@@ -52,20 +52,7 @@ public class TripleTuraKick : Skill
 
                     if (player.transform.position != targetPos)
                     {
-                        float lerpSpeed = 5.0f;
-                        moveTimer = Mathf.Abs(player.transform.position.x - player.target.transform.position.x) * lerpSpeed;
-
-                        currentMoveTimer += Time.deltaTime;
-
-                        if (currentMoveTimer > moveTimer)
-                        {
-                            currentMoveTimer = moveTimer;
-                        }
-
-                        float totalDistance = Vector3.Distance(player.battlePos, targetPos);
-                        float percentage = currentMoveTimer / totalDistance;
-
-                        player.transform.position = Vector3.Lerp(player.transform.position, targetPos, percentage);
+                        player.transform.position = Vector3.MoveTowards(player.transform.position, targetPos, 7f * Time.deltaTime);
                     }
                     else
                     {
@@ -162,20 +149,9 @@ public class TripleTuraKick : Skill
 
                     if (player.transform.position != player.battlePos)
                     {
-                        float lerpSpeed = 5.0f;
-                        moveTimer = Mathf.Abs(player.battlePos.x - player.transform.position.x) * lerpSpeed;
-
-                        currentMoveTimer += Time.deltaTime;
-
-                        if (currentMoveTimer > moveTimer)
-                        {
-                            currentMoveTimer = moveTimer;
-                        }
-
-                        float totalDistance = Vector3.Distance(player.battlePos, player.transform.position);
-                        float percentage = currentMoveTimer / totalDistance;
-
-                        player.transform.position = Vector3.Lerp(player.battlePos, player.transform.position, percentage);
+                        // merle doesnt go back... continue from here!
+                        player.transform.position = Vector3.MoveTowards(player.transform.position, player.battlePos, 7f * Time.deltaTime);
+                        Debug.Log(player.battlePos);
                     }
                     else
                     {                    

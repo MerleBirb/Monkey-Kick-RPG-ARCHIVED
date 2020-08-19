@@ -126,11 +126,6 @@ public class PlayerBattleScript : MonoBehaviour
                         actionSelect = 0;
                         anim.speed = 1;
 
-                        battlePos = new Vector3((float)System.Math.Round(battlePos.x, 1), (float)System.Math.Round(battlePos.y, 1),
-                            (float)System.Math.Round(battlePos.z, 1));
-                        
-                        transform.position = battlePos;
-
                         rb.velocity = Vector3.zero;
 
                         if (rb.velocity == Vector3.zero)
