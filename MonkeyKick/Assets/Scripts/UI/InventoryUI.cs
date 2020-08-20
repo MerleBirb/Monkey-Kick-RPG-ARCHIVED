@@ -63,7 +63,6 @@ public class InventoryUI : MonoBehaviour
                     }
 
                     CycleInventory();
-                    menuManager.CloseMenu();
 
                     break;
                 }

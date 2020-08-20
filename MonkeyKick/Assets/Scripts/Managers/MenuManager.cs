@@ -26,6 +26,8 @@ public class MenuManager : MonoBehaviour
     private float moveZ;
     private bool stickPressed;
     public int buttonSelect;
+    private int lastButtonSelect = 0;
+    private int lastItemSelect = 0;
 
     // sounds for the menu
     private AudioSource audioSource;
@@ -71,7 +73,7 @@ public class MenuManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {        
-        CheckInput();
+        CheckInput();       
 
         switch(state)
         {
@@ -94,6 +96,8 @@ public class MenuManager : MonoBehaviour
                                 {
                                     PlaySound(sounds, Sounds.OPEN);
                                     state = Menus.STATUS;
+                                    lastButtonSelect = buttonSelect;
+                                    buttonSelect = 0;
 
                                     break;
                                 }
@@ -101,6 +105,8 @@ public class MenuManager : MonoBehaviour
                                 {
                                     PlaySound(sounds, Sounds.OPEN);
                                     state = Menus.EQUIPMENT;
+                                    lastButtonSelect = buttonSelect;
+                                    buttonSelect = 0;
 
                                     break;
                                 }
@@ -108,6 +114,8 @@ public class MenuManager : MonoBehaviour
                                 {
                                     PlaySound(sounds, Sounds.OPEN);
                                     state = Menus.ITEMS;
+                                    lastButtonSelect = buttonSelect;
+                                    buttonSelect = lastItemSelect;
 
                                     break;
                                 }
@@ -115,6 +123,8 @@ public class MenuManager : MonoBehaviour
                                 {
                                     PlaySound(sounds, Sounds.OPEN);
                                     state = Menus.MAP;
+                                    lastButtonSelect = buttonSelect;
+                                    buttonSelect = 0;
 
                                     break;
                                 }
@@ -122,6 +132,8 @@ public class MenuManager : MonoBehaviour
                                 {
                                     PlaySound(sounds, Sounds.OPEN);
                                     state = Menus.SETTINGS;
+                                    lastButtonSelect = buttonSelect;
+                                    buttonSelect = 0;
 
                                     break;
                                 }
@@ -133,6 +145,8 @@ public class MenuManager : MonoBehaviour
                                     saveText.text = "SAVE GAME?";
 
                                     state = Menus.SAVE;
+                                    lastButtonSelect = buttonSelect;
+                                    buttonSelect = 0;
 
                                     break;
                                 }
@@ -323,6 +337,8 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetButtonDown("START_Button"))
         {
+            buttonSelect = lastButtonSelect;
+
             if (menu.activeSelf)
             {
                 PlaySound(sounds, Sounds.CLOSE);
@@ -341,6 +357,7 @@ public class MenuManager : MonoBehaviour
             {
                 PlaySound(sounds, Sounds.CLOSE);
                 itemMenu.SetActive(false);
+                lastItemSelect = buttonSelect;
                 state = Menus.MENU_UNOPENED;
             }
 
@@ -354,6 +371,8 @@ public class MenuManager : MonoBehaviour
 
         if (Input.GetButtonDown("B_Button"))
         {
+            buttonSelect = lastButtonSelect;
+
             if (menu.activeSelf)
             {
                 PlaySound(sounds, Sounds.CLOSE);

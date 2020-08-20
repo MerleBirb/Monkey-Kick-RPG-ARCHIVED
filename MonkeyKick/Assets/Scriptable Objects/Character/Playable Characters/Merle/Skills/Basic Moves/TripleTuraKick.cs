@@ -98,25 +98,25 @@ public class TripleTuraKick : Skill
 
                         if ((player.attackTimer > (player.attackResetTimer / 2.0f)) && (player.attackTimer <= player.attackResetTimer))
                         {
-                            TriggerDamage(player.gameObject, 0.4f, 0);
+                            TriggerDamage(0.4f, 0);
                             TriggerText(player.gameObject, player.timedText, 1, 0f, -200f);
                             currentMoveTimer = 0.0f;
                         }
                         else if ((player.attackTimer > (player.attackResetTimer / 4.0f)) && (player.attackTimer <= (player.attackResetTimer / 2.0f)))
                         {
-                            TriggerDamage(player.gameObject, 0.8f, 1);
+                            TriggerDamage(0.8f, 1);
                             TriggerText(player.gameObject, player.timedText, 2, 0f, -200f);
                             currentMoveTimer = 0.0f;
                         }
                         else if ((player.attackTimer > 0.0f) && (player.attackTimer <= (player.attackResetTimer / 4.0f)))
                         {
-                            TriggerDamage(player.gameObject, 1.2f, 2);
+                            TriggerDamage(1.2f, 2);
                             TriggerText(player.gameObject, player.timedText, 3, 0f, -200f);
                             currentMoveTimer = 0.0f;
                         }
                         else
                         {
-                            TriggerDamage(player.gameObject, 0.1f, 1);
+                            TriggerDamage(0.1f, 1);
                             TriggerText(player.gameObject, player.timedText, 0, 0f, -200f);
                             currentMoveTimer = 0.0f;
                         }
@@ -149,9 +149,7 @@ public class TripleTuraKick : Skill
 
                     if (player.transform.position != player.battlePos)
                     {
-                        // merle doesnt go back... continue from here!
                         player.transform.position = Vector3.MoveTowards(player.transform.position, player.battlePos, 7f * Time.deltaTime);
-                        Debug.Log(player.battlePos);
                     }
                     else
                     {                    
@@ -178,7 +176,7 @@ public class TripleTuraKick : Skill
     }
 
     // deals damage
-    public void TriggerDamage(GameObject user, float damageMult, int soundChoice)
+    public void TriggerDamage(float damageMult, int soundChoice)
     {
         var playerTarget = player.target.GetComponent<EnemyBattleScript>();
 
