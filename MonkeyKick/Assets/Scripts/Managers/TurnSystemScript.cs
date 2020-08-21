@@ -180,14 +180,14 @@ public class TurnSystemScript : MonoBehaviour
         {
             playerGroup[i].GetComponent<PlayerBattleScript>().battlePos = 
                 new Vector3((float)System.Math.Round(playerGroup[i].transform.position.x, 1),
-                (float)System.Math.Round(playerGroup[i].transform.position.y, 1), (float)System.Math.Round(playerGroup[i].transform.position.z, 1));
+                (float)System.Math.Round(playerGroup[i].transform.position.y - 0.19f, 2), (float)System.Math.Round(playerGroup[i].transform.position.z, 1));
         }
 
         for (int i = 0; i < enemyGroup.Count; i++)
         {
             enemyGroup[i].GetComponent<EnemyBattleScript>().battlePos =
                 new Vector3((float)System.Math.Round(enemyGroup[i].transform.position.x, 1),
-                (float)System.Math.Round(enemyGroup[i].transform.position.y, 1), (float)System.Math.Round(enemyGroup[i].transform.position.z, 1));
+                (float)System.Math.Round(enemyGroup[i].transform.position.y, 2), (float)System.Math.Round(enemyGroup[i].transform.position.z, 1));
         }
     }
 
