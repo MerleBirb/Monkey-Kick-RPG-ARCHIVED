@@ -18,8 +18,6 @@ public class MerleAnimations : MonoBehaviour
     public void MerleTripleKickFinish()
     {
         anim.SetBool("TripleKick", false);
-        playerBattle.state = PlayerBattleScript.BattleStates.RETURN;
-        Debug.Log("KICK IS OVER");
     }
 
     //// hurt animation

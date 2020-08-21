@@ -15,7 +15,6 @@ public class TripleTuraKick : Skill
     public GameObject[] hitEffects;
     private bool hasKicked = false;
     private float moveTimer = 0.0f;
-    private float currentMoveTimer = 0.0f;
 
     public enum KickStates
     { 
@@ -64,8 +63,7 @@ public class TripleTuraKick : Skill
             case KickStates.KICK_1:
                 {                   
                     player.attackTimer -= Time.deltaTime;
-                    currentMoveTimer = 0.0f;
-
+                    
                     if (player.attackTimer < 0.0f)
                     {
                         player.attackTimer = 0.0f;
@@ -99,33 +97,27 @@ public class TripleTuraKick : Skill
                         if ((player.attackTimer > (player.attackResetTimer / 2.0f)) && (player.attackTimer <= player.attackResetTimer))
                         {
                             TriggerDamage(0.4f, 0);
-                            TriggerText(player.gameObject, player.timedText, 1, 0f, -200f);
-                            currentMoveTimer = 0.0f;
+                            TriggerText(player.gameObject, player.timedText, 1, 0f, -200f);                           
                         }
                         else if ((player.attackTimer > (player.attackResetTimer / 4.0f)) && (player.attackTimer <= (player.attackResetTimer / 2.0f)))
                         {
                             TriggerDamage(0.8f, 1);
-                            TriggerText(player.gameObject, player.timedText, 2, 0f, -200f);
-                            currentMoveTimer = 0.0f;
+                            TriggerText(player.gameObject, player.timedText, 2, 0f, -200f);                         
                         }
                         else if ((player.attackTimer > 0.0f) && (player.attackTimer <= (player.attackResetTimer / 4.0f)))
                         {
                             TriggerDamage(1.2f, 2);
-                            TriggerText(player.gameObject, player.timedText, 3, 0f, -200f);
-                            currentMoveTimer = 0.0f;
+                            TriggerText(player.gameObject, player.timedText, 3, 0f, -200f);                           
                         }
                         else
                         {
                             TriggerDamage(0.1f, 1);
-                            TriggerText(player.gameObject, player.timedText, 0, 0f, -200f);
-                            currentMoveTimer = 0.0f;
+                            TriggerText(player.gameObject, player.timedText, 0, 0f, -200f);                          
                         }
                     }
 
                     if (player.attackTimer <= 0.0f)
-                    {
-                        
-
+                    {                     
                         if (!hasKicked)
                         {
                             player.timedText = Instantiate(player.text, player.battleMenu.transform);
@@ -142,17 +134,20 @@ public class TripleTuraKick : Skill
                 }
             case KickStates.SKILL_END:
                 {
-                    if (!GameManager.inBattle)
-                    {
-                        state = KickStates.SKILL_START;
-                    }
+                    //if (!GameManager.inBattle)
+                    //{
+                    //    state = KickStates.SKILL_START;
+                    //}
 
                     if (player.transform.position != player.battlePos)
                     {
                         player.transform.position = Vector3.MoveTowards(player.transform.position, player.battlePos, 7f * Time.deltaTime);
+                        Debug.Log("MOVING");
                     }
                     else
-                    {                    
+                    {
+                        player.state = PlayerBattleScript.BattleStates.RETURN;
+                        Debug.Log("KICK IS OVER");
                         state = KickStates.SKILL_START;                      
                     }                  
 
@@ -207,13 +202,12 @@ public class TripleTuraKick : Skill
         state = KickStates.SKILL_START;
         baseDamage = 2;
         moveTimer = 0.0f;
-        currentMoveTimer = 0.0f;
         hasKicked = false;
     }
 
     public override string ToString()
     {
-        return $@"Runtime: {state} {baseDamage} {moveTimer} {currentMoveTimer} {hasKicked}
+        return $@"Runtime: {state} {baseDamage} {moveTimer} {hasKicked}
         Initial: {KickStates.SKILL_START} {2} {0.0f} {0.0f} {false}";
     }
 }
