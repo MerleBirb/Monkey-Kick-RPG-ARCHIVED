@@ -17,8 +17,8 @@ public class LuaEnvironment : MonoBehaviour
     public GameObject dialogueManager;
 
     // store the file name of the file needing to be loaded
-    [SerializeField]
-    private string loadFile;
+    [HideInInspector]
+    public string loadFile;
     
     // store a Lua environment script using the Lua interpreter
     private Script enviro;

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,10 +8,14 @@ public class DialogueTrigger : MonoBehaviour
 {
     ////////// ACTIVATE DIALOGUE //////////
     /// triggers the dialogue state for the game
-    
+
     // store the dialogue UI
     public GameObject dialogueUI;
     public LuaEnvironment lua;
+
+    // store the dialogue
+    [SerializeField]
+    private string dialogueFile;
 
     // store the button
     public GameObject button;
@@ -32,6 +37,11 @@ public class DialogueTrigger : MonoBehaviour
         {
             if(Input.GetButtonDown("Y_Button"))
             {
+                if(lua.loadFile != dialogueFile)
+                {
+                    lua.loadFile = dialogueFile;
+                }
+
                 dialogueUI.SetActive(true);
                 button.SetActive(false);
                 StartCoroutine(lua.Setup());
