@@ -2781,7 +2781,7 @@ PrefabInstance:
     - target: {fileID: 5090154679174574802, guid: a80cd89db9e171a4aaf5b7ec76396600,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5090154679174574802, guid: a80cd89db9e171a4aaf5b7ec76396600,
         type: 3}
@@ -6389,6 +6389,71 @@ MonoBehaviour:
   dialogueManager: {fileID: 1400024032}
   selector: {fileID: 108686642079931122, guid: efef263afe1d28043946a1550559cb99, type: 3}
   isChoosingChoice: 0
+--- !u!1 &495086770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 495086772}
+  - component: {fileID: 495086771}
+  m_Layer: 0
+  m_Name: Light Probe Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!220 &495086771
+LightProbeGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495086770}
+  m_Enabled: 1
+  m_SourcePositions:
+  - {x: 25.75, y: 9.5, z: 18.75}
+  - {x: 25.75, y: 9.5, z: 4.75}
+  - {x: 25.75, y: -1, z: 18.75}
+  - {x: 25.75, y: -1, z: 4.75}
+  - {x: -11.75, y: 9.5, z: 18.75}
+  - {x: -11.75, y: 9.5, z: 4.75}
+  - {x: -11.75, y: -1, z: 18.75}
+  - {x: -11.75, y: -1, z: 4.75}
+  - {x: 25.75, y: 9.5, z: -1}
+  - {x: 25.75, y: -1, z: -1}
+  - {x: -11.75, y: 9.5, z: -1}
+  - {x: -11.75, y: -1, z: -1}
+  - {x: 25.75, y: 9.5, z: 4}
+  - {x: 25.75, y: -1, z: 4}
+  - {x: -11.75, y: 9.5, z: 4}
+  - {x: -11.75, y: -1, z: 4}
+  - {x: -4.25, y: 9.5, z: 2.75}
+  - {x: -4.25, y: 1, z: 2.75}
+  - {x: -6.75, y: 9.5, z: 2.75}
+  - {x: -6.75, y: 1, z: 2.75}
+  - {x: -4.25, y: 9.5, z: 3.5}
+  - {x: -4.25, y: 1, z: 3.5}
+  - {x: -6.75, y: 9.5, z: 3.5}
+  - {x: -6.75, y: 1, z: 3.5}
+  m_Dering: 1
+--- !u!4 &495086772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495086770}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13, y: 0.25, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &496355861
 GameObject:
   m_ObjectHideFlags: 0
