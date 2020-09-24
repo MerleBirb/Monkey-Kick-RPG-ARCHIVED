@@ -298,7 +298,7 @@ public class MenuManager : MonoBehaviour
         {
             for (int i = 0; i < otherOptions.Count; i++)
             {
-                otherOptions[i].GetComponent<Text>().color = Color.black;
+                otherOptions[i].GetComponent<Text>().color = Color.gray;
             }
         }
     }
@@ -313,7 +313,7 @@ public class MenuManager : MonoBehaviour
         {
             for (int i = 0; i < otherInventory.Count; i++)
             {
-                otherInventory[i].GetComponent<Image>().color = Color.black;
+                otherInventory[i].GetComponent<Image>().color = Color.gray;
             }
         }
     }
