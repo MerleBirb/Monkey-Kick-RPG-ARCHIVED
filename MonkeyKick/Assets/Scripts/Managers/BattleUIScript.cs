@@ -70,7 +70,7 @@ public class BattleUIScript : MonoBehaviour
             {
                 for (int e = 0; e < unselectedBattleMenu.Count; e++)
                 {
-                    unselectedBattleMenu[e].GetComponent<Text>().color = Color.black;
+                    unselectedBattleMenu[e].GetComponent<Text>().color = Color.gray;
                 }
             }
         }
