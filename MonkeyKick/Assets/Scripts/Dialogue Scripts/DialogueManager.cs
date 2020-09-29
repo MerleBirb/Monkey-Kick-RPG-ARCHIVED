@@ -92,7 +92,7 @@ public class DialogueManager : MonoBehaviour
             {
                 if(!talkSound.isPlaying)
                 {
-                    talkSound.clip = newTalkSounds[Random.Range(0, 2)];
+                    talkSound.clip = newTalkSounds[Random.Range(0, 3)];
                     talkSound.volume = Random.Range(newMinPitch, newMaxPitch);
                     talkSound.pitch = Random.Range(newMinPitch, newMaxPitch);
                     talkSound.Play();

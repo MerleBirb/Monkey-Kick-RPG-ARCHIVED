@@ -7650,6 +7650,36 @@ PrefabInstance:
       propertyPath: dialogueUI
       value: 
       objectReference: {fileID: 261473350}
+    - target: {fileID: 435016544865798077, guid: 21a9a26aed8cf3e43a0f13755d0db84f,
+        type: 3}
+      propertyPath: talkSounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 435016544865798077, guid: 21a9a26aed8cf3e43a0f13755d0db84f,
+        type: 3}
+      propertyPath: talkSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: cd798d9b6a46a1b4987f4139fa9ce1b8, type: 3}
+    - target: {fileID: 435016544865798077, guid: 21a9a26aed8cf3e43a0f13755d0db84f,
+        type: 3}
+      propertyPath: talkSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: cd798d9b6a46a1b4987f4139fa9ce1b8, type: 3}
+    - target: {fileID: 435016544865798077, guid: 21a9a26aed8cf3e43a0f13755d0db84f,
+        type: 3}
+      propertyPath: talkSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0869590507fdb964eb57d2d131c3b3a2, type: 3}
+    - target: {fileID: 435016544865798077, guid: 21a9a26aed8cf3e43a0f13755d0db84f,
+        type: 3}
+      propertyPath: minPitch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 435016544865798077, guid: 21a9a26aed8cf3e43a0f13755d0db84f,
+        type: 3}
+      propertyPath: maxPitch
+      value: 1.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21a9a26aed8cf3e43a0f13755d0db84f, type: 3}
 --- !u!1 &1507977611

@@ -17,6 +17,7 @@ MonoBehaviour:
   description: bird time
   talkSounds:
   - {fileID: 8300000, guid: 56b627b8681cdbd4881eb329d71f6bb4, type: 3}
+  - {fileID: 8300000, guid: e6291f41575e1314a9f3f799a030db40, type: 3}
   - {fileID: 8300000, guid: af91b64557343ae45902b8f65567fb41, type: 3}
   minPitch: 1.1
   maxPitch: 1.3

@@ -83,7 +83,7 @@ public class LuaCommands : MonoBehaviour
         {
             if (!talkSound.isPlaying)
             {
-                talkSound.clip = newTalkSounds[Random.Range(0, newTalkSounds.Length - 1)];
+                talkSound.clip = newTalkSounds[Random.Range(0, newTalkSounds.Length)];
                 talkSound.pitch = Random.Range(newMinPitch, newMaxPitch);
                 talkSound.Play();
             }
