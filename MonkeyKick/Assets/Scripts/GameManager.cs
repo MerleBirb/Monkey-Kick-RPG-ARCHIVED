@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetButtonDown("START_Button"))
             {
-                SceneManager.LoadScene("DemoLevel_v1");
+                SceneManager.LoadScene("DemoLevel_v2");
                 Destroy(gameObject);
             }
         }
