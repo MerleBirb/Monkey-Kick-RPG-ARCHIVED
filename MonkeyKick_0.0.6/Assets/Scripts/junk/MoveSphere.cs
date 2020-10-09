@@ -8,7 +8,6 @@ public class MoveSphere : MonoBehaviour
     [SerializeField]
     private float maxSpeed = 10f;
 
-
     // Start is called before the first frame update
     void Start()
     {

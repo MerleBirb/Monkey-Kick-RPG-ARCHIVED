@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckInput();
         CheckGround();
+        Debug.Log(Input.GetAxis("Vertical"));
     }
 
     // FixedUpdate is called once per frame consistently
