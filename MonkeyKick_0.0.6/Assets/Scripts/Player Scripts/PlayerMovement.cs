@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.ProBuilder;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,12 +9,14 @@ public class PlayerMovement : MonoBehaviour
     /// This script handles how player characters interact with physics, move, and collide!
     /// thank you @ Catlike Coding for the awesome tutorial on this! I've been looking for help on
     /// perfect movement everywhere ;v; 10/9/2020
-    /// PLACEHOLDER STUFF IS TO SIMULATE STUFF DURING THE TUTORIAL, DELETE LATER
 
     /// VARIABLES ///
     /// input variables
     // boolean for whether jump has been pressed or not
     private bool pressedJump;
+    // the space the player's inputs come from (world space or camera space)
+    [SerializeField]
+    private Transform playerInputSpace = default;
 
     /// speed variables
     // maximum speed variable: changes how fast the object is moving
@@ -63,11 +64,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private LayerMask probeMask = -1, stairsMask = -1;
 
+    /// custom gravity & physics variables
+    // time to make custom axises, ive gone off the deep end
+    private Vector3 upAxis, rightAxis, forwardAxis;
+
     /// FUNCTIONS
     /// Awake is called when the object activates, or turns on
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
         OnSlopeValidate();
     }
 
@@ -93,6 +99,18 @@ public class PlayerMovement : MonoBehaviour
         playerInput.x = Input.GetAxis("Horizontal");
         playerInput.y = Input.GetAxis("Vertical");
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+
+        if (playerInputSpace)
+        {
+            rightAxis = ProjectDirectionOnPlane(playerInputSpace.right, upAxis);
+            forwardAxis = ProjectDirectionOnPlane(playerInputSpace.forward, upAxis);
+        }
+        else
+        {
+            rightAxis = ProjectDirectionOnPlane(Vector3.right, upAxis);
+            forwardAxis = ProjectDirectionOnPlane(Vector3.forward, upAxis);
+        }
+
         desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
 
         // jumping input
@@ -115,16 +133,19 @@ public class PlayerMovement : MonoBehaviour
     /// CheckJump... checks to see if the input makes the object hop up! what else do you want me to say?
     private void CheckJump()
     {
+        Vector3 gravity = CustomGravity.GetGravity(rb.position, out upAxis);
+
         if (pressedJump)
         {
             pressedJump = false;
-            Jump();
+            Jump(gravity);
         }
-                
+
+        velocity += gravity * Time.deltaTime;
     }
 
     /// Jump is the jumping action
-    private void Jump()
+    private void Jump(Vector3 gravity)
     {
         Vector3 jumpDirection;
 
@@ -154,8 +175,8 @@ public class PlayerMovement : MonoBehaviour
         stepsSinceLastJump = 0;
         jumpPhase += 1;
 
-        float jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
-        jumpDirection = (jumpDirection + Vector3.up).normalized;
+        float jumpSpeed = Mathf.Sqrt(2f * gravity.magnitude * jumpHeight);
+        jumpDirection = (jumpDirection + upAxis).normalized;
         float alignedSpeed = Vector3.Dot(velocity, jumpDirection);
         if (alignedSpeed > 0f)
         {
@@ -171,6 +192,7 @@ public class PlayerMovement : MonoBehaviour
         stepsSinceLastGrounded += 1;
         stepsSinceLastJump += 1;
         velocity = rb.velocity;
+
         if (OnGround || SnapToGround() || CheckSteepContacts())
         {
             stepsSinceLastGrounded = 0;
@@ -185,7 +207,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            contactNormal = Vector3.up;
+            contactNormal = upAxis;
         }
     }
 
@@ -205,8 +227,8 @@ public class PlayerMovement : MonoBehaviour
     /// AdjustVelocity changes the velocity depending on the slope the player is on
     private void AdjustVelocity()
     {
-        Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
-        Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
+        Vector3 xAxis = ProjectDirectionOnPlane(rightAxis, contactNormal);
+        Vector3 zAxis = ProjectDirectionOnPlane(forwardAxis, contactNormal);
 
         float currentX = Vector3.Dot(velocity, xAxis);
         float currentZ = Vector3.Dot(velocity, zAxis);
@@ -240,12 +262,13 @@ public class PlayerMovement : MonoBehaviour
         for (int i = 0; i < collision.contactCount; i++)
         {
             Vector3 normal = collision.GetContact(i).normal;
-            if (normal.y >= minDot)
+            float upDot = Vector3.Dot(upAxis, normal);
+            if (upDot >= minDot)
             {
                 groundContactCount += 1;
                 contactNormal += normal;
             }
-            else if (normal.y > -0.01f)
+            else if (upDot > -0.01f)
             {
                 steepContactCount += 1;
                 steepNormal += normal;
@@ -267,9 +290,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /// ProjectOnContactPlane helps the player move up and down the slope more accurately
-    private Vector3 ProjectOnContactPlane(Vector3 vector)
+    private Vector3 ProjectDirectionOnPlane(Vector3 direction, Vector3 normal)
     {
-        return vector - contactNormal * Vector3.Dot(vector, contactNormal);
+        return (direction - normal * Vector3.Dot(direction, normal)).normalized;
     }
 
     /// SnapToGround is for objects to not go flying off a slope
@@ -286,12 +309,13 @@ public class PlayerMovement : MonoBehaviour
             return false;
         }
 
-        if (!Physics.Raycast(rb.position, Vector3.down, out RaycastHit hit, probeDistance, probeMask))
+        if (!Physics.Raycast(rb.position, -upAxis, out RaycastHit hit, probeDistance, probeMask))
         {
             return false;
         }
 
-        if (hit.normal.y < GetMinDot(hit.collider.gameObject.layer))
+        float upDot = Vector3.Dot(upAxis, hit.normal);
+        if (upDot < GetMinDot(hit.collider.gameObject.layer))
         {
             return false;
         }
@@ -314,7 +338,8 @@ public class PlayerMovement : MonoBehaviour
         if (steepContactCount > 1)
         {
             steepNormal.Normalize();
-            if (steepNormal.y >= minGroundDotProduct)
+            float upDot = Vector3.Dot(upAxis, steepNormal);
+            if (upDot >= minGroundDotProduct)
             {
                 steepContactCount = 0;
                 groundContactCount = 1;
