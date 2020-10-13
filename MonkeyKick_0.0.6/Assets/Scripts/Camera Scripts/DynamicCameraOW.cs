@@ -43,13 +43,16 @@ public class DynamicCameraOW : MonoBehaviour
     [SerializeField, Range(0f, 1f)]
     private float focusCentering = 0.5f;
     // how long it takes for the camera to align back to the player after rotating
-    [SerializeField, Min(0f)]
-    private float alignDelay = 3f;
+    //[SerializeField, Min(0f)]
+    //private float alignDelay = 3f;
     // smooth out the alignment
     [SerializeField, Range(0f, 90f)]
     private float alignSmoothRange = 45f;
     // keep track of last time that a manual rotation happened.
     private float lastManualRotationTime;
+    // the speed in which the camera flips when switching gravity
+    [SerializeField, Min(0f)]
+    private float upAlignmentSpeed = 360f;
 
     /// clipping / zoom variables
     // a reference to the regular camera
@@ -70,6 +73,7 @@ public class DynamicCameraOW : MonoBehaviour
     /// LateUpdate is called once per frame at the end of the frame
     void LateUpdate()
     {
+        UpdateGravityAlignment();
         UpdateFocusPoint();
         LookAt();
     }
@@ -77,9 +81,7 @@ public class DynamicCameraOW : MonoBehaviour
     /// LookAt keeps the camera focused and looking at the focus
     private void LookAt()
     {
-        gravityAlignment = Quaternion.FromToRotation(gravityAlignment * Vector3.up, CustomGravity.GetUpAxis(focusPoint)) * gravityAlignment;
-
-        if (ManualRotation() || AutomaticRotation())
+        if (ManualRotation()/* || AutomaticRotation()*/)
         {
             ConstrainAngles();
             orbitRotation = Quaternion.Euler(orbitAngles);
@@ -105,6 +107,26 @@ public class DynamicCameraOW : MonoBehaviour
         }
 
         transform.SetPositionAndRotation(lookPosition, lookRotation);
+    }
+
+    /// UpdateGravityAlignment keeps the camera updated with the current gravity
+    private void UpdateGravityAlignment()
+    {
+        Vector3 fromUp = gravityAlignment * Vector3.up;
+        Vector3 toUp = CustomGravity.GetUpAxis(focusPoint);
+        float dot = Mathf.Clamp(Vector3.Dot(fromUp, toUp), -1f, 1f);
+        float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
+        float maxAngle = upAlignmentSpeed * Time.deltaTime;
+
+        Quaternion newAlignment = Quaternion.FromToRotation(fromUp, toUp) * gravityAlignment;
+        if (angle <= maxAngle)
+        {
+            gravityAlignment = newAlignment;    
+        }
+        else
+        {
+            gravityAlignment = Quaternion.SlerpUnclamped(gravityAlignment, newAlignment, maxAngle / angle);
+        }
     }
 
     /// UpdateFocusPoint relaxes the camera and moves the focus point
@@ -152,7 +174,7 @@ public class DynamicCameraOW : MonoBehaviour
         return false;
     }
 
-    /// AutomaticRotation returns the orbit when not manually moved
+    /*/// AutomaticRotation returns the orbit when not manually moved
     private bool AutomaticRotation()
     {
         if (Time.unscaledTime - lastManualRotationTime < alignDelay)
@@ -184,7 +206,7 @@ public class DynamicCameraOW : MonoBehaviour
 
         orbitAngles.y = Mathf.MoveTowardsAngle(orbitAngles.y, headingAngle, rotationChange);
         return true;
-    }
+    }*/
 
     /// ConstrainAngles does what its named
     private void ConstrainAngles()
