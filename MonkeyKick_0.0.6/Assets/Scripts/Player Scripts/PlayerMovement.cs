@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity -= contactNormal * (maxClimbAcceleration * 0.9f * Time.deltaTime);
         }
-        else if (OnGround && velocity.sqrMagnitude < 0.01f)
+        else if (OnGround /*&& velocity.sqrMagnitude < 0.01f*/)
         {
             velocity += contactNormal * (Vector3.Dot(gravity, contactNormal) * Time.deltaTime);
         }
@@ -178,11 +178,11 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpDirection = contactNormal;
         }
-        else if (OnSteepGround)
+        /*else if (OnSteepGround)
         {
             jumpDirection = steepNormal;
             jumpPhase = 0;
-        }
+        }*/
         else if (maxAirJumps > 0 && jumpPhase <= maxAirJumps)
         {
             if (jumpPhase == 0)

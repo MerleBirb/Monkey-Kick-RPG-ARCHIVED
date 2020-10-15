@@ -57,6 +57,9 @@ public class DynamicCameraOW : MonoBehaviour
     /// clipping / zoom variables
     // a reference to the regular camera
     private Camera regularCamera;
+    // camera clip limit 
+    [SerializeField, Min(0f)]
+    private float cameraClipLimit = 0.5f;
     // what layers to ignore
     [SerializeField]
     private LayerMask obstructionMask = -1;
@@ -99,7 +102,7 @@ public class DynamicCameraOW : MonoBehaviour
         float castDistance = castLine.magnitude;
         Vector3 castDirection = castLine / castDistance;
 
-        if (Physics.BoxCast(castFrom, CameraHalfExtends, castDirection, 
+        if (Physics.BoxCast(castFrom, CameraClip, castDirection, 
             out RaycastHit hit, lookRotation, castDistance, obstructionMask))
         {
             rectPosition = castFrom + castDirection * hit.distance;
@@ -232,14 +235,14 @@ public class DynamicCameraOW : MonoBehaviour
         }
     }
 
-    /// CameraHalfExtends calculates the boxcast
+    /// CameraClip calculates the boxcast for clipping
     // wow, my first getter function, i must be getting smart hahaha
-    private Vector3 CameraHalfExtends
+    private Vector3 CameraClip
     {
         get
         {
             Vector3 halfExtends;
-            halfExtends.y = regularCamera.nearClipPlane * Mathf.Tan(0.5f * Mathf.Deg2Rad * regularCamera.fieldOfView);
+            halfExtends.y = regularCamera.nearClipPlane * Mathf.Tan(cameraClipLimit * Mathf.Deg2Rad * regularCamera.fieldOfView);
             halfExtends.x = halfExtends.y * regularCamera.aspect;
             halfExtends.z = 0f;
             return halfExtends;
