@@ -8,7 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Testing Scenes/SlopesTest.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Testing Scenes/StageTest.unity
     guid: dd6b9a6dad89d094fa64446d765a664d
+  - enabled: 0
+    path: Assets/Scenes/Testing Scenes/Complex Gravity Test.unity
+    guid: be06474305bd13645841e76105532657
+  - enabled: 1
+    path: Assets/Scenes/Testing Scenes/Gravity Sphere.unity
+    guid: 1c6a4ae1acfc46c409ec85e6a2dd82ed
   m_configObjects: {}

@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     /// input variables
     // boolean for whether jump has been pressed or not
     private bool pressedJump;
+    // boolean for when the player wants to climb
+    private bool pressedClimb;
     // the space the player's inputs come from (world space or camera space)
     [SerializeField]
     private Transform playerInputSpace = default;
@@ -18,13 +20,13 @@ public class PlayerMovement : MonoBehaviour
     /// speed variables
     // maximum speed variable: changes how fast the object is moving
     [SerializeField]
-    private float maxSpeed = 10f;
+    private float maxSpeed = 10f, maxClimbSpeed = 4f;
     // the velocity variable stores a vector that... well controls the velocity!
     // theres also a desiredVelocity variable here!
-    private Vector3 velocity, desiredVelocity;
+    private Vector3 velocity, connectionVelocity, playerInput;
     // maximum acceleration variable, storing a value for the max acceleration
     [SerializeField]
-    private float maxAcceleration = 10f, maxAirAcceleration = 1f;
+    private float maxAcceleration = 10f, maxAirAcceleration = 1f, maxClimbAcceleration = 20f;
     // the maximum snap speed stores how fast you can go until you dont snap... defaults to highest value
     [SerializeField, Range(0f, 100f)]
     private float maxSnapSpeed = 100f;
@@ -38,20 +40,24 @@ public class PlayerMovement : MonoBehaviour
 
     /// collision variables
     // the rigidbody contains unity's physics!
-    private Rigidbody rb;
+    private Rigidbody rb, connectedRb, previousConnectedRb;
     // max ground angle checks to see the angle when collision is ground or not. theres one for slopes / stairs too!
     [SerializeField, Range(0f, 90f)] // measured by degrees
     private float maxGroundAngle = 45f, maxStairsAngle = 60f;
+    [SerializeField, Range(90f, 180f)]
+    private float maxClimbAngle = 180f;
     // some crazy equation to calculate slope stuff... dont ask please i have no idea how it works
-    private float minGroundDotProduct, minStairsDotProduct;
+    private float minGroundDotProduct, minStairsDotProduct, minClimbDotProduct;
     // stores the normal of the player collision, including steep inclines
-    private Vector3 contactNormal, steepNormal;
+    private Vector3 contactNormal, steepNormal, climbNormal, lastClimbNormal;
     // checking if the player is grounded or not by how many ground points its touching, including steep surfaces
-    private int groundContactCount, steepContactCount;
+    private int groundContactCount, steepContactCount, climbContactCount;
     // check to see if the player is touching the ground
     private bool OnGround => groundContactCount > 0;
     // another check for steeper ground!
     private bool OnSteepGround => steepContactCount > 0;
+    // check to see if you're climbing
+    private bool Climbing => climbContactCount > 0 && stepsSinceLastJump > 2;
     // both for debugging purposes and snapping to ground purposes, counts the steps since last grounded, and steps since last jumped
     private int stepsSinceLastGrounded, stepsSinceLastJump;
     // how close the ground is before the player snaps to it?
@@ -59,7 +65,13 @@ public class PlayerMovement : MonoBehaviour
     private float probeDistance = 1f;
     // stores what specific layers to not ignore.
     [SerializeField]
-    private LayerMask probeMask = -1, stairsMask = -1;
+    private LayerMask probeMask = -1, stairsMask = -1, climbMask = -1;
+    // which rigidbody the player is standing on
+    private Vector3 connectionWorldPosition, connectionLocalPosition;
+    // just for checking collisions
+    [SerializeField]
+    private Material normalMaterial = default, climbingMaterial = default;
+    private MeshRenderer meshRenderer;
 
     /// custom gravity & physics variables
     // time to make custom axises, ive gone off the deep end
@@ -71,12 +83,15 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
+        meshRenderer = GetComponent<MeshRenderer>();
         OnSlopeValidate();
     }
 
     /// Update is called once per frame
     private void Update()
     {
+        // delete this once animated
+        meshRenderer.material = Climbing ? climbingMaterial : normalMaterial;
         CheckInput();
     }
 
@@ -85,14 +100,13 @@ public class PlayerMovement : MonoBehaviour
     {
         UpdateState();
         CheckMovement();
-        CleanState();
+        ClearState();
     }
 
     /// CheckInput takes the input from the user and applies it to the player's movements
     private void CheckInput()
     {
         // grounded movement
-        Vector2 playerInput;
         playerInput.x = Input.GetAxis("Horizontal");
         playerInput.y = Input.GetAxis("Vertical");
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
@@ -108,10 +122,9 @@ public class PlayerMovement : MonoBehaviour
             forwardAxis = ProjectDirectionOnPlane(Vector3.forward, upAxis);
         }
 
-        desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
-
         // jumping input
         pressedJump |= Input.GetButtonDown("A_BUTTON"); // note... what the hell kind of operator is |= ?!
+        pressedClimb |= Input.GetButtonDown("Y_BUTTON");
     }
 
     /// CheckMovement calculates the movement of the player. Self explanatory
@@ -138,7 +151,22 @@ public class PlayerMovement : MonoBehaviour
             Jump(gravity);
         }
 
-        velocity += gravity * Time.deltaTime;
+        if (Climbing)
+        {
+            velocity -= contactNormal * (maxClimbAcceleration * 0.9f * Time.deltaTime);
+        }
+        else if (OnGround && velocity.sqrMagnitude < 0.01f)
+        {
+            velocity += contactNormal * (Vector3.Dot(gravity, contactNormal) * Time.deltaTime);
+        }
+        else if (pressedClimb && OnGround)
+        {
+            velocity += (gravity - contactNormal * (maxClimbAcceleration * 0.9f)) * Time.deltaTime;
+        }
+        else
+        {
+            velocity += gravity * Time.deltaTime;
+        }
     }
 
     /// Jump is the jumping action
@@ -180,7 +208,6 @@ public class PlayerMovement : MonoBehaviour
             jumpSpeed = Mathf.Max(jumpSpeed - alignedSpeed, 0f);
         }
         velocity += jumpDirection * jumpSpeed;
-        
     }
 
     /// UpdateState checks and changes the current state of the player, whether grounded or in air or mid jump or etc
@@ -190,7 +217,7 @@ public class PlayerMovement : MonoBehaviour
         stepsSinceLastJump += 1;
         velocity = rb.velocity;
 
-        if (OnGround || SnapToGround() || CheckSteepContacts())
+        if (CheckClimbing() || OnGround || SnapToGround() || CheckSteepContacts())
         {
             stepsSinceLastGrounded = 0;
             if (stepsSinceLastJump > 1)
@@ -206,35 +233,63 @@ public class PlayerMovement : MonoBehaviour
         {
             contactNormal = upAxis;
         }
+
+        if (connectedRb)
+        {
+            if (connectedRb.isKinematic || connectedRb.mass >= rb.mass)
+            {
+                UpdateConnectionState();
+            }
+        }
     }
 
     /// ClearState resets the state to clean up the state
-    private void CleanState()
+    private void ClearState()
     {
-        groundContactCount = steepContactCount = 0;
-
         if (maxSpeed == maxSnapSpeed)
         {
             maxSnapSpeed += 1;
         }
 
-        contactNormal = steepNormal = Vector3.zero;
+        groundContactCount = steepContactCount = climbContactCount = 0;
+        contactNormal = steepNormal = climbNormal = Vector3.zero;
+        connectionVelocity = Vector3.zero;
+        previousConnectedRb = connectedRb;
+        connectedRb = null;
     }
 
     /// AdjustVelocity changes the velocity depending on the slope the player is on
     private void AdjustVelocity()
     {
-        Vector3 xAxis = ProjectDirectionOnPlane(rightAxis, contactNormal);
-        Vector3 zAxis = ProjectDirectionOnPlane(forwardAxis, contactNormal);
+        float acceleration, speed;
+        Vector3 xAxis, zAxis;
 
-        float currentX = Vector3.Dot(velocity, xAxis);
-        float currentZ = Vector3.Dot(velocity, zAxis);
+        if (Climbing)
+        {
+            acceleration = maxClimbAcceleration;
+            speed = maxClimbSpeed;
+            xAxis = Vector3.Cross(contactNormal, upAxis);
+            zAxis = upAxis;
+        }
+        else
+        {
+            acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
+            speed = maxSpeed;
+            xAxis = rightAxis;
+            zAxis = forwardAxis;
+        }
 
-        float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
+        xAxis = ProjectDirectionOnPlane(xAxis, contactNormal);
+        zAxis = ProjectDirectionOnPlane(zAxis, contactNormal);
+
+        Vector3 relativeVelocity = velocity - connectionVelocity;
+        float currentX = Vector3.Dot(relativeVelocity, xAxis);
+        float currentZ = Vector3.Dot(relativeVelocity, zAxis);
+
         float maxSpeedChange = acceleration * Time.deltaTime;
 
-        float newX = Mathf.MoveTowards(currentX, desiredVelocity.x, maxSpeedChange);
-        float newZ = Mathf.MoveTowards(currentZ, desiredVelocity.z, maxSpeedChange);
+        float newX = Mathf.MoveTowards(currentX, playerInput.x * speed, maxSpeedChange);
+        float newZ = Mathf.MoveTowards(currentZ, playerInput.y * speed, maxSpeedChange);
 
         velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
     }
@@ -255,7 +310,8 @@ public class PlayerMovement : MonoBehaviour
     /// hugging a wall or not, etc
     private void CheckCollision(Collision collision)
     {
-        float minDot = GetMinDot(collision.gameObject.layer);
+        int layer = collision.gameObject.layer;
+        float minDot = GetMinDot(layer);
         for (int i = 0; i < collision.contactCount; i++)
         {
             Vector3 normal = collision.GetContact(i).normal;
@@ -264,13 +320,63 @@ public class PlayerMovement : MonoBehaviour
             {
                 groundContactCount += 1;
                 contactNormal += normal;
+                connectedRb = collision.rigidbody;
             }
-            else if (upDot > -0.01f)
+            else 
             {
-                steepContactCount += 1;
-                steepNormal += normal;
+                if (upDot > -0.01f)
+                {
+                    steepContactCount += 1;
+                    steepNormal += normal;
+                    if (groundContactCount == 0)
+                    {
+                        connectedRb = collision.rigidbody;
+                    }
+                }
+                if (pressedClimb && upDot >= minClimbDotProduct && (climbMask & (1 << layer)) != 0)
+                {
+                    climbContactCount += 1;
+                    climbNormal += normal;
+                    lastClimbNormal = normal;
+                    connectedRb = collision.rigidbody;
+                }
             }
         }
+    }
+    
+    /// CheckClimbing checks to see if the player is colliding with a climable surface
+    private bool CheckClimbing()
+    {
+        if (Climbing)
+        {
+            if (climbContactCount > 1)
+            {
+                climbNormal.Normalize();
+                float upDot = Vector3.Dot(upAxis, climbNormal);
+                if (upDot >= minGroundDotProduct)
+                {
+                    climbNormal = lastClimbNormal;
+                }
+            }
+            groundContactCount = 1;
+            contactNormal = climbNormal;
+            return true;
+        }
+
+        return false;
+    }
+
+    /// UpdateConnectionState updates what the player is standing on
+    private void UpdateConnectionState()
+    {
+        if (connectedRb == previousConnectedRb)
+        {
+            Vector3 connectionMovement = connectedRb.transform.TransformPoint(connectionLocalPosition) - connectionWorldPosition;
+            connectionVelocity = connectionMovement / Time.deltaTime;
+        }
+
+        connectionWorldPosition = rb.position;
+        connectionLocalPosition = connectedRb.transform.InverseTransformPoint(connectionWorldPosition);
     }
 
     /// OnSlopeValidate plugs in the maxGroundAngle into cosine
@@ -278,6 +384,7 @@ public class PlayerMovement : MonoBehaviour
     {
         minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
         minStairsDotProduct = Mathf.Cos(maxStairsAngle * Mathf.Deg2Rad);
+        minClimbDotProduct = Mathf.Cos(maxClimbAngle * Mathf.Deg2Rad);
     }
 
     /// gets the min of the dot, self explanatory, i know i say that a lot but its true
@@ -325,6 +432,8 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity = (velocity - hit.normal * dot).normalized * speed;
         }
+
+        connectedRb = hit.rigidbody;
 
         return true;
     }
