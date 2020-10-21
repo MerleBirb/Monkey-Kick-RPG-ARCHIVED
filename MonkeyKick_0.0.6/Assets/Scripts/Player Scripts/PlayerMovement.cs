@@ -68,10 +68,6 @@ public class PlayerMovement : MonoBehaviour
     private LayerMask probeMask = -1, stairsMask = -1, climbMask = -1;
     // which rigidbody the player is standing on
     private Vector3 connectionWorldPosition, connectionLocalPosition;
-    // just for checking collisions
-    [SerializeField]
-    private Material normalMaterial = default, climbingMaterial = default;
-    private MeshRenderer meshRenderer;
 
     /// custom gravity & physics variables
     // time to make custom axises, ive gone off the deep end
@@ -83,15 +79,12 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
-        meshRenderer = GetComponent<MeshRenderer>();
         OnSlopeValidate();
     }
 
     /// Update is called once per frame
     private void Update()
     {
-        // delete this once animated
-        meshRenderer.material = Climbing ? climbingMaterial : normalMaterial;
         CheckInput();
     }
 
