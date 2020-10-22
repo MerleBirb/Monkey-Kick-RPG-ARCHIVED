@@ -117,7 +117,16 @@ public class PlayerMovement : MonoBehaviour
 
         // jumping input
         pressedJump |= Input.GetButtonDown("A_BUTTON"); // note... what the hell kind of operator is |= ?!
-        pressedClimb |= Input.GetButtonDown("Y_BUTTON");
+        //pressedClimb = Input.GetButton("Y_BUTTON");
+
+        if (Input.GetAxis("R_TRIGGER") > 0)
+        {
+            pressedClimb = true;
+        }
+        else
+        {
+            pressedClimb = false;
+        }
     }
 
     /// CheckMovement calculates the movement of the player. Self explanatory
@@ -239,10 +248,6 @@ public class PlayerMovement : MonoBehaviour
     /// ClearState resets the state to clean up the state
     private void ClearState()
     {
-        if (maxSpeed == maxSnapSpeed)
-        {
-            maxSnapSpeed += 1;
-        }
 
         groundContactCount = steepContactCount = climbContactCount = 0;
         contactNormal = steepNormal = climbNormal = Vector3.zero;
@@ -351,6 +356,7 @@ public class PlayerMovement : MonoBehaviour
                     climbNormal = lastClimbNormal;
                 }
             }
+
             groundContactCount = 1;
             contactNormal = climbNormal;
             return true;
