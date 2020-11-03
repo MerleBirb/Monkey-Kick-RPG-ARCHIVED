@@ -10,9 +10,11 @@ public class PlayerMovement : MonoBehaviour
     /// VARIABLES ///
     /// input variables
     // boolean for whether jump has been pressed or not
-    private bool pressedJump;
+    [HideInInspector]
+    public bool pressedJump;
     // boolean for when the player wants to climb
-    private bool pressedClimb;
+    [HideInInspector]
+    public bool pressedClimb;
     // the space the player's inputs come from (world space or camera space)
     [SerializeField]
     private Transform playerInputSpace = default;
@@ -23,10 +25,12 @@ public class PlayerMovement : MonoBehaviour
     private float maxSpeed = 10f, maxClimbSpeed = 4f;
     // the velocity variable stores a vector that... well controls the velocity!
     // theres also a desiredVelocity variable here!
-    private Vector3 velocity, connectionVelocity, playerInput;
+    private Vector3 velocity, connectionVelocity;
+    [HideInInspector]
+    public Vector3 playerInput;
     // maximum acceleration variable, storing a value for the max acceleration
-    [SerializeField]
-    private float maxAcceleration = 10f, maxAirAcceleration = 1f, maxClimbAcceleration = 20f;
+    //[SerializeField]
+    //private float maxAcceleration = 10f, maxAirAcceleration = 1f, maxClimbAcceleration = 20f;
     // the maximum snap speed stores how fast you can go until you dont snap... defaults to highest value
     [SerializeField, Range(0f, 100f)]
     private float maxSnapSpeed = 100f;
@@ -53,9 +57,11 @@ public class PlayerMovement : MonoBehaviour
     // checking if the player is grounded or not by how many ground points its touching, including steep surfaces
     private int groundContactCount, steepContactCount, climbContactCount;
     // check to see if the player is touching the ground
-    private bool OnGround => groundContactCount > 0;
+    [HideInInspector]
+    public bool OnGround => groundContactCount > 0;
     // another check for steeper ground!
-    private bool OnSteepGround => steepContactCount > 0;
+    [HideInInspector]
+    public bool OnSteepGround => steepContactCount > 0;
     // check to see if you're climbing
     private bool Climbing => climbContactCount > 0 && stepsSinceLastJump > 2;
     // both for debugging purposes and snapping to ground purposes, counts the steps since last grounded, and steps since last jumped
@@ -100,8 +106,8 @@ public class PlayerMovement : MonoBehaviour
     private void CheckInput()
     {
         // grounded movement
-        playerInput.x = Input.GetAxis("Horizontal");
-        playerInput.y = Input.GetAxis("Vertical");
+        playerInput.x = Input.GetAxisRaw("Horizontal");
+        playerInput.y = Input.GetAxisRaw("Vertical");
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
         if (playerInputSpace)
@@ -155,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Climbing)
         {
-            velocity -= contactNormal * (maxClimbAcceleration * 0.9f * Time.deltaTime);
+            velocity -= contactNormal; //* (maxClimbAcceleration * 0.9f * Time.deltaTime);
         }
         else if (OnGround /*&& velocity.sqrMagnitude < 0.01f*/)
         {
@@ -163,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (pressedClimb && OnGround)
         {
-            velocity += (gravity - contactNormal * (maxClimbAcceleration * 0.9f)) * Time.deltaTime;
+            velocity += (gravity - contactNormal); //* (maxClimbAcceleration * 0.9f)) * Time.deltaTime;
         }
         else
         {
@@ -259,19 +265,19 @@ public class PlayerMovement : MonoBehaviour
     /// AdjustVelocity changes the velocity depending on the slope the player is on
     private void AdjustVelocity()
     {
-        float acceleration, speed;
+        float speed; //, acceleration;
         Vector3 xAxis, zAxis;
 
         if (Climbing)
         {
-            acceleration = maxClimbAcceleration;
+            //acceleration = maxClimbAcceleration;
             speed = maxClimbSpeed;
             xAxis = Vector3.Cross(contactNormal, upAxis);
             zAxis = upAxis;
         }
         else
         {
-            acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
+            //acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
             speed = maxSpeed;
             xAxis = rightAxis;
             zAxis = forwardAxis;
@@ -284,10 +290,10 @@ public class PlayerMovement : MonoBehaviour
         float currentX = Vector3.Dot(relativeVelocity, xAxis);
         float currentZ = Vector3.Dot(relativeVelocity, zAxis);
 
-        float maxSpeedChange = acceleration * Time.deltaTime;
+        //float maxSpeedChange = acceleration * Time.deltaTime;
 
-        float newX = Mathf.MoveTowards(currentX, playerInput.x * speed, maxSpeedChange);
-        float newZ = Mathf.MoveTowards(currentZ, playerInput.y * speed, maxSpeedChange);
+        float newX = playerInput.x * speed; //Mathf.MoveTowards(currentX, playerInput.x * speed, maxSpeedChange);
+        float newZ = playerInput.y * speed; // Mathf.MoveTowards(currentZ, playerInput.y * speed, maxSpeedChange);
 
         velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
     }

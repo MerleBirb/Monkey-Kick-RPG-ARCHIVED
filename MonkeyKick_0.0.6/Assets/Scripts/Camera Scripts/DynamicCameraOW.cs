@@ -152,7 +152,8 @@ public class DynamicCameraOW : MonoBehaviour
                 t = Mathf.Min(t, focusRadius / vectDistance);
             }
 
-            focusPoint = Vector3.Lerp(targetPoint, focusPoint, t);
+            focusPoint = targetPoint;
+            //focusPoint = Vector3.Lerp(targetPoint, focusPoint, t);
         }
         else
         {
