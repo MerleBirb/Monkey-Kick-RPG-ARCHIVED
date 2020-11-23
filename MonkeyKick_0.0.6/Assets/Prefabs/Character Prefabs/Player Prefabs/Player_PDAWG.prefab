@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7678286350066051220}
   - component: {fileID: 224771795703692238}
   - component: {fileID: 7596666086540187297}
+  - component: {fileID: 6434443528249566680}
   - component: {fileID: 3477940999531703833}
   m_Layer: 8
   m_Name: Player_PDAWG
@@ -181,6 +182,7 @@ MonoBehaviour:
   maxSpeed: 3
   maxClimbSpeed: 2
   playerMove: {x: 0, y: 0, z: 0}
+  playerInput: {fileID: 0}
   maxSnapSpeed: 100
   jumpHeight: 1.5
   maxAirJumps: 0
@@ -197,6 +199,7 @@ MonoBehaviour:
   climbMask:
     serializedVersion: 2
     m_Bits: 2048
+  interacted: 0
 --- !u!114 &7596666086540187297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +230,19 @@ MonoBehaviour:
   m_DefaultActionMap: Player_Overworld
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &6434443528249566680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224771795703692235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9514f65eae9904ab9152644a227682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: dad3efba425a29b47a7d9baf1e90a2a1, type: 2}
 --- !u!114 &3477940999531703833
 MonoBehaviour:
   m_ObjectHideFlags: 0
