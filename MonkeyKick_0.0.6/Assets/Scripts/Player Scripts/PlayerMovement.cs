@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -27,7 +28,10 @@ public class PlayerMovement : MonoBehaviour
     // theres also a desiredVelocity variable here!
     private Vector3 velocity, connectionVelocity;
     [HideInInspector]
-    public Vector3 playerInput;
+    public Vector3 playerMove;
+    // takes in the controls from the Player Input component
+    [HideInInspector]
+    public PlayerInput playerInput;
     // maximum acceleration variable, storing a value for the max acceleration
     //[SerializeField]
     //private float maxAcceleration = 10f, maxAirAcceleration = 1f, maxClimbAcceleration = 20f;
@@ -79,12 +83,18 @@ public class PlayerMovement : MonoBehaviour
     // time to make custom axises, ive gone off the deep end
     private Vector3 upAxis, rightAxis, forwardAxis;
 
+
+
+    public bool interacted = false;
+
     /// FUNCTIONS
     /// Awake is called when the object activates, or turns on
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        playerInput = GetComponent<PlayerInput>();
         rb.useGravity = false;
+        InitControls();
         OnSlopeValidate();
     }
 
@@ -105,10 +115,14 @@ public class PlayerMovement : MonoBehaviour
     /// CheckInput takes the input from the user and applies it to the player's movements
     private void CheckInput()
     {
+        pressedJump |= playerInput.actions.FindAction("Jump").WasPressedThisFrame();
+        interacted = playerInput.actions.FindAction("Jump").WasPressedThisFrame();
+
         // grounded movement
-        playerInput.x = Input.GetAxisRaw("Horizontal");
-        playerInput.y = Input.GetAxisRaw("Vertical");
-        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+        //playerMove.x = Input.GetAxisRaw("Horizontal");
+        //playerMove.y = Input.GetAxisRaw("Vertical");
+
+        playerMove = Vector2.ClampMagnitude(playerMove, 1f);
 
         if (playerInputSpace)
         {
@@ -121,18 +135,22 @@ public class PlayerMovement : MonoBehaviour
             forwardAxis = ProjectDirectionOnPlane(Vector3.forward, upAxis);
         }
 
-        // jumping input
-        pressedJump |= Input.GetButtonDown("A_BUTTON"); // note... what the hell kind of operator is |= ?!
-        //pressedClimb = Input.GetButton("Y_BUTTON");
+        /// EDIT WITH NEW CONTROLS LATER
+        //if (Input.GetAxis("R_TRIGGER") > 0)
+        //{
+        //    pressedClimb = true;
+        //}
+        //else
+        //{
+        //    pressedClimb = false;
+        //}
+    }
 
-        if (Input.GetAxis("R_TRIGGER") > 0)
-        {
-            pressedClimb = true;
-        }
-        else
-        {
-            pressedClimb = false;
-        }
+    /// InitControls sets the controls
+    private void InitControls()
+    {
+        InputSystem.pollingFrequency = 180;
+        playerInput.actions.FindAction("Move").performed += ctx => playerMove = ctx.ReadValue<Vector2>();
     }
 
     /// CheckMovement calculates the movement of the player. Self explanatory
@@ -155,8 +173,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (pressedJump)
         {
+            if(!LuaEnvironment.inDialogue && !DialogueTrigger.playerInRange)
+            {
+                Jump(gravity);
+            }
+
             pressedJump = false;
-            Jump(gravity);
         }
 
         if (Climbing)
@@ -254,7 +276,6 @@ public class PlayerMovement : MonoBehaviour
     /// ClearState resets the state to clean up the state
     private void ClearState()
     {
-
         groundContactCount = steepContactCount = climbContactCount = 0;
         contactNormal = steepNormal = climbNormal = Vector3.zero;
         connectionVelocity = Vector3.zero;
@@ -292,10 +313,17 @@ public class PlayerMovement : MonoBehaviour
 
         //float maxSpeedChange = acceleration * Time.deltaTime;
 
-        float newX = playerInput.x * speed; //Mathf.MoveTowards(currentX, playerInput.x * speed, maxSpeedChange);
-        float newZ = playerInput.y * speed; // Mathf.MoveTowards(currentZ, playerInput.y * speed, maxSpeedChange);
+        float newX = playerMove.x * speed; //Mathf.MoveTowards(currentX, playerMove.x * speed, maxSpeedChange);
+        float newZ = playerMove.y * speed; // Mathf.MoveTowards(currentZ, playerMove.y * speed, maxSpeedChange);
 
-        velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
+        if (!LuaEnvironment.inDialogue)
+        {
+            velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
+        }
+        else
+        {
+            velocity = Vector3.zero;          
+        }
     }
 
     /// OnCollisionEnter sets stuff when collision is entered with the desired object

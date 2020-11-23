@@ -84,11 +84,11 @@ public class DynamicCameraOW : MonoBehaviour
     /// LookAt keeps the camera focused and looking at the focus
     private void LookAt()
     {
-        if (ManualRotation()/* || AutomaticRotation()*/)
-        {
-            ConstrainAngles();
-            orbitRotation = Quaternion.Euler(orbitAngles);
-        }
+        //if (ManualRotation()/* || AutomaticRotation()*/)
+        //{
+        //    ConstrainAngles();
+        //    orbitRotation = Quaternion.Euler(orbitAngles);
+        //}
 
         Quaternion lookRotation = gravityAlignment * orbitRotation;
 

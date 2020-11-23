@@ -52,7 +52,7 @@ public class PDawgAnimations : MonoBehaviour
         float maxInputX;
         float maxInputY;
 
-        if (Mathf.Abs(player.playerInput.x) > 0 || Mathf.Abs(player.playerInput.y) > 0)
+        if (Mathf.Abs(player.playerMove.x) > 0 || Mathf.Abs(player.playerMove.y) > 0)
         {
             moving = true;
         }
@@ -61,11 +61,11 @@ public class PDawgAnimations : MonoBehaviour
             moving = false;
         }
 
-        if (player.playerInput.x > 0)
+        if (player.playerMove.x > 0)
         {
             maxInputX = 1;
         }
-        else if (player.playerInput.x < 0)
+        else if (player.playerMove.x < 0)
         {
             maxInputX = -1;
         }
@@ -74,11 +74,11 @@ public class PDawgAnimations : MonoBehaviour
             maxInputX = 0;
         }
 
-        if (player.playerInput.y > 0)
+        if (player.playerMove.y > 0)
         {
             maxInputY = 1;
         }
-        else if (player.playerInput.y < 0)
+        else if (player.playerMove.y < 0)
         {
             maxInputY = -1;
         }
@@ -104,7 +104,7 @@ public class PDawgAnimations : MonoBehaviour
                 source.Play();
             }
 
-            if (player.pressedJump)
+            if (player.pressedJump && !LuaEnvironment.inDialogue && !DialogueTrigger.playerInRange)
             {
                 source.clip = soundClips[(int)Sounds.JUMP];
                 source.pitch = 1.0f;
