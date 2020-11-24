@@ -10,10 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a05a6399f9fec54b85b29d78f991fe1, type: 3}
-  m_Name: Test
+  m_Name: test 2
   m_EditorClassIdentifier: 
   name: P-Dawg
+  fullName: Firstname Lastname
+  powerLevel: 0
+  description: 
   talkSounds:
   - {fileID: 8300000, guid: 1b9ff663509df684283dbd8a8be8c73a, type: 3}
-  maxPitch: 1
-  minPitch: 1
+  maxPitch: 0
+  minPitch: 0
+  level: 1
+  maxXP: 0
+  maxHP: 0
+  maxEP: 0
+  strength: 0
+  intelligence: 0

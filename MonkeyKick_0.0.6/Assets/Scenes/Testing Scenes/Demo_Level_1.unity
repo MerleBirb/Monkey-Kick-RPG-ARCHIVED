@@ -1795,19 +1795,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 224771795703692235, guid: ec36ff93ec1512042a4b34e592110962, type: 3}
   m_PrefabInstance: {fileID: 3530768613785044613}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1416619046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1416619045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec9514f65eae9904ab9152644a227682, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: dad3efba425a29b47a7d9baf1e90a2a1, type: 2}
 --- !u!1 &1416676186 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3534375589557622405, guid: 79d67e03eeff7d04a838ee957f64df1b, type: 3}
@@ -3725,6 +3712,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6434443528249566680, guid: ec36ff93ec1512042a4b34e592110962, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 194833176d9ec0143ad4f3cc6994e728, type: 2}
     - target: {fileID: 7678286350066051220, guid: ec36ff93ec1512042a4b34e592110962, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0

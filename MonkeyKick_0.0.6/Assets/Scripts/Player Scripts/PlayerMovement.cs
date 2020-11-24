@@ -313,8 +313,8 @@ public class PlayerMovement : MonoBehaviour
 
         //float maxSpeedChange = acceleration * Time.deltaTime;
 
-        float newX = playerMove.x * speed; //Mathf.MoveTowards(currentX, playerMove.x * speed, maxSpeedChange);
-        float newZ = playerMove.y * speed; // Mathf.MoveTowards(currentZ, playerMove.y * speed, maxSpeedChange);
+        float newX = playerMove.x * speed;
+        float newZ = playerMove.y * speed; 
 
         if (!LuaEnvironment.inDialogue)
         {
@@ -322,7 +322,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            velocity = Vector3.zero;          
+            velocity = new Vector3(0f, velocity.y, 0f);
         }
     }
 

@@ -61,11 +61,11 @@ public class PDawgAnimations : MonoBehaviour
             moving = false;
         }
 
-        if (player.playerMove.x > 0)
+        if (player.playerMove.x > 0.3f)
         {
             maxInputX = 1;
         }
-        else if (player.playerMove.x < 0)
+        else if (player.playerMove.x < -0.3f)
         {
             maxInputX = -1;
         }
@@ -74,11 +74,11 @@ public class PDawgAnimations : MonoBehaviour
             maxInputX = 0;
         }
 
-        if (player.playerMove.y > 0)
+        if (player.playerMove.y > 0.3f)
         {
             maxInputY = 1;
         }
-        else if (player.playerMove.y < 0)
+        else if (player.playerMove.y < -0.3f)
         {
             maxInputY = -1;
         }
