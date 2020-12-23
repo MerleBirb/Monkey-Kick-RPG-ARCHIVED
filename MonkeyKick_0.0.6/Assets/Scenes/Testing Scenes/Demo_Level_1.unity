@@ -717,7 +717,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3876,6 +3876,6 @@ PrefabInstance:
     - target: {fileID: 8692264390754364182, guid: 79d67e03eeff7d04a838ee957f64df1b, type: 3}
       propertyPath: talkSounds.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 4da064ca4316d714b82a5291fdbd058a, type: 3}
+      objectReference: {fileID: 8300000, guid: 8f268514be37ddb47a73ec88fee46d40, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79d67e03eeff7d04a838ee957f64df1b, type: 3}

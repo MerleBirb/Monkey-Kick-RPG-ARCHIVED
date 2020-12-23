@@ -17,7 +17,7 @@ MonoBehaviour:
   powerLevel: 0
   description: 
   talkSounds:
-  - {fileID: 8300000, guid: 1b9ff663509df684283dbd8a8be8c73a, type: 3}
+  - {fileID: 8300000, guid: 07fdbca290469654590778960232bd90, type: 3}
   maxPitch: 1
   minPitch: 1
   level: 1
