@@ -36,7 +36,7 @@ public class DialogueTrigger : MonoBehaviour
     // update happens every frame
     public void Update()
     {
-        if (player.interacted)
+        if (player.pressedInteract)
         {
             if (playerInRange && !LuaEnvironment.inDialogue)
             {
@@ -52,7 +52,8 @@ public class DialogueTrigger : MonoBehaviour
                 LuaEnvironment.inDialogue = true;
                 
             }
-            player.interacted = false;
+
+            player.pressedInteract = false;
         }
     }
 

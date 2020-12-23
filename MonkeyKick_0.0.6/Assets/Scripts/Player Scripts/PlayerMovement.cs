@@ -12,10 +12,15 @@ public class PlayerMovement : MonoBehaviour
     /// input variables
     // boolean for whether jump has been pressed or not
     [HideInInspector]
-    public bool pressedJump;
-    // boolean for when the player wants to climb
+    public bool pressedJump = false;
+    // boolean for whether sprint has been pressed or not
+    private bool pressedSprint = false;
+    private bool sprinting = false;
+    // boolean for whether climb has been pressed or not
+    private bool pressedClimb = false;
+    // boolean for whether interact has been pressed or not
     [HideInInspector]
-    public bool pressedClimb;
+    public bool pressedInteract = false;
     // the space the player's inputs come from (world space or camera space)
     [SerializeField]
     private Transform playerInputSpace = default;
@@ -23,7 +28,8 @@ public class PlayerMovement : MonoBehaviour
     /// speed variables
     // maximum speed variable: changes how fast the object is moving
     [SerializeField]
-    private float maxSpeed = 10f, maxClimbSpeed = 4f;
+    private float maxSpeed = 3f, maxSprintSpeed = 4.5f, maxClimbSpeed = 2f;
+    private float currentSpeed;
     // the velocity variable stores a vector that... well controls the velocity!
     // theres also a desiredVelocity variable here!
     private Vector3 velocity, connectionVelocity;
@@ -82,10 +88,8 @@ public class PlayerMovement : MonoBehaviour
     /// custom gravity & physics variables
     // time to make custom axises, ive gone off the deep end
     private Vector3 upAxis, rightAxis, forwardAxis;
-
-
-
-    public bool interacted = false;
+    // checks to see if the player is moving
+    private bool Moving => Mathf.Abs(velocity.x) > 0 || Mathf.Abs(velocity.z) > 0; 
 
     /// FUNCTIONS
     /// Awake is called when the object activates, or turns on
@@ -116,13 +120,26 @@ public class PlayerMovement : MonoBehaviour
     private void CheckInput()
     {
         pressedJump |= playerInput.actions.FindAction("Jump").WasPressedThisFrame();
-        interacted = playerInput.actions.FindAction("Jump").WasPressedThisFrame();
-
-        // grounded movement
-        //playerMove.x = Input.GetAxisRaw("Horizontal");
-        //playerMove.y = Input.GetAxisRaw("Vertical");
-
+        pressedInteract = playerInput.actions.FindAction("Jump").WasPressedThisFrame();
+        pressedSprint |= playerInput.actions.FindAction("Sprint").WasPressedThisFrame();
         playerMove = Vector2.ClampMagnitude(playerMove, 1f);
+
+        if (!sprinting)
+        {
+            if (pressedSprint)
+            {
+                sprinting = true;
+                pressedSprint = false;
+            }
+        }
+        else
+        {
+            if (pressedSprint)
+            {
+                sprinting = false;
+                pressedSprint = false;
+            }
+        }
 
         if (playerInputSpace)
         {
@@ -286,20 +303,29 @@ public class PlayerMovement : MonoBehaviour
     /// AdjustVelocity changes the velocity depending on the slope the player is on
     private void AdjustVelocity()
     {
-        float speed; //, acceleration;
+        float speed = currentSpeed; //, acceleration;
         Vector3 xAxis, zAxis;
 
         if (Climbing)
         {
             //acceleration = maxClimbAcceleration;
-            speed = maxClimbSpeed;
+            currentSpeed = maxClimbSpeed;
             xAxis = Vector3.Cross(contactNormal, upAxis);
             zAxis = upAxis;
         }
         else
         {
             //acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
-            speed = maxSpeed;
+
+            if (sprinting)
+            {
+                currentSpeed = maxSprintSpeed;
+            }
+            else
+            {
+                currentSpeed = maxSpeed;
+            }
+
             xAxis = rightAxis;
             zAxis = forwardAxis;
         }

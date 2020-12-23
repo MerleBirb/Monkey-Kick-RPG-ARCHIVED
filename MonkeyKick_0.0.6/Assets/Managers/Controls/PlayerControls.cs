@@ -44,6 +44,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Sprint"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""3a4db287-3613-46f0-87a4-45724205ef78"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Interact"",
                     ""type"": ""PassThrough"",
                     ""id"": ""ba49b166-0e55-4d26-a042-48db3b4459f5"",
@@ -151,6 +159,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""266bb786-4f64-4eb5-9d7f-653b53579102"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5c1fc51d-2985-4991-9488-494172bc2d61"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -184,6 +214,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Overworld = asset.FindActionMap("Player_Overworld", throwIfNotFound: true);
         m_Player_Overworld_Move = m_Player_Overworld.FindAction("Move", throwIfNotFound: true);
         m_Player_Overworld_Jump = m_Player_Overworld.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Overworld_Sprint = m_Player_Overworld.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Overworld_Interact = m_Player_Overworld.FindAction("Interact", throwIfNotFound: true);
     }
 
@@ -246,6 +277,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IPlayer_OverworldActions m_Player_OverworldActionsCallbackInterface;
     private readonly InputAction m_Player_Overworld_Move;
     private readonly InputAction m_Player_Overworld_Jump;
+    private readonly InputAction m_Player_Overworld_Sprint;
     private readonly InputAction m_Player_Overworld_Interact;
     public struct Player_OverworldActions
     {
@@ -253,6 +285,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public Player_OverworldActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Overworld_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Overworld_Jump;
+        public InputAction @Sprint => m_Wrapper.m_Player_Overworld_Sprint;
         public InputAction @Interact => m_Wrapper.m_Player_Overworld_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player_Overworld; }
         public void Enable() { Get().Enable(); }
@@ -269,6 +302,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_Player_OverworldActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_Player_OverworldActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_Player_OverworldActionsCallbackInterface.OnJump;
+                @Sprint.started -= m_Wrapper.m_Player_OverworldActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_Player_OverworldActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_Player_OverworldActionsCallbackInterface.OnSprint;
                 @Interact.started -= m_Wrapper.m_Player_OverworldActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_Player_OverworldActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_Player_OverworldActionsCallbackInterface.OnInteract;
@@ -282,6 +318,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
@@ -311,6 +350,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
 }

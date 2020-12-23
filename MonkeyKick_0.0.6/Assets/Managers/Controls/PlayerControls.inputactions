@@ -22,6 +22,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Sprint",
+                    "type": "PassThrough",
+                    "id": "3a4db287-3613-46f0-87a4-45724205ef78",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Interact",
                     "type": "PassThrough",
                     "id": "ba49b166-0e55-4d26-a042-48db3b4459f5",
@@ -127,6 +135,28 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "266bb786-4f64-4eb5-9d7f-653b53579102",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c1fc51d-2985-4991-9488-494172bc2d61",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

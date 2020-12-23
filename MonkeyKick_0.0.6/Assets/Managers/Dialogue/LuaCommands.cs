@@ -21,7 +21,7 @@ public class LuaCommands : MonoBehaviour
     [SerializeField]
     private Text nameText;
     private string typingText;
-    private bool doneTyping = false;
+    public bool doneTyping = false;
     // store the button handler
     private ButtonHandler buttons;
     // store all interactable objects in the scene
@@ -33,8 +33,8 @@ public class LuaCommands : MonoBehaviour
     // store the current sound
     private AudioSource talkSound;
     private AudioClip[] newTalkSounds = null;
-    private float newMinPitch = 0.0f;
-    private float newMaxPitch = 0.0f;
+    [SerializeField]
+    private float newMinPitch = 0.9f, newMaxPitch = 1.1f;
 
     //// store interactable object scripts
     //private PlayerMovement player;
@@ -45,6 +45,7 @@ public class LuaCommands : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        doneTyping = false;
         talkSound = GetComponent<AudioSource>();
 
         //player = null;
@@ -63,13 +64,26 @@ public class LuaCommands : MonoBehaviour
         talkObjects.AddRange(GameObject.FindGameObjectsWithTag(interactableTag));
     }
 
+    // Update is called every frame
+    private void Update()
+    {
+        if (!doneTyping)
+        {
+            PlayTalkingSounds();
+        }
+    }
+
     // sets the line of dialogue
     public static void SetText(string textString)
     {
         instance.doneTyping = false;
         instance.typingText = textString;
         instance.StopAllCoroutines();
-        instance.StartCoroutine(instance.TypeSentence(instance.typingText));
+
+        if (!instance.doneTyping)
+        {
+            instance.StartCoroutine(instance.TypeSentence(instance.typingText));
+        }
     }
 
     // letter animation
@@ -78,18 +92,40 @@ public class LuaCommands : MonoBehaviour
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
-            if (!talkSound.isPlaying)
+            if (doneTyping)
             {
-                talkSound.clip = newTalkSounds[0];
-                talkSound.pitch = Random.Range(newMinPitch, newMaxPitch);
-                talkSound.Play();
+                yield break;
             }
-
-            dialogueText.text += letter;
-            doneTyping = true;
-
-            yield return new WaitForSeconds(0.02f);
+            else
+            {
+                dialogueText.text += letter;
+                yield return new WaitForSeconds(0.02f);
+            }
         }
+
+        if (dialogueText.text == typingText)
+        {
+            doneTyping = true;
+        }
+    }
+
+    // finishes the sentence early
+    public void FinishSentence()
+    {
+        doneTyping = true;
+        dialogueText.text = "";
+        dialogueText.text = instance.typingText;
+    }
+
+    // play talking sounds... self explanatory
+    private void PlayTalkingSounds()
+    {
+        if (!talkSound.isPlaying)
+        {
+            talkSound.clip = newTalkSounds[0];
+            talkSound.pitch = Random.Range(newMinPitch, newMaxPitch);
+            talkSound.Play();
+        }     
     }
 
     // show the buttons...
@@ -120,8 +156,6 @@ public class LuaCommands : MonoBehaviour
                 if (instance.talkObjects[i].GetComponent<PlayerStats>().stats.name == name)
                 {
                     instance.newTalkSounds = instance.talkObjects[i].GetComponent<PlayerStats>().stats.talkSounds;
-                    instance.newMinPitch = instance.talkObjects[i].GetComponent<PlayerStats>().stats.minPitch;
-                    instance.newMaxPitch = instance.talkObjects[i].GetComponent<PlayerStats>().stats.maxPitch;
                 }
             }
             //else if (instance.talkObjects[i].tag == instance.enemyTag)
@@ -129,8 +163,6 @@ public class LuaCommands : MonoBehaviour
             //    if (instance.talkObjects[i].GetComponent<EnemyBattleScript>().charStats.name == name)
             //    {
             //        instance.newTalkSounds = instance.talkObjects[i].GetComponent<EnemyBattleScript>().charStats.talkSounds;
-            //        instance.newMinPitch = instance.talkObjects[i].GetComponent<EnemyBattleScript>().charStats.minPitch;
-            //        instance.newMaxPitch = instance.talkObjects[i].GetComponent<EnemyBattleScript>().charStats.maxPitch;
             //    }
             //}
             else if (instance.talkObjects[i].tag == instance.interactableTag)
@@ -138,8 +170,6 @@ public class LuaCommands : MonoBehaviour
                 if (instance.talkObjects[i].GetComponent<Interactable>().objName == name)
                 {
                     instance.newTalkSounds = instance.talkObjects[i].GetComponent<Interactable>().talkSounds;
-                    instance.newMinPitch = instance.talkObjects[i].GetComponent<Interactable>().minPitch;
-                    instance.newMaxPitch = instance.talkObjects[i].GetComponent<Interactable>().maxPitch;
                 }
             }
         }

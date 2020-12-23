@@ -10,6 +10,7 @@ public class ButtonHandler : MonoBehaviour
 
     // store the environment
     private LuaEnvironment lua;
+    private LuaCommands commands;
 
     // store the text options for the buttons
     [SerializeField]
@@ -27,6 +28,7 @@ public class ButtonHandler : MonoBehaviour
     [SerializeField]
     private int dialogueSelect = 0;
     private bool stickPressed = false;
+    public bool fastForward = false;
 
     // (placeholder) store the buttons being used
     private List<GameObject> dialogueChoices = new List<GameObject>();
@@ -46,6 +48,7 @@ public class ButtonHandler : MonoBehaviour
     private void Start()
     {
         lua = FindObjectOfType<LuaEnvironment>();
+        commands = FindObjectOfType<LuaCommands>();
         dialogueChoices.AddRange(GameObject.FindGameObjectsWithTag(dialogueChoiceTag));
         buttonParent.SetActive(false);
         isChoosingChoice = false;
@@ -92,15 +95,22 @@ public class ButtonHandler : MonoBehaviour
         //moveX = Input.GetAxisRaw("Horizontal");
         //moveZ = Input.GetAxisRaw("Vertical");
 
-        if(player.GetComponent<PlayerMovement>().interacted)
+        if(player.GetComponent<PlayerMovement>().pressedInteract)
         {
-            Debug.Log("Choice selected " + dialogueSelect);
+            if (commands.doneTyping)
+            {
+                Debug.Log("Choice selected " + dialogueSelect);
+                lua.LuaGameState.ChoiceSelected = dialogueSelect + 1;
 
-            lua.LuaGameState.ChoiceSelected = dialogueSelect + 1;
-            buttonParent.SetActive(false);
+                buttonParent.SetActive(false);
+                player.GetComponent<PlayerMovement>().pressedInteract = false;
 
-            lua.AdvanceScript();
-            player.GetComponent<PlayerMovement>().interacted = false;
+                lua.AdvanceScript();
+            }
+            else
+            {
+                commands.FinishSentence();
+            }
         }
     }
 
