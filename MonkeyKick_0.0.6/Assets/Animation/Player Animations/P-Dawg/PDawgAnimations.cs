@@ -16,14 +16,15 @@ public class PDawgAnimations : MonoBehaviour
     public List<AudioClip> soundClips = new List<AudioClip>();
     private AudioSource source;
 
+    // store the input variables
+    float maxInputX;
+    float maxInputY;
+
     private enum Sounds : int
     {
         WALK = 0,
         JUMP = 1
     }
-
-    // is the character moving?
-    private bool moving;
 
     // store the current state name
     private string currentState;    
@@ -35,7 +36,6 @@ public class PDawgAnimations : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         player = GetComponent<PlayerMovement>();
         source = GetComponent<AudioSource>();
-        moving = false;
     }
 
     /// FixedUpdate is called once per frame at a constant framerate
@@ -49,42 +49,10 @@ public class PDawgAnimations : MonoBehaviour
     /// UpdateFace updates which direction the player is facing
     private void UpdateFace()
     {
-        float maxInputX;
-        float maxInputY;
-
-        if (Mathf.Abs(player.playerMove.x) > 0 || Mathf.Abs(player.playerMove.y) > 0)
+        if (player.Moving)
         {
-            moving = true;
-        }
-        else
-        {
-            moving = false;
-        }
-
-        if (player.playerMove.x > 0.3f)
-        {
-            maxInputX = 1;
-        }
-        else if (player.playerMove.x < -0.3f)
-        {
-            maxInputX = -1;
-        }
-        else
-        {
-            maxInputX = 0;
-        }
-
-        if (player.playerMove.y > 0.3f)
-        {
-            maxInputY = 1;
-        }
-        else if (player.playerMove.y < -0.3f)
-        {
-            maxInputY = -1;
-        }
-        else
-        {
-            maxInputY = 0;
+            maxInputX = player.playerMove.x;
+            maxInputY = player.playerMove.y;
         }
 
         anim.SetFloat("Horizontal", maxInputX);
@@ -96,7 +64,7 @@ public class PDawgAnimations : MonoBehaviour
     {
         if (player.OnGround)
         {
-            if (moving && !source.isPlaying)
+            if (player.Moving && !source.isPlaying)
             {
                 source.clip = soundClips[(int)Sounds.WALK];
                 source.pitch = Random.Range(1.5f, 1.8f);

@@ -89,7 +89,8 @@ public class PlayerMovement : MonoBehaviour
     // time to make custom axises, ive gone off the deep end
     private Vector3 upAxis, rightAxis, forwardAxis;
     // checks to see if the player is moving
-    private bool Moving => Mathf.Abs(velocity.x) > 0 || Mathf.Abs(velocity.z) > 0; 
+    [HideInInspector]
+    public bool Moving => Mathf.Abs(playerMove.x) > 0 || Mathf.Abs(playerMove.y) > 0; 
 
     /// FUNCTIONS
     /// Awake is called when the object activates, or turns on
