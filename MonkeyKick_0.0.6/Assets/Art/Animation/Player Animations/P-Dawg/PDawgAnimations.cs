@@ -68,7 +68,7 @@ public class PDawgAnimations : MonoBehaviour
             {
                 source.clip = soundClips[(int)Sounds.WALK];
                 source.pitch = Random.Range(1.5f, 1.8f);
-                source.volume = 0.05f;
+                source.volume = 0.15f;
                 source.Play();
             }
 
