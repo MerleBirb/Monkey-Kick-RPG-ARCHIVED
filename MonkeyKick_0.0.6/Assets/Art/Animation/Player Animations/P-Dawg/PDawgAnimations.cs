@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using CatlikeCoding.Movement;
 
 public class PDawgAnimations : MonoBehaviour
 {

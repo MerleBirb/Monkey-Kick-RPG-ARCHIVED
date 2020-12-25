@@ -35,7 +35,7 @@ namespace Kryz.CharacterStats
         // the value is "dirty" when it needs to be recalculated, bool for that here
         protected bool isDirty = true;
         protected float _value; // temp value
-        protected float lastBasevalue; // temp variable
+        protected float lastBasevalue = float.MinValue; // temp variable
 
         // a list of all the stat modifiers that have been applied to the stat
         protected readonly List<StatModifier> statModifiers;
@@ -139,7 +139,6 @@ namespace Kryz.CharacterStats
                 }
             }
 
-            // 
             return (float)Math.Round(finalValue, 4);
         }
     }
