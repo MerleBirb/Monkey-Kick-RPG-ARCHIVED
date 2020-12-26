@@ -27,11 +27,11 @@ public class LuaEnvironment : MonoBehaviour
     // check if the player is in dialogue
     public static bool inDialogue = false;
     // create a new gamestate for the lua environment to run in
-    private GameState luaGameState;
+    private LuaState luaGameState;
 
     /// FUNCTIONS ///
     // the getter function for luaGameState
-    public GameState LuaGameState
+    public LuaState LuaGameState
     {
         get
         {
@@ -42,7 +42,7 @@ public class LuaEnvironment : MonoBehaviour
     // Awake happens before anything
     private void Awake()
     {
-        luaGameState = new GameState();
+        luaGameState = new LuaState();
     }
 
     // Setup loads the file

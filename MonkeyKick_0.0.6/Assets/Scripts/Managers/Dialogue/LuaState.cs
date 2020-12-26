@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [MoonSharpUserData]
-public class GameState
+public class LuaState
 {
     /// GAME STATE FOR LUA ///
     /// this is a class for Lua to interpret different strings into different types, like names VS dialogue. Part of the Lua Dialogue System.
@@ -23,7 +23,7 @@ public class GameState
     /// FUNCTIONS ///
     // instantiate the game state
     [MoonSharpHidden]
-    public GameState()
+    public LuaState()
     {
         flags = new HashSet<string>();
     }
