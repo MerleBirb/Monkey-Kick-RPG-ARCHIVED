@@ -18,20 +18,20 @@ MonoBehaviour:
   talkSounds:
   - {fileID: 8300000, guid: 07fdbca290469654590778960232bd90, type: 3}
   level: 1
-  neededEXP: 0
+  neededEXP: 40
   maxHP:
-    BaseValue: 18
+    BaseValue: 28
   maxEP:
     BaseValue: 15
   attack:
-    BaseValue: 11
+    BaseValue: 22
   defense:
-    BaseValue: 10
+    BaseValue: 18
   specialAttack:
-    BaseValue: 7
+    BaseValue: 14
   specialDefense:
-    BaseValue: 9
+    BaseValue: 16
   speed:
-    BaseValue: 4
+    BaseValue: 12
   luck:
-    BaseValue: 6
+    BaseValue: 13
