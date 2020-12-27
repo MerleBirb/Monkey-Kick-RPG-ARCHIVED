@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using CatlikeCoding.Movement;
 
 public class DialogueTrigger : MonoBehaviour
@@ -8,9 +7,6 @@ public class DialogueTrigger : MonoBehaviour
     /// triggers the dialogue state for the game
 
     /// VARIABLES ///
-    // store the dialogue UI
-    private GameObject dialogueUI;
-    private LuaEnvironment lua;
     // store the dialogue
     [SerializeField]
     private string dialogueFile;
@@ -26,9 +22,6 @@ public class DialogueTrigger : MonoBehaviour
     // Awake activates in the beginning
     private void Awake()
     {
-        dialogueUI = GameObject.FindGameObjectWithTag("DialogueUI");
-        lua = FindObjectOfType<LuaEnvironment>();
-
         button.SetActive(false);
         playerInRange = false;
     }
@@ -41,14 +34,14 @@ public class DialogueTrigger : MonoBehaviour
             if (playerInRange && !LuaEnvironment.inDialogue)
             {
                 
-                if (lua.loadFile != dialogueFile)
+                if (GameManager.instance.Lua.loadFile != dialogueFile)
                 {
-                    lua.loadFile = dialogueFile;
+                    GameManager.instance.Lua.loadFile = dialogueFile;
                 }
 
-                dialogueUI.SetActive(true);
+                GameManager.instance.DialogueManager.SetActive(true);
                 button.SetActive(false);
-                StartCoroutine(lua.Setup());
+                StartCoroutine(GameManager.instance.Lua.Setup());
                 LuaEnvironment.inDialogue = true;
                 
             }
@@ -96,7 +89,7 @@ public class DialogueTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             button.SetActive(false);
-            dialogueUI.SetActive(false);
+            GameManager.instance.DialogueManager.SetActive(false);
             playerInRange = false;
             LuaEnvironment.inDialogue = false;
         }

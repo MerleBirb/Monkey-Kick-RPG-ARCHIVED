@@ -508,6 +508,10 @@ PrefabInstance:
       propertyPath: focus
       value: 
       objectReference: {fileID: 3738343490886597962}
+    - target: {fileID: 8846152805977057677, guid: a35dad2547f1b9042adb4f36efc73fea, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1747497280}
     - target: {fileID: 8846152806954085942, guid: a35dad2547f1b9042adb4f36efc73fea, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1880,7 +1884,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 224771795703692238, guid: ec36ff93ec1512042a4b34e592110962, type: 3}
   m_PrefabInstance: {fileID: 3530768613785044613}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1747497280}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61e1c42c27c02e545a912d11847c2820, type: 3}
@@ -2056,7 +2060,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-28146
+  m_Name: pb_Mesh-5356
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2382,6 +2386,11 @@ Mesh:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1715568316, guid: a35dad2547f1b9042adb4f36efc73fea, type: 3}
   m_PrefabInstance: {fileID: 180102778}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1747497280 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 224771795703692235, guid: ec36ff93ec1512042a4b34e592110962, type: 3}
+  m_PrefabInstance: {fileID: 3530768613785044613}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1894788259
 GameObject:

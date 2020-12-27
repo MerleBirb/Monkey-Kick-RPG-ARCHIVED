@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 /// ENUM ///
 /// this enum covers the state the game can be in
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     /// VARIABLES ///
 
     // a singleton instance that makes only one instance of the game manager ever
-    protected static GameManager instance;
+    public static GameManager instance;
 
     // the state the game is currently in
     public static GameStates GameState = GameStates.MAIN_MENU;
@@ -28,6 +29,12 @@ public class GameManager : MonoBehaviour
     // the cameras used in game, the overworld camera and battle camera
     public Camera overworldCamera;
     public Camera battleCamera;
+
+    // dialogue elements
+    [SerializeField]
+    public GameObject DialogueManager, DialogueUI;
+    [SerializeField]
+    public LuaEnvironment Lua;
 
     // the scenes
     [SerializeField]
@@ -39,6 +46,8 @@ public class GameManager : MonoBehaviour
     // the controls for the main menu
     private PlayerInput controls;
     private bool pressedStart = false;
+
+    // 
 
     /// FUNCTIONS ///
 
@@ -56,7 +65,6 @@ public class GameManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(this);
         }
     }
 

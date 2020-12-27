@@ -1130,6 +1130,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overworldCamera: {fileID: 1715568315}
   battleCamera: {fileID: 34443641}
+  DialogueManager: {fileID: 8846152806963751866}
+  DialogueUI: {fileID: 8846152805441157507}
+  Lua: {fileID: 8846152806089644886}
   sceneName: Demo_Level_1_OW
 --- !u!114 &6655498718721504671
 MonoBehaviour:
