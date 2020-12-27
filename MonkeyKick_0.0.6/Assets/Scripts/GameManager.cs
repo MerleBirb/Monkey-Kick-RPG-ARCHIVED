@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 /// ENUM ///
 /// this enum covers the state the game can be in
@@ -23,27 +23,35 @@ public class GameManager : MonoBehaviour
     protected static GameManager instance;
 
     // the state the game is currently in
-    public static GameStates GameState = GameStates.OVERWORLD;
+    public static GameStates GameState = GameStates.MAIN_MENU;
 
     // the cameras used in game, the overworld camera and battle camera
     public Camera overworldCamera;
     public Camera battleCamera;
 
     // the scenes
+    [SerializeField]
+    private string sceneName;
     private Scene currentScene;
     private Scene lastScene;
-    private bool changedScene;
+    private ChangeScene cs;
+
+    // the controls for the main menu
+    private PlayerInput controls;
+    private bool pressedStart = false;
 
     /// FUNCTIONS ///
 
     // Awake happens once the object activates
     private void Awake()
     {
+        cs = GetComponent<ChangeScene>();
+        controls = GetComponent<PlayerInput>();
         currentScene = SceneManager.GetActiveScene();
 
         if (instance != null)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         else
         {
@@ -63,34 +71,79 @@ public class GameManager : MonoBehaviour
     {
         switch(state)
         {
+            case GameStates.MAIN_MENU:
+                {
+                    MainMenu();
+
+                    break;
+                }
             case GameStates.OVERWORLD:
                 {
-                    if (!overworldCamera.gameObject.activeSelf)
-                    {
-                        overworldCamera.gameObject.SetActive(true);
-                    }
-
-                    if (battleCamera.gameObject.activeSelf)
-                    {
-                        battleCamera.gameObject.SetActive(false);
-                    }
+                    Overworld();
 
                     break;
                 }
             case GameStates.BATTLE:
                 {
-                    if (overworldCamera.gameObject.activeSelf)
-                    {
-                        overworldCamera.gameObject.SetActive(false);
-                    }
-
-                    if (!battleCamera.gameObject.activeSelf)
-                    {
-                        battleCamera.gameObject.SetActive(true);
-                    }
+                    Battle();
 
                     break;
                 }
+        }
+    }
+
+    // main menu state
+    private void MainMenu()
+    {
+        if (overworldCamera.gameObject.activeSelf)
+        {
+            overworldCamera.gameObject.SetActive(false);
+        }
+
+        if (battleCamera.gameObject.activeSelf)
+        {
+            battleCamera.gameObject.SetActive(false);
+        }
+
+        pressedStart = controls.actions.FindAction("Start").WasPressedThisFrame();
+
+        if (pressedStart)
+        {
+            cs.LoadNextScene(sceneName);
+            pressedStart = false;
+        }
+
+        if (SceneManager.GetActiveScene().name.Contains(sceneName))
+        {
+            GameState = GameStates.OVERWORLD;
+        }
+    }
+
+    // overworld state
+    private void Overworld()
+    {
+        if (!overworldCamera.gameObject.activeSelf)
+        {
+            overworldCamera.gameObject.SetActive(true);
+        }
+
+        if (battleCamera.gameObject.activeSelf)
+        {
+            battleCamera.gameObject.SetActive(false);
+        }
+    }
+
+    // battle state
+    private void Battle()
+    {
+        if (overworldCamera.gameObject.activeSelf)
+        {
+            overworldCamera.gameObject.SetActive(false);
+        }
+
+        if (!battleCamera.gameObject.activeSelf)
+        {
+            battleCamera.gameObject.SetActive(true);
         }
     }
 }

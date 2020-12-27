@@ -7,6 +7,7 @@ TagManager:
   - Interactable
   - Enemy
   - DialogueChoice
+  - DialogueUI
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: HUD
+    uniqueID: 1959067981
     locked: 0

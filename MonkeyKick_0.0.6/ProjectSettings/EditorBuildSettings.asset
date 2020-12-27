@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testing Scenes/Demo_Level_1_OW.unity
     guid: 7dd10e4e74ef39143b8c8f09241b5cd1
+  - enabled: 1
+    path: Assets/Scenes/Testing Scenes/Demo_Titlescreen_1.unity
+    guid: 2f0578ec24ebcfb4da7bf93acbd54bb0
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 17231eb233f406749b68fd047215b441, type: 2}

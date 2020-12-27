@@ -2,11 +2,11 @@
 using UnityEngine;
 using CatlikeCoding.Movement;
 
-public class PDawgAnimations : MonoBehaviour
+public class PlayerOverworldAnimations : MonoBehaviour
 {
-    /// P-DAWG ANIMATIONS ///
-    /// This script controls P-Dawg's animations. Simple! Some animations (like attack or skill ones) are controlled
-    /// directly controlled by their respective script. Thank you @ Lost Relic Games for your amazing tutorials! 11/1/2020
+    /// PLAYER OVERWORLD ANIMATIONS ///
+    /// This script controls P-Dawg's animations in the overworld.
+    /// Thank you @ Lost Relic Games for your amazing tutorials! 11/1/2020
 
     /// VARIABLES ///
     // store the animator and the player movement script

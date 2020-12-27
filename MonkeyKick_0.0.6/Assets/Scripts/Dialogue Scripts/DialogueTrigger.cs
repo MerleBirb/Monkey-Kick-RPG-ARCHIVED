@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using CatlikeCoding.Movement;
 
 public class DialogueTrigger : MonoBehaviour
@@ -8,8 +9,8 @@ public class DialogueTrigger : MonoBehaviour
 
     /// VARIABLES ///
     // store the dialogue UI
-    public GameObject dialogueUI;
-    public LuaEnvironment lua;
+    private GameObject dialogueUI;
+    private LuaEnvironment lua;
     // store the dialogue
     [SerializeField]
     private string dialogueFile;
@@ -22,9 +23,12 @@ public class DialogueTrigger : MonoBehaviour
     // player controls
 
     /// FUNCTIONS ///
-    // start activates in the beginning
-    private void Start()
+    // Awake activates in the beginning
+    private void Awake()
     {
+        dialogueUI = GameObject.FindGameObjectWithTag("DialogueUI");
+        lua = FindObjectOfType<LuaEnvironment>();
+
         button.SetActive(false);
         playerInRange = false;
     }

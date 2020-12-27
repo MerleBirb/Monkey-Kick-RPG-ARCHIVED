@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using CatlikeCoding.Movement;
 
 [RequireComponent(typeof(Camera))]
 public class DynamicCameraOW : MonoBehaviour
@@ -69,6 +68,7 @@ public class DynamicCameraOW : MonoBehaviour
     void Awake()
     {
         regularCamera = GetComponent<Camera>();
+        focus = GameObject.FindObjectOfType<PlayerMovement>().transform;
         focusPoint = focus.position;
         transform.localRotation = orbitRotation = Quaternion.Euler(orbitAngles);
     }
