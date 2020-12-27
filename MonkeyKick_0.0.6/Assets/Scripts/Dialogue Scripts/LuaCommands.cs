@@ -153,9 +153,9 @@ public class LuaCommands : MonoBehaviour
         {
             if (instance.talkObjects[i].tag == instance.playerTag)
             {
-                if (instance.talkObjects[i].GetComponent<PlayerStats>().stats.name == name)
+                if (instance.talkObjects[i].GetComponent<Stats>().stats.name == name)
                 {
-                    instance.newTalkSounds = instance.talkObjects[i].GetComponent<PlayerStats>().stats.talkSounds;
+                    instance.newTalkSounds = instance.talkObjects[i].GetComponent<Stats>().stats.talkSounds;
                 }
             }
             //else if (instance.talkObjects[i].tag == instance.enemyTag)
