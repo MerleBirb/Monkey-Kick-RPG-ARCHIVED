@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 /// ENUM ///
 /// this enum covers the state the game can be in
@@ -40,14 +39,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private string sceneName;
     private Scene currentScene;
-    private Scene lastScene;
     private ChangeScene cs;
 
     // the controls for the main menu
     private PlayerInput controls;
     private bool pressedStart = false;
-
-    // 
 
     /// FUNCTIONS ///
 
@@ -120,11 +116,6 @@ public class GameManager : MonoBehaviour
             cs.LoadNextScene(sceneName);
             pressedStart = false;
         }
-
-        if (SceneManager.GetActiveScene().name.Contains(sceneName))
-        {
-            GameState = GameStates.OVERWORLD;
-        }
     }
 
     // overworld state
@@ -152,6 +143,28 @@ public class GameManager : MonoBehaviour
         if (!battleCamera.gameObject.activeSelf)
         {
             battleCamera.gameObject.SetActive(true);
+        }
+    }
+
+    // changes scene depening on the suffix
+    private void ChangeGameState(Scene newScene)
+    {
+        if (currentScene == newScene)
+        {
+            return;
+        }
+
+        if (currentScene.name.Contains("OW"))
+        {
+            GameState = GameStates.OVERWORLD;
+        }
+        else if (currentScene.name.Contains("BAT"))
+        {
+            GameState = GameStates.BATTLE;
+        }
+        else if (currentScene.name.Contains("CUT"))
+        {
+            GameState = GameStates.CUTSCENE;
         }
     }
 }
