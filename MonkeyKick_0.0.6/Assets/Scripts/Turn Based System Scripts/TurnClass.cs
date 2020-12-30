@@ -17,7 +17,6 @@ namespace Merlebird.TurnBasedSystem
         public string charName;
 
         // boolean which tells if it is the character's turn or not
-        [HideInInspector]
         public bool isTurn = false, wasTurnPrev = false;
 
         // store the speed of the character to be used in the sorting turn order calculation

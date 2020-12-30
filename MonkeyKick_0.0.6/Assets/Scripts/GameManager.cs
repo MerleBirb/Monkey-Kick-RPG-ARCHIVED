@@ -73,7 +73,9 @@ public class GameManager : MonoBehaviour
     // updates the state of the game
     private void UpdateState(GameStates state)
     {
-        switch(state)
+        ChangeGameState(SceneManager.GetActiveScene());
+
+        switch (state)
         {
             case GameStates.MAIN_MENU:
                 {
@@ -147,13 +149,8 @@ public class GameManager : MonoBehaviour
     }
 
     // changes scene depening on the suffix
-    private void ChangeGameState(Scene newScene)
+    public void ChangeGameState(Scene newScene)
     {
-        if (currentScene == newScene)
-        {
-            return;
-        }
-
         if (currentScene.name.Contains("OW"))
         {
             GameState = GameStates.OVERWORLD;
@@ -166,5 +163,12 @@ public class GameManager : MonoBehaviour
         {
             GameState = GameStates.CUTSCENE;
         }
+
+        if (currentScene == newScene)
+        {
+            return;
+        }
+
+        currentScene = newScene;
     }
 }
