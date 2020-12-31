@@ -12,25 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a05a6399f9fec54b85b29d78f991fe1, type: 3}
   m_Name: C-Dawg (Test)
   m_EditorClassIdentifier: 
-  name: Name
+  name: C-Dawg
   totalEXP: 0
-  description: 
-  talkSounds: []
+  description: c-dawg.
+  talkSounds:
+  - {fileID: 8300000, guid: 07fdbca290469654590778960232bd90, type: 3}
   level: 1
   neededEXP: 0
   maxHP:
-    BaseValue: 0
+    BaseValue: 1
   maxEP:
-    BaseValue: 0
+    BaseValue: 1
   attack:
-    BaseValue: 0
+    BaseValue: 1
   defense:
-    BaseValue: 0
+    BaseValue: 1
   specialAttack:
-    BaseValue: 0
+    BaseValue: 1
   specialDefense:
-    BaseValue: 0
+    BaseValue: 1
   speed:
-    BaseValue: 0
+    BaseValue: 1
   luck:
-    BaseValue: 0
+    BaseValue: 1

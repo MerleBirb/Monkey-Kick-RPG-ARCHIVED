@@ -35,3 +35,5 @@ MonoBehaviour:
     BaseValue: 3
   luck:
     BaseValue: 3
+  currentHP: 30
+  currentEP: 10

@@ -29,4 +29,31 @@ public class Character : ScriptableObject
     public CharacterStat speed; /// the character's speed points. affects when you go in the turn order.
     public CharacterStat luck; /// the character's luck points. are you a lucky fella? this weird stat can affect many things in different ways.
                                /// it cuts prices in shop by a percentage, increases crit damage, increases the chance of status effects from moves!
+                               
+    // the current amount of these points
+    public int currentHP, currentEP;
+
+    /// keeps hp and ep from going over or below bounds
+    public void KeepPointsInCheck()
+    {
+        if (currentHP <= 0)
+        {
+            currentHP = 0;
+        }
+
+        if (currentHP > maxHP.Value)
+        {
+            currentHP = (int)maxHP.Value;
+        }
+
+        if (currentEP <= 0)
+        {
+            currentEP = 0;
+        }
+
+        if (currentEP > maxEP.Value)
+        {
+            currentEP = (int)maxEP.Value;
+        }
+    }
 }
