@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     /// FUNCTIONS ///
 
-    // Awake happens once the object activates
+    /// Awake happens once the object activates
     private void Awake()
     {
         cs = GetComponent<ChangeScene>();
@@ -64,13 +64,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update happens every single step
+    /// Update happens every single step
     private void Update()
     {
         UpdateState(GameState);
     }
 
-    // updates the state of the game
+    /// updates the state of the game
     private void UpdateState(GameStates state)
     {
         ChangeGameState(SceneManager.GetActiveScene());
