@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using Kryz.CharacterStats;
 
-[CreateAssetMenu(fileName = "New Character", menuName = "New Character/Character")]
-public class Character : ScriptableObject
+[System.Serializable]
+public class Character
 {
     /// CHARACTER OBJECT ///
     /// This scriptable object stores stats and other information about a character.
     
     /// BASIC INFORMATION ///
-    public new string name = "Name"; /// the display name of the character. used for storing info.
+    public string name = "Name"; /// the display name of the character. used for storing info.
     public int totalEXP = 0; /// the total experience, aka the power level of the character. a measure that averages all their abilites to a
-    /// numerical value.
+                             /// numerical value.
 
     [TextArea(15, 20)]
     public string description; /// the description of the character; like a small summary of who they are, what they are, etc. height, weight, etc.
@@ -32,28 +32,4 @@ public class Character : ScriptableObject
                                
     // the current amount of these points
     public int currentHP, currentEP;
-
-    /// keeps hp and ep from going over or below bounds
-    public void KeepPointsInCheck()
-    {
-        if (currentHP <= 0)
-        {
-            currentHP = 0;
-        }
-
-        if (currentHP > maxHP.Value)
-        {
-            currentHP = (int)maxHP.Value;
-        }
-
-        if (currentEP <= 0)
-        {
-            currentEP = 0;
-        }
-
-        if (currentEP > maxEP.Value)
-        {
-            currentEP = (int)maxEP.Value;
-        }
-    }
 }
