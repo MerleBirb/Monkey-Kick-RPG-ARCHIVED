@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 2012944465486931285}
   - component: {fileID: 3289136027320979065}
   - component: {fileID: 4504645178599736413}
-  - component: {fileID: 3115384045698187395}
   m_Layer: 0
   m_Name: enemy_spawner placeholder
   m_TagString: Enemy
@@ -161,18 +160,3 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3115384045698187395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9019368999515571717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec9514f65eae9904ab9152644a227682, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  charStats: {fileID: 11400000, guid: 2d9877b9f78c3034c8d69a58a6e296be, type: 2}
-  currentHP: 0
-  currentEP: 0
