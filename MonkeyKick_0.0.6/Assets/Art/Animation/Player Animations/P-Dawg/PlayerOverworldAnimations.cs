@@ -18,8 +18,8 @@ public class PlayerOverworldAnimations : MonoBehaviour
     private AudioSource source;
 
     // store the input variables
-    float maxInputX;
-    float maxInputY;
+    private float maxInputX;
+    private float maxInputY;
 
     private enum Sounds : int
     {
@@ -39,16 +39,8 @@ public class PlayerOverworldAnimations : MonoBehaviour
         source = GetComponent<AudioSource>();
     }
 
-    /// FixedUpdate is called once per frame at a constant framerate
-    void FixedUpdate()
-    {
-        UpdateFace();
-        UpdateSounds();
-        CleanSounds();
-    }
-
     /// UpdateFace updates which direction the player is facing
-    private void UpdateFace()
+    public void UpdateFace()
     {
         if (player.Moving)
         {
@@ -61,7 +53,7 @@ public class PlayerOverworldAnimations : MonoBehaviour
     }
 
     /// UpdateSounds keeps which sounds are playing in check
-    private void UpdateSounds()
+    public void UpdateSounds()
     {
         if (player.OnGround)
         {
@@ -85,7 +77,7 @@ public class PlayerOverworldAnimations : MonoBehaviour
     }
 
     /// CleanSounds cleans the source.
-    private void CleanSounds()
+    public void CleanSounds()
     {
         if (!source.isPlaying)
         {

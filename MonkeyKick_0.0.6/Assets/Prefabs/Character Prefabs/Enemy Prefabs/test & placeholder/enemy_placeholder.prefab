@@ -91,9 +91,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9514f65eae9904ab9152644a227682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charStats: {fileID: 11400000, guid: 2d9877b9f78c3034c8d69a58a6e296be, type: 2}
-  currentHP: 0
-  currentEP: 0
+  charStats:
+    name: Dummy
+    totalEXP: 15
+    description: A total dummy.
+    talkSounds:
+    - {fileID: 8300000, guid: 8f268514be37ddb47a73ec88fee46d40, type: 3}
+    level: 1
+    neededEXP: 0
+    maxHP:
+      BaseValue: 35
+    maxEP:
+      BaseValue: 0
+    attack:
+      BaseValue: 10
+    defense:
+      BaseValue: 10
+    specialAttack:
+      BaseValue: 10
+    specialDefense:
+      BaseValue: 10
+    speed:
+      BaseValue: 10
+    luck:
+      BaseValue: 0
+    currentHP: 35
+    currentEP: 35
 --- !u!1 &5481744570427377122
 GameObject:
   m_ObjectHideFlags: 0
