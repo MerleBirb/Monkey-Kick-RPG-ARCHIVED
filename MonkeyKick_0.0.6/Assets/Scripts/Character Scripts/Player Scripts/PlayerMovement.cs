@@ -105,22 +105,8 @@ namespace CatlikeCoding.Movement
             OnSlopeValidate();
         }
 
-        /// Update is called once per frame
-        private void Update()
-        {
-            CheckInput();
-        }
-
-        /// FixedUpdate is called once per frame at a fixed framerate
-        private void FixedUpdate()
-        {
-            UpdateState();
-            CheckMovement();
-            ClearState();
-        }
-
         /// CheckInput takes the input from the user and applies it to the player's movements
-        private void CheckInput()
+        public void CheckInput()
         {
             pressedJump |= playerInput.actions.FindAction("Jump").WasPressedThisFrame();
             pressedInteract = playerInput.actions.FindAction("Jump").WasPressedThisFrame();
@@ -174,7 +160,7 @@ namespace CatlikeCoding.Movement
         }
 
         /// CheckMovement calculates the movement of the player. Self explanatory
-        private void CheckMovement()
+        public void CheckMovement()
         {
             // grounded movement
             AdjustVelocity();
@@ -261,7 +247,7 @@ namespace CatlikeCoding.Movement
         }
 
         /// UpdateState checks and changes the current state of the player, whether grounded or in air or mid jump or etc
-        private void UpdateState()
+        public void UpdateState()
         {
             stepsSinceLastGrounded += 1;
             stepsSinceLastJump += 1;
@@ -294,7 +280,7 @@ namespace CatlikeCoding.Movement
         }
 
         /// ClearState resets the state to clean up the state
-        private void ClearState()
+        public void ClearState()
         {
             groundContactCount = steepContactCount = climbContactCount = 0;
             contactNormal = steepNormal = climbNormal = Vector3.zero;

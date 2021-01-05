@@ -9,8 +9,8 @@ public class ManagePlayerComponents : MonoBehaviour
     /// VARIABLES ///
 
     // all the player components, their variable names are abbreviations
-    private PlayerMovement PM;
-    private PlayerOverworldAnimations POWA;
+    private PlayerMovement playerMovement;
+    private PlayerOverworldAnimations playerOverworldAnimations;
 
     // game state variables
     private GameStates currentGameState;
@@ -18,16 +18,16 @@ public class ManagePlayerComponents : MonoBehaviour
 
     /// FUNCTIONS ///
 
-    // Awake is called the instant the player is awake
+    /// Awake is called the instant the player is awake
     private void Awake()
     {
         lastGameState = GameManager.GameState;
 
-        PM = GetComponent<PlayerMovement>();
-        POWA = GetComponent<PlayerOverworldAnimations>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerOverworldAnimations = GetComponent<PlayerOverworldAnimations>();
     }
 
-    // Update is called once per frame
+    /// Update is called once per frame
     private void Update()
     {
         if (currentGameState != GameManager.GameState)
@@ -42,6 +42,11 @@ public class ManagePlayerComponents : MonoBehaviour
                 case GameStates.OVERWORLD:
                     {
                         OverworldState();
+                        playerMovement.CheckInput();
+
+                        playerOverworldAnimations.UpdateFace();
+                        playerOverworldAnimations.UpdateSounds();
+                        playerOverworldAnimations.CleanSounds();
 
                         break;
                     }
@@ -55,7 +60,18 @@ public class ManagePlayerComponents : MonoBehaviour
         }
     }
 
-    // updates the saved state to the current one, returns a boolean
+    /// FixedUpdate calls every frame in a fixed rate
+    private void FixedUpdate()
+    {
+        if (GameManager.GameState == GameStates.OVERWORLD)
+        {
+            playerMovement.UpdateState();
+            playerMovement.CheckMovement();
+            playerMovement.ClearState();
+        }
+    }
+
+    /// updates the saved state to the current one, returns a boolean
     private bool ChangedState()
     {
         if (lastGameState != currentGameState)
@@ -66,31 +82,31 @@ public class ManagePlayerComponents : MonoBehaviour
         return false;
     }
 
-    // the overworld state of the player
+    /// the overworld state of the player
     private void OverworldState()
     {
-        if (PM.enabled == false)
+        if (playerMovement.enabled == false)
         {
-            PM.enabled = true;
+            playerMovement.enabled = true;
         }
 
-        if (POWA.enabled == false)
+        if (playerOverworldAnimations.enabled == false)
         {
-            POWA.enabled = true;
+            playerOverworldAnimations.enabled = true;
         }
     }
 
-    // the battle state of the player
+    /// the battle state of the player
     private void BattleState()
     {
-        if (PM.enabled == true)
+        if (playerMovement.enabled == true)
         {
-            PM.enabled = false;
+            playerMovement.enabled = false;
         }
 
-        if (POWA.enabled == true)
+        if (playerOverworldAnimations.enabled == true)
         {
-            POWA.enabled = false;
+            playerOverworldAnimations.enabled = false;
         }
     }
 }
