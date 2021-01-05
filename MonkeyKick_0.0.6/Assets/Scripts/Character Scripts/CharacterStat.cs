@@ -53,9 +53,9 @@ namespace Kryz.CharacterStats
             BaseValue = baseValue;
         }
 
-        /// FUNCTIONS /// 
+        /// FUNCTIONS ///
 
-        // adds a modifier to the stat
+        /// adds a modifier to the stat
         public virtual void AddModifier(StatModifier mod)
         {
             isDirty = true;
@@ -63,7 +63,7 @@ namespace Kryz.CharacterStats
             statModifiers.Sort(CompareModifierOrder);
         }
 
-        // removes all modifiers from specific source
+        /// removes all modifiers from specific source
         public virtual bool RemoveAllModifiersFromSource(object source)
         {
             bool didRemove = false;
@@ -81,7 +81,7 @@ namespace Kryz.CharacterStats
             return didRemove;
         }
 
-        // compares and sorts modifiers
+        /// compares and sorts modifiers
         protected virtual int CompareModifierOrder(StatModifier a, StatModifier b)
         {
             if (a.Order < b.Order)
@@ -96,7 +96,7 @@ namespace Kryz.CharacterStats
             return 0; // if (a.Order == b.Order)
         }
 
-        // remove a modifier to the stat
+        /// remove a modifier to the stat
         public virtual bool RemoveModifier(StatModifier mod)
         {
             if (statModifiers.Remove(mod))
@@ -108,7 +108,7 @@ namespace Kryz.CharacterStats
             return false;
         }
 
-        // combine stat modifiers and calculate the final value of the stat
+        /// combine stat modifiers and calculate the final value of the stat
         protected virtual float CalculateFinalValue()
         {
             float finalValue = BaseValue;
