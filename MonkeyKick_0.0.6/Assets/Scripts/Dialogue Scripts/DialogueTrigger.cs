@@ -7,6 +7,11 @@ public class DialogueTrigger : MonoBehaviour
     /// triggers the dialogue state for the game
 
     /// VARIABLES ///
+    // store the dialogue managers
+    [SerializeField]
+    private GameObject dialogueManager;
+    [SerializeField]
+    private LuaEnvironment lua;
     // store the dialogue
     [SerializeField]
     private string dialogueFile;
@@ -34,14 +39,14 @@ public class DialogueTrigger : MonoBehaviour
             if (playerInRange && !LuaEnvironment.inDialogue)
             {
                 
-                if (GameManager.instance.Lua.loadFile != dialogueFile)
+                if (lua.loadFile != dialogueFile)
                 {
-                    GameManager.instance.Lua.loadFile = dialogueFile;
+                    lua.loadFile = dialogueFile;
                 }
 
-                GameManager.instance.DialogueManager.SetActive(true);
+                dialogueManager.SetActive(true);
                 button.SetActive(false);
-                StartCoroutine(GameManager.instance.Lua.Setup());
+                StartCoroutine(lua.Setup());
                 LuaEnvironment.inDialogue = true;
                 
             }
@@ -89,7 +94,7 @@ public class DialogueTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             button.SetActive(false);
-            GameManager.instance.DialogueManager.SetActive(false);
+            dialogueManager.SetActive(false);
             playerInRange = false;
             LuaEnvironment.inDialogue = false;
         }

@@ -25,16 +25,6 @@ public class GameManager : MonoBehaviour
     // the state the game is currently in
     public static GameStates GameState = GameStates.MAIN_MENU;
 
-    // the cameras used in game, the overworld camera and battle camera
-    public Camera overworldCamera;
-    public Camera battleCamera;
-
-    // dialogue elements
-    [SerializeField]
-    public GameObject DialogueManager, DialogueUI;
-    [SerializeField]
-    public LuaEnvironment Lua;
-
     // the scenes
     [SerializeField]
     private string sceneName;
@@ -61,6 +51,7 @@ public class GameManager : MonoBehaviour
         else
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -73,7 +64,7 @@ public class GameManager : MonoBehaviour
     /// updates the state of the game
     private void UpdateState(GameStates state)
     {
-        ChangeGameState(SceneManager.GetActiveScene());
+        ChangeGameState();
 
         switch (state)
         {
@@ -85,6 +76,7 @@ public class GameManager : MonoBehaviour
                 }
             case GameStates.OVERWORLD:
                 {
+                    Debug.Log("Overworld");
                     Overworld();
 
                     break;
@@ -101,16 +93,6 @@ public class GameManager : MonoBehaviour
     // main menu state
     private void MainMenu()
     {
-        if (overworldCamera.gameObject.activeSelf)
-        {
-            overworldCamera.gameObject.SetActive(false);
-        }
-
-        if (battleCamera.gameObject.activeSelf)
-        {
-            battleCamera.gameObject.SetActive(false);
-        }
-
         pressedStart = controls.actions.FindAction("Start").WasPressedThisFrame();
 
         if (pressedStart)
@@ -123,52 +105,36 @@ public class GameManager : MonoBehaviour
     // overworld state
     private void Overworld()
     {
-        if (!overworldCamera.gameObject.activeSelf)
-        {
-            overworldCamera.gameObject.SetActive(true);
-        }
 
-        if (battleCamera.gameObject.activeSelf)
-        {
-            battleCamera.gameObject.SetActive(false);
-        }
     }
 
     // battle state
     private void Battle()
     {
-        if (overworldCamera.gameObject.activeSelf)
-        {
-            overworldCamera.gameObject.SetActive(false);
-        }
 
-        if (!battleCamera.gameObject.activeSelf)
-        {
-            battleCamera.gameObject.SetActive(true);
-        }
     }
 
     // changes scene depening on the suffix
-    public void ChangeGameState(Scene newScene)
+    public void ChangeGameState()
     {
-        if (currentScene.name.Contains("OW"))
+        if (SceneManager.GetActiveScene().name.Contains("OW"))
         {
             GameState = GameStates.OVERWORLD;
         }
-        else if (currentScene.name.Contains("BAT"))
+        else if (SceneManager.GetActiveScene().name.Contains("BAT"))
         {
             GameState = GameStates.BATTLE;
         }
-        else if (currentScene.name.Contains("CUT"))
+        else if (SceneManager.GetActiveScene().name.Contains("CUT"))
         {
             GameState = GameStates.CUTSCENE;
         }
 
-        if (currentScene == newScene)
+        if (currentScene == SceneManager.GetActiveScene())
         {
             return;
         }
 
-        currentScene = newScene;
+        currentScene = SceneManager.GetActiveScene();
     }
 }

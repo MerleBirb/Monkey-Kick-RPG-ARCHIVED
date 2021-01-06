@@ -12,17 +12,11 @@ public class ManagePlayerComponents : MonoBehaviour
     private PlayerMovement playerMovement;
     private PlayerOverworldAnimations playerOverworldAnimations;
 
-    // game state variables
-    private GameStates currentGameState;
-    private GameStates lastGameState;
-
     /// FUNCTIONS ///
 
     /// Awake is called the instant the player is awake
     private void Awake()
     {
-        lastGameState = GameManager.GameState;
-
         playerMovement = GetComponent<PlayerMovement>();
         playerOverworldAnimations = GetComponent<PlayerOverworldAnimations>();
     }
@@ -30,33 +24,25 @@ public class ManagePlayerComponents : MonoBehaviour
     /// Update is called once per frame
     private void Update()
     {
-        if (currentGameState != GameManager.GameState)
+        switch (GameManager.GameState)
         {
-            currentGameState = GameManager.GameState;
-        }
+            case GameStates.OVERWORLD:
+                {
+                    OverworldState();
+                    playerMovement.CheckInput();
 
-        if (ChangedState())
-        {
-            switch(GameManager.GameState)
-            {
-                case GameStates.OVERWORLD:
-                    {
-                        OverworldState();
-                        playerMovement.CheckInput();
+                    playerOverworldAnimations.UpdateFace();
+                    playerOverworldAnimations.UpdateSounds();
+                    playerOverworldAnimations.CleanSounds();
 
-                        playerOverworldAnimations.UpdateFace();
-                        playerOverworldAnimations.UpdateSounds();
-                        playerOverworldAnimations.CleanSounds();
+                    break;
+                }
+            case GameStates.BATTLE:
+                {
+                    BattleState();
 
-                        break;
-                    }
-                case GameStates.BATTLE:
-                    {
-                        BattleState();
-
-                        break;
-                    }
-            }
+                    break;
+                }
         }
     }
 
@@ -69,17 +55,6 @@ public class ManagePlayerComponents : MonoBehaviour
             playerMovement.CheckMovement();
             playerMovement.ClearState();
         }
-    }
-
-    /// updates the saved state to the current one, returns a boolean
-    private bool ChangedState()
-    {
-        if (lastGameState != currentGameState)
-        {
-            return true;
-        }
-
-        return false;
     }
 
     /// the overworld state of the player

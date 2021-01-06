@@ -32,13 +32,9 @@ public class LuaCommands : MonoBehaviour
     private string interactableTag = "Interactable";
     // store the current sound
     private AudioSource talkSound;
-    private AudioClip[] newTalkSounds = null;
+    private AudioClip[] newTalkSounds;
     [SerializeField]
     private float newMinPitch = 0.9f, newMaxPitch = 1.1f;
-
-    //// store interactable object scripts
-    //private PlayerMovement player;
-    //private EnemyBattleScript enemy;
 
     /// FUNCTIONS ///
     // Awake starts right when the scene starts or when the object begins existing
@@ -47,14 +43,8 @@ public class LuaCommands : MonoBehaviour
         instance = this;
         doneTyping = false;
         talkSound = GetComponent<AudioSource>();
+        newTalkSounds = null;
 
-        //player = null;
-        //enemy = null;
-    }
-
-    // Start is called on the first frame
-    private void Start()
-    {
         buttons = FindObjectOfType<ButtonHandler>();
         lua = FindObjectOfType<LuaEnvironment>();
 
@@ -62,6 +52,9 @@ public class LuaCommands : MonoBehaviour
         talkObjects.AddRange(GameObject.FindGameObjectsWithTag(playerTag));
         talkObjects.AddRange(GameObject.FindGameObjectsWithTag(enemyTag));
         talkObjects.AddRange(GameObject.FindGameObjectsWithTag(interactableTag));
+
+        //player = null;
+        //enemy = null;
     }
 
     // Update is called every frame
@@ -120,12 +113,15 @@ public class LuaCommands : MonoBehaviour
     // play talking sounds... self explanatory
     private void PlayTalkingSounds()
     {
-        if (!talkSound.isPlaying)
+        if (newTalkSounds != null)
         {
-            talkSound.clip = newTalkSounds[0];
-            talkSound.pitch = Random.Range(newMinPitch, newMaxPitch);
-            talkSound.Play();
-        }     
+            if (!talkSound.isPlaying)
+            {
+                talkSound.clip = newTalkSounds[0];
+                talkSound.pitch = Random.Range(newMinPitch, newMaxPitch);
+                talkSound.Play();
+            }
+        }    
     }
 
     // show the buttons...
