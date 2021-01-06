@@ -68,7 +68,7 @@ public class DynamicCameraOW : MonoBehaviour
     void Awake()
     {
         regularCamera = GetComponent<Camera>();
-        focus = GameObject.FindObjectOfType<PlayerMovement>().transform;
+        focus = FindObjectOfType<PlayerMovement>().transform;
         focusPoint = focus.position;
         transform.localRotation = orbitRotation = Quaternion.Euler(orbitAngles);
     }
