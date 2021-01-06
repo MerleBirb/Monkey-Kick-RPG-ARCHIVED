@@ -42,10 +42,11 @@ public class ButtonHandler : MonoBehaviour
     // are you selecting a choice or not?
     public bool isChoosingChoice = false;
 
+    // the player
     public GameObject player;
 
     // Start is called on the first frame
-    private void Start()
+    private void Awake()
     {
         lua = FindObjectOfType<LuaEnvironment>();
         commands = FindObjectOfType<LuaCommands>();

@@ -25,12 +25,6 @@ public class GameManager : MonoBehaviour
     // the state the game is currently in
     public static GameStates GameState = GameStates.MAIN_MENU;
 
-    // dialogue elements
-    [SerializeField]
-    public GameObject DialogueManager, DialogueUI;
-    [SerializeField]
-    public LuaEnvironment Lua;
-
     // the scenes
     [SerializeField]
     private string sceneName;
@@ -82,6 +76,7 @@ public class GameManager : MonoBehaviour
                 }
             case GameStates.OVERWORLD:
                 {
+                    Debug.Log("Overworld");
                     Overworld();
 
                     break;
