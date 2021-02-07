@@ -21,9 +21,9 @@ namespace Kryz.CharacterStats
         {
             get
             {
-                if (isDirty)
+                if (isDirty || lastBaseValue != BaseValue)
                 {
-                    lastBasevalue = BaseValue;
+                    lastBaseValue = BaseValue;
                     _value = CalculateFinalValue();
                     isDirty = false;
                 }
@@ -35,7 +35,7 @@ namespace Kryz.CharacterStats
         // the value is "dirty" when it needs to be recalculated, bool for that here
         protected bool isDirty = true;
         protected float _value; // temp value
-        protected float lastBasevalue = float.MinValue; // temp variable
+        protected float lastBaseValue = float.MinValue; // temp variable
 
         // a list of all the stat modifiers that have been applied to the stat
         protected readonly List<StatModifier> statModifiers;

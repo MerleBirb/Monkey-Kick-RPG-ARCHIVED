@@ -8,6 +8,15 @@ public class Stats : MonoBehaviour
     // stores the character stats
     public Character charStats;
 
+    /// loads stats onto the game manager player party
+    private void Awake()
+    {
+        if (GameManager.Instance.PlayerParty[0] != charStats)
+        {
+            charStats = GameManager.Instance.PlayerParty[0];
+        }
+    }
+
     /// keeps hp and ep from going over or below bounds
     private void OnValidate()
     {

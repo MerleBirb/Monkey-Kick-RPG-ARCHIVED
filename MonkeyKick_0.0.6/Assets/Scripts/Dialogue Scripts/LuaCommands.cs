@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Kryz.CharacterStats;
 
 public class LuaCommands : MonoBehaviour
 {
@@ -147,9 +148,9 @@ public class LuaCommands : MonoBehaviour
         
         for (int i = 0; i < instance.talkObjects.Count; i++)
         {
-            if (instance.talkObjects[i].tag == instance.playerTag)
+            if (instance.talkObjects[i].tag.Contains(instance.playerTag))
             {
-                if (instance.talkObjects[i].GetComponent<Stats>().charStats.name == name)
+                if (instance.talkObjects[i].GetComponent<Stats>().charStats.name.Contains(name))
                 {
                     instance.newTalkSounds = instance.talkObjects[i].GetComponent<Stats>().charStats.talkSounds;
                 }
@@ -161,11 +162,27 @@ public class LuaCommands : MonoBehaviour
             //        instance.newTalkSounds = instance.talkObjects[i].GetComponent<EnemyBattleScript>().charStats.talkSounds;
             //    }
             //}
-            else if (instance.talkObjects[i].tag == instance.interactableTag)
+            else if (instance.talkObjects[i].tag.Contains(instance.interactableTag))
             {
-                if (instance.talkObjects[i].GetComponent<Interactable>().objName == name)
+                if (instance.talkObjects[i].GetComponent<Interactable>().objName.Contains(name))
                 {
                     instance.newTalkSounds = instance.talkObjects[i].GetComponent<Interactable>().talkSounds;
+                }
+            }
+        }
+    }
+
+    // sets a stat value
+    public static void SetStatValue(char op /* operator */, CharacterStat stat)
+    {
+        for (int i = 0; i < instance.talkObjects.Count; i++)
+        {
+            if (instance.talkObjects[i].tag.Contains(instance.playerTag) 
+                    && instance.talkObjects[i].GetComponent<Stats>().charStats.name.Contains(instance.lua.LuaGameState.CharacterName))
+            {
+                if (op == '-')
+                {
+
                 }
             }
         }

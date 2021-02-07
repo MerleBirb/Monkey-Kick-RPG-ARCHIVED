@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 /// ENUM ///
 /// this enum covers the state the game can be in
@@ -20,15 +21,30 @@ public class GameManager : MonoBehaviour
     /// VARIABLES ///
 
     // a singleton instance that makes only one instance of the game manager ever
-    public static GameManager instance;
+    public static GameManager Instance;
 
     // the state the game is currently in
     public static GameStates GameState = GameStates.MAIN_MENU;
 
+    // PlayerParty holds the stats of the player party.
+    public List<Character> _playerParty = new List<Character>(4);
+    public List<Character> PlayerParty
+    {
+        get
+        {
+            return _playerParty;
+        }
+
+        set
+        {
+            _playerParty = value;
+        }
+    }
+
     // the scenes
     [SerializeField]
     private string sceneName;
-    private Scene currentScene;
+    public static Scene CurrentScene;
     private ChangeScene cs;
 
     // the controls for the main menu
@@ -40,19 +56,19 @@ public class GameManager : MonoBehaviour
     /// Awake happens once the object activates
     private void Awake()
     {
-        cs = GetComponent<ChangeScene>();
-        controls = GetComponent<PlayerInput>();
-        currentScene = SceneManager.GetActiveScene();
-
-        if (instance != null)
+        if (Instance != null)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         else
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        cs = GetComponent<ChangeScene>();
+        controls = GetComponent<PlayerInput>();
+        CurrentScene = SceneManager.GetActiveScene();
     }
 
     /// Update happens every single step
@@ -76,7 +92,6 @@ public class GameManager : MonoBehaviour
                 }
             case GameStates.OVERWORLD:
                 {
-                    Debug.Log("Overworld");
                     Overworld();
 
                     break;
@@ -130,11 +145,11 @@ public class GameManager : MonoBehaviour
             GameState = GameStates.CUTSCENE;
         }
 
-        if (currentScene == SceneManager.GetActiveScene())
+        if (CurrentScene == SceneManager.GetActiveScene())
         {
             return;
         }
 
-        currentScene = SceneManager.GetActiveScene();
+        CurrentScene = SceneManager.GetActiveScene();
     }
 }

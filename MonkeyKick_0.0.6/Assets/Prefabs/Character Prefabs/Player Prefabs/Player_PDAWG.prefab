@@ -203,6 +203,7 @@ MonoBehaviour:
       BaseValue: 16
     currentHP: 28
     currentEP: 20
+  ID: 1
 --- !u!114 &7596666086540187297
 MonoBehaviour:
   m_ObjectHideFlags: 0

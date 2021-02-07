@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Kryz.CharacterStats;
 
 public class LuaEnvironment : MonoBehaviour
 {
@@ -59,6 +60,7 @@ public class LuaEnvironment : MonoBehaviour
         enviro.Globals["SetText"] = (Action<string>)LuaCommands.SetText;
         enviro.Globals["ShowButtons"] = (Action<string, string>)LuaCommands.ShowButtons;
         enviro.Globals["ToggleChoosingChoice"] = (Action<bool>)LuaCommands.ToggleChoosingChoice;
+        enviro.Globals["SetStatValue"] = (Action<char, CharacterStat>)LuaCommands.SetStatValue;
         enviro.Globals["State"] = UserData.Create(luaGameState);
 
         yield return 1;

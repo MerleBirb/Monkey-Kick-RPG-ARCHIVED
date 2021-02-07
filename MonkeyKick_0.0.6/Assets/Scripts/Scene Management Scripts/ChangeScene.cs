@@ -5,7 +5,7 @@ public class ChangeScene : MonoBehaviour
 {
     /// CHANGE SCENE ///
     /// Simple script that changes the scene
-    /// 
+    
     public string sn;
     
     // loads the next scene, self explanatory
@@ -18,6 +18,7 @@ public class ChangeScene : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            GameManager.Instance.PlayerParty[0] = other.GetComponent<Stats>().charStats;
             LoadNextScene(sn);
         }
     }
