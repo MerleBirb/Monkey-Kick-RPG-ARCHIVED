@@ -1,0 +1,76 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Characters/Playable/Placeholder/player1.png" type="Texture" id=1]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_southeast.tres" type="Animation" id=2]
+[ext_resource path="res://Characters/Playable/PlayerMovement.cs" type="Script" id=3]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_south.tres" type="Animation" id=4]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_northeast.tres" type="Animation" id=5]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_east.tres" type="Animation" id=6]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_north.tres" type="Animation" id=7]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_west.tres" type="Animation" id=8]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_southwest.tres" type="Animation" id=9]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_northwest.tres" type="Animation" id=10]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.170564
+height = 0.542035
+
+[sub_resource type="Environment" id=2]
+ambient_light_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "PDawg_idle_south"
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[node name="Player" type="Spatial"]
+
+[node name="OverworldPhysics" type="KinematicBody" parent="."]
+script = ExtResource( 3 )
+moveSpeed = 4
+jumpForce = 10
+gravity = 0.8
+
+[node name="CollisionShape" type="CollisionShape" parent="OverworldPhysics"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.45, -0.1 )
+shape = SubResource( 1 )
+
+[node name="CamBase" type="Spatial" parent="OverworldPhysics"]
+
+[node name="Camera" type="Camera" parent="OverworldPhysics/CamBase"]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 4 )
+environment = SubResource( 2 )
+current = true
+fov = 45.0
+far = 200.0
+
+[node name="Graphics" type="Spatial" parent="OverworldPhysics"]
+
+[node name="Sprite3D" type="Sprite3D" parent="OverworldPhysics/Graphics"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+billboard = 1
+texture = ExtResource( 1 )
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OverworldPhysics/Graphics"]
+anims/PDawg_idle_south = SubResource( 3 )
+anims/Placey_idle_east = ExtResource( 6 )
+anims/Placey_idle_north = ExtResource( 7 )
+anims/Placey_idle_northeast = ExtResource( 5 )
+anims/Placey_idle_northwest = ExtResource( 10 )
+anims/Placey_idle_south = ExtResource( 4 )
+anims/Placey_idle_southeast = ExtResource( 2 )
+anims/Placey_idle_southwest = ExtResource( 9 )
+anims/Placey_idle_west = ExtResource( 8 )
