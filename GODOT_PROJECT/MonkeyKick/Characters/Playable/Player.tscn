@@ -85,9 +85,9 @@ start_node = "Idle"
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 3 )
 moveSpeed = 4
-jumpForce = 12
-gravity = 0.9
-maxFallSpeed = 28.0
+jumpForce = 10
+gravity = 0.7
+maxFallSpeed = 25.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.45, -0.1 )
