@@ -40,7 +40,6 @@ namespace Merlebirb.PlayableCharacter
 
             #region Godot Components
 
-            private Node camera;
             private AnimationPlayer anims;
             private AnimationTree animTree;
 
@@ -49,7 +48,6 @@ namespace Merlebirb.PlayableCharacter
         // Initializes the node.
         public override void _Ready()
         {
-            camera = GetNode<Spatial>("CamBase");
             anims = GetNode<AnimationPlayer>("Graphics/AnimationPlayer");
             animTree = GetNode<AnimationTree>("Graphics/AnimationTree");
         }  
