@@ -15,7 +15,7 @@
 radius = 0.170564
 height = 0.542035
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "PDawg_idle_south"
 loop = true
 step = 0.5
@@ -32,78 +32,78 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=4]
+[sub_resource type="AnimationNodeAnimation" id=3]
 animation = "Placey_idle_south"
 
-[sub_resource type="AnimationNodeAnimation" id=5]
+[sub_resource type="AnimationNodeAnimation" id=4]
 animation = "Placey_idle_north"
 
-[sub_resource type="AnimationNodeAnimation" id=6]
+[sub_resource type="AnimationNodeAnimation" id=5]
 animation = "Placey_idle_east"
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=6]
 animation = "Placey_idle_west"
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "Placey_idle_southwest"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "Placey_idle_southeast"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "Placey_idle_northwest"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Placey_idle_northeast"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=12]
-blend_point_0/node = SubResource( 4 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=11]
+blend_point_0/node = SubResource( 3 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 5 )
+blend_point_1/node = SubResource( 4 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 6 )
+blend_point_2/node = SubResource( 5 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 7 )
+blend_point_3/node = SubResource( 6 )
 blend_point_3/pos = Vector2( -1, 0 )
-blend_point_4/node = SubResource( 8 )
+blend_point_4/node = SubResource( 7 )
 blend_point_4/pos = Vector2( -0.75, 0.75 )
-blend_point_5/node = SubResource( 9 )
+blend_point_5/node = SubResource( 8 )
 blend_point_5/pos = Vector2( 0.75, 0.75 )
-blend_point_6/node = SubResource( 10 )
+blend_point_6/node = SubResource( 9 )
 blend_point_6/pos = Vector2( -0.75, -0.75 )
-blend_point_7/node = SubResource( 11 )
+blend_point_7/node = SubResource( 10 )
 blend_point_7/pos = Vector2( 0.75, -0.75 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeStateMachine" id=13]
-states/Idle/node = SubResource( 12 )
+[sub_resource type="AnimationNodeStateMachine" id=12]
+states/Idle/node = SubResource( 11 )
 states/Idle/position = Vector2( 613, 111 )
 start_node = "Idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=14]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=13]
 
-[node name="Player" type="Spatial"]
-
-[node name="OverworldPhysics" type="KinematicBody" parent="."]
+[node name="Player" type="KinematicBody"]
 script = ExtResource( 3 )
 moveSpeed = 4
-jumpForce = 10
-gravity = 0.8
+jumpForce = 12
+gravity = 0.9
+maxFallSpeed = 28.0
 
-[node name="CollisionShape" type="CollisionShape" parent="OverworldPhysics"]
+[node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.45, -0.1 )
 shape = SubResource( 1 )
 
-[node name="Graphics" type="Spatial" parent="OverworldPhysics"]
+[node name="Graphics" type="Spatial" parent="."]
 
-[node name="Sprite3D" type="Sprite3D" parent="OverworldPhysics/Graphics"]
+[node name="Sprite3D" type="Sprite3D" parent="Graphics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 billboard = 1
+shaded = true
 texture = ExtResource( 1 )
 vframes = 8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="OverworldPhysics/Graphics"]
-anims/PDawg_idle_south = SubResource( 3 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+anims/PDawg_idle_south = SubResource( 2 )
 anims/Placey_idle_east = ExtResource( 6 )
 anims/Placey_idle_north = ExtResource( 7 )
 anims/Placey_idle_northeast = ExtResource( 5 )
@@ -113,9 +113,9 @@ anims/Placey_idle_southeast = ExtResource( 2 )
 anims/Placey_idle_southwest = ExtResource( 9 )
 anims/Placey_idle_west = ExtResource( 8 )
 
-[node name="AnimationTree" type="AnimationTree" parent="OverworldPhysics/Graphics"]
-tree_root = SubResource( 13 )
+[node name="AnimationTree" type="AnimationTree" parent="Graphics"]
+tree_root = SubResource( 12 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 14 )
+parameters/playback = SubResource( 13 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
