@@ -42,6 +42,7 @@ namespace Merlebirb.PlayableCharacter
 
             private Node camera;
             private AnimationPlayer anims;
+            private AnimationTree animTree;
 
             #endregion
 
@@ -50,6 +51,7 @@ namespace Merlebirb.PlayableCharacter
         {
             camera = GetNode<Spatial>("CamBase");
             anims = GetNode<AnimationPlayer>("Graphics/AnimationPlayer");
+            animTree = GetNode<AnimationTree>("Graphics/AnimationTree");
         }  
 
         // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -100,17 +102,17 @@ namespace Merlebirb.PlayableCharacter
         // movement logic
         private void Movement()
         {
-            Vector3 movementVector = new Vector3();
+            Vector3 movement = new Vector3();
 
-            movementVector.x = (float)xMove;
-            movementVector.z = (float)zMove;
-            movementVector = movementVector.Normalized();
-            movementVector *= (float)moveSpeed;
+            movement.x = (float)xMove;
+            movement.z = (float)zMove;
+            movement = movement.Normalized();
+            movement *= (float)moveSpeed;
 
-            movementVector.y = yVel;
-            MoveAndSlide(movementVector, Vector3.Up);
+            movement.y = yVel;
+            MoveAndSlide(movement, Vector3.Up);
 
-            if (Mathf.Abs(movementVector.x) > 0 || Mathf.Abs(movementVector.z) > 0)
+            if (Mathf.Abs(movement.x) > 0 || Mathf.Abs(movement.z) > 0)
             {
                 isMoving = true;
             }
@@ -118,6 +120,10 @@ namespace Merlebirb.PlayableCharacter
             {
                 isMoving = false;
             }
+
+            // animation
+            Vector2 animVector = new Vector2((float)xMove, (float)zMove);
+            animTree.Set("parameters/Idle/blend_position", animVector);
         }
 
         // gravity logic
