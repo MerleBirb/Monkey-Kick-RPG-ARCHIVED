@@ -12,7 +12,7 @@ namespace Merlebirb.PlayableCharacter
     P.S. thank you @ Miziziziz for the awesome 3d movement tutorial, this script is based off of his.
     */
 
-    public class PlayerMovement : KinematicBody
+    public class PlayerMovement : Spatial
     {
             #region Constants
 
@@ -27,6 +27,8 @@ namespace Merlebirb.PlayableCharacter
 
             private int xMove;
             private int zMove;
+            private int lastXMove = 0;
+            private int lastZMove = 0;
             [Export] public int moveSpeed = 12;
             [Export] public int jumpForce = 30;
             [Export] public float gravity = 0.98f;
@@ -40,16 +42,20 @@ namespace Merlebirb.PlayableCharacter
 
             #region Godot Components
 
+            private KinematicBody kb;
             private AnimationPlayer anims;
             private AnimationTree animTree;
+            private AnimationNodeStateMachinePlayback animState;
 
             #endregion
 
         // Initializes the node.
         public override void _Ready()
         {
+            kb = GetParent<KinematicBody>();
             anims = GetNode<AnimationPlayer>("Graphics/AnimationPlayer");
             animTree = GetNode<AnimationTree>("Graphics/AnimationTree");
+            animState = (AnimationNodeStateMachinePlayback)animTree.Get("parameters/playback");
         }  
 
         // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -64,6 +70,7 @@ namespace Merlebirb.PlayableCharacter
         {
             Movement();
             Gravity();
+            Animations();
         }
       
         // Gets the input from the player
@@ -108,7 +115,7 @@ namespace Merlebirb.PlayableCharacter
             movement *= (float)moveSpeed;
 
             movement.y = yVel;
-            MoveAndSlide(movement, Vector3.Up);
+            kb.MoveAndSlide(movement, Vector3.Up);
 
             if (Mathf.Abs(movement.x) > 0 || Mathf.Abs(movement.z) > 0)
             {
@@ -118,16 +125,12 @@ namespace Merlebirb.PlayableCharacter
             {
                 isMoving = false;
             }
-
-            // animation
-            Vector2 animVector = new Vector2((float)xMove, (float)zMove);
-            animTree.Set("parameters/Idle/blend_position", animVector);
         }
 
         // gravity logic
         private void Gravity()
         {
-            isGrounded = IsOnFloor();
+            isGrounded = kb.IsOnFloor();
 
             yVel -= gravity;
 
@@ -151,6 +154,30 @@ namespace Merlebirb.PlayableCharacter
             {
                 isJumping = true;
                 yVel = jumpForce;
+            }
+        }
+
+        // animations
+        private void Animations()
+        {
+            if (isMoving)
+            {
+                lastXMove = xMove;
+                lastZMove = zMove;
+            }
+
+            // animation
+            if (!isMoving) // idle
+            {
+                Vector2 idleAnimVector = new Vector2((float)lastXMove, (float)lastZMove);
+                animTree.Set("parameters/Idle/blend_position", idleAnimVector);
+                animState.Travel("Idle");
+            }
+            else // running
+            {
+                Vector2 runAnimVector = new Vector2((float)xMove, (float)zMove);
+                animTree.Set("parameters/Run/blend_position", runAnimVector);
+                animState.Travel("Run");
             }
         }
     }
