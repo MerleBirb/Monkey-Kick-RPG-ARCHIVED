@@ -1,22 +1,22 @@
 [gd_scene load_steps=42 format=2]
 
-[ext_resource path="res://Characters/Playable/Placeholder/player1.png" type="Texture" id=1]
-[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_southeast.tres" type="Animation" id=2]
-[ext_resource path="res://Characters/Playable/PlayerMovement.cs" type="Script" id=3]
-[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_south.tres" type="Animation" id=4]
-[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_northeast.tres" type="Animation" id=5]
-[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_east.tres" type="Animation" id=6]
-[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_north.tres" type="Animation" id=7]
-[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_west.tres" type="Animation" id=8]
-[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_southwest.tres" type="Animation" id=9]
-[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_northwest.tres" type="Animation" id=10]
+[ext_resource path="res://Characters/Playable/Placeholder/player1.png" type="Texture" id=2]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_east.tres" type="Animation" id=3]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_northeast.tres" type="Animation" id=4]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_north.tres" type="Animation" id=5]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_southwest.tres" type="Animation" id=6]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_west.tres" type="Animation" id=7]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_southeast.tres" type="Animation" id=8]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_south.tres" type="Animation" id=9]
+[ext_resource path="res://Characters/Shadow.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_southeast.tres" type="Animation" id=11]
-[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_south.tres" type="Animation" id=12]
-[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_east.tres" type="Animation" id=13]
-[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_northeast.tres" type="Animation" id=14]
-[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_north.tres" type="Animation" id=15]
-[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_northwest.tres" type="Animation" id=16]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_north.tres" type="Animation" id=12]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_northwest.tres" type="Animation" id=13]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_east.tres" type="Animation" id=14]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_northwest.tres" type="Animation" id=15]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_south.tres" type="Animation" id=16]
 [ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_west.tres" type="Animation" id=17]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_northeast.tres" type="Animation" id=18]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.170564
@@ -139,43 +139,42 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=24]
 
-[node name="Player" type="KinematicBody"]
+[node name="Character" type="KinematicBody"]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.45, -0.1 )
 shape = SubResource( 1 )
 
 [node name="Overworld" type="Spatial" parent="."]
-script = ExtResource( 3 )
-moveSpeed = 4
-jumpForce = 10
-gravity = 0.7
-maxFallSpeed = 25.0
 
 [node name="Graphics" type="Spatial" parent="Overworld"]
 
 [node name="Sprite3D" type="Sprite3D" parent="Overworld/Graphics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+layers = 2
+cast_shadow = 0
 billboard = 1
 shaded = true
-texture = ExtResource( 1 )
+double_sided = false
+texture = ExtResource( 2 )
 vframes = 9
 hframes = 8
+region_rect = Rect2( 0, 0, 512, 576 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Overworld/Graphics"]
-anims/Placey_idle_east = ExtResource( 6 )
-anims/Placey_idle_north = ExtResource( 7 )
-anims/Placey_idle_northeast = ExtResource( 5 )
-anims/Placey_idle_northwest = ExtResource( 10 )
-anims/Placey_idle_south = ExtResource( 4 )
-anims/Placey_idle_southeast = ExtResource( 2 )
-anims/Placey_idle_southwest = ExtResource( 9 )
-anims/Placey_idle_west = ExtResource( 8 )
-anims/Placey_run_east = ExtResource( 13 )
-anims/Placey_run_north = ExtResource( 15 )
-anims/Placey_run_northeast = ExtResource( 14 )
-anims/Placey_run_northwest = ExtResource( 16 )
-anims/Placey_run_south = ExtResource( 12 )
+anims/Placey_idle_east = ExtResource( 3 )
+anims/Placey_idle_north = ExtResource( 5 )
+anims/Placey_idle_northeast = ExtResource( 4 )
+anims/Placey_idle_northwest = ExtResource( 15 )
+anims/Placey_idle_south = ExtResource( 9 )
+anims/Placey_idle_southeast = ExtResource( 8 )
+anims/Placey_idle_southwest = ExtResource( 6 )
+anims/Placey_idle_west = ExtResource( 7 )
+anims/Placey_run_east = ExtResource( 14 )
+anims/Placey_run_north = ExtResource( 12 )
+anims/Placey_run_northeast = ExtResource( 18 )
+anims/Placey_run_northwest = ExtResource( 13 )
+anims/Placey_run_south = ExtResource( 16 )
 anims/Placey_run_southeast = ExtResource( 11 )
 anims/Placey_run_southwest = SubResource( 2 )
 anims/Placey_run_west = ExtResource( 17 )
@@ -187,3 +186,5 @@ active = true
 parameters/playback = SubResource( 24 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Run/blend_position = Vector2( 0, 0 )
+
+[node name="Shadow" parent="." instance=ExtResource( 10 )]

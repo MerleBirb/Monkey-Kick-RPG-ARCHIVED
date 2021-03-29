@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ShadowSmall.png-dc1c5d300a410032c617edda0707548a.stex"
+path="res://.import/enemy1.png-c7d1c4c73f04ac65d5aeaeefbccf007d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Shadows/ShadowSmall.png"
-dest_files=[ "res://.import/ShadowSmall.png-dc1c5d300a410032c617edda0707548a.stex" ]
+source_file="res://Characters/Enemies/Placeholder/enemy1.png"
+dest_files=[ "res://.import/enemy1.png-c7d1c4c73f04ac65d5aeaeefbccf007d.stex" ]
 
 [params]
 
