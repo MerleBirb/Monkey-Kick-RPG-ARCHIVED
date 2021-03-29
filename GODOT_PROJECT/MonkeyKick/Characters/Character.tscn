@@ -20,7 +20,7 @@
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.170564
-height = 0.542035
+height = 0.33809
 
 [sub_resource type="Animation" id=2]
 resource_name = "Placey_run_southwest"
@@ -142,7 +142,7 @@ start_node = "Idle"
 [node name="Character" type="KinematicBody"]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.45, -0.1 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.35, -0.1 )
 shape = SubResource( 1 )
 
 [node name="Overworld" type="Spatial" parent="."]
@@ -150,7 +150,7 @@ shape = SubResource( 1 )
 [node name="Graphics" type="Spatial" parent="Overworld"]
 
 [node name="Sprite3D" type="Sprite3D" parent="Overworld/Graphics"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 0 )
 layers = 2
 cast_shadow = 0
 billboard = 1
@@ -187,3 +187,5 @@ parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Run/blend_position = Vector2( 0, 0 )
 
 [node name="Shadow" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 1.2, 0.1 )
+light_energy = 0.75

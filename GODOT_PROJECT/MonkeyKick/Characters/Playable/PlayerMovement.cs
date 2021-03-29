@@ -115,7 +115,7 @@ namespace Merlebirb.PlayableCharacter
             movement *= (float)moveSpeed;
 
             movement.y = yVel;
-            kb.MoveAndSlide(movement, Vector3.Up);
+            kb.MoveAndSlide(movement, Vector3.Up, true);
 
             if (Mathf.Abs(movement.x) > 0 || Mathf.Abs(movement.z) > 0)
             {
