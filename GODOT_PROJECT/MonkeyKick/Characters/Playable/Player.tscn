@@ -1,18 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/Playable/PlayerMovement.cs" type="Script" id=2]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+
 [node name="Player" instance=ExtResource( 1 )]
 
 [node name="Overworld" parent="." index="1"]
 script = ExtResource( 2 )
 moveSpeed = 4
-jumpForce = 10
+jumpForce = 9
 gravity = 0.7
 maxFallSpeed = 25.0
 
 [node name="AnimationTree" parent="Overworld/Graphics" index="2"]
 parameters/playback = SubResource( 1 )
+
+[node name="AnimationTree" parent="Battle/Graphics" index="2"]
+parameters/playback = SubResource( 2 )

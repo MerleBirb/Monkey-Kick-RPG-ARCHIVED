@@ -5,11 +5,10 @@ namespace Merlebirb.PlayableCharacter
 {
     //===== PLAYER MOVEMENT SCRIPT =====//
     /*
-    by: Merlebirb 3/22/2021
-
+    3/22/2021
     Description: The Player's movement and physics logic. Allows the player to move, jump, fall, etc.
 
-    P.S. thank you @ Miziziziz for the awesome 3d movement tutorial, this script is based off of his.
+    Thank you @ Miziziziz for the awesome 3d movement tutorial.
     */
 
     public class PlayerMovement : Spatial
