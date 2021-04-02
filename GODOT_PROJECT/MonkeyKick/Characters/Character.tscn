@@ -1,5 +1,6 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=60 format=2]
 
+[ext_resource path="res://Characters/Stats.cs" type="Script" id=1]
 [ext_resource path="res://Characters/Playable/Placeholder/player1.png" type="Texture" id=2]
 [ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_east.tres" type="Animation" id=3]
 [ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_northeast.tres" type="Animation" id=4]
@@ -398,6 +399,9 @@ tracks/0/keys = {
 [sub_resource type="AnimationNodeStateMachinePlayback" id=41]
 
 [node name="Character" type="KinematicBody"]
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.35, 0 )

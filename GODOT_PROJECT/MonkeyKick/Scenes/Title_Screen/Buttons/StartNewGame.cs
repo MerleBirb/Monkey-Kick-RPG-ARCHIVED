@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Merlebirb.Managers;
 
 namespace Merlebirb.Scenes
 {
@@ -17,6 +18,7 @@ namespace Merlebirb.Scenes
         private void _on_NewGameButton_pressed()
         {
             GetTree().ChangeScene(sceneName);
+            GameManager.ChangeGameState(GameStates.OVERWORLD);
         }
     }
 }

@@ -9,18 +9,17 @@ namespace Merlebirb.Managers
     Description: An extremely important script that controls aspects of the game's state and holds very important variables.
 
     */
+    public enum GameStates // various states the game can be in, might add more depending on what is in the game.
+    {
+        MAIN_MENU = 100,
+        OVERWORLD = 200,
+        BATTLE = 300,
+        CUTSCENE = 400,
+        PAUSED = 500
+    }
 
     public class GameManager : Node
     {
-        public enum GameStates // various states the game can be in, might add more depending on what is in the game.
-        {
-            MAIN_MENU = 100,
-            OVERWORLD = 200,
-            BATTLE = 300,
-            CUTSCENE = 400,
-            PAUSED = 500
-        }
-
         public static GameStates state;
 
         public override void _Ready()
@@ -38,6 +37,11 @@ namespace Merlebirb.Managers
         {
             if (state == newState) { return; };
             state = newState;
+        }
+
+        public static void InitiateBattle(string scene)
+        {
+            
         }
     }
 

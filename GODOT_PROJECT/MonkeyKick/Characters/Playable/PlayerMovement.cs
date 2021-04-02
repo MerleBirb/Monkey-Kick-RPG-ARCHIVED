@@ -58,14 +58,14 @@ namespace Merlebirb.PlayableCharacter
         }  
 
         // Called every frame. 'delta' is the elapsed time since the previous frame.
-        public override void _Process(float delta)
+        public void PlayerMovementProcess()
         {
             GetInput();
 
         }
 
         // Called every frame. 'delta' is the elapsed time since the previous frame. Better for physics.
-        public override void _PhysicsProcess(float delta)
+        public void PlayerMovementPhysics()
         {
             Movement();
             Gravity();
