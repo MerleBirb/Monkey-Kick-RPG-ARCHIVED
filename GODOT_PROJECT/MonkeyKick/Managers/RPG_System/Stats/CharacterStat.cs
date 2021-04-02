@@ -14,9 +14,9 @@ namespace Merlebirb.TurnBasedSystem
     */
 
     [Serializable]
-    public class CharacterStat
+    public class CharacterStat : Godot.Resource
     {
-        public float BaseValue;
+        [Export] public float BaseValue;
         public virtual float Value
         {
             get

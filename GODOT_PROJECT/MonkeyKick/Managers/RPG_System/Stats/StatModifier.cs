@@ -18,7 +18,7 @@ namespace Merlebirb.TurnBasedSystem
 
     }
 
-    public class StatModifier
+    public class StatModifier : Godot.Resource
     {
         public readonly float Value;
         public readonly StatModeType Type;
