@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="MonkeyKick"
 run/main_scene="res://Scenes/Title_Screen/TitleScreen.tscn"
 
+[autoload]
+
+GameManager="*res://Managers/GameManager.tscn"
+
 [debug]
 
 settings/fps/force_fps=60

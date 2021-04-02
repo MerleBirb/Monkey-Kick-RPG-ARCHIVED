@@ -11,7 +11,7 @@
 
 [node name="Overworld" parent="." index="1"]
 script = ExtResource( 2 )
-moveSpeed = 4
+moveSpeed = 3
 jumpForce = 9
 gravity = 0.7
 maxFallSpeed = 25.0

@@ -37,6 +37,7 @@ namespace Merlebirb.TurnBasedSystem
         protected readonly List<StatModifier> statModifiers;
         public readonly ReadOnlyCollection<StatModifier> StatModifiers;
 
+        // constructor
         public CharacterStat()
         {
             statModifiers = new List<StatModifier>();
@@ -46,7 +47,7 @@ namespace Merlebirb.TurnBasedSystem
         {
             BaseValue = baseValue;
         }
-
+        
         public virtual void AddModifier(StatModifier mod)
         {
             isDirty = true;
