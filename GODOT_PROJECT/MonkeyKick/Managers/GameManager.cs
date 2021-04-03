@@ -39,9 +39,9 @@ namespace Merlebirb.Managers
             state = newState;
         }
 
-        public static void InitiateBattle(string scene)
+        public static void InitiateBattle()
         {
-            
+
         }
     }
 

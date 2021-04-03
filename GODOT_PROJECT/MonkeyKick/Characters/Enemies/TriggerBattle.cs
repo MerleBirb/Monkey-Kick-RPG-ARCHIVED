@@ -21,6 +21,7 @@ namespace Merlebirb.TurnBasedSystem
             {
                 GD.Print("Collided with Player.");
                 GameManager.ChangeGameState(GameStates.BATTLE);
+                GetTree().ChangeScene(battleScene);
             }
         }
     }
