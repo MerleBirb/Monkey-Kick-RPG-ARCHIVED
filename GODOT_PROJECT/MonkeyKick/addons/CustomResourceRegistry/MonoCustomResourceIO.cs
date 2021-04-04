@@ -1,3 +1,4 @@
+#if TOOLS
 using Godot;
 using System;
 using System.Reflection;
@@ -170,3 +171,4 @@ public static class MonoCustomResourceIO
         return null;
     }
 }
+#endif

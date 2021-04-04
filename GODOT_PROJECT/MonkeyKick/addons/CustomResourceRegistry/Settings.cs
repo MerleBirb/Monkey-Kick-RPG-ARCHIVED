@@ -1,3 +1,4 @@
+#if TOOLS
 using Godot;
 using Godot.Collections;
 using System.Collections.ObjectModel;
@@ -53,3 +54,4 @@ namespace MonoCustomResourceRegistry
 		private static string SettingPath(string title) => $"{nameof(MonoCustomResourceRegistry)}/{title}";
 	}
 }
+#endif
