@@ -75,10 +75,15 @@ namespace Merlebirb.Managers
             if (state == newState) { return; };
             state = newState;
         }
-
-        public static void InitiateBattle()
+        
+        public static void StartBattle()
         {
 
+        }
+
+        public static void EndBattle()
+        {
+            
         }
     }
 
