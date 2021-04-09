@@ -24,14 +24,51 @@ namespace Merlebirb.Managers
 
         public override void _Ready()
         {
-            state = GameStates.MAIN_MENU;
+            if (GetTree().CurrentScene.Name.Contains("Title"))
+            {
+                state = GameStates.MAIN_MENU;
+            }
+            else if (GetTree().CurrentScene.Name.Contains("Overworld"))
+            {
+                state = GameStates.OVERWORLD;
+            }
+            else if (GetTree().CurrentScene.Name.Contains("Battle"))
+            {
+                state = GameStates.BATTLE;
+            }
+            else
+            {
+                state = GameStates.OVERWORLD;
+            }
         }
 
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    //  public override void _Process(float delta)
-    //  {
-    //      
-    //  }
+        // Called every frame. 'delta' is the elapsed time since the previous frame.
+        public override void _Process(float delta)
+        {
+            switch(state)
+            {
+                case GameStates.MAIN_MENU:
+                {
+                    break;
+                }
+                case GameStates.OVERWORLD:
+                {
+                    break;
+                }
+                case GameStates.BATTLE:
+                {
+                    break;
+                }
+                case GameStates.CUTSCENE:
+                {
+                    break;
+                }
+                case GameStates.PAUSED:
+                {
+                    break;
+                }
+            }
+        }
 
         public static void ChangeGameState(GameStates newState)
         {
