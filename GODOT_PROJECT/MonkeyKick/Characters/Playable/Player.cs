@@ -14,11 +14,12 @@ public class Player : KinematicBody
 {
     // store the player nodes
     private PlayerMovement playerMovement;
+    private string overworldNode = "Overworld";
 
     public override void _Ready()
     {
         SetMeta("Type", "Player");
-        playerMovement = GetNode<PlayerMovement>("Overworld");
+        playerMovement = GetNode<PlayerMovement>(overworldNode);
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -2,8 +2,9 @@
 
 [ext_resource path="res://Scenes/Debug_and_Test/DebugTestAssets.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://Characters/Playable/P-Dawg/P-Dawg.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Characters/Enemies/Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Characters/Enemies/EnemyOverworld.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/BattleUI.tscn" type="PackedScene" id=4]
+
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.913725, 0.584314, 0.709804, 1 )
