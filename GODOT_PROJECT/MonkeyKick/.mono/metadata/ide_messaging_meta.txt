@@ -1,9 +1,5 @@
 <<<<<<< HEAD
-<<<<<<< HEAD
 ﻿60613
-=======
-﻿56389
->>>>>>> parent of 904ae7b (made scene switching more modular)
 =======
 ﻿56389
 >>>>>>> parent of 904ae7b (made scene switching more modular)

@@ -5,12 +5,9 @@
 [ext_resource path="res://Characters/Enemies/Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Managers/RPG_System/Battle/BattleTrigger.tscn" type="PackedScene" id=4]
 <<<<<<< HEAD
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> parent of 904ae7b (made scene switching more modular)
 =======
 >>>>>>> parent of 904ae7b (made scene switching more modular)
 
