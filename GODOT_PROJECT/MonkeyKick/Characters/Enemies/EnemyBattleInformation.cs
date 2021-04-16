@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 //===== ENEMY BATTLE INFORMATION =====//
 /*
@@ -11,6 +12,6 @@ Description: stores the information to be loaded into an enemy when battle is lo
 public class EnemyBattleInformation : KinematicBody
 {
     [Export] public PackedScene battleScene; // save the path of the battle scene here.
-    
-    //[Export] 
+    [Export] public List<PackedScene> enemyParty = new List<PackedScene>();
+     
 }

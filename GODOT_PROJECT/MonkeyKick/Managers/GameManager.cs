@@ -21,11 +21,14 @@ namespace Merlebirb.Managers
 
     public class GameManager : Node
     {
-        public static GameStates state; // controls what the game manager is doing depending on the game state
-        public static List<Node> battleList = new List<Node>(); // stores characters that will enter the battle
+        public static GameStates state; // controls what the game manager is doing depending on the game state 
+        [Export] public List<PackedScene> playerParty;
 
+        // Called when the node enters the scene tree for the first time.
         public override void _Ready()
         {
+            GD.Print("Size of player party: " + playerParty.Count);
+
             if (GetTree().CurrentScene.Name.Contains("Title"))
             {
                 state = GameStates.MAIN_MENU;

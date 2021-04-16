@@ -16,7 +16,7 @@ public class TurnSystem : Node
     private string playerTag = "Player";
     public List<Node> enemyList = new List<Node>();
     private string enemyTag = "Enemy";
-    public List<Node> allCharacterList;
+    public List<PackedScene> allCharacterList;
     public static Node selectedCharacter;
 
     public List<TurnClass> charList;
@@ -97,7 +97,7 @@ public class TurnSystem : Node
         //}
     }
 
-    private void FillCharacterLists()
+    public void FillCharacterLists()
     {
         
     }

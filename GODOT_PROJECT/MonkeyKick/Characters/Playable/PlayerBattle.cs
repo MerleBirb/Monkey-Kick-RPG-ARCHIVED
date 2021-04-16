@@ -1,22 +1,11 @@
 using Godot;
 using System;
-using Merlebirb.TurnBasedSystem;
 
-//===== STATS =====//
-/*
-4/2/21
-Description: Holds the character's stats and manages them if need be.
-
-*/
-
-public class Stats : Node
+public class PlayerBattle : Spatial
 {
-    [Export] public Character charStats = new Character();
-
-    //public override void _Ready()
-    //{
-    //   
-    //}
+    // Declare member variables here. Examples:
+    // private int a = 2;
+    // private string b = "text";
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
