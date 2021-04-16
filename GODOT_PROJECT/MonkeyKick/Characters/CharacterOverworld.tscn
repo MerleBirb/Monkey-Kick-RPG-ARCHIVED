@@ -1,0 +1,188 @@
+[gd_scene load_steps=42 format=2]
+
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_southeast.tres" type="Animation" id=1]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_south.tres" type="Animation" id=2]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_northwest.tres" type="Animation" id=3]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_north.tres" type="Animation" id=4]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_southeast.tres" type="Animation" id=5]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_east.tres" type="Animation" id=6]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_south.tres" type="Animation" id=7]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_northwest.tres" type="Animation" id=8]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_west.tres" type="Animation" id=9]
+[ext_resource path="res://Characters/Shadow.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_northeast.tres" type="Animation" id=11]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_east.tres" type="Animation" id=12]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_north.tres" type="Animation" id=13]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_southwest.tres" type="Animation" id=14]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_west.tres" type="Animation" id=15]
+[ext_resource path="res://Characters/Playable/Placeholder/player1.png" type="Texture" id=16]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_northeast.tres" type="Animation" id=17]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.170564
+height = 0.33809
+
+[sub_resource type="Animation" id=2]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 64, 65 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Placey_idle_south"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "Placey_idle_north"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "Placey_idle_east"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "Placey_idle_west"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Placey_idle_southwest"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Placey_idle_southeast"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Placey_idle_northwest"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Placey_idle_northeast"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=11]
+blend_point_0/node = SubResource( 3 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 4 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 5 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 6 )
+blend_point_3/pos = Vector2( -1, 0 )
+blend_point_4/node = SubResource( 7 )
+blend_point_4/pos = Vector2( -0.75, 0.75 )
+blend_point_5/node = SubResource( 8 )
+blend_point_5/pos = Vector2( 0.75, 0.75 )
+blend_point_6/node = SubResource( 9 )
+blend_point_6/pos = Vector2( -0.75, -0.75 )
+blend_point_7/node = SubResource( 10 )
+blend_point_7/pos = Vector2( 0.75, -0.75 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "Placey_run_south"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "Placey_run_southeast"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "Placey_run_east"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "Placey_run_northeast"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Placey_run_north"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "Placey_run_northwest"
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "Placey_run_west"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "Placey_run_southwest"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=20]
+blend_point_0/node = SubResource( 12 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 13 )
+blend_point_1/pos = Vector2( 0.75, 0.75 )
+blend_point_2/node = SubResource( 14 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 15 )
+blend_point_3/pos = Vector2( 0.75, -0.75 )
+blend_point_4/node = SubResource( 16 )
+blend_point_4/pos = Vector2( 0, -1 )
+blend_point_5/node = SubResource( 17 )
+blend_point_5/pos = Vector2( -0.75, -0.75 )
+blend_point_6/node = SubResource( 18 )
+blend_point_6/pos = Vector2( -1, 0 )
+blend_point_7/node = SubResource( 19 )
+blend_point_7/pos = Vector2( -0.75, 0.75 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachine" id=23]
+states/Idle/node = SubResource( 11 )
+states/Idle/position = Vector2( 613, 111 )
+states/Run/node = SubResource( 20 )
+states/Run/position = Vector2( 808, 111 )
+transitions = [ "Idle", "Run", SubResource( 21 ), "Run", "Idle", SubResource( 22 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
+
+[node name="CharacterOverworld" type="KinematicBody"]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.35, 0 )
+shape = SubResource( 1 )
+
+[node name="Graphics" type="Spatial" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Graphics"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 0 )
+layers = 2
+cast_shadow = 0
+billboard = 1
+double_sided = false
+texture = ExtResource( 16 )
+vframes = 9
+hframes = 8
+region_rect = Rect2( 0, 0, 512, 576 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+anims/Placey_idle_east = ExtResource( 12 )
+anims/Placey_idle_north = ExtResource( 13 )
+anims/Placey_idle_northeast = ExtResource( 11 )
+anims/Placey_idle_northwest = ExtResource( 8 )
+anims/Placey_idle_south = ExtResource( 2 )
+anims/Placey_idle_southeast = ExtResource( 1 )
+anims/Placey_idle_southwest = ExtResource( 14 )
+anims/Placey_idle_west = ExtResource( 15 )
+anims/Placey_run_east = ExtResource( 6 )
+anims/Placey_run_north = ExtResource( 4 )
+anims/Placey_run_northeast = ExtResource( 17 )
+anims/Placey_run_northwest = ExtResource( 3 )
+anims/Placey_run_south = ExtResource( 7 )
+anims/Placey_run_southeast = ExtResource( 5 )
+anims/Placey_run_southwest = SubResource( 2 )
+anims/Placey_run_west = ExtResource( 9 )
+
+[node name="AnimationTree" type="AnimationTree" parent="Graphics"]
+tree_root = SubResource( 23 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 24 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Run/blend_position = Vector2( 0, 0 )
+
+[node name="Shadow" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 1.2, 0.1 )
+light_energy = 0.75
