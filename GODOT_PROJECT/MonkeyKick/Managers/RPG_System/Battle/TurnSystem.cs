@@ -1,7 +1,6 @@
 using Godot;
 using System.Collections.Generic;
 using Merlebirb.TurnBasedSystem;
-using Merlebirb.Managers;
 
 //===== TURN BASED BATTLE SYSTEM =====//
 /*
@@ -37,80 +36,22 @@ public class TurnSystem : Node
 
     public void EndBattle()
     {
-        for (int i = 0; i < charList.Count; i++)
-        {
-            charList[i].isTurn = false;
-            charList[i].wasTurnPrev = false;
-        }
 
-        selectedCharacter = null;
-        actionList.Clear();
-        charList.Clear();
-        allCharacterList.Clear();
-        playerList.Clear();
-        enemyList.Clear();
-
-        everyoneLoaded = false;
-        GameManager.ChangeGameState(GameStates.OVERWORLD);
     }
 
     public void UpdateTurns()
     {
-        for (int i = 0; i < charList.Count; i++)
-        {
-            if (!charList[i].wasTurnPrev)
-            {
-                charList[i].isTurn = true;
-                break;
-            }
-            else if ((i == charList.Count - 1) && (charList[i].wasTurnPrev))
-            {
-                SetBattleOrder();
-                ResetTurns();
-                actionList.Clear();
-                turnCounter++;
-            }
-        }
 
-        //for (int i = 0; i < charList.Count; i++)
-        //{
-        //    if ((string)selectedCharacter.GetMeta("Type") == playerTag)
-        //    {
-        //        if (selectedCharacter.transform.position == selectedCharacter.GetComponent<PlayerBattleScript>().battlePos)
-        //        {
-        //            if (charList[i].isTurn)
-        //            {
-        //                selectedCharacter = charList[i].character;
-        //            }
-        //        }
-        //    }
-        //    else if ((string)selectedCharacter.GetMeta("Type") == enemyTag)//
-        //    {
-        //        if (selectedCharacter.transform.position == selectedCharacter.GetComponent<EnemyBattleScript>().battlePos)
-        //        {
-        //            if (charList[i].isTurn)
-        //            {
-        //                selectedCharacter = charList[i].character;
-        //            }
-        //        }
-        //    }
-        //}
     }
 
     private void FillCharacterLists()
     {
-        
+
     }
 
     private void FillBattleList()
     {
-        
 
-        if (playerList.Count + enemyList.Count == charList.Count)
-        {
-            everyoneLoaded = true;
-            GD.Print("LOADED BATTLE");
-        }
     }
 
     private void SetBattleOrder()

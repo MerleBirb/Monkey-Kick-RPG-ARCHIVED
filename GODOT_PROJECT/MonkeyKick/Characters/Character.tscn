@@ -1,0 +1,531 @@
+[gd_scene load_steps=71 format=2]
+
+[ext_resource path="res://Characters/Stats.cs" type="Script" id=1]
+[ext_resource path="res://Characters/Playable/Placeholder/player1.png" type="Texture" id=2]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_east.tres" type="Animation" id=3]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_northeast.tres" type="Animation" id=4]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_north.tres" type="Animation" id=5]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_southwest.tres" type="Animation" id=6]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_west.tres" type="Animation" id=7]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_southeast.tres" type="Animation" id=8]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_south.tres" type="Animation" id=9]
+[ext_resource path="res://Characters/Shadow.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_southeast.tres" type="Animation" id=11]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_north.tres" type="Animation" id=12]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_northwest.tres" type="Animation" id=13]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_east.tres" type="Animation" id=14]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/idle/Placey_idle_northwest.tres" type="Animation" id=15]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_south.tres" type="Animation" id=16]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_west.tres" type="Animation" id=17]
+[ext_resource path="res://Characters/Playable/Placeholder/Placey_OW_Anims/Run/Placey_run_northeast.tres" type="Animation" id=18]
+[ext_resource path="res://Characters/Character.cs" type="Script" id=19]
+[ext_resource path="res://Managers/RPG_System/Stats/CharacterStat.cs" type="Script" id=20]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 20 )
+BaseValue = 1.0
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 20 )
+BaseValue = 1.0
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 20 )
+BaseValue = 1.0
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 20 )
+BaseValue = 1.0
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 20 )
+BaseValue = 1.0
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 20 )
+BaseValue = 1.0
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 20 )
+BaseValue = 1.0
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 20 )
+BaseValue = 1.0
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 19 )
+name = "New Character"
+description = "Description"
+level = 1
+totalXP = 0
+neededXP = 1
+maxHP = SubResource( 3 )
+currentHP = 1
+maxKP = SubResource( 4 )
+currentKP = 1
+attack = SubResource( 1 )
+defense = SubResource( 2 )
+specialAttack = SubResource( 5 )
+specialDefense = SubResource( 6 )
+speed = SubResource( 7 )
+swag = SubResource( 8 )
+
+[sub_resource type="CapsuleShape" id=10]
+radius = 0.170564
+height = 0.33809
+
+[sub_resource type="Animation" id=11]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 64, 65 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "Placey_idle_south"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "Placey_idle_north"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "Placey_idle_east"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "Placey_idle_west"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Placey_idle_southwest"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "Placey_idle_southeast"
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "Placey_idle_northwest"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "Placey_idle_northeast"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=20]
+blend_point_0/node = SubResource( 12 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 13 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 14 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 15 )
+blend_point_3/pos = Vector2( -1, 0 )
+blend_point_4/node = SubResource( 16 )
+blend_point_4/pos = Vector2( -0.75, 0.75 )
+blend_point_5/node = SubResource( 17 )
+blend_point_5/pos = Vector2( 0.75, 0.75 )
+blend_point_6/node = SubResource( 18 )
+blend_point_6/pos = Vector2( -0.75, -0.75 )
+blend_point_7/node = SubResource( 19 )
+blend_point_7/pos = Vector2( 0.75, -0.75 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "Placey_run_south"
+
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "Placey_run_southeast"
+
+[sub_resource type="AnimationNodeAnimation" id=23]
+animation = "Placey_run_east"
+
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "Placey_run_northeast"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "Placey_run_north"
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "Placey_run_northwest"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "Placey_run_west"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "Placey_run_southwest"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=29]
+blend_point_0/node = SubResource( 21 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 22 )
+blend_point_1/pos = Vector2( 0.75, 0.75 )
+blend_point_2/node = SubResource( 23 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 24 )
+blend_point_3/pos = Vector2( 0.75, -0.75 )
+blend_point_4/node = SubResource( 25 )
+blend_point_4/pos = Vector2( 0, -1 )
+blend_point_5/node = SubResource( 26 )
+blend_point_5/pos = Vector2( -0.75, -0.75 )
+blend_point_6/node = SubResource( 27 )
+blend_point_6/pos = Vector2( -1, 0 )
+blend_point_7/node = SubResource( 28 )
+blend_point_7/pos = Vector2( -0.75, 0.75 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachine" id=32]
+states/Idle/node = SubResource( 20 )
+states/Idle/position = Vector2( 613, 111 )
+states/Run/node = SubResource( 29 )
+states/Run/position = Vector2( 808, 111 )
+transitions = [ "Idle", "Run", SubResource( 30 ), "Run", "Idle", SubResource( 31 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=33]
+
+[sub_resource type="Animation" id=34]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=35]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+
+[sub_resource type="Animation" id=36]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+
+[sub_resource type="Animation" id=37]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 5 ]
+}
+
+[sub_resource type="Animation" id=38]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=39]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=40]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 7 ]
+}
+
+[sub_resource type="Animation" id=41]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+
+[sub_resource type="Animation" id=42]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 24, 25 ]
+}
+
+[sub_resource type="Animation" id=43]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 40, 41 ]
+}
+
+[sub_resource type="Animation" id=44]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 32, 33 ]
+}
+
+[sub_resource type="Animation" id=45]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 48, 49 ]
+}
+
+[sub_resource type="Animation" id=46]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 8, 9 ]
+}
+
+[sub_resource type="Animation" id=47]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 16, 17 ]
+}
+
+[sub_resource type="Animation" id=48]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 64, 65 ]
+}
+
+[sub_resource type="Animation" id=49]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 56, 57 ]
+}
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=50]
+
+[node name="Character" type="KinematicBody"]
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource( 1 )
+charStats = SubResource( 9 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.35, 0 )
+shape = SubResource( 10 )
+
+[node name="Overworld" type="Spatial" parent="."]
+
+[node name="Graphics" type="Spatial" parent="Overworld"]
+
+[node name="Sprite3D" type="Sprite3D" parent="Overworld/Graphics"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 0 )
+layers = 2
+cast_shadow = 0
+billboard = 1
+double_sided = false
+texture = ExtResource( 2 )
+vframes = 9
+hframes = 8
+region_rect = Rect2( 0, 0, 512, 576 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Overworld/Graphics"]
+anims/Placey_idle_east = ExtResource( 3 )
+anims/Placey_idle_north = ExtResource( 5 )
+anims/Placey_idle_northeast = ExtResource( 4 )
+anims/Placey_idle_northwest = ExtResource( 15 )
+anims/Placey_idle_south = ExtResource( 9 )
+anims/Placey_idle_southeast = ExtResource( 8 )
+anims/Placey_idle_southwest = ExtResource( 6 )
+anims/Placey_idle_west = ExtResource( 7 )
+anims/Placey_run_east = ExtResource( 14 )
+anims/Placey_run_north = ExtResource( 12 )
+anims/Placey_run_northeast = ExtResource( 18 )
+anims/Placey_run_northwest = ExtResource( 13 )
+anims/Placey_run_south = ExtResource( 16 )
+anims/Placey_run_southeast = ExtResource( 11 )
+anims/Placey_run_southwest = SubResource( 11 )
+anims/Placey_run_west = ExtResource( 17 )
+
+[node name="AnimationTree" type="AnimationTree" parent="Overworld/Graphics"]
+tree_root = SubResource( 32 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 33 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Run/blend_position = Vector2( 0, 0 )
+
+[node name="Battle" type="Spatial" parent="."]
+visible = false
+
+[node name="Graphics" type="Spatial" parent="Battle"]
+
+[node name="Sprite3D" type="Sprite3D" parent="Battle/Graphics"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 0 )
+layers = 2
+cast_shadow = 0
+billboard = 1
+double_sided = false
+texture = ExtResource( 2 )
+vframes = 9
+hframes = 8
+region_rect = Rect2( 0, 0, 512, 576 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Battle/Graphics"]
+anims/Placey_idle_east = SubResource( 34 )
+anims/Placey_idle_north = SubResource( 35 )
+anims/Placey_idle_northeast = SubResource( 36 )
+anims/Placey_idle_northwest = SubResource( 37 )
+anims/Placey_idle_south = SubResource( 38 )
+anims/Placey_idle_southeast = SubResource( 39 )
+anims/Placey_idle_southwest = SubResource( 40 )
+anims/Placey_idle_west = SubResource( 41 )
+anims/Placey_run_east = SubResource( 42 )
+anims/Placey_run_north = SubResource( 43 )
+anims/Placey_run_northeast = SubResource( 44 )
+anims/Placey_run_northwest = SubResource( 45 )
+anims/Placey_run_south = SubResource( 46 )
+anims/Placey_run_southeast = SubResource( 47 )
+anims/Placey_run_southwest = SubResource( 48 )
+anims/Placey_run_west = SubResource( 49 )
+
+[node name="AnimationTree" type="AnimationTree" parent="Battle/Graphics"]
+tree_root = SubResource( 32 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 50 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Run/blend_position = Vector2( 0, 0 )
+
+[node name="Shadow" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 1.2, 0.1 )
+light_energy = 0.75

@@ -1,6 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Debug_and_Test/DebugTestAssets.meshlib" type="MeshLibrary" id=1]
+<<<<<<< HEAD
+=======
+[ext_resource path="res://Characters/Playable/P-Dawg/P-Dawg.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Characters/Enemies/Enemy.tscn" type="PackedScene" id=3]
+>>>>>>> parent of 904ae7b (made scene switching more modular)
 [ext_resource path="res://UI/BattleUI.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ProceduralSky" id=1]

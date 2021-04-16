@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
 
 namespace Merlebirb.Managers
 {
@@ -21,8 +20,7 @@ namespace Merlebirb.Managers
 
     public class GameManager : Node
     {
-        public static GameStates state; // controls what the game manager is doing depending on the game state
-        public static List<Node> battleList = new List<Node>(); // stores characters that will enter the battle
+        public static GameStates state;
 
         public override void _Ready()
         {

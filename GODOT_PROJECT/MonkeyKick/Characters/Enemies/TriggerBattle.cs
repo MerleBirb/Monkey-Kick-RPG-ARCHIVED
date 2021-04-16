@@ -13,14 +13,7 @@ namespace Merlebirb.TurnBasedSystem
 
     public class TriggerBattle : Area
     {
-        private EnemyBattleInformation info;
-        private string enemyParent = "EnemyOverworld";
-
-        // Called when the node enters the scene tree for the first time.
-        public override void _Ready()
-        {
-            info = GetParent<EnemyBattleInformation>();
-        }
+        [Export] private string battleScene = ""; // save the path of the battle scene here.
 
         public void OnTriggerEnter(Node col)
         {
@@ -28,9 +21,7 @@ namespace Merlebirb.TurnBasedSystem
             {
                 GD.Print("Collided with Player.");
                 GameManager.ChangeGameState(GameStates.BATTLE);
-                GameManager.battleList.Add(col);
-                //GameManager.battleList.Add()
-                GetTree().ChangeSceneTo(info.battleScene);
+                GetTree().ChangeScene(battleScene);
             }
         }
     }
