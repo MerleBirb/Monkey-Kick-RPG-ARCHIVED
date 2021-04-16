@@ -1,0 +1,82 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Characters/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Characters/Playable/PlayerMovement.cs" type="Script" id=2]
+[ext_resource path="res://Characters/Playable/Player.cs" type="Script" id=3]
+[ext_resource path="res://Managers/RPG_System/Stats/CharacterStat.cs" type="Script" id=4]
+[ext_resource path="res://Characters/Character.cs" type="Script" id=5]
+[ext_resource path="res://Managers/RPG_System/Stats/Stats.cs" type="Script" id=6]
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 4 )
+BaseValue = 0.0
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 4 )
+BaseValue = 0.0
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 4 )
+BaseValue = 0.0
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 4 )
+BaseValue = 0.0
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 4 )
+BaseValue = 0.0
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 4 )
+BaseValue = 0.0
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 4 )
+BaseValue = 0.0
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 4 )
+BaseValue = 0.0
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+name = "New Character"
+description = "Description"
+level = 1
+totalXP = 0
+neededXP = 1
+maxHP = SubResource( 5 )
+currentHP = 0
+maxKP = SubResource( 6 )
+currentKP = 0
+attack = SubResource( 3 )
+defense = SubResource( 4 )
+specialAttack = SubResource( 7 )
+specialDefense = SubResource( 8 )
+speed = SubResource( 9 )
+swag = SubResource( 10 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+
+[node name="Player" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Stats" type="Node" parent="." index="0"]
+script = ExtResource( 6 )
+charStats = SubResource( 11 )
+
+[node name="Overworld" parent="." index="2"]
+script = ExtResource( 2 )
+moveSpeed = 3
+jumpForce = 9
+gravity = 0.7
+maxFallSpeed = 25.0
+
+[node name="AnimationTree" parent="Overworld/Graphics" index="2"]
+parameters/playback = SubResource( 1 )
+
+[node name="AnimationTree" parent="Battle/Graphics" index="2"]
+parameters/playback = SubResource( 2 )
