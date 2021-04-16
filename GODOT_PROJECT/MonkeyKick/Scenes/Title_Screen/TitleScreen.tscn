@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://UI/Fonts/FreePixel.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scenes/Title_Screen/Buttons/OptionsButton.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Title_Screen/Buttons/ContinueButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/Misc_Images/recharge.png" type="Texture" id=5]
 [ext_resource path="res://UI/Effects/FadeIn.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Debug_and_Test/OverworldTest1.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -53,6 +54,7 @@ alignment = 1
 margin_top = 38.0
 margin_right = 258.0
 margin_bottom = 78.0
+scene = ExtResource( 7 )
 
 [node name="ContinueButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 4 )]
 margin_top = 94.0

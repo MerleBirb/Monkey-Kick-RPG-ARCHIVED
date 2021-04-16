@@ -13,11 +13,11 @@ namespace Merlebirb.Scenes
 
     public class StartNewGame : Button
     {
-        [Export] private string sceneName = "";
+        [Export] private PackedScene scene;
 
         private void _on_NewGameButton_pressed()
         {
-            GetTree().ChangeScene(sceneName);
+            GetTree().ChangeSceneTo(scene);
             GameManager.ChangeGameState(GameStates.OVERWORLD);
         }
     }
