@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 [gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Characters/Character.tscn" type="PackedScene" id=1]
@@ -8,6 +9,11 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Characters/Character.tscn" type="PackedScene" id=1]
+=======
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Characters/Character.tscn" type="PackedScene" id=1]
+>>>>>>> parent of 904ae7b (made scene switching more modular)
 [ext_resource path="res://Characters/Playable/PlayerMovement.cs" type="Script" id=2]
 [ext_resource path="res://Characters/Playable/Player.cs" type="Script" id=3]
 

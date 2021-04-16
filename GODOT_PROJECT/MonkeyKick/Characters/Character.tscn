@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 [gd_scene load_steps=54 format=2]
+=======
+[gd_scene load_steps=71 format=2]
+>>>>>>> parent of 904ae7b (made scene switching more modular)
 =======
 [gd_scene load_steps=71 format=2]
 >>>>>>> parent of 904ae7b (made scene switching more modular)
@@ -195,7 +199,10 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=33]
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 904ae7b (made scene switching more modular)
 
 [sub_resource type="Animation" id=34]
 tracks/0/type = "value"
@@ -438,6 +445,9 @@ tracks/0/keys = {
 }
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=50]
+<<<<<<< HEAD
+>>>>>>> parent of 904ae7b (made scene switching more modular)
+=======
 >>>>>>> parent of 904ae7b (made scene switching more modular)
 
 [node name="Character" type="KinematicBody"]
@@ -450,7 +460,10 @@ charStats = SubResource( 9 )
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.35, 0 )
 shape = SubResource( 10 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 904ae7b (made scene switching more modular)
 
 [node name="Overworld" type="Spatial" parent="."]
 >>>>>>> parent of 904ae7b (made scene switching more modular)
@@ -540,6 +553,9 @@ tree_root = SubResource( 32 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 50 )
+<<<<<<< HEAD
+>>>>>>> parent of 904ae7b (made scene switching more modular)
+=======
 >>>>>>> parent of 904ae7b (made scene switching more modular)
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Run/blend_position = Vector2( 0, 0 )
