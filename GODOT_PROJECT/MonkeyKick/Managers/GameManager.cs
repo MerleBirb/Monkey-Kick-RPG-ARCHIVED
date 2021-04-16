@@ -80,7 +80,7 @@ namespace Merlebirb.Managers
         
         public static void StartBattle()
         {
-
+            
         }
 
         public static void EndBattle()
