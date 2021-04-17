@@ -2,6 +2,7 @@ using Godot;
 using System;
 using Merlebirb.PlayableCharacter;
 using Merlebirb.Managers;
+using Merlebirb.QualityOfLife;
 
 //===== PLAYER =====//
 /*
@@ -19,7 +20,7 @@ public class Player : KinematicBody
     // Called when the node enters the scene tree for the first time.
         public override void _Ready()
     {
-        SetMeta("Type", "Player");
+        SetMeta(ObjectTags.TAG, ObjectTags.PLAYER);
         playerMovement = GetNode<PlayerMovement>(overworldNode);
     }
 

@@ -22,13 +22,11 @@ namespace Merlebirb.Managers
     public class GameManager : Node
     {
         public static GameStates state; // controls what the game manager is doing depending on the game state 
-        //[Export] public List<PackedScene> playerParty;
+        public static List<Node> playerParty = new List<Node>();
 
         // Called when the node enters the scene tree for the first time.
         public override void _Ready()
         {
-            //GD.Print("Size of player party: " + playerParty.Count);
-
             if (GetTree().CurrentScene.Name.Contains("Title"))
             {
                 state = GameStates.MAIN_MENU;
@@ -45,6 +43,9 @@ namespace Merlebirb.Managers
             {
                 state = GameStates.OVERWORLD;
             }
+
+            AddPartyMember("res://Characters/Playable/P-Dawg/P-Dawg.tscn");
+            GD.Print("Size of player party: " + playerParty.Count);
         }
 
         // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -80,15 +81,36 @@ namespace Merlebirb.Managers
             if (state == newState) { return; };
             state = newState;
         }
-        
-        public static void StartBattle()
-        {
-            
-        }
 
-        public static void EndBattle()
+        public static void AddPartyMember(string resourcePath)
         {
-            
+            PackedScene newPartyMember = GD.Load<PackedScene>(resourcePath);
+            Node instance = newPartyMember.Instance();
+
+            if (playerParty.Count == 0)
+            {
+                playerParty.Add(instance);
+                GD.Print("Added first party member.");
+            }
+            else
+            {
+                if (playerParty[playerParty.Count - 1] == instance)
+                {
+                    GD.PrintErr("Error: party member already exists.");
+                    return;                    
+                }
+                else
+                {
+                    playerParty.Add(instance);
+                    GD.Print("Added next party member.");
+                }
+            }
+
+            GD.Print("Current Player Party: ");
+            for (int i = 0; i < playerParty.Count; i++)
+            {                
+                GD.Print(playerParty[i].Name);
+            }
         }
     }
 

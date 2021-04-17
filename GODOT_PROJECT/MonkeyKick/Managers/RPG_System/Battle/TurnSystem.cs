@@ -6,36 +6,52 @@ using Merlebirb.Managers;
 //===== TURN BASED BATTLE SYSTEM =====//
 /*
 4/9/21
-Description: Handles all the logic of sorting by speed stat, turn order, turn based, etc.
+Description: Handles all the logic of sorting by speed stat, turn order, turn based, etc. SUPER important.
+Notes: 
+- might rewrite later if inefficient.
 
 */
 
 public class TurnSystem : Node
 {
-    public List<Node> playerList = new List<Node>();
-    private string playerTag = "Player";
-    public List<Node> enemyList = new List<Node>();
-    private string enemyTag = "Enemy";
-    public List<PackedScene> allCharacterList;
-    public static Node selectedCharacter;
+    #region character lists
 
-    public List<TurnClass> charList;
-    public List<StoreAction> actionList;
+    public static List<Node> playerList = new List<Node>();
+    public static List<Node> enemyList = new List<Node>();
+    public static List<Node> allCharacterList = new List<Node>();
+    public static Node selectedCharacter; // character who's turn is active
+
+    #endregion
+
+    #region storing turns
+
+    public static List<TurnClass> charList; // list of quick and important character info
+    public static List<StoreAction> actionList; // store actions executed on turn
+
+    #endregion
+
+    #region misc
 
     public static bool everyoneLoaded = false;
     public static int turnCounter = 0;
 
-    public void StartBattle()
+    #endregion
+
+    public static void StartBattle(List<Node> enemyParty)
     {
-        FillCharacterLists();
+        GD.Print ("Starting Battle Sequence...");
+
+        FillCharacterLists(enemyParty); // fills the all character list
         FillBattleList();
         SetBattleOrder();
-        selectedCharacter = charList[0].character; // the first character in the list is the selected character
+        //selectedCharacter = charList[0].character; // the first character in the list is the selected character
         ResetTurns();
         SetBattlePosition();
+
+        GD.Print ("Loaded Battle.");
     }
 
-    public void EndBattle()
+    public static void EndBattle()
     {
         for (int i = 0; i < charList.Count; i++)
         {
@@ -50,11 +66,13 @@ public class TurnSystem : Node
         playerList.Clear();
         enemyList.Clear();
 
+        turnCounter = 0;
+
         everyoneLoaded = false;
         GameManager.ChangeGameState(GameStates.OVERWORLD);
     }
 
-    public void UpdateTurns()
+    public static void UpdateTurns()
     {
         for (int i = 0; i < charList.Count; i++)
         {
@@ -97,12 +115,15 @@ public class TurnSystem : Node
         //}
     }
 
-    public void FillCharacterLists()
+    public static void FillCharacterLists(List<Node> enemyParty)
     {
-        
+        allCharacterList.AddRange(GameManager.playerParty);
+        GD.Print("Added Players to character list.");
+        allCharacterList.AddRange(enemyParty);
+        GD.Print("Added Enemies to character list.");
     }
 
-    private void FillBattleList()
+    private static void FillBattleList()
     {
         //if (playerList.Count + enemyList.Count == charList.Count)
         //{
@@ -111,17 +132,17 @@ public class TurnSystem : Node
         //}
     }
 
-    private void SetBattleOrder()
+    private static void SetBattleOrder()
     {
 
     }
 
-    private void SetBattlePosition()
+    private static void SetBattlePosition()
     {
 
     }
 
-    private void ResetTurns()
+    private static void ResetTurns()
     {
         
     }

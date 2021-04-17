@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Merlebirb.Managers;
+using Merlebirb.QualityOfLife;
 
 namespace Merlebirb.TurnBasedSystem
 {
@@ -20,29 +21,25 @@ namespace Merlebirb.TurnBasedSystem
         // Called when the node enters the scene tree for the first time.
         public override void _Ready()
         {
-            turnSystem = (TurnSystem)GetNode<TurnSystem>("/root/TurnSystem");
-            if (turnSystem != null) 
-            { 
-                GD.Print("Turn system imported"); 
+            info = GetParent<EnemyBattleInformation>();
+
+            if (info == null)
+            {
+                GD.PrintErr("Error: the enemy battle info was unable to be loaded.");
             }
             else
             {
-                GD.Print("Error: no turn system");
+                GD.Print("Loaded enemy battle info.");
             }
-
-            //gameManager = (GameManager)GetNode<GameManager>("/root/GameManager");
-            //if (gameManager != null) { GD.Print("Game Manager imported"); };
-
-            info = GetParent<EnemyBattleInformation>();
         }
 
         public void OnTriggerEnter(Node col)
         {
-            if((string)col.GetMeta("Type") == "Player")
+            if((string)col.GetMeta(ObjectTags.TAG) == ObjectTags.PLAYER)
             {
                 GD.Print("Collided with Player.");
                 GameManager.ChangeGameState(GameStates.BATTLE);
-                //turnSystem.StartBattle();
+                TurnSystem.StartBattle(info.enemyParty);
                 GetTree().ChangeSceneTo(info.battleScene);
             }
         }
