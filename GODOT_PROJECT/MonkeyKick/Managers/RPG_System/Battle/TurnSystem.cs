@@ -104,13 +104,11 @@ public class TurnSystem : Node
 
     private void FillBattleList()
     {
-        
-
-        if (playerList.Count + enemyList.Count == charList.Count)
-        {
-            everyoneLoaded = true;
-            GD.Print("LOADED BATTLE");
-        }
+        //if (playerList.Count + enemyList.Count == charList.Count)
+        //{
+        //    everyoneLoaded = true;
+        //    GD.Print("LOADED BATTLE");
+        //}
     }
 
     private void SetBattleOrder()

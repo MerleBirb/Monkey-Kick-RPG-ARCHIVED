@@ -27,7 +27,8 @@ run/main_scene="res://Scenes/Title_Screen/TitleScreen.tscn"
 
 [autoload]
 
-GameManager="*res://Managers/GameManager.tscn"
+GameManager="*res://Managers/GameManager.cs"
+TurnSystem="*res://Managers/RPG_System/Battle/TurnSystem.cs"
 
 [debug]
 

@@ -13,18 +13,25 @@ namespace Merlebirb.TurnBasedSystem
 
     public class TriggerBattle : Area
     {
-        private GameManager gameManager;
+        //private GameManager gameManager;
         private TurnSystem turnSystem;
         private EnemyBattleInformation info;
 
         // Called when the node enters the scene tree for the first time.
         public override void _Ready()
         {
-            turnSystem = GetTree().Root.GetNode<TurnSystem>("/root/GameManager/TurnSystem");
-            if (turnSystem != null) { GD.Print("Turn system imported"); };
+            turnSystem = (TurnSystem)GetNode<TurnSystem>("/root/TurnSystem");
+            if (turnSystem != null) 
+            { 
+                GD.Print("Turn system imported"); 
+            }
+            else
+            {
+                GD.Print("Error: no turn system");
+            }
 
-            gameManager = GetTree().Root.GetNode<GameManager>("/root/GameManager");
-            if (gameManager != null) { GD.Print("Game Manager imported"); };
+            //gameManager = (GameManager)GetNode<GameManager>("/root/GameManager");
+            //if (gameManager != null) { GD.Print("Game Manager imported"); };
 
             info = GetParent<EnemyBattleInformation>();
         }
@@ -35,8 +42,7 @@ namespace Merlebirb.TurnBasedSystem
             {
                 GD.Print("Collided with Player.");
                 GameManager.ChangeGameState(GameStates.BATTLE);
-                //turnSystem.allCharacterList.Add(gameManager.playerParty[0]);
-                //turnSystem.allCharacterList.AddRange(info.enemyParty);
+                //turnSystem.StartBattle();
                 GetTree().ChangeSceneTo(info.battleScene);
             }
         }
