@@ -29,6 +29,7 @@ run/main_scene="res://Scenes/Title_Screen/TitleScreen.tscn"
 
 GameManager="*res://Managers/GameManager.cs"
 TurnSystem="*res://Managers/RPG_System/Battle/TurnSystem.cs"
+Tags="*res://Quality_of_Life/Tags.cs"
 
 [debug]
 

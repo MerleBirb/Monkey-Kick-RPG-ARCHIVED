@@ -1,13 +1,65 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/Playable/PlayerMovement.cs" type="Script" id=2]
 [ext_resource path="res://Characters/Playable/Player.cs" type="Script" id=3]
+[ext_resource path="res://Characters/Character.cs" type="Script" id=4]
+[ext_resource path="res://Managers/RPG_System/Stats/CharacterStat.cs" type="Script" id=5]
 [ext_resource path="res://Characters/Playable/PlayerBattle.cs" type="Script" id=7]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+[sub_resource type="Resource" id=4]
+script = ExtResource( 5 )
+BaseValue = 26.0
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 5 )
+BaseValue = 25.0
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+BaseValue = 28.0
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 5 )
+BaseValue = 22.0
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 5 )
+BaseValue = 18.0
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 5 )
+BaseValue = 17.0
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+BaseValue = 21.0
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+BaseValue = 24.0
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 4 )
+name = "P-Dawg"
+description = "A rad dude."
+level = 1
+totalXP = 0
+neededXP = 10
+maxHP = SubResource( 6 )
+currentHP = 28
+maxKP = SubResource( 7 )
+currentKP = 22
+attack = SubResource( 4 )
+defense = SubResource( 5 )
+specialAttack = SubResource( 8 )
+specialDefense = SubResource( 9 )
+speed = SubResource( 10 )
+swag = SubResource( 11 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=3]
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -24,6 +76,7 @@ parameters/playback = SubResource( 1 )
 
 [node name="Battle" parent="." index="2"]
 script = ExtResource( 7 )
+stats = SubResource( 2 )
 
 [node name="AnimationTree" parent="Battle/Graphics" index="2"]
-parameters/playback = SubResource( 2 )
+parameters/playback = SubResource( 3 )

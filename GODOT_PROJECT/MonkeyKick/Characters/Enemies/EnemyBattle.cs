@@ -3,14 +3,14 @@ using System;
 using Merlebirb.TurnBasedSystem;
 using Merlebirb.QualityOfLife;
 
-//===== PLAYER BATTLE LOGIC =====//
+//===== ENEMY BATTLE LOGIC =====//
 /*
 4/18/21
-Description: handles the player's logic during battle.
+Description: handles the enemy's logic during battle.
 
 */
 
-public class PlayerBattle : Spatial
+public class EnemyBattle : Spatial
 {
     public TurnClass turnClass;
     [Export] public Character stats;

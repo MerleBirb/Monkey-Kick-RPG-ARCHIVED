@@ -2,6 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using Merlebirb.TurnBasedSystem;
 using Merlebirb.Managers;
+using Merlebirb.QualityOfLife;
 
 //===== TURN BASED BATTLE SYSTEM =====//
 /*
@@ -25,7 +26,7 @@ public class TurnSystem : Node
 
     #region storing turns
 
-    public static List<TurnClass> charList; // list of quick and important character info
+    public static List<TurnClass> charList = new List<TurnClass>(); // list of quick and important character info
     public static List<StoreAction> actionList; // store actions executed on turn
 
     #endregion
@@ -41,11 +42,13 @@ public class TurnSystem : Node
     {
         GD.Print ("Starting Battle Sequence...");
 
-        FillCharacterLists(enemyParty); // fills the all character list
-        FillBattleList();
-        SetBattleOrder();
+        FillCharacterLists(enemyParty); // fills the character lists
+        FillBattleList(); // set the player list and enemy list and fill out turn class information
+        //SetBattleOrder(); // sorts the battle order by speed
         //selectedCharacter = charList[0].character; // the first character in the list is the selected character
+        //GD.Print("The first character up is " + selectedCharacter.Name);
         ResetTurns();
+        SpawnCharacters();
         SetBattlePosition();
 
         GD.Print ("Loaded Battle.");
@@ -121,18 +124,69 @@ public class TurnSystem : Node
         GD.Print("Added Players to character list.");
         allCharacterList.AddRange(enemyParty);
         GD.Print("Added Enemies to character list.");
+        GD.Print("All character list count: " + allCharacterList.Count);
+
+        for (int i = 0; i < allCharacterList.Count; i++)
+        {
+            // make new tag system
+            if(allCharacterList[i].IsInGroup(Tags.PLAYER))
+            {     
+                GD.Print("Adding Player to player list...");
+                charList.Add(allCharacterList[i].GetNode<PlayerBattle>("Battle").turnClass);
+                playerList.Add(allCharacterList[i]);
+                GD.Print("Added Player to player list.");
+            }
+            else if (allCharacterList[i].IsInGroup(Tags.ENEMY))
+            {
+                GD.Print("Adding Enemy to enemy list...");
+                charList.Add(allCharacterList[i].GetNode<EnemyBattle>("Battle").turnClass);
+                enemyList.Add(allCharacterList[i]);
+                GD.Print("Added Enemy to enemy list.");
+            }
+        }
     }
 
     private static void FillBattleList()
     {
-        //if (playerList.Count + enemyList.Count == charList.Count)
-        //{
-        //    everyoneLoaded = true;
-        //    GD.Print("LOADED BATTLE");
-        //}
+        GD.Print("CharList count: " + charList.Count);
+
+        for (int i = 0; i < charList.Count; i++)
+        {
+            charList[i].character = allCharacterList[i]; // save the character variable as itself
+
+            if (charList[i].character.IsInGroup(Tags.PLAYER))
+            {
+                charList[i].charName = charList[i].character.GetNode<PlayerBattle>("Battle").stats.name;
+                charList[i].charSpeed = (int)charList[i].character.GetNode<PlayerBattle>("Battle").stats.speed.BaseValue;
+            }
+            else if (charList[i].character.IsInGroup(Tags.ENEMY))
+            {
+                charList[i].charName = charList[i].character.GetNode<EnemyBattle>("Battle").stats.name;
+                charList[i].charSpeed = (int)charList[i].character.GetNode<EnemyBattle>("Battle").stats.speed.BaseValue;
+            }
+        }
+
+        if (playerList.Count + enemyList.Count == charList.Count)
+        {
+            everyoneLoaded = true;
+            GD.Print("Every character is loaded.");
+        }
     }
 
     private static void SetBattleOrder()
+    {
+        // compares speed of characters in the character list and sorts them
+        charList.Sort((a, b) =>
+        {
+            var speedA = a.charSpeed;
+            var speedB = b.charSpeed;
+
+            // Sort the speeds
+            return speedA < speedB ? 1 : (speedA == speedB ? 0 : -1);
+        });
+    }
+
+    private static void SpawnCharacters()
     {
 
     }
@@ -145,5 +199,10 @@ public class TurnSystem : Node
     private static void ResetTurns()
     {
         
+    }
+
+    public static void CollectAction(StoreAction input)
+    {
+        actionList.Add(input);
     }
 }

@@ -35,7 +35,7 @@ namespace Merlebirb.TurnBasedSystem
 
         public void OnTriggerEnter(Node col)
         {
-            if((string)col.GetMeta(ObjectTags.TAG) == ObjectTags.PLAYER)
+            if(col.IsInGroup(Tags.PLAYER))
             {
                 GD.Print("Collided with Player.");
                 GameManager.ChangeGameState(GameStates.BATTLE);

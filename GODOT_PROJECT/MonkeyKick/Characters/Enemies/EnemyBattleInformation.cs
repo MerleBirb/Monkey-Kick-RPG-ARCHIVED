@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using Merlebirb.QualityOfLife;
 
 //===== ENEMY BATTLE INFORMATION =====//
 /*
@@ -18,6 +19,7 @@ public class EnemyBattleInformation : KinematicBody
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        AddToGroup(Tags.ENEMY);
         EnemyListToEnemyParty();
     }
 

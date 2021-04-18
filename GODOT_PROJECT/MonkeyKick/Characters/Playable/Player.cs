@@ -15,13 +15,14 @@ public class Player : KinematicBody
 {
     // store the player nodes
     private PlayerMovement playerMovement;
-    private string overworldNode = "Overworld";
+    private PlayerBattle playerBattle;
 
     // Called when the node enters the scene tree for the first time.
-        public override void _Ready()
+    public override void _Ready()
     {
-        SetMeta(ObjectTags.TAG, ObjectTags.PLAYER);
-        playerMovement = GetNode<PlayerMovement>(overworldNode);
+        AddToGroup(Tags.PLAYER);
+        playerMovement = GetNode<PlayerMovement>("Overworld");
+        playerBattle = GetNode<PlayerBattle>("Battle");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,7 +32,17 @@ public class Player : KinematicBody
         {
             case GameStates.OVERWORLD:
             {
+                if (!playerMovement.Visible) { playerMovement.Visible = true; };
+                if (playerBattle.Visible) { playerBattle.Visible = false; };
+
                 playerMovement.PlayerMovementProcess();
+                break;
+            }
+            case GameStates.BATTLE:
+            {
+                if (playerMovement.Visible) { playerMovement.Visible = false; };
+                if (!playerBattle.Visible) { playerBattle.Visible = true; };
+
                 break;
             }
         }

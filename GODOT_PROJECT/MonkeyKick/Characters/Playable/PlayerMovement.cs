@@ -3,7 +3,7 @@ using System;
 
 namespace Merlebirb.PlayableCharacter
 {
-    //===== PLAYER MOVEMENT SCRIPT =====//
+    //===== PLAYER MOVEMENT LOGIC =====//
     /*
     3/22/2021
     Description: The Player's movement and physics logic. Allows the player to move, jump, fall, etc.
