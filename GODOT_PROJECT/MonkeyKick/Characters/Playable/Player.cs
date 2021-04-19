@@ -3,6 +3,7 @@ using System;
 using Merlebirb.PlayableCharacter;
 using Merlebirb.Managers;
 using Merlebirb.QualityOfLife;
+using Merlebirb.Tag;
 
 //===== PLAYER =====//
 /*
@@ -20,9 +21,13 @@ public class Player : KinematicBody
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        AddToGroup(Tags.PLAYER);
         playerMovement = GetNode<PlayerMovement>("Overworld");
         playerBattle = GetNode<PlayerBattle>("Battle");
+
+        if (!this.HasTag("Player"))
+        {
+            NodeTagExtension.AddTag(this, "Player");
+        }
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

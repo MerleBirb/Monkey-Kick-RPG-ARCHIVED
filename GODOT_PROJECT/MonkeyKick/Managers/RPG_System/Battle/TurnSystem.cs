@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Merlebirb.TurnBasedSystem;
 using Merlebirb.Managers;
 using Merlebirb.QualityOfLife;
+using Merlebirb.Tag;
 
 //===== TURN BASED BATTLE SYSTEM =====//
 /*
@@ -41,14 +42,14 @@ public class TurnSystem : Node
     public static void StartBattle(List<Node> enemyParty)
     {
         GD.Print ("Starting Battle Sequence...");
-
-        FillCharacterLists(enemyParty); // fills the character lists
+   
+        SpawnCharacters(enemyParty); // spawn the characters into the scene
+        FillCharacterLists(); // fills the character lists
         FillBattleList(); // set the player list and enemy list and fill out turn class information
         //SetBattleOrder(); // sorts the battle order by speed
         //selectedCharacter = charList[0].character; // the first character in the list is the selected character
         //GD.Print("The first character up is " + selectedCharacter.Name);
         ResetTurns();
-        SpawnCharacters();
         SetBattlePosition();
 
         GD.Print ("Loaded Battle.");
@@ -118,25 +119,35 @@ public class TurnSystem : Node
         //}
     }
 
-    public static void FillCharacterLists(List<Node> enemyParty)
+    private static void SpawnCharacters(List<Node> enemyParty)
     {
-        allCharacterList.AddRange(GameManager.playerParty);
+        GD.Print("Spawning characters...");
+
+        var playerSpawns = TagSystem.AllObjectsForTag("PlayerSpawn");
+        GD.Print("Player spawns enabled: " + playerSpawns.Count);
+        var enemySpawns = TagSystem.AllObjectsForTag("EnemySpawn");
+        GD.Print("Enemy spawns enabled: " + enemySpawns.Count);
+    }
+
+    public static void FillCharacterLists()
+    {
+        //allCharacterList.AddRange(GameManager.playerParty);
         GD.Print("Added Players to character list.");
-        allCharacterList.AddRange(enemyParty);
+        //allCharacterList.AddRange(enemyParty);
         GD.Print("Added Enemies to character list.");
         GD.Print("All character list count: " + allCharacterList.Count);
 
         for (int i = 0; i < allCharacterList.Count; i++)
         {
             // make new tag system
-            if(allCharacterList[i].IsInGroup(Tags.PLAYER))
+            if(allCharacterList[i].HasTag("Player"))
             {     
                 GD.Print("Adding Player to player list...");
                 charList.Add(allCharacterList[i].GetNode<PlayerBattle>("Battle").turnClass);
                 playerList.Add(allCharacterList[i]);
                 GD.Print("Added Player to player list.");
             }
-            else if (allCharacterList[i].IsInGroup(Tags.ENEMY))
+            else if (allCharacterList[i].HasTag("Enemy"))
             {
                 GD.Print("Adding Enemy to enemy list...");
                 charList.Add(allCharacterList[i].GetNode<EnemyBattle>("Battle").turnClass);
@@ -154,12 +165,12 @@ public class TurnSystem : Node
         {
             charList[i].character = allCharacterList[i]; // save the character variable as itself
 
-            if (charList[i].character.IsInGroup(Tags.PLAYER))
+            if (charList[i].character.HasTag("Player"))
             {
                 charList[i].charName = charList[i].character.GetNode<PlayerBattle>("Battle").stats.name;
                 charList[i].charSpeed = (int)charList[i].character.GetNode<PlayerBattle>("Battle").stats.speed.BaseValue;
             }
-            else if (charList[i].character.IsInGroup(Tags.ENEMY))
+            else if (charList[i].character.HasTag("Enemy"))
             {
                 charList[i].charName = charList[i].character.GetNode<EnemyBattle>("Battle").stats.name;
                 charList[i].charSpeed = (int)charList[i].character.GetNode<EnemyBattle>("Battle").stats.speed.BaseValue;
@@ -184,11 +195,6 @@ public class TurnSystem : Node
             // Sort the speeds
             return speedA < speedB ? 1 : (speedA == speedB ? 0 : -1);
         });
-    }
-
-    private static void SpawnCharacters()
-    {
-
     }
 
     private static void SetBattlePosition()

@@ -2,6 +2,7 @@ using Godot;
 using System;
 using Merlebirb.Managers;
 using Merlebirb.QualityOfLife;
+using Merlebirb.Tag;
 
 namespace Merlebirb.TurnBasedSystem
 {
@@ -35,7 +36,7 @@ namespace Merlebirb.TurnBasedSystem
 
         public void OnTriggerEnter(Node col)
         {
-            if(col.IsInGroup(Tags.PLAYER))
+            if(col.HasTag("Player"))
             {
                 GD.Print("Collided with Player.");
                 GameManager.ChangeGameState(GameStates.BATTLE);

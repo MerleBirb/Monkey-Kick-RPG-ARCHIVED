@@ -9,57 +9,57 @@
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
-[sub_resource type="Resource" id=4]
+[sub_resource type="Resource" id=2]
 script = ExtResource( 5 )
 BaseValue = 26.0
 
-[sub_resource type="Resource" id=5]
+[sub_resource type="Resource" id=3]
 script = ExtResource( 5 )
 BaseValue = 25.0
 
-[sub_resource type="Resource" id=6]
+[sub_resource type="Resource" id=4]
 script = ExtResource( 5 )
 BaseValue = 28.0
 
-[sub_resource type="Resource" id=7]
+[sub_resource type="Resource" id=5]
 script = ExtResource( 5 )
 BaseValue = 22.0
 
-[sub_resource type="Resource" id=8]
+[sub_resource type="Resource" id=6]
 script = ExtResource( 5 )
 BaseValue = 18.0
 
-[sub_resource type="Resource" id=9]
+[sub_resource type="Resource" id=7]
 script = ExtResource( 5 )
 BaseValue = 17.0
 
-[sub_resource type="Resource" id=10]
+[sub_resource type="Resource" id=8]
 script = ExtResource( 5 )
 BaseValue = 21.0
 
-[sub_resource type="Resource" id=11]
+[sub_resource type="Resource" id=9]
 script = ExtResource( 5 )
 BaseValue = 24.0
 
-[sub_resource type="Resource" id=2]
+[sub_resource type="Resource" id=10]
 script = ExtResource( 4 )
 name = "P-Dawg"
 description = "A rad dude."
 level = 1
 totalXP = 0
 neededXP = 10
-maxHP = SubResource( 6 )
+maxHP = SubResource( 4 )
 currentHP = 28
-maxKP = SubResource( 7 )
+maxKP = SubResource( 5 )
 currentKP = 22
-attack = SubResource( 4 )
-defense = SubResource( 5 )
-specialAttack = SubResource( 8 )
-specialDefense = SubResource( 9 )
-speed = SubResource( 10 )
-swag = SubResource( 11 )
+attack = SubResource( 2 )
+defense = SubResource( 3 )
+specialAttack = SubResource( 6 )
+specialDefense = SubResource( 7 )
+speed = SubResource( 8 )
+swag = SubResource( 9 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=3]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=11]
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -76,7 +76,10 @@ parameters/playback = SubResource( 1 )
 
 [node name="Battle" parent="." index="2"]
 script = ExtResource( 7 )
-stats = SubResource( 2 )
+stats = SubResource( 10 )
 
 [node name="AnimationTree" parent="Battle/Graphics" index="2"]
-parameters/playback = SubResource( 3 )
+parameters/playback = SubResource( 11 )
+
+[node name="Tag" parent="." index="4"]
+m_tagList = [ "Player" ]
