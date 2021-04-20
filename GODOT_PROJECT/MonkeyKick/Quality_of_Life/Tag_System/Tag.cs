@@ -1,6 +1,7 @@
 using Godot;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Merlebirb.Tag
 {
@@ -20,11 +21,13 @@ namespace Merlebirb.Tag
         // Called when the node enters the scene tree for the first time.
         public override void _Ready()
         {
-            for (int i = 0; i < m_tagList.Count; i++)
-            {
-                var tag = m_tagList[i];
-                m_tagList[i] = tag.Trim().ToLower();
-            }
+            //for (int i = 0; i < m_tagList.Count; i++)
+            //{
+            //    var tag = m_tagList[i];
+            //    m_tagList[i] = tag.Trim().ToLower();
+            //}
+
+            m_tagList = m_tagList.ConvertAll(d => d.ToLower());
 
             UpdateTagSystem();
         }
@@ -74,7 +77,6 @@ namespace Merlebirb.Tag
 
         private void UpdateTagSystem()
         {
-            GD.Print("Updating Tag Dictionary...");
             TagSystem.AddObject(this);
         }
 

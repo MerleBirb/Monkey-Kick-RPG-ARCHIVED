@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Managers/Tag_System/Tag.cs" type="Script" id=1]
+[ext_resource path="res://Quality_of_Life/Tag_System/Tag.cs" type="Script" id=1]
 
 [node name="Tag" type="Node"]
 script = ExtResource( 1 )

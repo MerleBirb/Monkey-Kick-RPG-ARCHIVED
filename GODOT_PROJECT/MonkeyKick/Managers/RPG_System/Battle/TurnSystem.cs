@@ -20,6 +20,7 @@ public class TurnSystem : Node
 
     public static List<Node> playerList = new List<Node>();
     public static List<Node> enemyList = new List<Node>();
+    public static List<Node> enemyParty = new List<Node>();
     public static List<Node> allCharacterList = new List<Node>();
     public static Node selectedCharacter; // character who's turn is active
 
@@ -39,18 +40,24 @@ public class TurnSystem : Node
 
     #endregion
 
-    public static void StartBattle(List<Node> enemyParty)
+    public static void LoadBattle(List<Node> ep)
+    {   
+        if (everyoneLoaded) { everyoneLoaded = false; };
+        //ResetCharacterLists();
+        enemyParty = ep;
+        GD.Print("Enemy party size: " + enemyParty.Count);
+    }
+
+    public static void StartBattle()
     {
         GD.Print ("Starting Battle Sequence...");
    
-        SpawnCharacters(enemyParty); // spawn the characters into the scene
-        FillCharacterLists(); // fills the character lists
-        FillBattleList(); // set the player list and enemy list and fill out turn class information
-        //SetBattleOrder(); // sorts the battle order by speed
-        //selectedCharacter = charList[0].character; // the first character in the list is the selected character
-        //GD.Print("The first character up is " + selectedCharacter.Name);
+        FillCharacterLists(); // fills the character lists 
+        FillBattleList(); // sets the player list and enemy list and fill out turn class information
+        SetBattleOrder(); // sorts the battle order by speed
+        SpawnCharacters(); // spawn the characters into the scene
+        selectedCharacter = charList[0].character; // the first character in the list is the selected character
         ResetTurns();
-        SetBattlePosition();
 
         GD.Print ("Loaded Battle.");
     }
@@ -94,47 +101,19 @@ public class TurnSystem : Node
             }
         }
 
-        //for (int i = 0; i < charList.Count; i++)
-        //{
-        //    if ((string)selectedCharacter.GetMeta("Type") == playerTag)
-        //    {
-        //        if (selectedCharacter.transform.position == selectedCharacter.GetComponent<PlayerBattleScript>().battlePos)
-        //        {
-        //            if (charList[i].isTurn)
-        //            {
-        //                selectedCharacter = charList[i].character;
-        //            }
-        //        }
-        //    }
-        //    else if ((string)selectedCharacter.GetMeta("Type") == enemyTag)//
-        //    {
-        //        if (selectedCharacter.transform.position == selectedCharacter.GetComponent<EnemyBattleScript>().battlePos)
-        //        {
-        //            if (charList[i].isTurn)
-        //            {
-        //                selectedCharacter = charList[i].character;
-        //            }
-        //        }
-        //    }
-        //}
-    }
-
-    private static void SpawnCharacters(List<Node> enemyParty)
-    {
-        GD.Print("Spawning characters...");
-
-        var playerSpawns = TagSystem.AllObjectsForTag("PlayerSpawn");
-        GD.Print("Player spawns enabled: " + playerSpawns.Count);
-        var enemySpawns = TagSystem.AllObjectsForTag("EnemySpawn");
-        GD.Print("Enemy spawns enabled: " + enemySpawns.Count);
+        for (int e = 0; e < charList.Count; e++)
+        {
+            if (charList[e].isTurn)
+            {
+                selectedCharacter = charList[e].character;
+            }
+        }
     }
 
     public static void FillCharacterLists()
     {
-        //allCharacterList.AddRange(GameManager.playerParty);
-        GD.Print("Added Players to character list.");
-        //allCharacterList.AddRange(enemyParty);
-        GD.Print("Added Enemies to character list.");
+        allCharacterList.AddRange(GameManager.playerParty);
+        allCharacterList.AddRange(enemyParty);
         GD.Print("All character list count: " + allCharacterList.Count);
 
         for (int i = 0; i < allCharacterList.Count; i++)
@@ -145,22 +124,22 @@ public class TurnSystem : Node
                 GD.Print("Adding Player to player list...");
                 charList.Add(allCharacterList[i].GetNode<PlayerBattle>("Battle").turnClass);
                 playerList.Add(allCharacterList[i]);
-                GD.Print("Added Player to player list.");
+                GD.Print("Added " + allCharacterList[i].Name + " to player list.");
             }
             else if (allCharacterList[i].HasTag("Enemy"))
             {
                 GD.Print("Adding Enemy to enemy list...");
                 charList.Add(allCharacterList[i].GetNode<EnemyBattle>("Battle").turnClass);
                 enemyList.Add(allCharacterList[i]);
-                GD.Print("Added Enemy to enemy list.");
+                GD.Print("Added " + allCharacterList[i].Name + " to enemy list.");
             }
         }
+        
+        GD.Print("CharList count: " + charList.Count);
     }
 
     private static void FillBattleList()
     {
-        GD.Print("CharList count: " + charList.Count);
-
         for (int i = 0; i < charList.Count; i++)
         {
             charList[i].character = allCharacterList[i]; // save the character variable as itself
@@ -195,20 +174,69 @@ public class TurnSystem : Node
             // Sort the speeds
             return speedA < speedB ? 1 : (speedA == speedB ? 0 : -1);
         });
+
+        GD.Print("Turn order: ");
+        for (int i = 0; i < charList.Count; i++)
+        {
+            GD.Print(charList[i].charName);
+        }
     }
 
-    private static void SetBattlePosition()
+    private static void SpawnCharacters()
     {
+        GD.Print("Spawning characters...");
 
+        var playerSpawns = TagSystem.AllObjectsForTag("PlayerSpawn");
+        var enemySpawns = TagSystem.AllObjectsForTag("EnemySpawn");
+
+        for(int i = 0; i < playerList.Count; i++)
+        {
+            playerSpawns[i].AddChild(playerList[i]);
+        }
+
+        GD.Print("Spawned all players.");
+
+        for (int e = 0; e < enemyList.Count; e++)
+        {
+            enemySpawns[e].AddChild(enemyList[e]);
+        }
+
+        GD.Print("Spawned all enemies.");
     }
 
     private static void ResetTurns()
     {
-        
+        for (int i = 0; i < charList.Count; i++)
+        {
+            if (i == 0)
+            {
+                charList[i].isTurn = true;
+                charList[i].wasTurnPrev = false;
+            }
+            else
+            {
+                charList[i].isTurn = false;
+                charList[i].wasTurnPrev = false;
+            }
+
+            if (charList[i] == null)
+            {
+                charList.Remove(charList[i]);
+            }
+        }
     }
 
     public static void CollectAction(StoreAction input)
     {
         actionList.Add(input);
+    }
+
+    public static void ResetCharacterLists()
+    {
+        allCharacterList.Clear();
+        charList.Clear();
+        playerList.Clear();
+        enemyList.Clear();
+        enemyParty.Clear();
     }
 }

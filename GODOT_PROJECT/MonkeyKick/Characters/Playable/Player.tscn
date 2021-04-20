@@ -82,4 +82,4 @@ stats = SubResource( 10 )
 parameters/playback = SubResource( 11 )
 
 [node name="Tag" parent="." index="4"]
-m_tagList = [ "Player" ]
+m_tagList = [ "player" ]

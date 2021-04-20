@@ -24,9 +24,9 @@ public class Player : KinematicBody
         playerMovement = GetNode<PlayerMovement>("Overworld");
         playerBattle = GetNode<PlayerBattle>("Battle");
 
-        if (!this.HasTag("Player"))
+        if (!this.HasTag("player"))
         {
-            NodeTagExtension.AddTag(this, "Player");
+            this.AddTag("player");
         }
     }
 

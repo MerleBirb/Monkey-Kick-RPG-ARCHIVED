@@ -63,6 +63,8 @@ namespace Merlebirb.Managers
                 }
                 case GameStates.BATTLE:
                 {
+                    TurnSystem.UpdateTurns();
+
                     break;
                 }
                 case GameStates.CUTSCENE:

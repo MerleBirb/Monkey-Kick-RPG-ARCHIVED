@@ -15,9 +15,6 @@ extents = Vector3( 0.3, 0.3, 0.3 )
 [node name="Enemy" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
 
-[node name="Tag" parent="." index="0"]
-m_tagList = [ "Enemy" ]
-
 [node name="Sprite3D" parent="Overworld/Graphics" index="0"]
 texture = ExtResource( 1 )
 
@@ -33,4 +30,7 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="BattleTrigger" index="0"]
 shape = SubResource( 3 )
+
+[node name="Tag" parent="." index="5"]
+m_tagList = [ "enemy" ]
 [connection signal="body_entered" from="BattleTrigger" to="BattleTrigger" method="OnTriggerEnter"]

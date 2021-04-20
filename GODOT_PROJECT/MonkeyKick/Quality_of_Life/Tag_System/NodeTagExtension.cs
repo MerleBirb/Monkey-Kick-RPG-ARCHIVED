@@ -13,7 +13,7 @@ namespace Merlebirb.Tag
     
     public static class NodeTagExtension
     {
-        public static Tag GetTag (Node node)
+        public static Tag GetTag (this Node node)
         {
             var tag = node.GetNode<Tag>("Tag");
 

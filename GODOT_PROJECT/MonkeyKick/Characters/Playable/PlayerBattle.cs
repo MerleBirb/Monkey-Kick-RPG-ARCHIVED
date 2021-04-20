@@ -12,7 +12,7 @@ Description: handles the player's logic during battle.
 
 public class PlayerBattle : Spatial
 {
-    public TurnClass turnClass;
+    public TurnClass turnClass = new TurnClass();
     [Export] public Character stats;
 
     // Called when the node enters the scene tree for the first time.

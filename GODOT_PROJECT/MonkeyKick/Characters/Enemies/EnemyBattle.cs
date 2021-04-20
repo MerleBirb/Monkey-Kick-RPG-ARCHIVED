@@ -12,7 +12,7 @@ Description: handles the enemy's logic during battle.
 
 public class EnemyBattle : Spatial
 {
-    public TurnClass turnClass;
+    public TurnClass turnClass = new TurnClass();
     [Export] public Character stats;
 
     // Called when the node enters the scene tree for the first time.

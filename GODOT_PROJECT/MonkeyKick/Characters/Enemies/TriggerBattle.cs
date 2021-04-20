@@ -40,7 +40,7 @@ namespace Merlebirb.TurnBasedSystem
             {
                 GD.Print("Collided with Player.");
                 GameManager.ChangeGameState(GameStates.BATTLE);
-                TurnSystem.StartBattle(info.enemyParty);
+                TurnSystem.LoadBattle(info.enemiesToSpawnList);
                 GetTree().ChangeSceneTo(info.battleScene);
             }
         }
