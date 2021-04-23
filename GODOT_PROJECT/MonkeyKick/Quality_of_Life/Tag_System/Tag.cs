@@ -61,7 +61,6 @@ namespace Merlebirb.Tag
 
         private void OnEnable()
         {
-            GD.Print("Tag Enabled");
             UpdateTagSystem();
         }
 
