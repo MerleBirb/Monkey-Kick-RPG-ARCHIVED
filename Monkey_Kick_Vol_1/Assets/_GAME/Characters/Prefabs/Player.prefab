@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1599932963123554123}
   - component: {fileID: 3122010454206781323}
   - component: {fileID: 2392638260980735192}
+  - component: {fileID: 6238342467824268308}
   - component: {fileID: 744948376793014240}
   - component: {fileID: 5594884644936944234}
   - component: {fileID: 6257340945637411841}
@@ -67,6 +68,36 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &6238342467824268308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072620314332300718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 749114b69bf53b2448f104db1720ff79, type: 3}
+  m_NotificationBehavior: 3
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Overworld
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!114 &744948376793014240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72dd1157034210c468b1e7e649e71016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerState: 0
 --- !u!114 &5594884644936944234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,9 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64709d19529e86144a32f992321c4b8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  sprintSpeed: 7
-  jumpHeight: 0
+  moveSpeed: 3
+  sprintSpeed: 6
+  jumpHeight: 8
   radius: 0.55
   groundLayer:
     serializedVersion: 2

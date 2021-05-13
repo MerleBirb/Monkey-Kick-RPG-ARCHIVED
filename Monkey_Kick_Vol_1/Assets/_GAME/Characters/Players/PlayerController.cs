@@ -9,39 +9,53 @@ Description:
 
 using UnityEngine;
 
-namespace Merlebirb.Characters
+
+[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerBattle))]
+public class PlayerController : MonoBehaviour
 {
-    public enum PlayerStates
+    private PlayerMovement playerMovement; // movement logic
+    private PlayerBattle playerBattle; // battle logic
+
+    private void Start()
     {
-        OVERWORLD = 0,
-        BATTLE = 1
+        playerMovement = GetComponent<PlayerMovement>();
+        playerBattle = GetComponent<PlayerBattle>();
+
+        switch(Game.gameManager.GameState)
+        {
+            case GameStates.OVERWORLD:
+            {
+                playerMovement.StartMovement();
+
+                break;
+            }
+        }
     }
 
-    [RequireComponent(typeof(PlayerMovement))]
-    [RequireComponent(typeof(PlayerBattle))]
-    public class PlayerController : MonoBehaviour
+    private void Update()
     {
-        public PlayerStates playerState; // determines what actions the player will be able to do
-
-        private PlayerMovement playerMovement; // movement logic
-        private PlayerBattle playerBattle; // battle logic
-
-        // Start is called before the first frame update
-        private void Start()
+        switch(Game.gameManager.GameState)
         {
-            playerMovement = GetComponent<PlayerMovement>();
-            playerBattle = GetComponent<PlayerBattle>();
+            case GameStates.OVERWORLD:
+            {
+                playerMovement.UpdateMovement();
+
+                break;
+            }
         }
+    }
 
-        // Update is called once per frame
-        private void Update()
+    private void FixedUpdate()
+    {
+        switch(Game.gameManager.GameState)
         {
-            
-        }
+            case GameStates.OVERWORLD:
+            {
+                playerMovement.FixedUpdateMovement();
 
-        private void ToggleState()
-        {
-            
+                break;
+            }
         }
     }
 }
