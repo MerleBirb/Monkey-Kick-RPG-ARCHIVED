@@ -2,31 +2,30 @@
 /*
 5/11/21
 Description: 
-- Controls all the player logic. 
-- Requires PlayerMovement and PlayerBattle components.
+- Controls all player logic.
 
 */
 
 using UnityEngine;
 
 
-[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerOverworld))]
 [RequireComponent(typeof(PlayerBattle))]
 public class PlayerController : MonoBehaviour
 {
-    private PlayerMovement playerMovement; // movement logic
+    private PlayerOverworld playerOverworld; // overworld logic
     private PlayerBattle playerBattle; // battle logic
 
     private void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
+        playerOverworld = GetComponent<PlayerOverworld>();
         playerBattle = GetComponent<PlayerBattle>();
 
         switch(Game.gameManager.GameState)
         {
             case GameStates.OVERWORLD:
             {
-                playerMovement.StartMovement();
+                playerOverworld.StartOverworld();
 
                 break;
             }
@@ -39,7 +38,7 @@ public class PlayerController : MonoBehaviour
         {
             case GameStates.OVERWORLD:
             {
-                playerMovement.UpdateMovement();
+                playerOverworld.UpdateOverworld();
 
                 break;
             }
@@ -52,7 +51,7 @@ public class PlayerController : MonoBehaviour
         {
             case GameStates.OVERWORLD:
             {
-                playerMovement.FixedUpdateMovement();
+                playerOverworld.FixedUpdateOverworld();
 
                 break;
             }

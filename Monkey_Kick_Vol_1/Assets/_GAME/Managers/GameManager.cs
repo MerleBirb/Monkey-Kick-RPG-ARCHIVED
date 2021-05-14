@@ -20,19 +20,7 @@ public enum GameStates
 public class GameManager : MonoBehaviour
 {
     public GameStates GameState;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void ChangeGameState(GameStates newState)
     {
         if (GameState == newState) { return; }

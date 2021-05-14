@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5d9789ab820d54687e4b1fefaef6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGameState: 0
+  GameState: 0
 --- !u!1 &1932579958
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,4 +223,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b417fa71cf271243a35814bf6a15163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Scene_OW_Debug_1
+  sceneToLoad: Debug_Overworld_1
