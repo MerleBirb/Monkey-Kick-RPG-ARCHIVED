@@ -137,7 +137,7 @@ MonoBehaviour:
   moveSpeed: 3
   sprintSpeed: 5
   jumpHeight: 8
-  radius: 0.55
+  radius: 0.65
   groundLayer:
     serializedVersion: 2
     m_Bits: 8

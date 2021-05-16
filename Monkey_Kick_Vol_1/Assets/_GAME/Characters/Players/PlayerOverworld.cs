@@ -162,12 +162,12 @@ public class PlayerOverworld : MonoBehaviour
     {
         float speed = rb.velocity.magnitude;
 
-        if (stepsSinceLastGrounded > 1 || stepsSinceLastJumped <= 2)
+        if (stepsSinceLastGrounded > 1 || stepsSinceLastJumped <= 3)
         {
             return false;
         }
 
-        if (!Physics.Raycast(rb.position, -Vector2.up, out RaycastHit hit, 1f, -1))
+        if (!Physics.Raycast(rb.position, -Vector3.up, out RaycastHit hit, 1f, -1))
         {
             return false;
         }
