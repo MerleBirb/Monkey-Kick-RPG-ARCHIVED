@@ -14,9 +14,9 @@ using System.Collections.ObjectModel;
 [Serializable]
 public class CharacterStat
 {
-    public float BaseValue;
+    public int BaseValue;
 
-    public float Value
+    public int Value
     {
         get 
         {
@@ -32,8 +32,8 @@ public class CharacterStat
     }
 
     protected bool isDirty = true;
-    protected float _value;
-    protected float lastBaseValue = float.MinValue;
+    protected int _value;
+    protected int lastBaseValue = int.MinValue;
 
     protected readonly List<StatModifier> statModifiers;
     public readonly ReadOnlyCollection<StatModifier> StatModifiers;
@@ -44,7 +44,7 @@ public class CharacterStat
         StatModifiers = statModifiers.AsReadOnly();
     }
 
-    public CharacterStat(float baseValue) : this()
+    public CharacterStat(int baseValue) : this()
     {
         BaseValue = baseValue;
     }
@@ -91,9 +91,9 @@ public class CharacterStat
         return didRemove;
     }
 
-    protected virtual float CalculateFinalValue()
+    protected virtual int CalculateFinalValue()
     {
-        float finalValue = BaseValue;
+        float finalValue = (float)BaseValue;
         float sumPercentAdd = 0;
 
         for (int i = 0; i < statModifiers.Count; i++)
@@ -120,6 +120,6 @@ public class CharacterStat
             }
         }
 
-        return (float)Math.Round(finalValue, 4);
+        return (int)Math.Round(finalValue, 4);
     }
 }

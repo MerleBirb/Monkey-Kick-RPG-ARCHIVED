@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private PlayerOverworld playerOverworld; // overworld logic
     private PlayerBattle playerBattle; // battle logic
 
+    [SerializeField]
+    private PlayerInfo stats;
+
     private void Start()
     {
         playerOverworld = GetComponent<PlayerOverworld>();
