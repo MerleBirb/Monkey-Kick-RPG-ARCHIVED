@@ -16,8 +16,7 @@ public class PlayerController : MonoBehaviour
     private PlayerOverworld playerOverworld; // overworld logic
     private PlayerBattle playerBattle; // battle logic
 
-    [SerializeField]
-    private PlayerInfo stats;
+    public PlayerInfo stats;
 
     private void Start()
     {

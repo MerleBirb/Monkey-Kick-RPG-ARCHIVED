@@ -42,10 +42,10 @@ public abstract class CharacterInfo : ISerializationCallbackReceiver
         level = Mathf.Clamp(level, 1, 100);
 
         maxHP.BaseValue = Mathf.Clamp(maxHP.BaseValue, 1, statLimit);
-        currentHP.BaseValue = Mathf.Clamp(currentHP.BaseValue, 1, maxHP.BaseValue);
+        currentHP.BaseValue = Mathf.Clamp(currentHP.BaseValue, 0, maxHP.BaseValue);
 
         maxKP.BaseValue = Mathf.Clamp(maxKP.BaseValue, 1, statLimit);
-        currentKP.BaseValue = Mathf.Clamp(currentKP.BaseValue, 1, maxKP.BaseValue);
+        currentKP.BaseValue = Mathf.Clamp(currentKP.BaseValue, 0, maxKP.BaseValue);
 
         muscle.BaseValue = Mathf.Clamp(muscle.BaseValue, 1, statLimit);
         toughness.BaseValue = Mathf.Clamp(toughness.BaseValue, 1, statLimit);

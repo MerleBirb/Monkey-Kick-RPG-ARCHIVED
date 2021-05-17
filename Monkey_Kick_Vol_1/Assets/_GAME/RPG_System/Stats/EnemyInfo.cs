@@ -17,8 +17,10 @@ public class EnemyInfo : CharacterInfo
     // experience gained by killing
     [SerializeField] private int EXPGained = 1;
 
-    void OnValidate()
+    public override void OnValidate()
     {
+        base.OnValidate();
+
         EXPGained = Mathf.Clamp(EXPGained, 0, int.MaxValue);
     }
 }

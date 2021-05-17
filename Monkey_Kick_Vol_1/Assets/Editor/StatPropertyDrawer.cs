@@ -21,8 +21,11 @@ public class StatPropertyDrawer : PropertyDrawer
         // Draw label
         position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
         var rect = new Rect(position.position, Vector2.one * 20);
+        var indent = EditorGUI.indentLevel;
+        EditorGUI.indentLevel = 0;
 
         EditorGUI.PropertyField(position, property.FindPropertyRelative("BaseValue"), GUIContent.none);
+        EditorGUI.indentLevel = indent;
         
         EditorGUI.EndProperty();
     }

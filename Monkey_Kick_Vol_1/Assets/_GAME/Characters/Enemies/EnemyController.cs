@@ -17,12 +17,9 @@ public class EnemyController : MonoBehaviour
 {
     private EnemyOverworld enemyOverworld; // overworld logic
     private EnemyBattle enemyBattle; // battle logic
-
-    #region COLLISION AND TRIGGERS
-
     [HideInInspector] public Rigidbody rb;
 
-    #endregion
+    public EnemyInfo stats;
 
     private void Start()
     {

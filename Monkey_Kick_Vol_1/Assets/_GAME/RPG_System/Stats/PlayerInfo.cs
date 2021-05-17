@@ -21,7 +21,9 @@ public class PlayerInfo : CharacterInfo
 
     public override void OnValidate()
     {
+        base.OnValidate();
+
         maxEXP = Mathf.Clamp(maxEXP, 1, int.MaxValue);
-        currentEXP = Mathf.Clamp(currentEXP, 1, maxEXP);
+        currentEXP = Mathf.Clamp(currentEXP, 0, maxEXP);
     }
 }
