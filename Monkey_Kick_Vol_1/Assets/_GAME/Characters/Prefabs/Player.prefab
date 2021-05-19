@@ -115,27 +115,27 @@ MonoBehaviour:
     description: This guy is cool.
     level: 1
     maxHP:
-      BaseValue: 0
+      BaseValue: 1
     currentHP:
       BaseValue: 0
     maxKP:
-      BaseValue: 0
+      BaseValue: 1
     currentKP:
       BaseValue: 0
     muscle:
-      BaseValue: 0
+      BaseValue: 1
     toughness:
-      BaseValue: 0
+      BaseValue: 1
     smarts:
-      BaseValue: 0
+      BaseValue: 1
     tenacity:
-      BaseValue: 0
+      BaseValue: 1
     speed:
-      BaseValue: 0
+      BaseValue: 1
     swag:
-      BaseValue: 0
+      BaseValue: 1
     maxEXP: 1
-    currentEXP: 1
+    currentEXP: 0
     totalEXP: 0
 --- !u!114 &6257340945637411841
 MonoBehaviour:

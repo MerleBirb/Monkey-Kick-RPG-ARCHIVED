@@ -8,15 +8,12 @@ Description:
 
 using UnityEngine;
 
-
 [RequireComponent(typeof(PlayerOverworld))]
 [RequireComponent(typeof(PlayerBattle))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : PlayableController
 {
     private PlayerOverworld playerOverworld; // overworld logic
     private PlayerBattle playerBattle; // battle logic
-
-    public PlayerInfo stats;
 
     private void Start()
     {

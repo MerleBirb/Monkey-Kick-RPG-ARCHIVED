@@ -13,12 +13,14 @@ using UnityEngine.SceneManagement;
 static class Game
 {
     public static GameManager gameManager;
+    public static PartyManager partyManager;
 
     static Game()
     {
         GameObject game = SafeFind("_app");
 
         gameManager = (GameManager)SafeComponent(game, "GameManager");
+        partyManager = (PartyManager)SafeComponent(game, "PartyManager");
     }
 
     private static GameObject SafeFind(string obj)

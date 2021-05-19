@@ -11,7 +11,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class PlayerInfo : CharacterInfo
+public class PlayableInfo : CharacterInfo
 {
     /// STATS
     // experience points
