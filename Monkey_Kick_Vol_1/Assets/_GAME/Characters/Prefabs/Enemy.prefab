@@ -94,6 +94,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  stats:
+    characterName: Character
+    description: This guy is cool.
+    level: 1
+    maxHP:
+      BaseValue: 1
+    currentHP:
+      BaseValue: 0
+    maxKP:
+      BaseValue: 1
+    currentKP:
+      BaseValue: 0
+    muscle:
+      BaseValue: 1
+    toughness:
+      BaseValue: 1
+    smarts:
+      BaseValue: 1
+    tenacity:
+      BaseValue: 1
+    speed:
+      BaseValue: 1
+    swag:
+      BaseValue: 1
+    EXPGained: 1
 --- !u!114 &791280359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6702410976217091622, guid: f6371c9aa9eb0c44c8a2e1fa55fa6281, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -0.35
       objectReference: {fileID: 0}
     - target: {fileID: 6702410976217091622, guid: f6371c9aa9eb0c44c8a2e1fa55fa6281, type: 3}
       propertyPath: m_LocalPosition.z

@@ -111,5 +111,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaceholderPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 6238342467824268308, guid: 933d500a827fb3e4495eb8319cd2c919, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6238342467824268308, guid: 933d500a827fb3e4495eb8319cd2c919, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 933d500a827fb3e4495eb8319cd2c919, type: 3}

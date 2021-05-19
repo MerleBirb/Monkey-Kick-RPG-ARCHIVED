@@ -12,8 +12,17 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerBattle))]
 public class PlayerController : PlayableController
 {
+    #region OVERWORLD 
+
     private PlayerOverworld playerOverworld; // overworld logic
+
+    #endregion
+
+    #region BATTLE
+
     private PlayerBattle playerBattle; // battle logic
+
+    #endregion
 
     private void Start()
     {

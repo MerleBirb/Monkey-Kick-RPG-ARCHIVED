@@ -44,6 +44,10 @@ public class PlayerOverworld : MonoBehaviour
     const string SPRINT = "Sprint";
     const string JUMP = "Jump";
 
+    private InputAction move;
+    private InputAction sprint;
+    private InputAction jump;
+
     private bool isMoving = false;
     private bool hasPressedJump = false;
     private bool hasPressedSprint = false;
@@ -51,15 +55,21 @@ public class PlayerOverworld : MonoBehaviour
 
     #endregion
 
-    private void Awake()
+    public void AwakeOverworld()
     {
-        InputSystem.pollingFrequency = 180;
     }
 
     public void StartOverworld()
     {
+        InputSystem.pollingFrequency = 180;
         input = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
+        
+        move = input.actions.FindAction(MOVE);
+        jump = input.actions.FindAction(JUMP);
+        sprint = input.actions.FindAction(SPRINT);
+        
+        move.performed += context => movement = context.ReadValue<Vector2>();
     }
 
     public void UpdateOverworld()
@@ -77,9 +87,8 @@ public class PlayerOverworld : MonoBehaviour
 
     private void CheckForPlayerInput()
     {
-        input.actions.FindAction(MOVE).performed += context => movement = context.ReadValue<Vector2>();
-        hasPressedJump |= input.actions.FindAction(JUMP).WasPressedThisFrame();
-        hasPressedSprint |= input.actions.FindAction(SPRINT).WasPressedThisFrame();
+        hasPressedJump |= jump.WasPressedThisFrame();
+        hasPressedSprint |= sprint.WasPressedThisFrame();
 
         // toggle sprint
         if (!isSprinting)
