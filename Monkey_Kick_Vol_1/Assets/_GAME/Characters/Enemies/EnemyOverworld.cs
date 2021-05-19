@@ -46,6 +46,9 @@ public class EnemyOverworld : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
+            var player = col.GetComponent<PlayerController>();
+            Game.partyManager.TemporarilySavePlayerStats(player); // save the collided player's stats
+
             InitiateBattle();
         }
     }

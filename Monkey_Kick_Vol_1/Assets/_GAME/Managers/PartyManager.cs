@@ -14,7 +14,7 @@ using UnityEngine;
 public class PartyManager : MonoBehaviour
 {
     public PlayerController firstPlayer; // the first character you play as
-    public PlayerController mainPlayer; // the current character you are playing as
+    [HideInInspector] public PlayerController mainPlayer; // the current character you are playing as
 
     protected readonly List<PlayableController> playerParty; // private player party
     public readonly ReadOnlyCollection<PlayableController> PlayerParty; // readable player party
@@ -27,21 +27,57 @@ public class PartyManager : MonoBehaviour
     
     private void Awake()
     {  
-        CheckIfFirstPlayerExists(firstPlayer);
+        CheckIfFirstPlayerExists();
     }
 
-    private void CheckIfFirstPlayerExists(PlayerController player) // needs this to load the player
+    private void CheckIfFirstPlayerExists() // needs this to load the player
     {
-        if (player != null)
+        if (firstPlayer != null)
         {
-            playerParty.Add(firstPlayer);
-            mainPlayer = (PlayerController)playerParty[0];
-            Debug.Log("First Player: " + firstPlayer.stats.characterName);
+            mainPlayer = firstPlayer;
+            playerParty.Add(mainPlayer);
+            Debug.Log("First Player: " + mainPlayer.stats.characterName);
         }
         else // (if firstPlayer == null)
         {
             Debug.LogError(">>>ERROR: No First Player Exists! Make sure to set them in the inspector.");
         }
+    }
+
+    public void TemporarilySavePlayerStats(PlayableController player)
+    {
+        mainPlayer.stats = player.stats;
+    }
+
+    public void TemporarilyLoadPlayerStats(PlayableController player)
+    {
+        player.stats = mainPlayer.stats;
+    }
+
+    public void ChangeMainPlayer(PlayerController player)
+    {
+        mainPlayer = player;
+        mainPlayer.stats = player.stats;
+    }
+
+    public bool SearchIfPartyMemberExists(PlayableController searchedPartyMember)
+    {
+        return playerParty.Contains(searchedPartyMember);
+    }
+
+    public PlayableController SearchAndGetPartyMember(PlayableController searchedPartyMember)
+    {
+        PlayableController partyMember = null; // if the party member doesn't exist, return null
+
+        for (int i = 0; i < playerParty.Count; i++)
+        {
+            if (playerParty[i].stats.characterName.Equals(searchedPartyMember.stats.characterName))
+            {
+                partyMember = playerParty[i];
+            }
+        }
+
+        return partyMember;
     }
 
 }

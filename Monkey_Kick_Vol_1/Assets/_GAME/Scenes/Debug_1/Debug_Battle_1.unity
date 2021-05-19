@@ -303,6 +303,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4823629675720034523, guid: 2f2566ff98f520848a5e2be853b2ffc4, type: 3}
+      propertyPath: enemySpawns.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823629675720034523, guid: 2f2566ff98f520848a5e2be853b2ffc4, type: 3}
+      propertyPath: playerSpawns.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823629675720034523, guid: 2f2566ff98f520848a5e2be853b2ffc4, type: 3}
+      propertyPath: enemySpawns.Array.data[0]
+      value: 
+      objectReference: {fileID: 354595610}
+    - target: {fileID: 4823629675720034523, guid: 2f2566ff98f520848a5e2be853b2ffc4, type: 3}
+      propertyPath: playerSpawns.Array.data[0]
+      value: 
+      objectReference: {fileID: 474940891}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f2566ff98f520848a5e2be853b2ffc4, type: 3}
 --- !u!4 &132315863 stripped
@@ -334,7 +350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 354595609}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0.01, z: 0}
+  m_LocalPosition: {x: 3, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9970248}
@@ -346,7 +362,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30236
+  m_Name: pb_Mesh29420
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -514,7 +530,7 @@ GameObject:
   m_Component:
   - component: {fileID: 425519206}
   m_Layer: 0
-  m_Name: Scene_Constants
+  m_Name: SCENE_CONSTANTS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -562,7 +578,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474940890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0.01, z: 0}
+  m_LocalPosition: {x: -3, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9970248}
