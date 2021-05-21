@@ -25,6 +25,7 @@ public abstract class CharacterInfo : ISerializationCallbackReceiver
     // hit points
     public CharacterStat maxHP;
     public CharacterStat currentHP;
+    [HideInInspector] public bool isAlive = true;
     
     // ki points
     public CharacterStat maxKP;

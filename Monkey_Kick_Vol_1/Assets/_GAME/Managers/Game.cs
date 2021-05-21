@@ -14,6 +14,7 @@ static class Game
 {
     public static GameManager gameManager;
     public static PartyManager partyManager;
+    public static TurnSystem turnSystem;
 
     static Game()
     {
@@ -21,6 +22,7 @@ static class Game
 
         gameManager = (GameManager)SafeComponent(game, "GameManager");
         partyManager = (PartyManager)SafeComponent(game, "PartyManager");
+        turnSystem = (TurnSystem)SafeComponent(game, "TurnSystem");
     }
 
     private static GameObject SafeFind(string obj)

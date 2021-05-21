@@ -12,16 +12,19 @@ using UnityEngine;
 
 public class TurnSystem : MonoBehaviour
 {
+    #region SPAWNING INFO
+    
     public List<Transform> playerSpawns;
     public List<Transform> enemySpawns;
+
+    public string playerTag = "Player";
+    public string enemyTag = "Enemy";
     
-    // DELETE LATER
-    private void Awake()
-    {
-        if (Game.gameManager.GameState == GameStates.BATTLE)
-        {
-            var player = Instantiate(Game.partyManager.PlayerParty[0], playerSpawns[0].position, playerSpawns[0].rotation);
-            Game.partyManager.TemporarilyLoadPlayerStats(player.GetComponent<PlayableController>());
-        }
-    }
+    #endregion
+
+    #region CHARACTER LISTS
+
+
+    #endregion
+    
 }

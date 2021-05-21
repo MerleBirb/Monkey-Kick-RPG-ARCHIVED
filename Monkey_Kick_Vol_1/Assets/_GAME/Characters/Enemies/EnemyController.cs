@@ -23,6 +23,11 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        if (!stats.isAlive)
+        {
+            this.gameObject.SetActive(false);
+        }
+
         rb = GetComponent<Rigidbody>();
         enemyOverworld = GetComponent<EnemyOverworld>();
         enemyBattle = GetComponent<EnemyBattle>();

@@ -95,17 +95,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   stats:
-    characterName: Character
-    description: This guy is cool.
+    characterName: Enemy
+    description: This guy is evil.
     level: 1
     maxHP:
       BaseValue: 1
     currentHP:
-      BaseValue: 0
+      BaseValue: 1
+    isAlive: 1
     maxKP:
       BaseValue: 1
     currentKP:
-      BaseValue: 0
+      BaseValue: 1
     muscle:
       BaseValue: 1
     toughness:

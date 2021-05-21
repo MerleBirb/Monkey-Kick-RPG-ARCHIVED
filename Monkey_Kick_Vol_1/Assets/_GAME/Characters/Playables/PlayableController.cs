@@ -11,4 +11,12 @@ using UnityEngine;
 public abstract class PlayableController : MonoBehaviour
 {
     public PlayableInfo stats;
+
+    public virtual void Start()
+    {
+        if (!stats.isAlive)
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
 }

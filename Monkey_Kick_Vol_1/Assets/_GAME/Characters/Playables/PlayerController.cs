@@ -24,8 +24,10 @@ public class PlayerController : PlayableController
 
     #endregion
 
-    private void Start()
-    {
+    public override void Start()
+    {   
+        base.Start();
+
         playerOverworld = GetComponent<PlayerOverworld>();
         playerBattle = GetComponent<PlayerBattle>();
 
