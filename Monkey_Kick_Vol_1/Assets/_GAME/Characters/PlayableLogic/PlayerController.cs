@@ -10,7 +10,7 @@ Author: Merlebirb
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : PlayableController
+public class PlayerController : CharController
 {
     [SerializeField] private PlayerOverworld playerOverworld; // overworld logic
     //[SerializeField] private PlayerBattle playerBattle; // battle logic

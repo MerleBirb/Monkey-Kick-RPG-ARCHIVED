@@ -9,7 +9,7 @@ Description:
 using UnityEngine;
 
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : CharController
 {
-    public EnemyInformation stats;
+    
 }
