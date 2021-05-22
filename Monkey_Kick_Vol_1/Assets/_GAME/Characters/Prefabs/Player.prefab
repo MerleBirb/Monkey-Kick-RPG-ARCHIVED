@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 6111373368890800737}
   - component: {fileID: 486307931781004813}
   - component: {fileID: 6455460361410443480}
-  - component: {fileID: 4229617712471330240}
+  - component: {fileID: 4055757059798671378}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_DefaultActionMap: Overworld
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4229617712471330240
+--- !u!114 &4055757059798671378
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,11 +201,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3835935537506116255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72dd1157034210c468b1e7e649e71016, type: 3}
+  m_Script: {fileID: 11500000, guid: 5985f02034b8bae4dbd7439089525680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: e07b5aafc75401f4faa3b5e2ab2a30af, type: 2}
-  playerOverworld: {fileID: 11400000, guid: 830fd73f817ce6d4ca94cbfeaadb6b3e, type: 2}
+  moveSpeed: 3
+  sprintSpeed: 5
+  jumpHeight: 8
+  radius: 0.55
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1001 &182493123805851618
 PrefabInstance:
   m_ObjectHideFlags: 0

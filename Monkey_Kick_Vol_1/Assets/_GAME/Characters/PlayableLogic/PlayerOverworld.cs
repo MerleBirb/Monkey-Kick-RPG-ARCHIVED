@@ -10,8 +10,7 @@ Author: Merlebirb
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[CreateAssetMenu(fileName = "New Player Overworld", menuName = "New Playable Logic/New Player Overworld Logic")]
-public class PlayerOverworld : ScriptableObject
+public class PlayerOverworld : MonoBehaviour
 {
     #region PHYSICS
 
@@ -25,7 +24,7 @@ public class PlayerOverworld : ScriptableObject
 
     [SerializeField] private float radius = 0.55f; // for raycasts, ground check, etc
     [SerializeField] public LayerMask groundLayer;
-    private bool OnGround => Physics.Raycast(tf.position, Vector3.down, radius, groundLayer);
+    private bool OnGround => Physics.Raycast(transform.position, Vector3.down, radius, groundLayer);
     private int stepsSinceLastGrounded = 0;
     private int stepsSinceLastJumped = 0;
 
@@ -52,18 +51,16 @@ public class PlayerOverworld : ScriptableObject
 
     private Rigidbody rb;
     private PlayerInput input;
-    private Transform tf;
 
     #endregion
 
-    public void SetComponents(Rigidbody rigidbody, PlayerInput playerInput, Transform transform)
+    private void Awake()
     {
-        rb = rigidbody;
-        input = playerInput;
-        tf = transform;
+        rb = GetComponent<Rigidbody>();
+        input = GetComponent<PlayerInput>();
     }
 
-    public void InitiateControls()
+    private void Start()
     {
         InputSystem.pollingFrequency = 180;
         
@@ -72,6 +69,19 @@ public class PlayerOverworld : ScriptableObject
         sprint = input.actions.FindAction(SPRINT);
         
         move.performed += context => movement = context.ReadValue<Vector2>();
+    }
+    
+    private void Update()
+    {
+        CheckForPlayerInput();
+        CheckIfGravityShouldApply();
+    }
+
+    private void FixedUpdate()
+    {
+        Movement();
+        UpdatePhysicsCount();
+        ClearPhysicsCount();
     }
 
     public void CheckForPlayerInput()
@@ -177,5 +187,15 @@ public class PlayerOverworld : ScriptableObject
         }
 
         return true;
+    }
+
+    private void OnEnable()
+    {
+        input.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        input.enabled = false;
     }
 }
