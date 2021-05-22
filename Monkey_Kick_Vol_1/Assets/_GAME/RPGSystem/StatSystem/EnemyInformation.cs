@@ -12,7 +12,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Enemy", menuName = "New Character/New Enemy Character")]
 public class EnemyInformation : CharacterInformation
 {
-    [Tooltip("Experience given to the player once the enemy is defeated.")]
     public int EXPGiven;
 
     public override void OnValidate()

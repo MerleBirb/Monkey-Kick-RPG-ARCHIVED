@@ -12,7 +12,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Player", menuName = "New Character/New Playable Character")]
 public class PlayableInformation : CharacterInformation
 {
-    [Tooltip("Player's experience. Reach the maximum and they will Level up.")]
     public int MaxEXP;
     public int CurrentEXP;
     public int TotalEXP;

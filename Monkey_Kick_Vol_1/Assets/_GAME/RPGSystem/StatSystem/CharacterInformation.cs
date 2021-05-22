@@ -13,12 +13,10 @@ public class CharacterInformation : ScriptableObject
 {
     protected int statClamp = 9999;
 
-    [Tooltip("General information used for describing the character.")]
     public string CharacterName = "New Character";
     [Multiline] public string Description;
     public int Level;
 
-    [Tooltip("The Battle Stats of the character.")]
     public CharacterStatReference MaxHP;
     public CharacterStatReference CurrentHP;
     [HideInInspector] public bool isAlive = true;

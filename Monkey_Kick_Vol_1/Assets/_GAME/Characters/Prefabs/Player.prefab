@@ -206,7 +206,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: e07b5aafc75401f4faa3b5e2ab2a30af, type: 2}
   playerOverworld: {fileID: 11400000, guid: 830fd73f817ce6d4ca94cbfeaadb6b3e, type: 2}
-  playerBattle: {fileID: 0}
 --- !u!1001 &182493123805851618
 PrefabInstance:
   m_ObjectHideFlags: 0
