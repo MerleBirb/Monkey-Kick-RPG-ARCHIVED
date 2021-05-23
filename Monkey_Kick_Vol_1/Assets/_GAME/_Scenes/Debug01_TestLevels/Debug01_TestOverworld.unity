@@ -190,6 +190,10 @@ PrefabInstance:
       propertyPath: characterParty
       value: 
       objectReference: {fileID: 11400000, guid: 2470fe435b96f0149906e6b498c1558a, type: 2}
+    - target: {fileID: 6455460361410443480, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Keyboard & Mouse
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
 --- !u!1 &494317223
