@@ -10,5 +10,5 @@ using UnityEngine;
 
 public class CharacterParty : MonoBehaviour
 {
-    public CharacterPartyData party;
+    public CharacterPartyData characterParty;
 }
