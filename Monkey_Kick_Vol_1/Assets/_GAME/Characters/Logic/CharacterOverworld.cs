@@ -36,12 +36,12 @@ public class CharacterOverworld : MonoBehaviour
     {
         if (_physics != null)
         {
-            ApplyPhysics();
+            ApplyPhysics(moveSpeed);
         }
     }
-    public void ApplyPhysics()
+    public void ApplyPhysics(float speed)
     {
-        rb.velocity = _physics.Movement(movement, moveSpeed, rb.velocity.y);
+        rb.velocity = _physics.Movement(movement, speed, rb.velocity.y);
             
         _physics.UpdatePhysicsCount(SnapToGround());
         _physics.ClearPhysicsCount();

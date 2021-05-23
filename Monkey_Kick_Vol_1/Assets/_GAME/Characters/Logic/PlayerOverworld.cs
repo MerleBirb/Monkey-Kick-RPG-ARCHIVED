@@ -67,7 +67,7 @@ public class PlayerOverworld : CharacterOverworld
             if (!isSprinting) currentSpeed = moveSpeed;
             else currentSpeed = sprintSpeed;
 
-            ApplyPhysics();
+            ApplyPhysics(currentSpeed);
         }
     }
 
