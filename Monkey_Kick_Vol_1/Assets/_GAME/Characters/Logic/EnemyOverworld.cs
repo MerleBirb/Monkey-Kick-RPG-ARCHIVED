@@ -8,9 +8,12 @@ Author: Merlebirb
 */
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyOverworld : CharacterOverworld
 {
+    [SerializeField] private SceneReference battleScene;
+
     public override void Awake()
     {
         base.Awake();
@@ -24,5 +27,14 @@ public class EnemyOverworld : CharacterOverworld
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            Game.SetGameState(GameStates.Battle);
+            SceneManager.LoadScene(battleScene);
+        }
     }
 }

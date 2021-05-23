@@ -24,7 +24,12 @@ public class GameStateData : ScriptableObject
     [SerializeField] private GameStates GameState;
 
     public GameStates GetGameState() { return GameState; }
-    public void SetGameState(GameStates newState) { GameState = newState; }
+    public void SetGameState(GameStates newState) 
+    { 
+        if (GameState == newState) return;
+        
+        GameState = newState; 
+    }
 
     public bool CompareGameState(GameStates comparisonState) 
     { 

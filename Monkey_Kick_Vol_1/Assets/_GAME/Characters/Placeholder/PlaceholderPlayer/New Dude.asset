@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dafbdcceb5147e428579f6815f3ae8e, type: 3}
-  m_Name: New Guy
+  m_Script: {fileID: 11500000, guid: ab2a6dedc8c21b94f93542cf735f7839, type: 3}
+  m_Name: New Dude
   m_EditorClassIdentifier: 
-  CharacterName: New Guy
-  Description: He's pretty cool.
+  CharacterName: New Dude
+  Description: One cool dude.
   Level: 1
   MaxHP:
     UseConstant: 1
@@ -54,7 +54,7 @@ MonoBehaviour:
   Tenacity:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 7
+      BaseValue: 6
     Variable: {fileID: 0}
   Speed:
     UseConstant: 1

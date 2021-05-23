@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: New Jerk
   m_EditorClassIdentifier: 
   CharacterName: New Jerk
-  Description: This guy sucks.
+  Description: One bad dude.
   Level: 1
   MaxHP:
     UseConstant: 1
@@ -44,26 +44,26 @@ MonoBehaviour:
   Toughness:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 4
+      BaseValue: 5
     Variable: {fileID: 0}
   Smarts:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 5
+      BaseValue: 4
     Variable: {fileID: 0}
   Tenacity:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 5
+      BaseValue: 3
     Variable: {fileID: 0}
   Speed:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 5
+      BaseValue: 6
     Variable: {fileID: 0}
   Swag:
     UseConstant: 1
     ConstantValue:
       BaseValue: 1
     Variable: {fileID: 0}
-  EXPGiven: 10
+  EXPGiven: 15

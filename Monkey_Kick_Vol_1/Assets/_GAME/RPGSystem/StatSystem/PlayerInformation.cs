@@ -9,8 +9,8 @@ Author: Merlebirb
 
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Player", menuName = "New Character/New Playable Character")]
-public class PlayableInformation : CharacterInformation
+[CreateAssetMenu(fileName = "New Player", menuName = "New Character/New Player Character")]
+public class PlayerInformation : CharacterInformation
 {
     public int MaxEXP;
     public int CurrentEXP;
