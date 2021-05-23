@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class CharacterOverworld : MonoBehaviour
 {
-    [SerializeField] protected GameSettings Game;
+    [SerializeField] protected GameStateData Game;
 
     protected Vector2 movement;
     [SerializeField] protected float moveSpeed;

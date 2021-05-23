@@ -1,14 +1,14 @@
-//===== GAME SETTINGS =====//
+//===== GAME STATE DATA =====//
 /*
 5/23/21
 Description:
-- The game settings for the Game Manager.
+- The game state.
+- Handles what logic is run and what isnt at the time.
 
 Author: Merlebirb
 */
 
 using UnityEngine;
-
 public enum GameStates
 {
     Overworld = 100,
@@ -18,8 +18,8 @@ public enum GameStates
     Pause = 500
 }
 
-[CreateAssetMenu(menuName = "New Manager Settings/Game Manager Settings", fileName = "GameSettings")]
-public class GameSettings : ScriptableObject
+[CreateAssetMenu(menuName = "New Data/Game State Data", fileName = "GameState")]
+public class GameStateData : ScriptableObject
 {
     [SerializeField] private GameStates GameState;
 
