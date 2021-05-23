@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13966, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: Debug01_TestOverworld_Template
+  m_EditorClassIdentifier: 
+  templateScene: {fileID: 102900000, guid: 400d09e508b633a47a60dbba7ebc9645, type: 3}
+  templateName: Testing Overworld Template
+  description: 'Contains:
+
+    - A light
+
+    - A camera
+
+    - A cinemachine'
+  preview: {fileID: 0}
+  dependencies:
+  - dependency: {fileID: 4240403128900377938, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: 2800000, guid: 5f2a108eb023faf43a809979fd3d38f2, type: 3}
+    instantiationMode: 1
+  templatePipeline: {fileID: 0}
+  addToDefaults: 0

@@ -44,7 +44,7 @@ public class TurnSystem : MonoBehaviour
                 // spawn player in
                 var playerLeader = Instantiate<CharacterBattle>(
                     playerPrefab, 
-                    new Vector3(-1f * (1 + p), 0.5f, 3f + (p * -0.5f)), 
+                    BattleParties.GetPlayerParty().party[p].battlePos, 
                     Quaternion.identity);
 
                 // set the stats and name
@@ -58,7 +58,7 @@ public class TurnSystem : MonoBehaviour
                 // spawn player in
                 var playerPartyMember = Instantiate<CharacterBattle>(
                     playerPartyMemberPrefab, 
-                    new Vector3(-1f * (1 + p), 0.5f, 3f + (p * -0.5f)), 
+                    BattleParties.GetPlayerParty().party[p].battlePos, 
                     Quaternion.identity);
 
                 // set the stats and name
@@ -79,7 +79,7 @@ public class TurnSystem : MonoBehaviour
                 // spawn enemy in
                 var enemyLeader = Instantiate<CharacterBattle>(
                     enemyPrefab, 
-                    new Vector3(1f * (1 + e), 0.5f, 3f + (e * -0.5f)), 
+                    BattleParties.GetEnemyParty().party[e].battlePos, 
                     Quaternion.identity);
                 
                 // set the stats and the name
@@ -93,7 +93,7 @@ public class TurnSystem : MonoBehaviour
                 // spawn enemy in
                 var enemyPartyMember = Instantiate<CharacterBattle>(
                     enemyPartyMemberPrefab, 
-                    new Vector3(1f * (1 + e), 0.5f, 3f + (e * -0.5f)), 
+                    BattleParties.GetEnemyParty().party[e].battlePos, 
                     Quaternion.identity);
 
                 // set the stats and the name

@@ -31,6 +31,8 @@ public class CharacterInformation : ScriptableObject
     public CharacterStatReference Speed; // speed... what else?
     public CharacterStatReference Swag; // luck / crit chance
 
+    public Vector3 battlePos; // neutral position during battle
+
     public virtual void OnValidate()
     {
         Level = Mathf.Clamp(Level, 1, 100);

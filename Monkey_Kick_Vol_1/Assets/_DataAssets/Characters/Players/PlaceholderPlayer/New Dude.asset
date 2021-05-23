@@ -66,6 +66,7 @@ MonoBehaviour:
     ConstantValue:
       BaseValue: 5
     Variable: {fileID: 0}
+  battlePos: {x: -2, y: 0, z: 3}
   MaxEXP: 20
   CurrentEXP: 0
   TotalEXP: 0

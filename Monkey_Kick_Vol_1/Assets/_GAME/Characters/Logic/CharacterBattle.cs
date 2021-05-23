@@ -13,6 +13,7 @@ public class CharacterBattle : MonoBehaviour
     [SerializeField] private GameStateData Game;
 
     public CharacterInformation stats;
+    private TurnClass turnClass;
 
     public void Update()
     {
