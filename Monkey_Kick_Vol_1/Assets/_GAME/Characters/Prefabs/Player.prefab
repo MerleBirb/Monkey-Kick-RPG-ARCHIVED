@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 486307931781004813}
   - component: {fileID: 6455460361410443480}
   - component: {fileID: 4055757059798671378}
+  - component: {fileID: 1083161853514539855}
   - component: {fileID: 8000344939465306489}
   - component: {fileID: 5656932086517781852}
   m_Layer: 0
@@ -210,6 +211,20 @@ MonoBehaviour:
   moveSpeed: 3
   sprintSpeed: 5
   jumpHeight: 8
+--- !u!114 &1083161853514539855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3835935537506116255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da8f18a989cdf149a60f5a7ca73a43f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Game: {fileID: 11400000, guid: f3e6f635e4d026d44982cd6b5ab7b7fb, type: 2}
+  stats: {fileID: 0}
 --- !u!114 &8000344939465306489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b27a4f7bb4ecf94a9cd5f319c321a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  party: {fileID: 0}
+  characterParty: {fileID: 0}
 --- !u!1001 &182493123805851618
 PrefabInstance:
   m_ObjectHideFlags: 0

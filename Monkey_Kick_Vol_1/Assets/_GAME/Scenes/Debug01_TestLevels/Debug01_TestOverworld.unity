@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1083161853514539855, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: b9ad988ae74e1294e9c11a8671ae573b, type: 2}
     - target: {fileID: 3835935537506116254, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -629,6 +633,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6052142450522532255, guid: dc9512ef8695fa6408cf87a18af27b9a, type: 3}
+      propertyPath: Game
+      value: 
+      objectReference: {fileID: 11400000, guid: f3e6f635e4d026d44982cd6b5ab7b7fb, type: 2}
+    - target: {fileID: -6052142450522532255, guid: dc9512ef8695fa6408cf87a18af27b9a, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e349a59841a84d41894a3c5cda748f8, type: 2}
     - target: {fileID: 296387247620423216, guid: dc9512ef8695fa6408cf87a18af27b9a, type: 3}
       propertyPath: characterParty
       value: 

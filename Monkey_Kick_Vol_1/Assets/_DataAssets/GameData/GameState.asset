@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00bcc611f1c354247913b50d14714daa, type: 3}
-  m_Name: BattleParties
+  m_Script: {fileID: 11500000, guid: b78bf0e8db39a9742be66089bc797bd0, type: 3}
+  m_Name: GameState
   m_EditorClassIdentifier: 
-  playerParty: {fileID: 0}
-  enemyParty: {fileID: 0}
+  GameState: 200

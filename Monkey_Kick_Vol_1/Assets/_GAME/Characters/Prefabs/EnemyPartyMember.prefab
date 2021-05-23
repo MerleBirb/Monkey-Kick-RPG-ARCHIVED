@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5043337898211509426}
   - component: {fileID: 1697235658599284958}
   - component: {fileID: 4377857987732062469}
+  - component: {fileID: 1838194716797139729}
+  - component: {fileID: 3502211907269284705}
   m_Layer: 0
   m_Name: EnemyPartyMember
   m_TagString: Enemy
@@ -78,6 +80,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 1, z: 0.75}
   m_Center: {x: 0, y: 0, z: 0.075}
+--- !u!114 &1838194716797139729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2596755807759785036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da8f18a989cdf149a60f5a7ca73a43f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Game: {fileID: 0}
+  stats: {fileID: 0}
+--- !u!114 &3502211907269284705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2596755807759785036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de88d96ce7f6c6249b27f5937fa48c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.55
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &4266343482721937840
 GameObject:
   m_ObjectHideFlags: 0

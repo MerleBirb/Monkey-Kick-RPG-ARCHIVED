@@ -8,26 +8,34 @@ Author: Merlebirb
 */
 
 using UnityEngine;
-
-[CreateAssetMenu(menuName = "New Battle Parties Data", fileName = "BattleParties")]
-public class BattleParties : ScriptableObject
+public static class BattleParties
 {
-    [ReadOnly] public CharacterPartyData playerParty;
-    [ReadOnly] public CharacterPartyData enemyParty;
+    private static CharacterPartyData playerParty;
+    private static CharacterPartyData enemyParty;
 
-    public void SetPlayerParty(CharacterPartyData newParty)
+    public static CharacterPartyData GetPlayerParty() { return playerParty; }
+    public static CharacterPartyData GetEnemyParty() { return enemyParty; }
+
+    public static void SetPlayerParty(CharacterPartyData newParty)
     {
         if (playerParty == newParty) return;
 
         playerParty = null;
         playerParty = newParty;
+
+        Debug.Log(">>> PLAYER PARTY COUNT: " + playerParty.party.Count);
     }
 
-    public void SetEnemyParty(CharacterPartyData newParty)
+    public static void SetEnemyParty(CharacterPartyData newParty)
     {
         if (enemyParty == newParty) return;
 
         enemyParty = null;
         enemyParty = newParty;
+        
+        Debug.Log(">>> ENEMY PARTY COUNT: " + enemyParty.party.Count);
     }
+
+    public static void ClearPlayerParty() { playerParty = null; }
+    public static void ClearEnemyParty() { enemyParty = null; }
 }

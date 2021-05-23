@@ -12,15 +12,14 @@ using UnityEngine.SceneManagement;
 
 public class EnemyOverworld : CharacterOverworld
 {
-    [SerializeField] private BattleParties battleParties;
-    private CharacterParty _characterParty;
+    private CharacterParty _enemyParty;
     [SerializeField] private SceneReference battleScene;
 
     public override void Awake()
     {
         base.Awake();
 
-        _characterParty = GetComponent<CharacterParty>();
+        _enemyParty = GetComponent<CharacterParty>();
     }
 
     public override void Update()
@@ -38,9 +37,10 @@ public class EnemyOverworld : CharacterOverworld
         if (col.CompareTag("Player"))
         {
             // save the parties into the battle parties data
-            var playerParty = col.GetComponent<CharacterParty>().characterParty;
-            battleParties.SetPlayerParty(playerParty);
-            battleParties.SetEnemyParty(_characterParty.characterParty);
+            var _playerParty = col.GetComponent<CharacterParty>().characterParty;
+
+            BattleParties.SetPlayerParty(_playerParty);
+            BattleParties.SetEnemyParty(_enemyParty.characterParty);
 
             Game.SetGameState(GameStates.Battle);
             SceneManager.LoadScene(battleScene);
