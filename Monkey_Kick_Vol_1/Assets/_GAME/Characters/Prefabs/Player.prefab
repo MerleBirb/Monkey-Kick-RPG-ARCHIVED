@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5985f02034b8bae4dbd7439089525680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Game: {fileID: 11400000, guid: 44cff794182e9674589b6dcbddb4aeca, type: 2}
   moveSpeed: 3
   sprintSpeed: 5
   jumpHeight: 8

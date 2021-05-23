@@ -2,7 +2,7 @@
 /*
 5/11/21
 Description: 
-- Contains player physics and movement logic for the overworld game state.
+- Contains player movement logic for the overworld game state.
 
 Author: Merlebirb
 */
@@ -10,10 +10,8 @@ Author: Merlebirb
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerOverworld : MonoBehaviour
-{
-    private IPhysics _physics;
-    
+public class PlayerOverworld : CharacterOverworld
+{   
     #region CONTROLS
 
     const string MOVE = "Move";
@@ -28,26 +26,18 @@ public class PlayerOverworld : MonoBehaviour
     private bool hasPressedSprint = false;
     private bool isSprinting = false;
 
-    private Vector2 movementInput; // player's input for movement
-    [SerializeField] private float moveSpeed;
     [SerializeField] private float sprintSpeed; // moveSpeed while sprint is pressed
-
     [SerializeField] private float jumpHeight;
 
     #endregion
     
-    #region COMPONENTS
-
-    private Rigidbody rb;
     private PlayerInput input;
 
-    #endregion
-
-    private void Awake()
+    public override void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        base.Awake();
+
         input = GetComponent<PlayerInput>();
-        _physics = GetComponent<IPhysics>();
     }
 
     private void Start()
@@ -58,16 +48,17 @@ public class PlayerOverworld : MonoBehaviour
         jump = input.actions.FindAction(JUMP);
         sprint = input.actions.FindAction(SPRINT);
         
-        move.performed += context => movementInput = context.ReadValue<Vector2>();
+        move.performed += context => movement = context.ReadValue<Vector2>();
     }
     
-    private void Update()
+    public override void Update()
     {
+        base.Update();
+        
         if (input != null) CheckForPlayerInput();
-        if (_physics != null) _physics.CheckIfGravityShouldApply(rb);
     }
 
-    private void FixedUpdate()
+    public override void FixedUpdate()
     {   
         if (_physics != null)
         {
@@ -76,10 +67,7 @@ public class PlayerOverworld : MonoBehaviour
             if (!isSprinting) currentSpeed = moveSpeed;
             else currentSpeed = sprintSpeed;
 
-            rb.velocity = _physics.Movement(movementInput, currentSpeed, rb.velocity.y);
-
-            _physics.UpdatePhysicsCount(SnapToGround());
-            _physics.ClearPhysicsCount();
+            ApplyPhysics();
         }
     }
 
@@ -88,7 +76,12 @@ public class PlayerOverworld : MonoBehaviour
         hasPressedJump |= jump.WasPressedThisFrame();
         hasPressedSprint |= sprint.WasPressedThisFrame();
 
-        // toggle sprint
+        ToggleSprint();
+        PressedJump();
+    }
+
+    private void ToggleSprint()
+    {
         if (!isSprinting)
         {
             if (hasPressedSprint)
@@ -105,9 +98,10 @@ public class PlayerOverworld : MonoBehaviour
                 hasPressedSprint = false;
             }
         }
+
     }
 
-    private void CheckJump()
+    private void PressedJump()
     {
         if (hasPressedJump)
         {
@@ -120,29 +114,6 @@ public class PlayerOverworld : MonoBehaviour
             hasPressedJump = false;
         }
         
-    }
-
-    private bool SnapToGround()
-    {
-        float speed = rb.velocity.magnitude;
-
-        if (_physics.GetStepsSinceLastGrounded() > 1 || _physics.GetStepsSinceLastAerial() <= 3)
-        {
-            return false;
-        }
-
-        if (!Physics.Raycast(rb.position, -Vector3.up, out RaycastHit hit, 1f, -1))
-        {
-            return false;
-        }
-
-        float dot = Vector3.Dot(rb.velocity, hit.normal);
-        if (dot > 0f)
-        {
-            rb.velocity = (rb.velocity - hit.normal * dot).normalized * speed;
-        }
-
-        return true;
     }
 
     private void OnEnable()
