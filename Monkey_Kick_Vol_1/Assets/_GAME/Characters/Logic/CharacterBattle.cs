@@ -8,14 +8,34 @@ Description:
 
 using UnityEngine;
 
-public class CharacterBattle : MonoBehaviour
+public enum BattleStates
+{
+    EnterBattle,
+    Wait, 
+    Active,
+    Targeting,
+    Action, 
+    Return, 
+    Counter,
+    Reset
+
+}
+
+public abstract class CharacterBattle : MonoBehaviour
 {
     [SerializeField] private GameStateData Game;
 
     public CharacterInformation stats;
-    private TurnClass turnClass;
+    [ReadOnly] public TurnClass turnClass;
 
-    public void Update()
+    protected BattleStates state;
+
+    private void Start()
+    {
+        state = BattleStates.EnterBattle;
+    }
+
+    public virtual void Update()
     {
         if (!Game.CompareGameState(GameStates.Battle)) { this.enabled = false; }
     }

@@ -14,9 +14,9 @@ using UnityEngine;
 [Serializable]
 public class StoreActions
 {
-    public string actionCharacterName; // store the name of the character who just did an action
-    public GameObject actionCharacter; // store the character to last do an action
-    public List<GameObject> actionTargets; // store the target(s) of the last action
+    [ReadOnly] public string actionCharacterName; // store the name of the character who just did an action
+    [ReadOnly] public GameObject actionCharacter; // store the character to last do an action
+    [ReadOnly] public List<GameObject> actionTargets; // store the target(s) of the last action
 
     public StoreActions()
     {

@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 2596755807759785037}
   - component: {fileID: 5043337898211509426}
   - component: {fileID: 1697235658599284958}
-  - component: {fileID: 4377857987732062469}
-  - component: {fileID: 1838194716797139729}
+  - component: {fileID: 6533963204907656041}
   - component: {fileID: 3502211907269284705}
   m_Layer: 0
   m_Name: EnemyPartyMember
@@ -67,20 +66,7 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0.05}
---- !u!65 &4377857987732062469
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2596755807759785036}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.75, y: 1, z: 0.75}
-  m_Center: {x: 0, y: 0, z: 0.075}
---- !u!114 &1838194716797139729
+--- !u!114 &6533963204907656041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,11 +75,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2596755807759785036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9da8f18a989cdf149a60f5a7ca73a43f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e7c5b22c2171ce489d5d6a057d0dee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Game: {fileID: 0}
   stats: {fileID: 0}
+  turnClass:
+    turnSystem: {fileID: 0}
+    character: {fileID: 0}
+    isTurn: 0
+    wasTurnPrev: 0
+    charName: 
+    charSpeed:
+      BaseValue: 0
 --- !u!114 &3502211907269284705
 MonoBehaviour:
   m_ObjectHideFlags: 0
