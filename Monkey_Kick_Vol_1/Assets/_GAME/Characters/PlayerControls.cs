@@ -164,6 +164,181 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""BattleMenu"",
+            ""id"": ""16cdfe5f-e841-4b31-a14c-329cb737d561"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""f65c6656-3475-408a-b7dc-a67621156f98"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""8f29e22d-22f5-49d0-b534-628204175fd1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d1cce2a-e34b-4c89-b06c-36ff6bc3ab62"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""ae500acd-c83a-4750-8fcc-22b030edb1ff"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""11f12163-c2be-4277-9b16-1af408e78990"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""fa785ed4-92a6-498f-b1f2-ec6b63abedce"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""90adb974-5b51-48d5-aafb-c3f1af0546f5"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""8ae3ca7a-0a3c-4472-9b75-bca62456066a"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a762904-2685-43cf-9e55-eef461f930de"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36aaba0a-cf59-4f65-b7e1-e324e2ea4d8f"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82865bf2-feba-429b-8c16-b77a02d5898a"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f77954cb-dcb8-44bc-ba2c-7e68fb77d425"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e89eb9a9-3516-4ef4-ba9c-29b3aaaa1241"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09f2eb00-7293-471a-b6ee-608e6107e215"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c933ee86-0592-43a7-99d1-b987ed038188"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""245ed576-a781-403c-8ba4-cc0c5061520d"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -201,6 +376,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Overworld_Move = m_Overworld.FindAction("Move", throwIfNotFound: true);
         m_Overworld_Jump = m_Overworld.FindAction("Jump", throwIfNotFound: true);
         m_Overworld_Sprint = m_Overworld.FindAction("Sprint", throwIfNotFound: true);
+        // BattleMenu
+        m_BattleMenu = asset.FindActionMap("BattleMenu", throwIfNotFound: true);
+        m_BattleMenu_Move = m_BattleMenu.FindAction("Move", throwIfNotFound: true);
+        m_BattleMenu_Select = m_BattleMenu.FindAction("Select", throwIfNotFound: true);
+        m_BattleMenu_Cancel = m_BattleMenu.FindAction("Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -305,6 +485,55 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public OverworldActions @Overworld => new OverworldActions(this);
+
+    // BattleMenu
+    private readonly InputActionMap m_BattleMenu;
+    private IBattleMenuActions m_BattleMenuActionsCallbackInterface;
+    private readonly InputAction m_BattleMenu_Move;
+    private readonly InputAction m_BattleMenu_Select;
+    private readonly InputAction m_BattleMenu_Cancel;
+    public struct BattleMenuActions
+    {
+        private @PlayerControls m_Wrapper;
+        public BattleMenuActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_BattleMenu_Move;
+        public InputAction @Select => m_Wrapper.m_BattleMenu_Select;
+        public InputAction @Cancel => m_Wrapper.m_BattleMenu_Cancel;
+        public InputActionMap Get() { return m_Wrapper.m_BattleMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BattleMenuActions set) { return set.Get(); }
+        public void SetCallbacks(IBattleMenuActions instance)
+        {
+            if (m_Wrapper.m_BattleMenuActionsCallbackInterface != null)
+            {
+                @Move.started -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnMove;
+                @Select.started -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnSelect;
+                @Cancel.started -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnCancel;
+            }
+            m_Wrapper.m_BattleMenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+                @Cancel.started += instance.OnCancel;
+                @Cancel.performed += instance.OnCancel;
+                @Cancel.canceled += instance.OnCancel;
+            }
+        }
+    }
+    public BattleMenuActions @BattleMenu => new BattleMenuActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -328,5 +557,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+    }
+    public interface IBattleMenuActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
 }

@@ -30,7 +30,7 @@ public abstract class CharacterBattle : MonoBehaviour
 
     protected BattleStates state;
 
-    private void Start()
+    public virtual void Start()
     {
         state = BattleStates.EnterBattle;
     }
@@ -38,5 +38,10 @@ public abstract class CharacterBattle : MonoBehaviour
     public virtual void Update()
     {
         if (!Game.CompareGameState(GameStates.Battle)) { this.enabled = false; }
+    }
+
+    public virtual void BattleStateMachine()
+    {
+
     }
 }

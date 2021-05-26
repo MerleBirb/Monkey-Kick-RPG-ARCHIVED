@@ -186,6 +186,10 @@ PrefabInstance:
       propertyPath: characterParty
       value: 
       objectReference: {fileID: 11400000, guid: 2470fe435b96f0149906e6b498c1558a, type: 2}
+    - target: {fileID: 8456826372629826873, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: b9ad988ae74e1294e9c11a8671ae573b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
 --- !u!1 &494317223
@@ -647,12 +651,16 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 3292d69833b3fae42954cc31ed21b96d, type: 2}
     - target: {fileID: 882795103079985091, guid: dc9512ef8695fa6408cf87a18af27b9a, type: 3}
       propertyPath: battleScene.scenePath
-      value: Assets/_GAME/Scenes/Debug01_TestLevels/Debug01_TestBattle.unity
+      value: Assets/_GAME/_Scenes/Debug01_TestLevels/Debug01_TestBattle.unity
       objectReference: {fileID: 0}
     - target: {fileID: 882795103079985091, guid: dc9512ef8695fa6408cf87a18af27b9a, type: 3}
       propertyPath: battleScene.sceneAsset
       value: 
       objectReference: {fileID: 102900000, guid: a347a5fd4734cba418effb4bc7aca732, type: 3}
+    - target: {fileID: 2058690368216125982, guid: dc9512ef8695fa6408cf87a18af27b9a, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e349a59841a84d41894a3c5cda748f8, type: 2}
     - target: {fileID: 6812762513324355850, guid: dc9512ef8695fa6408cf87a18af27b9a, type: 3}
       propertyPath: m_Name
       value: Enemy

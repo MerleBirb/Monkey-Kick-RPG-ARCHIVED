@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7c5b22c2171ce489d5d6a057d0dee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Game: {fileID: 0}
+  Game: {fileID: 11400000, guid: f3e6f635e4d026d44982cd6b5ab7b7fb, type: 2}
   stats: {fileID: 0}
   turnClass:
     turnSystem: {fileID: 0}

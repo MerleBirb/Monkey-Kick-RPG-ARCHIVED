@@ -43,6 +43,7 @@ public class PlayerOverworld : CharacterOverworld
     private void Start()
     {
         InputSystem.pollingFrequency = 180;
+        input.SwitchCurrentActionMap("Overworld");
         
         move = input.actions.FindAction(MOVE);
         jump = input.actions.FindAction(JUMP);
@@ -118,11 +119,18 @@ public class PlayerOverworld : CharacterOverworld
 
     private void OnEnable()
     {
-        input.enabled = true;
+        ResetControls();
     }
 
     private void OnDisable()
     {
-        input.enabled = false;
+        ResetControls();
+    }
+
+    private void ResetControls()
+    {
+        hasPressedJump = false;
+        hasPressedSprint = false;
+        isSprinting = false;
     }
 }
