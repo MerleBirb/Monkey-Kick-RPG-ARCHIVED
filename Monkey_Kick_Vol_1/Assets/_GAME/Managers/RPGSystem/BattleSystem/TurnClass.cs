@@ -13,7 +13,7 @@ using UnityEngine;
 [Serializable]
 public class TurnClass
 {
-    [ReadOnly] public TurnSystem turnSystem;
+    [HideInInspector] public TurnSystem turnSystem;
     [ReadOnly] public CharacterBattle character;
     [ReadOnly] public bool isTurn = false;
     [ReadOnly] public bool wasTurnPrev = false; // is true if the current character had isTurn last turn

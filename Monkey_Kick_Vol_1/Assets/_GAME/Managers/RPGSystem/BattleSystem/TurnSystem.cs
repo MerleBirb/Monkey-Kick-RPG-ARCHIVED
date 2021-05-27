@@ -27,6 +27,7 @@ public class TurnSystem : MonoBehaviour
     [ReadOnly, SerializeField] private List<CharacterBattle> playerList;
     [ReadOnly, SerializeField] private List<CharacterBattle> enemyList;
     [ReadOnly, SerializeField] private List<TurnClass> turnOrder;
+    public List<TurnClass> GetTurnOrder() { return turnOrder; }
 
     [ReadOnly] public CharacterBattle ActiveCharacter;
     [ReadOnly] public int TurnCounter = 0;
@@ -136,7 +137,7 @@ public class TurnSystem : MonoBehaviour
 
     private bool EveryoneLoaded()
     {
-        return (playerList.Count + enemyList.Count == turnOrder.Count);
+        return (playerList.Count + enemyList.Count == allCharacterList.Count);
     }
     
     private void FillTurnOrder() // fills up the turn order list

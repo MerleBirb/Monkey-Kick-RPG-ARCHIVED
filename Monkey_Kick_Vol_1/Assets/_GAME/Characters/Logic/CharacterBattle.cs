@@ -33,6 +33,14 @@ public abstract class CharacterBattle : MonoBehaviour
     public virtual void Start()
     {
         state = BattleStates.EnterBattle;
+
+        foreach (TurnClass tc in turnClass.turnSystem.GetTurnOrder())
+        {
+            if (tc.charName == stats.CharacterName)
+            {
+                turnClass = tc;
+            }
+        }
     }
 
     public virtual void Update()
