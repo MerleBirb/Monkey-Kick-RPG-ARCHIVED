@@ -1,0 +1,30 @@
+CODE CONVENTIONS - by Merlebirb
+
+=======================================================================
+public fields (both serialized or not): Pascal Case
+Example(s):
+
+public Transform Target;
+public int Number;
+
+if the variable name is the same as the type, be more specific with the name!
+
+Example(s):
+public Transform CharacterTransform;
+public Type NewType;
+
+=======================================================================
+private fields (not serialized): Underscore + Camel Case
+Example(s):
+
+private Rigidbody _rb;
+private float _number;
+
+private fields (serialized): Camel Case
+Example(s):
+
+[SerializeField] private Type type;
+[SerializeField] private int number;
+
+=======================================================================
+ALL FUNCTIONS SHOULD BE PASCAL CASE !!!
