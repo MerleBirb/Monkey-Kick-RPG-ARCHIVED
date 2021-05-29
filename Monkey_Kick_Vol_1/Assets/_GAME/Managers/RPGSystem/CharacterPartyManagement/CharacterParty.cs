@@ -8,7 +8,10 @@ Description:
 
 using UnityEngine;
 
-public class CharacterParty : MonoBehaviour
+namespace Merlebirb.CharacterLogic
 {
-    public CharacterPartyData characterParty;
+    public class CharacterParty : MonoBehaviour
+    {
+        public CharacterPartyData Party;
+    }
 }

@@ -10,14 +10,18 @@ Author: Merlebirb
 using UnityEngine;
 using Cinemachine;
 
-public class FollowTarget : MonoBehaviour
+namespace Merlebirb.CameraEffects
 {
-    private CinemachineVirtualCamera cam;
-    public Transform target; // the object the camera is going to follow
-
-    private void Awake()
+    public class FollowTarget : MonoBehaviour
     {
-        cam = GetComponent<CinemachineVirtualCamera>();
-        cam.Follow = target;
+        private CinemachineVirtualCamera cineCamera;
+
+        public Transform Target; // the object the camera is going to follow
+
+        private void Awake()
+        {
+            cineCamera = GetComponent<CinemachineVirtualCamera>();
+            cineCamera.Follow = Target;
+        }
     }
 }

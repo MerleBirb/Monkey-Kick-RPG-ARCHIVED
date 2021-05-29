@@ -9,10 +9,13 @@ Author: Merlebirb
 
 using UnityEngine;
 
-public class EnemyBattle : CharacterBattle
+namespace Merlebirb.CharacterLogic
 {
-    public override void Update()
+    public class EnemyBattle : CharacterBattle
     {
-        base.Update();
+        public override void Update()
+        {
+            base.Update();
+        }
     }
 }

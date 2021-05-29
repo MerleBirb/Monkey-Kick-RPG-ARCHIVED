@@ -10,8 +10,11 @@ Author: Merlebirb
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "New Party", fileName = "CharacterParty")]
-public class CharacterPartyData : ScriptableObject
+namespace Merlebirb.CharacterLogic
 {
-    public List<CharacterInformation> party;
+    [CreateAssetMenu(menuName = "New Party", fileName = "CharacterParty")]
+    public class CharacterPartyData : ScriptableObject
+    {
+        public List<CharacterInformation> CharacterList;
+    }
 }

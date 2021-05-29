@@ -10,65 +10,68 @@ Author: Merlebirb
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerBattle : CharacterBattle
+namespace Merlebirb.CharacterLogic
 {
-    private PlayerInput input;
-
-    #region MENU CONTROLS
-
-    const string MOVE = "Move";
-    const string SELECT = "Select";
-    const string CANCEL = "Cancel";
-
-    private InputAction move;
-    private InputAction select;
-    private InputAction cancel;
-
-    private Vector2 movement;
-    private bool stickPressed = false;
-    private bool hasSelected = false;
-    private bool hasCanceled = false;
-
-    #endregion
-
-    private void Awake()
+    public class PlayerBattle : CharacterBattle
     {
-        input = GetComponent<PlayerInput>();
-    }
+        private PlayerInput input;
 
-    public override void Start()
-    {
-        base.Start();
+        #region MENU CONTROLS
 
-        InputSystem.pollingFrequency = 180;
-        input.SwitchCurrentActionMap("BattleMenu");
+        private const string Move = "Move";
+        private const string Select = "Select";
+        private const string Cancel = "Cancel";
 
-        move = input.actions.FindAction(MOVE);
-        select = input.actions.FindAction(SELECT);
-        cancel = input.actions.FindAction(CANCEL);
+        private InputAction move;
+        private InputAction select;
+        private InputAction cancel;
 
-        move.performed += context => movement = context.ReadValue<Vector2>();
-    }
+        private Vector2 movement;
+        private bool stickPressed = false;
+        private bool hasSelected = false;
+        private bool hasCanceled = false;
 
-    public override void Update()
-    {
-        base.Update();
-    }
+        #endregion
 
-    private void OnEnable()
-    {
-        ResetControls();
-    }
+        private void Awake()
+        {
+            input = GetComponent<PlayerInput>();
+        }
 
-    private void OnDisable()
-    {
-        ResetControls();
-    }
+        public override void Start()
+        {
+            base.Start();
 
-    private void ResetControls()
-    {
-        stickPressed = false;
-        hasSelected = false;
-        hasCanceled = false;
+            InputSystem.pollingFrequency = 180;
+            input.SwitchCurrentActionMap("BattleMenu");
+
+            move = input.actions.FindAction(Move);
+            select = input.actions.FindAction(Select);
+            cancel = input.actions.FindAction(Cancel);
+
+            move.performed += context => movement = context.ReadValue<Vector2>();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+        }
+
+        private void OnEnable()
+        {
+            ResetControls();
+        }
+
+        private void OnDisable()
+        {
+            ResetControls();
+        }
+
+        private void ResetControls()
+        {
+            stickPressed = false;
+            hasSelected = false;
+            hasCanceled = false;
+        }
     }
 }

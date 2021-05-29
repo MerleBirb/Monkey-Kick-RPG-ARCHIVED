@@ -8,64 +8,72 @@ Author: Merlebirb
 */
 
 using UnityEngine;
+using Merlebirb.Managers;
 
-public class CharacterOverworld : MonoBehaviour
+namespace Merlebirb.CharacterLogic
 {
-    [SerializeField] protected GameStateData Game;
-
-    protected Vector2 movement;
-    [SerializeField] protected float moveSpeed;
-
-    protected IPhysics _physics;
-    protected Rigidbody rb;
-
-    public virtual void Awake()
+    public class CharacterOverworld : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody>();
-        _physics = GetComponent<IPhysics>();
-    }
+        [SerializeField] protected GameStateData Game;
 
-    public virtual void Update()
-    {
-        if (!Game.CompareGameState(GameStates.Overworld)) { this.enabled = false; }
+        protected Vector2 movement;
+        [SerializeField] protected float moveSpeed;
 
-        if (_physics != null) _physics.CheckIfGravityShouldApply(rb);
-    }
+        protected IPhysics physics;
+        protected Rigidbody rb;
 
-    public virtual void FixedUpdate()
-    {
-        if (_physics != null)
+        public virtual void Awake()
         {
-            ApplyPhysics(moveSpeed);
-        }
-    }
-    public void ApplyPhysics(float speed)
-    {
-        rb.velocity = _physics.Movement(movement, speed, rb.velocity.y);
-            
-        _physics.UpdatePhysicsCount(SnapToGround());
-        _physics.ClearPhysicsCount();
-    }
-    public bool SnapToGround()
-    {
-        float speed = rb.velocity.magnitude;
-
-        if (_physics.GetStepsSinceLastGrounded() > 1 || _physics.GetStepsSinceLastAerial() <= 3)
-        {
-            return false;
+            if (!Game.CompareGameState(GameStates.Overworld)) { this.enabled = false; }
+            else
+            {
+                rb = GetComponent<Rigidbody>();
+                physics = GetComponent<IPhysics>();
+            }
         }
 
-        if (!Physics.Raycast(rb.position, -Vector3.up, out RaycastHit hit, 1f, -1))
+        public virtual void Update()
         {
-            return false;
+            if (!Game.CompareGameState(GameStates.Overworld)) { this.enabled = false; }
+
+            physics?.CheckIfGravityShouldApply(rb);
         }
 
-        float dot = Vector3.Dot(rb.velocity, hit.normal);
-        if (dot > 0f)
+        public virtual void FixedUpdate()
         {
-            rb.velocity = (rb.velocity - hit.normal * dot).normalized * speed;
+            if (physics != null)
+            {
+                ApplyPhysics(moveSpeed);
+            }
         }
+        public void ApplyPhysics(float _speed)
+        {
+            rb.velocity = physics.Movement(movement, _speed, rb.velocity.y);
 
-        return true;
+            physics.UpdatePhysicsCount(SnapToGround());
+            physics.ClearPhysicsCount();
+        }
+        public bool SnapToGround()
+        {
+            float _speed = rb.velocity.magnitude;
+
+            if (physics.GetStepsSinceLastGrounded() > 1 || physics.GetStepsSinceLastAerial() <= 3)
+            {
+                return false;
+            }
+
+            if (!Physics.Raycast(rb.position, -Vector3.up, out RaycastHit hit, 1f, -1))
+            {
+                return false;
+            }
+
+            float _dot = Vector3.Dot(rb.velocity, hit.normal);
+            if (_dot > 0f)
+            {
+                rb.velocity = (rb.velocity - (hit.normal * _dot)).normalized * _speed;
+            }
+
+            return true;
+        }
     }
 }

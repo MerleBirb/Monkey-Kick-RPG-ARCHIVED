@@ -8,34 +8,40 @@ Author: Merlebirb
 */
 
 using UnityEngine;
-public static class BattleParties
+using Merlebirb.CharacterLogic;
+
+
+namespace Merlebirb.RPGSystem
 {
-    private static CharacterPartyData playerParty;
-    private static CharacterPartyData enemyParty;
-
-    public static CharacterPartyData GetPlayerParty() { return playerParty; }
-    public static CharacterPartyData GetEnemyParty() { return enemyParty; }
-
-    public static void SetPlayerParty(CharacterPartyData newParty)
+    public static class BattleParties
     {
-        if (playerParty == newParty) return;
+        private static CharacterPartyData PlayerParty;
+        private static CharacterPartyData EnemyParty;
 
-        playerParty = null;
-        playerParty = newParty;
+        public static CharacterPartyData GetPlayerParty() { return PlayerParty; }
+        public static CharacterPartyData GetEnemyParty() { return EnemyParty; }
 
-        Debug.Log(">>> PLAYER PARTY COUNT: " + playerParty.party.Count);
+        public static void SetPlayerParty(CharacterPartyData _newParty)
+        {
+            if (PlayerParty == _newParty) return;
+
+            PlayerParty = null;
+            PlayerParty = _newParty;
+
+            Debug.Log(">>> PLAYER PARTY COUNT: " + PlayerParty.CharacterList.Count);
+        }
+
+        public static void SetEnemyParty(CharacterPartyData _newParty)
+        {
+            if (EnemyParty == _newParty) return;
+
+            EnemyParty = null;
+            EnemyParty = _newParty;
+
+            Debug.Log(">>> ENEMY PARTY COUNT: " + EnemyParty.CharacterList.Count);
+        }
+
+        public static void ClearPlayerParty() { PlayerParty = null; }
+        public static void ClearEnemyParty() { EnemyParty = null; }
     }
-
-    public static void SetEnemyParty(CharacterPartyData newParty)
-    {
-        if (enemyParty == newParty) return;
-
-        enemyParty = null;
-        enemyParty = newParty;
-        
-        Debug.Log(">>> ENEMY PARTY COUNT: " + enemyParty.party.Count);
-    }
-
-    public static void ClearPlayerParty() { playerParty = null; }
-    public static void ClearEnemyParty() { enemyParty = null; }
 }

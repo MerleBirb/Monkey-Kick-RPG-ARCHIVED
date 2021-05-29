@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586d16c7a2d211448a4805b92352b237, type: 3}
   m_Name: New Dude's Party
   m_EditorClassIdentifier: 
-  party:
+  CharacterList:
   - {fileID: 11400000, guid: b9ad988ae74e1294e9c11a8671ae573b, type: 2}

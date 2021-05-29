@@ -9,37 +9,32 @@ Author: Merlebirb
 */
 
 using UnityEngine;
-public enum GameStates
+
+namespace Merlebirb.Managers
 {
-    Overworld = 100,
-    Battle = 200,
-    Cutscene = 300,
-    Menu = 400,
-    Pause = 500
-}
+    [CreateAssetMenu(menuName = "New Data/Game State Data", fileName = "GameState")]
+    public class GameStateData : ScriptableObject
+    {
+        [SerializeField] private GameStates GameState;
 
-[CreateAssetMenu(menuName = "New Data/Game State Data", fileName = "GameState")]
-public class GameStateData : ScriptableObject
-{
-    [SerializeField] private GameStates GameState;
-
-    public GameStates GetGameState() { return GameState; }
-    public void SetGameState(GameStates newState) 
-    { 
-        if (GameState == newState) return;
-        
-        GameState = newState; 
-    }
-
-    public bool CompareGameState(GameStates comparisonState) 
-    { 
-        bool isTheSame = false;
-        
-        if (GameState == comparisonState)
+        public GameStates GetGameState() { return GameState; }
+        public void SetGameState(GameStates _newState)
         {
-            isTheSame = true;
+            if (GameState == _newState) return;
+
+            GameState = _newState;
         }
 
-        return isTheSame;  
+        public bool CompareGameState(GameStates _comparisonState)
+        {
+            bool _isTheSame = false;
+
+            if (GameState == _comparisonState)
+            {
+                _isTheSame = true;
+            }
+
+            return _isTheSame;
+        }
     }
 }

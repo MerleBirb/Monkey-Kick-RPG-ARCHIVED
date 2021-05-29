@@ -9,41 +9,36 @@ Author: Merlebirb
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Merlebirb.Managers;
+using Merlebirb.RPGSystem;
 
-public class EnemyOverworld : CharacterOverworld
+namespace Merlebirb.CharacterLogic
 {
-    private CharacterParty _enemyParty;
-    [SerializeField] private SceneReference battleScene;
-
-    public override void Awake()
+    public class EnemyOverworld : CharacterOverworld
     {
-        base.Awake();
+        private CharacterParty enemyParty;
+        [SerializeField] private SceneReference battleScene;
 
-        _enemyParty = GetComponent<CharacterParty>();
-    }
-
-    public override void Update()
-    {
-        base.Update();
-    }
-    
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-    }
-
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.CompareTag("Player"))
+        public override void Awake()
         {
-            // save the parties into the battle parties data
-            var _playerParty = col.GetComponent<CharacterParty>().characterParty;
+            base.Awake();
 
-            BattleParties.SetPlayerParty(_playerParty);
-            BattleParties.SetEnemyParty(_enemyParty.characterParty);
+            enemyParty = GetComponent<CharacterParty>();
+        }
 
-            Game.SetGameState(GameStates.Battle);
-            SceneManager.LoadScene(battleScene);
+        private void OnTriggerEnter(Collider _col)
+        {
+            if (_col.CompareTag("Player"))
+            {
+                // save the parties into the battle parties data
+                var _playerParty = _col.GetComponent<CharacterParty>().Party;
+
+                BattleParties.SetPlayerParty(_playerParty);
+                BattleParties.SetEnemyParty(enemyParty.Party);
+
+                Game.SetGameState(GameStates.Battle);
+                SceneManager.LoadScene(battleScene);
+            }
         }
     }
 }

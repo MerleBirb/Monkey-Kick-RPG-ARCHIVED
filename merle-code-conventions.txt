@@ -1,30 +1,61 @@
-CODE CONVENTIONS - by Merlebirb
+CODE CONVENTIONS - by Merlebirb 5/29/21
 
 =======================================================================
-public fields (both serialized or not): Pascal Case
+public fields (serialized): Pascal Case
 Example(s):
 
 public Transform Target;
 public int Number;
 
-if the variable name is the same as the type, be more specific with the name!
+public fields (not serialized): CamelCase
 
 Example(s):
 public Transform CharacterTransform;
 public Type NewType;
 
 =======================================================================
-private fields (not serialized): Underscore + Camel Case
+private fields (both serialized or not): Camel Case
 Example(s):
 
-private Rigidbody _rb;
-private float _number;
+private Rigidbody rb;
+private float number;
 
-private fields (serialized): Camel Case
+if the private field is super important, like a scriptable object, pascal case!
 Example(s):
 
-[SerializeField] private Type type;
-[SerializeField] private int number;
+private GameManager Game;
+private PlayerController Controller;
 
 =======================================================================
+temporary fields: Underscore + Camel Case
+Example(s):
+
+var _num = 5;
+string _name = "Bro";
+
+=======================================================================
+static fields: Pascal Case
+Example(s):
+
+public static int TotalScore;
+private static float CoolFloat;
+
+=======================================================================
+enums: Pascal Case
+Example(s):
+
+enum States
+{
+
+	CoolState,
+	UncoolState
+}
+
+=======================================================================
+EXTRA RULES:
+
+- Private goes first
+- Protected goes next
+- Public goes next
+
 ALL FUNCTIONS SHOULD BE PASCAL CASE !!!

@@ -7,49 +7,45 @@ Description:
 */
 
 using UnityEngine;
+using Merlebirb.RPGSystem;
+using Merlebirb.Managers;
 
-public enum BattleStates
+namespace Merlebirb.CharacterLogic
 {
-    EnterBattle,
-    Wait, 
-    Active,
-    Targeting,
-    Action, 
-    Return, 
-    Counter,
-    Reset
-
-}
-
-public abstract class CharacterBattle : MonoBehaviour
-{
-    [SerializeField] private GameStateData Game;
-
-    public CharacterInformation stats;
-    [ReadOnly] public TurnClass turnClass;
-
-    protected BattleStates state;
-
-    public virtual void Start()
+    public abstract class CharacterBattle : MonoBehaviour
     {
-        state = BattleStates.EnterBattle;
+        [SerializeField] private GameStateData Game;
 
-        foreach (TurnClass tc in turnClass.turnSystem.GetTurnOrder())
+        protected BattleStates state;
+
+        public CharacterInformation Stats;
+        [ReadOnly] public TurnClass Turn;
+
+        public virtual void Start()
         {
-            if (tc.charName == stats.CharacterName)
+            if (!Game.CompareGameState(GameStates.Battle)) { this.enabled = false; }
+            else
             {
-                turnClass = tc;
+                state = BattleStates.EnterBattle;
+
+                foreach (var tc in Turn.turnSystem.GetTurnOrder())
+                {
+                    if (tc.charName == Stats.CharacterName)
+                    {
+                        Turn = tc;
+                    }
+                }
             }
         }
-    }
 
-    public virtual void Update()
-    {
-        if (!Game.CompareGameState(GameStates.Battle)) { this.enabled = false; }
-    }
+        public virtual void Update()
+        {
+            if (!Game.CompareGameState(GameStates.Battle)) { this.enabled = false; }
+        }
 
-    public virtual void BattleStateMachine()
-    {
+        public virtual void BattleStateMachine()
+        {
 
+        }
     }
 }

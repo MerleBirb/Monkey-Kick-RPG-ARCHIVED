@@ -9,15 +9,18 @@ Author: Merlebirb
 
 using UnityEngine;
 
-public interface IPhysics
+namespace Merlebirb.CharacterLogic
 {
-    Vector3 Movement(Vector2 _movement, float currentSpeed, float yVal);
-    bool OnGround();
-    void CheckIfGravityShouldApply(Rigidbody _rb);
-    void UpdatePhysicsCount(bool additionalChecks);
-    void ClearPhysicsCount();
-    int GetStepsSinceLastGrounded();
-    void SetStepsSinceLastGrounded(int newSteps);
-    int GetStepsSinceLastAerial();
-    void SetStepsSinceLastAerial(int newSteps);
+    public interface IPhysics
+    {
+        Vector3 Movement(Vector2 _movement, float _currentSpeed, float _yVal);
+        bool OnGround();
+        void CheckIfGravityShouldApply(Rigidbody _rb);
+        void UpdatePhysicsCount(bool _additionalChecks);
+        void ClearPhysicsCount();
+        int GetStepsSinceLastGrounded();
+        void SetStepsSinceLastGrounded(int _newSteps);
+        int GetStepsSinceLastAerial();
+        void SetStepsSinceLastAerial(int _newSteps);
+    }
 }

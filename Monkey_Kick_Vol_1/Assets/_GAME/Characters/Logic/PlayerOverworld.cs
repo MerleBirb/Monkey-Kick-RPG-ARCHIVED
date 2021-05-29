@@ -10,127 +10,130 @@ Author: Merlebirb
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerOverworld : CharacterOverworld
-{   
-    #region CONTROLS
-
-    const string MOVE = "Move";
-    const string SPRINT = "Sprint";
-    const string JUMP = "Jump";
-
-    private InputAction move;
-    private InputAction sprint;
-    private InputAction jump;
-
-    private bool hasPressedJump = false;
-    private bool hasPressedSprint = false;
-    private bool isSprinting = false;
-
-    [SerializeField] private float sprintSpeed; // moveSpeed while sprint is pressed
-    [SerializeField] private float jumpHeight;
-
-    #endregion
-    
-    private PlayerInput input;
-
-    public override void Awake()
+namespace Merlebirb.CharacterLogic
+{
+    public class PlayerOverworld : CharacterOverworld
     {
-        base.Awake();
+        #region CONTROLS
 
-        input = GetComponent<PlayerInput>();
-    }
+        private const string Move = "Move";
+        private const string Sprint = "Sprint";
+        private const string Jump = "Jump";
 
-    private void Start()
-    {
-        InputSystem.pollingFrequency = 180;
-        input.SwitchCurrentActionMap("Overworld");
-        
-        move = input.actions.FindAction(MOVE);
-        jump = input.actions.FindAction(JUMP);
-        sprint = input.actions.FindAction(SPRINT);
-        
-        move.performed += context => movement = context.ReadValue<Vector2>();
-    }
-    
-    public override void Update()
-    {
-        base.Update();
-        
-        if (input != null) CheckForPlayerInput();
-    }
+        private InputAction move;
+        private InputAction sprint;
+        private InputAction jump;
 
-    public override void FixedUpdate()
-    {   
-        if (_physics != null)
+        private bool hasPressedJump = false;
+        private bool hasPressedSprint = false;
+        private bool isSprinting = false;
+
+        [SerializeField] private float sprintSpeed; // moveSpeed while sprint is pressed
+        [SerializeField] private float jumpHeight;
+
+        #endregion
+
+        private PlayerInput input;
+
+        public override void Awake()
         {
-            float currentSpeed;
+            base.Awake();
 
-            if (!isSprinting) currentSpeed = moveSpeed;
-            else currentSpeed = sprintSpeed;
-
-            ApplyPhysics(currentSpeed);
+            input = GetComponent<PlayerInput>();
         }
-    }
 
-    private void CheckForPlayerInput()
-    {
-        hasPressedJump |= jump.WasPressedThisFrame();
-        hasPressedSprint |= sprint.WasPressedThisFrame();
-
-        ToggleSprint();
-        PressedJump();
-    }
-
-    private void ToggleSprint()
-    {
-        if (!isSprinting)
+        private void Start()
         {
-            if (hasPressedSprint)
-            {
-                isSprinting = true;
-                hasPressedSprint = false;
-            }
+            InputSystem.pollingFrequency = 180;
+            input.SwitchCurrentActionMap("Overworld");
+
+            move = input.actions.FindAction(Move);
+            jump = input.actions.FindAction(Jump);
+            sprint = input.actions.FindAction(Sprint);
+
+            move.performed += context => movement = context.ReadValue<Vector2>();
         }
-        else
+
+        public override void Update()
         {
-            if (hasPressedSprint)
+            base.Update();
+
+            if (input != null) CheckForPlayerInput();
+        }
+
+        public override void FixedUpdate()
+        {
+            if (physics != null)
             {
-                isSprinting = false;
-                hasPressedSprint = false;
+                float _currentSpeed;
+
+                if (!isSprinting) _currentSpeed = moveSpeed;
+                else _currentSpeed = sprintSpeed;
+
+                ApplyPhysics(_currentSpeed);
             }
         }
 
-    }
-
-    private void PressedJump()
-    {
-        if (hasPressedJump)
+        private void CheckForPlayerInput()
         {
-            if (_physics.OnGround())
+            hasPressedJump |= jump.WasPressedThisFrame();
+            hasPressedSprint |= sprint.WasPressedThisFrame();
+
+            ToggleSprint();
+            PressedJump();
+        }
+
+        private void ToggleSprint()
+        {
+            if (!isSprinting)
             {
-                _physics.SetStepsSinceLastAerial(0);
-                rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
+                if (hasPressedSprint)
+                {
+                    isSprinting = true;
+                    hasPressedSprint = false;
+                }
             }
-            
+            else
+            {
+                if (hasPressedSprint)
+                {
+                    isSprinting = false;
+                    hasPressedSprint = false;
+                }
+            }
+
+        }
+
+        private void PressedJump()
+        {
+            if (hasPressedJump)
+            {
+                if (physics.OnGround())
+                {
+                    physics.SetStepsSinceLastAerial(0);
+                    rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
+                }
+
+                hasPressedJump = false;
+            }
+
+        }
+
+        private void OnEnable()
+        {
+            ResetControls();
+        }
+
+        private void OnDisable()
+        {
+            ResetControls();
+        }
+
+        private void ResetControls()
+        {
             hasPressedJump = false;
+            hasPressedSprint = false;
+            isSprinting = false;
         }
-        
-    }
-
-    private void OnEnable()
-    {
-        ResetControls();
-    }
-
-    private void OnDisable()
-    {
-        ResetControls();
-    }
-
-    private void ResetControls()
-    {
-        hasPressedJump = false;
-        hasPressedSprint = false;
-        isSprinting = false;
     }
 }

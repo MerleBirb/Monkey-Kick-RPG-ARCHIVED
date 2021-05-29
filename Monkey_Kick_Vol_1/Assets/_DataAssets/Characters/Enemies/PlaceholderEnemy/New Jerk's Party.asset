@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586d16c7a2d211448a4805b92352b237, type: 3}
   m_Name: New Jerk's Party
   m_EditorClassIdentifier: 
-  party:
+  CharacterList:
   - {fileID: 11400000, guid: 3e349a59841a84d41894a3c5cda748f8, type: 2}
