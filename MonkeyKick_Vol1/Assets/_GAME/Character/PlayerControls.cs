@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @PlayerControls : IInputActionCollection, IDisposable
+namespace MonkeyKick.Character
 {
-    public InputActionAsset asset { get; }
-    public @PlayerControls()
+    public class PlayerControls : IInputActionCollection, IDisposable
     {
-        asset = InputActionAsset.FromJson(@"{
+        public InputActionAsset asset { get; }
+        public PlayerControls()
+        {
+            asset = InputActionAsset.FromJson(@"{
     ""name"": ""PlayerControls"",
     ""maps"": [
         {
@@ -362,187 +364,188 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         }
     ]
 }");
+            // Overworld
+            m_Overworld = asset.FindActionMap("Overworld", throwIfNotFound: true);
+            m_Overworld_Move = m_Overworld.FindAction("Move", throwIfNotFound: true);
+            m_Overworld_Jump = m_Overworld.FindAction("Jump", throwIfNotFound: true);
+            m_Overworld_Sprint = m_Overworld.FindAction("Sprint", throwIfNotFound: true);
+            // BattleMenu
+            m_BattleMenu = asset.FindActionMap("BattleMenu", throwIfNotFound: true);
+            m_BattleMenu_Move = m_BattleMenu.FindAction("Move", throwIfNotFound: true);
+            m_BattleMenu_Select = m_BattleMenu.FindAction("Select", throwIfNotFound: true);
+            m_BattleMenu_Cancel = m_BattleMenu.FindAction("Cancel", throwIfNotFound: true);
+        }
+
+        public void Dispose()
+        {
+            UnityEngine.Object.Destroy(asset);
+        }
+
+        public InputBinding? bindingMask
+        {
+            get => asset.bindingMask;
+            set => asset.bindingMask = value;
+        }
+
+        public ReadOnlyArray<InputDevice>? devices
+        {
+            get => asset.devices;
+            set => asset.devices = value;
+        }
+
+        public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+        public bool Contains(InputAction action)
+        {
+            return asset.Contains(action);
+        }
+
+        public IEnumerator<InputAction> GetEnumerator()
+        {
+            return asset.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void Enable()
+        {
+            asset.Enable();
+        }
+
+        public void Disable()
+        {
+            asset.Disable();
+        }
+
         // Overworld
-        m_Overworld = asset.FindActionMap("Overworld", throwIfNotFound: true);
-        m_Overworld_Move = m_Overworld.FindAction("Move", throwIfNotFound: true);
-        m_Overworld_Jump = m_Overworld.FindAction("Jump", throwIfNotFound: true);
-        m_Overworld_Sprint = m_Overworld.FindAction("Sprint", throwIfNotFound: true);
+        private readonly InputActionMap m_Overworld;
+        private IOverworldActions m_OverworldActionsCallbackInterface;
+        private readonly InputAction m_Overworld_Move;
+        private readonly InputAction m_Overworld_Jump;
+        private readonly InputAction m_Overworld_Sprint;
+        public struct OverworldActions
+        {
+            private @PlayerControls m_Wrapper;
+            public OverworldActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_Overworld_Move;
+            public InputAction @Jump => m_Wrapper.m_Overworld_Jump;
+            public InputAction @Sprint => m_Wrapper.m_Overworld_Sprint;
+            public InputActionMap Get() { return m_Wrapper.m_Overworld; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(OverworldActions set) { return set.Get(); }
+            public void SetCallbacks(IOverworldActions instance)
+            {
+                if (m_Wrapper.m_OverworldActionsCallbackInterface != null)
+                {
+                    @Move.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMove;
+                    @Move.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMove;
+                    @Move.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMove;
+                    @Jump.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnJump;
+                    @Jump.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnJump;
+                    @Jump.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnJump;
+                    @Sprint.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnSprint;
+                    @Sprint.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnSprint;
+                    @Sprint.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnSprint;
+                }
+                m_Wrapper.m_OverworldActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Move.started += instance.OnMove;
+                    @Move.performed += instance.OnMove;
+                    @Move.canceled += instance.OnMove;
+                    @Jump.started += instance.OnJump;
+                    @Jump.performed += instance.OnJump;
+                    @Jump.canceled += instance.OnJump;
+                    @Sprint.started += instance.OnSprint;
+                    @Sprint.performed += instance.OnSprint;
+                    @Sprint.canceled += instance.OnSprint;
+                }
+            }
+        }
+        public OverworldActions @Overworld => new OverworldActions(this);
+
         // BattleMenu
-        m_BattleMenu = asset.FindActionMap("BattleMenu", throwIfNotFound: true);
-        m_BattleMenu_Move = m_BattleMenu.FindAction("Move", throwIfNotFound: true);
-        m_BattleMenu_Select = m_BattleMenu.FindAction("Select", throwIfNotFound: true);
-        m_BattleMenu_Cancel = m_BattleMenu.FindAction("Cancel", throwIfNotFound: true);
-    }
-
-    public void Dispose()
-    {
-        UnityEngine.Object.Destroy(asset);
-    }
-
-    public InputBinding? bindingMask
-    {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
-    }
-
-    public ReadOnlyArray<InputDevice>? devices
-    {
-        get => asset.devices;
-        set => asset.devices = value;
-    }
-
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-    public bool Contains(InputAction action)
-    {
-        return asset.Contains(action);
-    }
-
-    public IEnumerator<InputAction> GetEnumerator()
-    {
-        return asset.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    public void Enable()
-    {
-        asset.Enable();
-    }
-
-    public void Disable()
-    {
-        asset.Disable();
-    }
-
-    // Overworld
-    private readonly InputActionMap m_Overworld;
-    private IOverworldActions m_OverworldActionsCallbackInterface;
-    private readonly InputAction m_Overworld_Move;
-    private readonly InputAction m_Overworld_Jump;
-    private readonly InputAction m_Overworld_Sprint;
-    public struct OverworldActions
-    {
-        private @PlayerControls m_Wrapper;
-        public OverworldActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Overworld_Move;
-        public InputAction @Jump => m_Wrapper.m_Overworld_Jump;
-        public InputAction @Sprint => m_Wrapper.m_Overworld_Sprint;
-        public InputActionMap Get() { return m_Wrapper.m_Overworld; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(OverworldActions set) { return set.Get(); }
-        public void SetCallbacks(IOverworldActions instance)
+        private readonly InputActionMap m_BattleMenu;
+        private IBattleMenuActions m_BattleMenuActionsCallbackInterface;
+        private readonly InputAction m_BattleMenu_Move;
+        private readonly InputAction m_BattleMenu_Select;
+        private readonly InputAction m_BattleMenu_Cancel;
+        public struct BattleMenuActions
         {
-            if (m_Wrapper.m_OverworldActionsCallbackInterface != null)
+            private @PlayerControls m_Wrapper;
+            public BattleMenuActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_BattleMenu_Move;
+            public InputAction @Select => m_Wrapper.m_BattleMenu_Select;
+            public InputAction @Cancel => m_Wrapper.m_BattleMenu_Cancel;
+            public InputActionMap Get() { return m_Wrapper.m_BattleMenu; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(BattleMenuActions set) { return set.Get(); }
+            public void SetCallbacks(IBattleMenuActions instance)
             {
-                @Move.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMove;
-                @Jump.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnJump;
-                @Sprint.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnSprint;
-                @Sprint.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnSprint;
-                @Sprint.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnSprint;
-            }
-            m_Wrapper.m_OverworldActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
-                @Sprint.started += instance.OnSprint;
-                @Sprint.performed += instance.OnSprint;
-                @Sprint.canceled += instance.OnSprint;
+                if (m_Wrapper.m_BattleMenuActionsCallbackInterface != null)
+                {
+                    @Move.started -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnMove;
+                    @Move.performed -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnMove;
+                    @Move.canceled -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnMove;
+                    @Select.started -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnSelect;
+                    @Select.performed -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnSelect;
+                    @Select.canceled -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnSelect;
+                    @Cancel.started -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnCancel;
+                    @Cancel.performed -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnCancel;
+                    @Cancel.canceled -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnCancel;
+                }
+                m_Wrapper.m_BattleMenuActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Move.started += instance.OnMove;
+                    @Move.performed += instance.OnMove;
+                    @Move.canceled += instance.OnMove;
+                    @Select.started += instance.OnSelect;
+                    @Select.performed += instance.OnSelect;
+                    @Select.canceled += instance.OnSelect;
+                    @Cancel.started += instance.OnCancel;
+                    @Cancel.performed += instance.OnCancel;
+                    @Cancel.canceled += instance.OnCancel;
+                }
             }
         }
-    }
-    public OverworldActions @Overworld => new OverworldActions(this);
-
-    // BattleMenu
-    private readonly InputActionMap m_BattleMenu;
-    private IBattleMenuActions m_BattleMenuActionsCallbackInterface;
-    private readonly InputAction m_BattleMenu_Move;
-    private readonly InputAction m_BattleMenu_Select;
-    private readonly InputAction m_BattleMenu_Cancel;
-    public struct BattleMenuActions
-    {
-        private @PlayerControls m_Wrapper;
-        public BattleMenuActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_BattleMenu_Move;
-        public InputAction @Select => m_Wrapper.m_BattleMenu_Select;
-        public InputAction @Cancel => m_Wrapper.m_BattleMenu_Cancel;
-        public InputActionMap Get() { return m_Wrapper.m_BattleMenu; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(BattleMenuActions set) { return set.Get(); }
-        public void SetCallbacks(IBattleMenuActions instance)
+        public BattleMenuActions @BattleMenu => new BattleMenuActions(this);
+        private int m_KeyboardMouseSchemeIndex = -1;
+        public InputControlScheme KeyboardMouseScheme
         {
-            if (m_Wrapper.m_BattleMenuActionsCallbackInterface != null)
+            get
             {
-                @Move.started -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnMove;
-                @Select.started -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnSelect;
-                @Select.performed -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnSelect;
-                @Select.canceled -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnSelect;
-                @Cancel.started -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnCancel;
-                @Cancel.performed -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnCancel;
-                @Cancel.canceled -= m_Wrapper.m_BattleMenuActionsCallbackInterface.OnCancel;
-            }
-            m_Wrapper.m_BattleMenuActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Select.started += instance.OnSelect;
-                @Select.performed += instance.OnSelect;
-                @Select.canceled += instance.OnSelect;
-                @Cancel.started += instance.OnCancel;
-                @Cancel.performed += instance.OnCancel;
-                @Cancel.canceled += instance.OnCancel;
+                if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard & Mouse");
+                return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
             }
         }
-    }
-    public BattleMenuActions @BattleMenu => new BattleMenuActions(this);
-    private int m_KeyboardMouseSchemeIndex = -1;
-    public InputControlScheme KeyboardMouseScheme
-    {
-        get
+        private int m_GamepadSchemeIndex = -1;
+        public InputControlScheme GamepadScheme
         {
-            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard & Mouse");
-            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+            get
+            {
+                if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+                return asset.controlSchemes[m_GamepadSchemeIndex];
+            }
         }
-    }
-    private int m_GamepadSchemeIndex = -1;
-    public InputControlScheme GamepadScheme
-    {
-        get
+        public interface IOverworldActions
         {
-            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
-            return asset.controlSchemes[m_GamepadSchemeIndex];
+            void OnMove(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
+            void OnSprint(InputAction.CallbackContext context);
         }
-    }
-    public interface IOverworldActions
-    {
-        void OnMove(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
-        void OnSprint(InputAction.CallbackContext context);
-    }
-    public interface IBattleMenuActions
-    {
-        void OnMove(InputAction.CallbackContext context);
-        void OnSelect(InputAction.CallbackContext context);
-        void OnCancel(InputAction.CallbackContext context);
+        public interface IBattleMenuActions
+        {
+            void OnMove(InputAction.CallbackContext context);
+            void OnSelect(InputAction.CallbackContext context);
+            void OnCancel(InputAction.CallbackContext context);
+        }
     }
 }
