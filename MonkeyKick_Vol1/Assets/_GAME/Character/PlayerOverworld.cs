@@ -16,10 +16,6 @@ namespace MonkeyKick.Character
     {
         #region CONTROLS
 
-        private const string Move = "Move";
-        private const string Sprint = "Sprint";
-        private const string Jump = "Jump";
-
         private InputAction move;
         private InputAction sprint;
         private InputAction jump;
@@ -33,23 +29,19 @@ namespace MonkeyKick.Character
 
         #endregion
 
-        private PlayerInput input;
+        private PlayerControls input;
 
         public override void Awake()
         {
             base.Awake();
 
-            input = GetComponent<PlayerInput>();
-        }
-
-        private void Start()
-        {
             InputSystem.pollingFrequency = 180;
-            input.SwitchCurrentActionMap("Overworld");
 
-            move = input.actions.FindAction(Move);
-            jump = input.actions.FindAction(Jump);
-            sprint = input.actions.FindAction(Sprint);
+            input = new PlayerControls();
+
+            move = input.Overworld.Move;
+            jump = input.Overworld.Jump;
+            sprint = input.Overworld.Sprint;
 
             move.performed += context => movement = context.ReadValue<Vector2>();
         }
@@ -121,16 +113,21 @@ namespace MonkeyKick.Character
 
         private void OnEnable()
         {
-            ResetControls();
+            input.Overworld.Move.Enable();
+            input.Overworld.Jump.Enable();
+            input.Overworld.Sprint.Enable();
+
+            hasPressedJump = false;
+            hasPressedSprint = false;
+            isSprinting = false;
         }
 
         private void OnDisable()
         {
-            ResetControls();
-        }
+            input.Overworld.Move.Disable();
+            input.Overworld.Jump.Disable();
+            input.Overworld.Sprint.Disable();
 
-        private void ResetControls()
-        {
             hasPressedJump = false;
             hasPressedSprint = false;
             isSprinting = false;
