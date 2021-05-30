@@ -8,7 +8,7 @@ Description:
 
 using UnityEngine;
 
-namespace MonkeyKick.Managers
+namespace MonkeyKick.Character
 {
     public class CharacterParty : MonoBehaviour
     {

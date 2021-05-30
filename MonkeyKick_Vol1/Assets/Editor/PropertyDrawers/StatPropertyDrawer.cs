@@ -11,24 +11,27 @@ Author: Merlebirb
 
 using UnityEditor;
 using UnityEngine;
-using MonkeyKick.Character;
+using MonkeyKick.Stats;
 
-[CustomPropertyDrawer(typeof(CharacterStat))]
-public class StatPropertyDrawer : PropertyDrawer
+namespace MonkeyKick.PropertyDrawers
 {
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    [CustomPropertyDrawer(typeof(CharacterStat))]
+    public class StatPropertyDrawer : PropertyDrawer
     {
-        EditorGUI.BeginProperty(position, label, property);
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            EditorGUI.BeginProperty(position, label, property);
 
-        // Draw label
-        position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
-        var rect = new Rect(position.position, Vector2.one * 20);
-        var indent = EditorGUI.indentLevel;
-        EditorGUI.indentLevel = 0;
+            // Draw label
+            position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
+            var rect = new Rect(position.position, Vector2.one * 20);
+            var indent = EditorGUI.indentLevel;
+            EditorGUI.indentLevel = 0;
 
-        EditorGUI.PropertyField(position, property.FindPropertyRelative("BaseValue"), GUIContent.none);
-        EditorGUI.indentLevel = indent;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("BaseValue"), GUIContent.none);
+            EditorGUI.indentLevel = indent;
 
-        EditorGUI.EndProperty();
+            EditorGUI.EndProperty();
+        }
     }
 }

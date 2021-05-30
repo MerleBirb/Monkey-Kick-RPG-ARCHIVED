@@ -8,6 +8,7 @@ Author: Merlebirb
 */
 
 using UnityEngine;
+using MonkeyKick.Stats;
 
 namespace MonkeyKick.Character
 {

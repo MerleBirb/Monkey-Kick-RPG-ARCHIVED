@@ -663,7 +663,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 3292d69833b3fae42954cc31ed21b96d, type: 2}
     - target: {fileID: 882795103079985091, guid: dc9512ef8695fa6408cf87a18af27b9a, type: 3}
       propertyPath: battleScene.scenePath
-      value: Assets/_GAME/_Scenes/Debug01_TestLevels/Debug01_TestBattle.unity
+      value: Assets/_GAME/Scenes/Debug01_TestLevels/Debug01_TestBattle.unity
       objectReference: {fileID: 0}
     - target: {fileID: 882795103079985091, guid: dc9512ef8695fa6408cf87a18af27b9a, type: 3}
       propertyPath: battleScene.sceneAsset
@@ -738,7 +738,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29972
+  m_Name: pb_Mesh29596
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -911,6 +911,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1266392270}
+    - target: {fileID: 4240403128028615958, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
+      propertyPath: m_FollowOffset.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240403128028615958, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -4
+      objectReference: {fileID: 0}
     - target: {fileID: 4240403128900377937, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
       propertyPath: m_RootOrder
       value: 0
