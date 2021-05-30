@@ -10,7 +10,7 @@ Author: Merlebirb
 using UnityEngine;
 using Cinemachine;
 
-namespace Merlebirb.CameraEffects
+namespace MonkeyKick.Cameras
 {
     public class FollowTarget : MonoBehaviour
     {

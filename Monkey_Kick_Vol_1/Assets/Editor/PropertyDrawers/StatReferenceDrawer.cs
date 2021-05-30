@@ -10,12 +10,13 @@ Author: Ryan Hipple (original script), Merlebirb (this modified version)
 
 using UnityEditor;
 using UnityEngine;
+using MonkeyKick.Character;
 
 [CustomPropertyDrawer(typeof(CharacterStatReference))]
 public class StatReferenceDrawer : PropertyDrawer
 {
     // Options to display in the popup to select constant or variable.
-    private readonly string[] popupOptions = 
+    private readonly string[] popupOptions =
         { "Use Constant", "Use Variable" };
 
     // Cached style to use to draw the popup button.
@@ -31,7 +32,7 @@ public class StatReferenceDrawer : PropertyDrawer
 
         label = EditorGUI.BeginProperty(position, label, property);
         position = EditorGUI.PrefixLabel(position, label);
-        
+
         EditorGUI.BeginChangeCheck();
 
         // Get properties
@@ -53,8 +54,8 @@ public class StatReferenceDrawer : PropertyDrawer
 
         useConstant.boolValue = result == 0;
 
-        EditorGUI.PropertyField(position, 
-            useConstant.boolValue ? constantValue : variable, 
+        EditorGUI.PropertyField(position,
+            useConstant.boolValue ? constantValue : variable,
             GUIContent.none);
 
         if (EditorGUI.EndChangeCheck())

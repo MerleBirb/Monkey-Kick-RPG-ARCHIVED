@@ -11,6 +11,7 @@ Author: Merlebirb
 
 using UnityEditor;
 using UnityEngine;
+using MonkeyKick.Character;
 
 [CustomPropertyDrawer(typeof(CharacterStat))]
 public class StatPropertyDrawer : PropertyDrawer
@@ -27,7 +28,7 @@ public class StatPropertyDrawer : PropertyDrawer
 
         EditorGUI.PropertyField(position, property.FindPropertyRelative("BaseValue"), GUIContent.none);
         EditorGUI.indentLevel = indent;
-        
+
         EditorGUI.EndProperty();
     }
 }
