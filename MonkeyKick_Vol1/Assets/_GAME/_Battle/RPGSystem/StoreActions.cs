@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Collections;
 
-namespace MonkeyKick.RPGSystem
+namespace MonkeyKick.Battle
 {
     [Serializable]
     public class StoreActions

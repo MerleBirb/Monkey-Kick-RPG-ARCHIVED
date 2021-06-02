@@ -28,9 +28,9 @@ namespace MonkeyKick.Stats
             ConstantValue = value;
         }
 
-        public CharacterStat Value
+        public CharacterStat Stat
         {
-            get { return UseConstant ? ConstantValue : Variable.Value; }
+            get { return UseConstant ? ConstantValue : Variable.Stat; }
         }
     }
 }

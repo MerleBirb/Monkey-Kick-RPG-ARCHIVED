@@ -8,10 +8,9 @@ Author: Merlebirb
 */
 
 using UnityEngine;
-using MonkeyKick.Character;
 
 
-namespace MonkeyKick.Character
+namespace MonkeyKick.Battle
 {
     public static class BattleParties
     {

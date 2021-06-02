@@ -7,10 +7,11 @@ Description:
 Author: Merlebirb
 */
 
+using System.Collections.Generic;
 using UnityEngine;
 using MonkeyKick.Stats;
 
-namespace MonkeyKick.Character
+namespace MonkeyKick.Battle
 {
     public class CharacterInformation : ScriptableObject
     {
@@ -36,22 +37,24 @@ namespace MonkeyKick.Character
 
         public Vector3 battlePos; // neutral position during battle
 
+        public List<ISkill> skillList;
+
         public virtual void OnValidate()
         {
             Level = Mathf.Clamp(Level, 1, 100);
 
-            MaxHP.Value.BaseValue = Mathf.Clamp(MaxHP.Value.BaseValue, 1, statClamp);
-            CurrentHP.Value.BaseValue = Mathf.Clamp(CurrentHP.Value.BaseValue, 0, MaxHP.Value.BaseValue);
+            MaxHP.Stat.BaseValue = Mathf.Clamp(MaxHP.Stat.BaseValue, 1, statClamp);
+            CurrentHP.Stat.BaseValue = Mathf.Clamp(CurrentHP.Stat.BaseValue, 0, MaxHP.Stat.BaseValue);
 
-            MaxKP.Value.BaseValue = Mathf.Clamp(MaxKP.Value.BaseValue, 1, statClamp);
-            CurrentKP.Value.BaseValue = Mathf.Clamp(CurrentKP.Value.BaseValue, 0, MaxKP.Value.BaseValue);
+            MaxKP.Stat.BaseValue = Mathf.Clamp(MaxKP.Stat.BaseValue, 1, statClamp);
+            CurrentKP.Stat.BaseValue = Mathf.Clamp(CurrentKP.Stat.BaseValue, 0, MaxKP.Stat.BaseValue);
 
-            Muscle.Value.BaseValue = Mathf.Clamp(Muscle.Value.BaseValue, 1, statClamp);
-            Toughness.Value.BaseValue = Mathf.Clamp(Toughness.Value.BaseValue, 1, statClamp);
-            Smarts.Value.BaseValue = Mathf.Clamp(Smarts.Value.BaseValue, 1, statClamp);
-            Tenacity.Value.BaseValue = Mathf.Clamp(Tenacity.Value.BaseValue, 1, statClamp);
-            Speed.Value.BaseValue = Mathf.Clamp(Speed.Value.BaseValue, 1, statClamp);
-            Swag.Value.BaseValue = Mathf.Clamp(Swag.Value.BaseValue, 1, statClamp);
+            Muscle.Stat.BaseValue = Mathf.Clamp(Muscle.Stat.BaseValue, 1, statClamp);
+            Toughness.Stat.BaseValue = Mathf.Clamp(Toughness.Stat.BaseValue, 1, statClamp);
+            Smarts.Stat.BaseValue = Mathf.Clamp(Smarts.Stat.BaseValue, 1, statClamp);
+            Tenacity.Stat.BaseValue = Mathf.Clamp(Tenacity.Stat.BaseValue, 1, statClamp);
+            Speed.Stat.BaseValue = Mathf.Clamp(Speed.Stat.BaseValue, 1, statClamp);
+            Swag.Stat.BaseValue = Mathf.Clamp(Swag.Stat.BaseValue, 1, statClamp);
         }
     }
 }

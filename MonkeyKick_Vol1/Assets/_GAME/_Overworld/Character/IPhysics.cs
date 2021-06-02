@@ -1,4 +1,4 @@
-//===== IPHYSICS =====//
+//===== INTERFACE PHYSICS =====//
 /*
 5/22/21
 Description:
@@ -9,7 +9,7 @@ Author: Merlebirb
 
 using UnityEngine;
 
-namespace MonkeyKick.Character
+namespace MonkeyKick.Overworld
 {
     public interface IPhysics
     {

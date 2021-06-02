@@ -10,7 +10,7 @@ Author: Merlebirb
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace MonkeyKick.Character
+namespace MonkeyKick.Overworld
 {
     public class PlayerOverworld : CharacterOverworld
     {
@@ -113,9 +113,7 @@ namespace MonkeyKick.Character
 
         private void OnEnable()
         {
-            input.Overworld.Move.Enable();
-            input.Overworld.Jump.Enable();
-            input.Overworld.Sprint.Enable();
+            input.Overworld.Enable();
 
             hasPressedJump = false;
             hasPressedSprint = false;
@@ -124,9 +122,7 @@ namespace MonkeyKick.Character
 
         private void OnDisable()
         {
-            input.Overworld.Move.Disable();
-            input.Overworld.Jump.Disable();
-            input.Overworld.Sprint.Disable();
+            input.Overworld.Disable();
 
             hasPressedJump = false;
             hasPressedSprint = false;

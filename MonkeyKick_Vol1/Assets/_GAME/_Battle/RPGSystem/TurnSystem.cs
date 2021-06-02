@@ -11,9 +11,9 @@ using UnityEngine;
 using Unity.Collections;
 using System.Collections.Generic;
 using MonkeyKick.Managers;
-using MonkeyKick.Character;
+using MonkeyKick.Overworld;
 
-namespace MonkeyKick.RPGSystem
+namespace MonkeyKick.Battle
 {
     public class TurnSystem : MonoBehaviour
     {
@@ -156,7 +156,7 @@ namespace MonkeyKick.RPGSystem
             for (int j = 0; j < turnOrder.Count; j++)
             {
                 turnOrder[j].turnSystem = this;
-                turnOrder[j].charSpeed = turnOrder[j].character.Stats.Speed.Value;
+                turnOrder[j].charSpeed = turnOrder[j].character.Stats.Speed.Stat;
                 turnOrder[j].charName = turnOrder[j].character.Stats.CharacterName;
             }
         }

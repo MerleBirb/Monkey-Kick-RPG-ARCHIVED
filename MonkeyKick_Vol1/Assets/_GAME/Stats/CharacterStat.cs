@@ -31,6 +31,17 @@ namespace MonkeyKick.Stats
 
                 return _value;
             }
+            set
+            {
+                if (isDirty || BaseValue != lastBaseValue)
+                {
+                    lastBaseValue = BaseValue;
+                    _value = CalculateFinalValue();
+                    isDirty = true;
+                }
+
+                _value = value;
+            }
         }
 
         protected bool isDirty = true;

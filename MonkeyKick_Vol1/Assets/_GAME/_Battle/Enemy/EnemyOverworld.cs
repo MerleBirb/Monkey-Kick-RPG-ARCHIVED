@@ -10,8 +10,9 @@ Author: Merlebirb
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using MonkeyKick.Managers;
+using MonkeyKick.Overworld;
 
-namespace MonkeyKick.Character
+namespace MonkeyKick.Battle
 {
     public class EnemyOverworld : CharacterOverworld
     {

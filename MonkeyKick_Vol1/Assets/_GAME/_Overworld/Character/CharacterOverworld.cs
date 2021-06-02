@@ -10,7 +10,7 @@ Author: Merlebirb
 using UnityEngine;
 using MonkeyKick.Managers;
 
-namespace MonkeyKick.Character
+namespace MonkeyKick.Overworld
 {
     public class CharacterOverworld : MonoBehaviour
     {

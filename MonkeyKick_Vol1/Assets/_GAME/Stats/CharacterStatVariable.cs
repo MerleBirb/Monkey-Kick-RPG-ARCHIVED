@@ -14,11 +14,11 @@ namespace MonkeyKick.Stats
     [CreateAssetMenu(fileName = "Stat", menuName = "New Stat")]
     public class CharacterStatVariable : ScriptableObject
     {
-        public CharacterStat Value;
+        public CharacterStat Stat;
 
         private void OnValidate()
         {
-            Value.BaseValue = Mathf.Clamp(Value.BaseValue, 1, 9999);
+            Stat.BaseValue = Mathf.Clamp(Stat.BaseValue, 1, 9999);
         }
     }
 }

@@ -9,18 +9,25 @@ Description:
 using UnityEngine;
 using Unity.Collections;
 using MonkeyKick.Managers;
-using MonkeyKick.Character;
+using MonkeyKick.Overworld;
 
-namespace MonkeyKick.RPGSystem
+namespace MonkeyKick.Battle
 {
     public abstract class CharacterBattle : MonoBehaviour
     {
         [SerializeField] private GameStateData Game;
+        private bool isTurn = false;
 
         protected BattleStates state;
 
+        public Rigidbody rb;
         public CharacterInformation Stats;
         [ReadOnly] public TurnClass Turn;
+
+        public virtual void Awake()
+        {
+            rb = GetComponent<Rigidbody>();
+        }
 
         public virtual void Start()
         {
@@ -44,9 +51,26 @@ namespace MonkeyKick.RPGSystem
             if (!Game.CompareGameState(GameStates.Battle)) { this.enabled = false; }
         }
 
-        public virtual void BattleStateMachine()
+        public virtual void EnterBattle()
         {
+            state = BattleStates.Wait;
+        }
 
+        public virtual void Wait()
+        {
+            isTurn = Turn.isTurn;
+            if (isTurn) { state = BattleStates.Active; }
+        }
+
+        public virtual void Active()
+        {
+            
+        }
+
+        public void ChangeBattleState(BattleStates newState)
+        {
+            if (state == newState) { return; }
+            state = newState;
         }
     }
 }

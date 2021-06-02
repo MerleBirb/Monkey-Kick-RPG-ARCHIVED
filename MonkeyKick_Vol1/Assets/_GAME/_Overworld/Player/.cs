@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace MonkeyKick.Character
+namespace MonkeyKick.Overworld
 {
     public class @PlayerControls : IInputActionCollection, IDisposable
     {

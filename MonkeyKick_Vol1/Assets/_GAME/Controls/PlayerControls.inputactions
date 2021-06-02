@@ -148,7 +148,7 @@
             "id": "16cdfe5f-e841-4b31-a14c-329cb737d561",
             "actions": [
                 {
-                    "name": "Move",
+                    "name": "MoveSelector",
                     "type": "PassThrough",
                     "id": "f65c6656-3475-408a-b7dc-a67621156f98",
                     "expectedControlType": "Vector2",
@@ -180,7 +180,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveSelector",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -191,7 +191,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveSelector",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -202,7 +202,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveSelector",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -213,7 +213,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveSelector",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -224,7 +224,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveSelector",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -235,7 +235,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Move",
+                    "action": "MoveSelector",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

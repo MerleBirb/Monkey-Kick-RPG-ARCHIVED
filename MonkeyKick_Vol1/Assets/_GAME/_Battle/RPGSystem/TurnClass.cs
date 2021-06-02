@@ -13,7 +13,7 @@ using Unity.Collections;
 using MonkeyKick.Managers;
 using MonkeyKick.Stats;
 
-namespace MonkeyKick.RPGSystem
+namespace MonkeyKick.Battle
 {
     [Serializable]
     public class TurnClass

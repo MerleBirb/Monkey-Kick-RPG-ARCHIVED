@@ -9,7 +9,7 @@ Author: Merlebirb
 
 using UnityEngine;
 
-namespace MonkeyKick.Character
+namespace MonkeyKick.Overworld
 {
     public class CharacterPhysics : MonoBehaviour, IPhysics
     {

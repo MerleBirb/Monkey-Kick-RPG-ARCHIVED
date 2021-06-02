@@ -9,7 +9,7 @@ Author: Merlebirb
 
 using UnityEngine;
 
-namespace MonkeyKick.RPGSystem
+namespace MonkeyKick.Battle
 {
     public class EnemyBattle : CharacterBattle
     {

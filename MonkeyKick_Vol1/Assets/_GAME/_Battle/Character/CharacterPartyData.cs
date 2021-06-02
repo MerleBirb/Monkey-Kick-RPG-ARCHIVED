@@ -10,7 +10,7 @@ Author: Merlebirb
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace MonkeyKick.Character
+namespace MonkeyKick.Battle
 {
     [CreateAssetMenu(menuName = "New Party", fileName = "CharacterParty")]
     public class CharacterPartyData : ScriptableObject

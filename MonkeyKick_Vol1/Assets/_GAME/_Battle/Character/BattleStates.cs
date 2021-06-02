@@ -6,7 +6,7 @@ Description:
 
 */
 
-namespace MonkeyKick.RPGSystem
+namespace MonkeyKick.Battle
 {
     public enum BattleStates
     {
@@ -15,7 +15,6 @@ namespace MonkeyKick.RPGSystem
         Active,
         Targeting,
         Action,
-        Return,
         Counter,
         Reset
 

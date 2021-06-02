@@ -9,7 +9,7 @@ Author: Merlebirb
 
 using UnityEngine;
 
-namespace MonkeyKick.Character
+namespace MonkeyKick.Battle
 {
     [CreateAssetMenu(fileName = "New Enemy", menuName = "New Character/New Enemy Character")]
     public class EnemyInformation : CharacterInformation
