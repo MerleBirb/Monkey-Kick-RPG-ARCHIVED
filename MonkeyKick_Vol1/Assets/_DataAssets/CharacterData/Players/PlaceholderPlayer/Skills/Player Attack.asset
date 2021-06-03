@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 241c6459e09d82a45ab5663d6760bbbc, type: 3}
-  m_Name: Placeholder Attack
+  m_Name: Player Attack
   m_EditorClassIdentifier: 
   skillName: Placeholder Attack
   skillDescription: Cool move. Not real though.
   damageValue: 5
+  speed: 3
+  xOffset: -1
   sequence: 0

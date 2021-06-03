@@ -8,8 +8,8 @@ namespace MonkeyKick.Battle
     public class DamageSkill : Skill
     {
         [SerializeField] private int damageValue;
-
-        private float speed = 10f;
+        [SerializeField] private float speed;
+        [SerializeField] private float xOffset;
 
         private enum SkillState
         {
@@ -20,7 +20,7 @@ namespace MonkeyKick.Battle
             EndSequence
         }
 
-        [SerializeField] private SkillState sequence;
+        [SerializeField] private SkillState sequence = SkillState.WaitingToBegin;
 
         public override void Action(CharacterBattle _actor, CharacterBattle _target)
         {
@@ -35,7 +35,7 @@ namespace MonkeyKick.Battle
 
                 case SkillState.BeginSequence:
                 {
-                    var _targetPos = new Vector3(_target.transform.position.x - 1f, _target.transform.position.y, _target.transform.position.z);
+                    var _targetPos = new Vector3(_target.transform.position.x + xOffset, _target.transform.position.y, _target.transform.position.z);
                     bool _atTheEnemyLocation = _actor.transform.position != _targetPos;
 
                     if(_atTheEnemyLocation) {_actor.rb.velocity = new Vector3(speed, _actor.rb.velocity.y, _actor.rb.velocity.z); }
@@ -69,7 +69,7 @@ namespace MonkeyKick.Battle
                 {
                     _actor.finishAction = true;
                     sequence = SkillState.BeginSequence;
-                    _actor.ChangeBattleState(BattleStates.Wait);
+                    _actor.ChangeBattleState(BattleStates.Reset);
 
                     break;
                 }

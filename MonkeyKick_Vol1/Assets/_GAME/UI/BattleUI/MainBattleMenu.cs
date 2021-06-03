@@ -31,6 +31,7 @@ namespace MonkeyKick.UI
         private void Update()
         {
             if (!isCreated) { selector = Instantiate(selectorPrefab, transform); isCreated = true; }
+            if (selector.rectTransform.rotation.z != 90f) { selector.rectTransform.rotation = Quaternion.Euler(0f, 0f, -90f); }
 
             MenuManager.SelectMenu(menuTexts, selector, menuChoice.Variable.Value, xOffset);
 

@@ -47,7 +47,7 @@ namespace MonkeyKick.Battle
             }
         }
 
-        public virtual void FixedUpdate()
+        public virtual void Update()
         {
             if (!Game.CompareGameState(GameStates.Battle)) { this.enabled = false; }
 
@@ -59,9 +59,18 @@ namespace MonkeyKick.Battle
             state = BattleStates.Wait;
         }
 
-        public virtual void Wait() // waits until is turn
+        public virtual void Wait()
         {
             if (isTurn) { state = BattleStates.Action; }
+        }
+
+        public virtual void Reset() // sets the turn to false
+        {
+            isTurn = false;
+            Turn.isTurn = isTurn;
+            Turn.wasTurnPrev = true;
+
+            if (!isTurn) { state = BattleStates.Wait; }
         }
 
         public void ChangeBattleState(BattleStates newState)

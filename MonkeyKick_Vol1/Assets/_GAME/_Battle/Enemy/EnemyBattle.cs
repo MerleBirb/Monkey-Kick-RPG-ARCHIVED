@@ -13,9 +13,34 @@ namespace MonkeyKick.Battle
 {
     public class EnemyBattle : CharacterBattle
     {
-        public override void FixedUpdate()
+        public override void Update()
         {
-            base.FixedUpdate();
+            base.Update();
+
+            switch(state)
+            {
+                case BattleStates.EnterBattle: EnterBattle(); break;
+                case BattleStates.Wait: Wait(); break;
+                case BattleStates.Reset: Reset(); break;
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            switch(state)
+            {
+                case BattleStates.Action: Action(); break;
+            }
+        }
+
+        public override void Wait()
+        {
+            if (isTurn) { state = BattleStates.Action; }
+        }
+
+        private void Action() // use the skill chosen
+        {
+            Stats.skillList[0].Action(this, Turn.turnSystem.playerList[0]);
         }
     }
 }

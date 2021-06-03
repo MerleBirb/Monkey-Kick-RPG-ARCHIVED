@@ -28,6 +28,7 @@ namespace MonkeyKick.Battle
 
         private Vector2 movementMenu;
         private bool movePressed = false;
+        private bool selectPressed = false;
 
         #endregion
 
@@ -45,20 +46,31 @@ namespace MonkeyKick.Battle
             moveSelector.performed += context => movementMenu = context.ReadValue<Vector2>();
         }
 
-        public override void FixedUpdate()
+        // separate battle logic between normal update and fixed update
+
+        public override void Update()
         {
-            base.FixedUpdate();
+            base.Update();
+            CheckInput();
 
             switch(state)
             {
                 case BattleStates.EnterBattle: EnterBattle(); break;
                 case BattleStates.Wait: Wait(); break;
                 case BattleStates.NavigateMenu: NavigateMenu(); break;
+                case BattleStates.Reset: Reset(); break;
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            switch(state)
+            {
                 case BattleStates.Action: Action(); break;
             }
         }
 
-        public override void Wait()
+        public override void Wait() // wait until it's the character's turn
         {
             if (isTurn)
             {
@@ -102,7 +114,7 @@ namespace MonkeyKick.Battle
                 movePressed = false;
             }
 
-            if (select.triggered)
+            if (selectPressed)
             {
                 switch(menuChoice.Variable.Value)
                 {
@@ -113,9 +125,14 @@ namespace MonkeyKick.Battle
             }
         }
 
-        private void Action()
+        private void Action() // use the skill chosen
         {
             Stats.skillList[0].Action(this, Turn.turnSystem.enemyList[0]);
+        }
+
+        private void CheckInput()
+        {
+            selectPressed = select.triggered;
         }
 
         private void OnEnable() => input.BattleMenu.Enable();

@@ -3,6 +3,8 @@
     "rootNamespace": "MonkeyKick.UI",
     "references": [
         "GUID:097b01736e2c69f4f9b7a13f30fa1382",
+        "GUID:8ccce24b68511f64fab3295d2a41eb95",
+        "GUID:b407055ee9ed77c40bb59d3197f43037",
         "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
