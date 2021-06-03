@@ -16,13 +16,14 @@ namespace MonkeyKick.Battle
     public abstract class CharacterBattle : MonoBehaviour
     {
         [SerializeField] private GameStateData Game;
-        private bool isTurn = false;
 
         protected BattleStates state;
+        protected bool isTurn = false;
 
-        public Rigidbody rb;
+        [HideInInspector] public bool finishAction = false;
+        [HideInInspector] public Rigidbody rb;
         public CharacterInformation Stats;
-        [ReadOnly] public TurnClass Turn;
+        [HideInInspector] public TurnClass Turn; // stores turn information
 
         public virtual void Awake()
         {
@@ -31,7 +32,7 @@ namespace MonkeyKick.Battle
 
         public virtual void Start()
         {
-            if (!Game.CompareGameState(GameStates.Battle)) { this.enabled = false; }
+            if (!Game.CompareGameState(GameStates.Battle)) { enabled = false; }
             else
             {
                 state = BattleStates.EnterBattle;
@@ -46,25 +47,21 @@ namespace MonkeyKick.Battle
             }
         }
 
-        public virtual void Update()
+        public virtual void FixedUpdate()
         {
             if (!Game.CompareGameState(GameStates.Battle)) { this.enabled = false; }
+
+            if (isTurn != Turn.isTurn) { isTurn = Turn.isTurn; }
         }
 
-        public virtual void EnterBattle()
+        public virtual void EnterBattle() // sets the initial state
         {
             state = BattleStates.Wait;
         }
 
-        public virtual void Wait()
+        public virtual void Wait() // waits until is turn
         {
-            isTurn = Turn.isTurn;
-            if (isTurn) { state = BattleStates.Active; }
-        }
-
-        public virtual void Active()
-        {
-            
+            if (isTurn) { state = BattleStates.Action; }
         }
 
         public void ChangeBattleState(BattleStates newState)

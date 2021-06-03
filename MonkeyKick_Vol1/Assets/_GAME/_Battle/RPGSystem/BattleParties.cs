@@ -26,8 +26,6 @@ namespace MonkeyKick.Battle
 
             PlayerParty = null;
             PlayerParty = _newParty;
-
-            Debug.Log(">>> PLAYER PARTY COUNT: " + PlayerParty.CharacterList.Count);
         }
 
         public static void SetEnemyParty(CharacterPartyData _newParty)
@@ -36,8 +34,6 @@ namespace MonkeyKick.Battle
 
             EnemyParty = null;
             EnemyParty = _newParty;
-
-            Debug.Log(">>> ENEMY PARTY COUNT: " + EnemyParty.CharacterList.Count);
         }
 
         public static void ClearPlayerParty() { PlayerParty = null; }

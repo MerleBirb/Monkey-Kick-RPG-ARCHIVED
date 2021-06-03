@@ -13,9 +13,9 @@ namespace MonkeyKick.Battle
 {
     public class EnemyBattle : CharacterBattle
     {
-        public override void Update()
+        public override void FixedUpdate()
         {
-            base.Update();
+            base.FixedUpdate();
         }
     }
 }

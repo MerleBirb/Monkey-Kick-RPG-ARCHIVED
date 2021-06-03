@@ -5,59 +5,85 @@ using UnityEngine;
 namespace MonkeyKick.Battle
 {
     [CreateAssetMenu(menuName = "Skills/Damage Skills/Placeholder Damage Skill", fileName = "Placeholder Attack")]
-    public class DamageSkill : ScriptableObject, ISkill
+    public class DamageSkill : Skill
     {
-        [SerializeField] private string skillName;
-        [Multiline, SerializeField] private string skillDescription;
-        [SerializeField] private CharacterStatReference damageStat;
+        [SerializeField] private int damageValue;
 
-        private float speed = 3f;
+        private float speed = 10f;
 
-        public void Action(CharacterBattle _actor, CharacterBattle _target)
+        private enum SkillState
         {
-            bool _finishedAttack = false;
+            WaitingToBegin,
+            BeginSequence,
+            ActionSequence,
+            ReturnFromSequence,
+            EndSequence
+        }
 
-            var _actorPos = _actor.transform.position;
-            var _targetPos = _target.transform.position - new Vector3(-1.2f, 0f, 0f);
+        [SerializeField] private SkillState sequence;
 
-            if ((_actorPos != _targetPos) && !_finishedAttack)
+        public override void Action(CharacterBattle _actor, CharacterBattle _target)
+        {
+            switch(sequence)
             {
-                Vector3 pos = Vector3.MoveTowards(_actorPos, _targetPos, speed * Time.deltaTime);
-                _actor.rb.MovePosition(pos);
+                case SkillState.WaitingToBegin:
+                {
+                    if (!_actor.finishAction) { sequence = SkillState.BeginSequence; }
 
-                Damage(_target.Stats.CurrentHP.Stat);
-                _finishedAttack = true;
+                    break;
+                }
+
+                case SkillState.BeginSequence:
+                {
+                    var _targetPos = new Vector3(_target.transform.position.x - 1f, _target.transform.position.y, _target.transform.position.z);
+                    bool _atTheEnemyLocation = _actor.transform.position != _targetPos;
+
+                    if(_atTheEnemyLocation) {_actor.rb.velocity = new Vector3(speed, _actor.rb.velocity.y, _actor.rb.velocity.z); }
+                    else { sequence = SkillState.ActionSequence; }
+
+                    break;
+                }
+
+                case SkillState.ActionSequence:
+                {
+                    Damage(_target.Stats.CurrentHP);
+                    sequence = SkillState.ReturnFromSequence;
+
+                    break;
+                }
+
+                case SkillState.ReturnFromSequence:
+                {
+                        bool _backAtBattlePosition = _actor.transform.position.x != _actor.Stats.battlePos.x;
+                        if (_backAtBattlePosition) { _actor.rb.velocity = new Vector3(-speed, _actor.rb.velocity.y, _actor.rb.velocity.z); }
+                    else
+                    {
+                        _actor.rb.velocity = Vector3.zero;
+                        sequence = SkillState.EndSequence;
+                    }
+
+                    break;
+                }
+
+                case SkillState.EndSequence:
+                {
+                    _actor.finishAction = true;
+                    sequence = SkillState.BeginSequence;
+                    _actor.ChangeBattleState(BattleStates.Wait);
+
+                    break;
+                }
             }
-
-            if (_finishedAttack && (_actorPos != _actor.Stats.battlePos))
-            {
-                Vector3 pos = Vector3.MoveTowards(_actorPos, _actor.Stats.battlePos, speed * Time.deltaTime);
-                _actor.rb.MovePosition(pos);
-            }
-            else if (_finishedAttack)
-            {
-                _actor.ChangeBattleState(BattleStates.Wait);
-            }
         }
 
-        public string GetName()
+        public int GetDamage()
         {
-            return skillName;
+            return damageValue;
         }
 
-        public string GetDescription()
+        private void Damage(CharacterStatReference _targetHP)
         {
-            return skillDescription;
-        }
-
-        public int GetValue()
-        {
-            return damageStat.Stat.Value;
-        }
-
-        private void Damage(CharacterStat _targetHP)
-        {
-            _targetHP.Value -= damageStat.Stat.Value;
+            _targetHP.ChangeStat(-damageValue);
         }
     }
 }

@@ -148,8 +148,8 @@ public class TripleTuraKick : Skill
                     {
                         player.state = PlayerBattleScript.BattleStates.RETURN;
                         Debug.Log("KICK IS OVER");
-                        state = KickStates.SKILL_START;                      
-                    }                  
+                        state = KickStates.SKILL_START;
+                    }
 
                     break;
                 }

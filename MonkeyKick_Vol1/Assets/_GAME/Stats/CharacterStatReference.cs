@@ -5,6 +5,7 @@ Description:
 - Saves a reference of the Scriptable Object of a Character Stat.
 - Special thanks to Ryan Hipple for this approach.
 
+Author: Merlebirb
 */
 
 using System;
@@ -31,6 +32,12 @@ namespace MonkeyKick.Stats
         public CharacterStat Stat
         {
             get { return UseConstant ? ConstantValue : Variable.Stat; }
+        }
+
+        public void ChangeStat(int changeByValue)
+        {
+            if (UseConstant) { ConstantValue.BaseValue += changeByValue; }
+            else { Variable.Stat.BaseValue += changeByValue; }
         }
     }
 }

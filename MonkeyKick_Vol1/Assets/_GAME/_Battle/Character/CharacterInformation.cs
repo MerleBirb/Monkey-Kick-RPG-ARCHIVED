@@ -37,7 +37,7 @@ namespace MonkeyKick.Battle
 
         public Vector3 battlePos; // neutral position during battle
 
-        public List<ISkill> skillList;
+        public List<Skill> skillList;
 
         public virtual void OnValidate()
         {

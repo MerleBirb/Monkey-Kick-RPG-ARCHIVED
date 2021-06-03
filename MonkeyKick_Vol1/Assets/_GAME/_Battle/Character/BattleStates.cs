@@ -12,7 +12,7 @@ namespace MonkeyKick.Battle
     {
         EnterBattle,
         Wait,
-        Active,
+        NavigateMenu,
         Targeting,
         Action,
         Counter,

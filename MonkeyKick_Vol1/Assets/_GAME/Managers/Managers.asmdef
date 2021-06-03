@@ -1,6 +1,6 @@
 {
     "name": "Managers",
-    "rootNamespace": "",
+    "rootNamespace": "MonkeyKick.Managers",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

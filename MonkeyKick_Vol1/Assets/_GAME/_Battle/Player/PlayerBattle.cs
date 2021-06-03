@@ -10,6 +10,7 @@ Author: Merlebirb
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MonkeyKick.Overworld;
+using MonkeyKick.References;
 
 namespace MonkeyKick.Battle
 {
@@ -19,13 +20,14 @@ namespace MonkeyKick.Battle
 
         #region CONTROLS
 
+        [SerializeField] private IntReference menuChoice;
+
         private InputAction moveSelector;
         private InputAction select;
         private InputAction cancel;
 
+        private Vector2 movementMenu;
         private bool movePressed = false;
-        private bool selectPressed = false;
-        private bool cancelPressed = false;
 
         #endregion
 
@@ -36,17 +38,88 @@ namespace MonkeyKick.Battle
             input = new PlayerControls();
             InputSystem.pollingFrequency = 180;
 
-            // continue here
+            moveSelector = input.BattleMenu.MoveSelector;
+            select = input.BattleMenu.Select;
+            cancel = input.BattleMenu.Cancel;
+
+            moveSelector.performed += context => movementMenu = context.ReadValue<Vector2>();
         }
 
-        private void OnEnable()
+        public override void FixedUpdate()
         {
-            input.BattleMenu.Enable();
+            base.FixedUpdate();
+
+            switch(state)
+            {
+                case BattleStates.EnterBattle: EnterBattle(); break;
+                case BattleStates.Wait: Wait(); break;
+                case BattleStates.NavigateMenu: NavigateMenu(); break;
+                case BattleStates.Action: Action(); break;
+            }
         }
 
-        private void OnDisable()
+        public override void Wait()
         {
-            input.BattleMenu.Disable();
+            if (isTurn)
+            {
+                menuChoice.Variable.Value = 0;
+                state = BattleStates.NavigateMenu;
+            }
         }
+
+        private void NavigateMenu() // navigates through the battle menu
+        {
+            const float _deadZone = 0.5f;
+
+            #region MENU OPTIONS
+
+            const int FIGHT = 0;
+            const int CHARGE = 1;
+            const int ITEMS = 2;
+
+            #endregion
+
+            if(finishAction) finishAction = false;
+
+            if (movementMenu.y < -_deadZone)
+            {
+                if (!movePressed)
+                {
+                    menuChoice.Variable.Value++;
+                    movePressed = true;
+                }
+            }
+            else if (movementMenu.y > _deadZone)
+            {
+                if (!movePressed)
+                {
+                    menuChoice.Variable.Value--;
+                    movePressed = true;
+                }
+            }
+            else
+            {
+                movePressed = false;
+            }
+
+            if (select.triggered)
+            {
+                switch(menuChoice.Variable.Value)
+                {
+                    case FIGHT: state = BattleStates.Action; break;
+                    case CHARGE: break;
+                    case ITEMS: break;
+                }
+            }
+        }
+
+        private void Action()
+        {
+            Stats.skillList[0].Action(this, Turn.turnSystem.enemyList[0]);
+        }
+
+        private void OnEnable() => input.BattleMenu.Enable();
+
+        private void OnDisable() => input.BattleMenu.Disable();
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "Stats",
-    "rootNamespace": "",
+    "rootNamespace": "MonkeyKick.Stats",
     "references": [
         "GUID:d2017b195950c044dbba70a04bb21e80"
     ],

@@ -658,6 +658,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 27c65f9078c828048962dde13aea4297, type: 2}
     - target: {fileID: 882795103079985091, guid: dc9512ef8695fa6408cf87a18af27b9a, type: 3}
+      propertyPath: battleScene
+      value: Debug01_TestBattle
+      objectReference: {fileID: 0}
+    - target: {fileID: 882795103079985091, guid: dc9512ef8695fa6408cf87a18af27b9a, type: 3}
       propertyPath: battleParties
       value: 
       objectReference: {fileID: 11400000, guid: 3292d69833b3fae42954cc31ed21b96d, type: 2}
@@ -738,7 +742,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29596
+  m_Name: pb_Mesh25330
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

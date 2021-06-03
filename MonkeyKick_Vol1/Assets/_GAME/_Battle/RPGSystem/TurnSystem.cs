@@ -28,10 +28,10 @@ namespace MonkeyKick.Battle
 
         #endregion
 
-        [ReadOnly, SerializeField] private List<CharacterBattle> allCharacterList;
-        [ReadOnly, SerializeField] private List<CharacterBattle> playerList;
-        [ReadOnly, SerializeField] private List<CharacterBattle> enemyList;
-        [ReadOnly, SerializeField] private List<TurnClass> turnOrder;
+        [ReadOnly] public List<CharacterBattle> allCharacterList;
+        [ReadOnly] public List<CharacterBattle> playerList;
+        [ReadOnly] public List<CharacterBattle> enemyList;
+        [ReadOnly] public List<TurnClass> turnOrder;
         public List<TurnClass> GetTurnOrder() { return turnOrder; }
 
         [ReadOnly] public CharacterBattle ActiveCharacter;

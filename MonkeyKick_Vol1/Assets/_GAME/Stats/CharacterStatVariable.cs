@@ -5,6 +5,7 @@ Description:
 - Saves a Character Stat as a Scriptable Object.
 - Special thanks to Ryan Hipple for this approach.
 
+Author: Merlebirb
 */
 
 using UnityEngine;

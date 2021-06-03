@@ -17,7 +17,7 @@ namespace MonkeyKick.Battle
     public class EnemyOverworld : CharacterOverworld
     {
         private CharacterParty enemyParty;
-        [SerializeField] private SceneReference battleScene;
+        [SerializeField] private string battleScene;
 
         public override void Awake()
         {
@@ -28,16 +28,19 @@ namespace MonkeyKick.Battle
 
         private void OnTriggerEnter(Collider _col)
         {
-            if (_col.CompareTag("Player"))
+            if (Game.CompareGameState(GameStates.Overworld))
             {
-                // save the parties into the battle parties data
-                var _playerParty = _col.GetComponent<CharacterParty>().Party;
+                if (_col.CompareTag("Player"))
+                {
+                    // save the parties into the battle parties data
+                    var _playerParty = _col.GetComponent<CharacterParty>().Party;
 
-                BattleParties.SetPlayerParty(_playerParty);
-                BattleParties.SetEnemyParty(enemyParty.Party);
+                    BattleParties.SetPlayerParty(_playerParty);
+                    BattleParties.SetEnemyParty(enemyParty.Party);
 
-                Game.SetGameState(GameStates.Battle);
-                SceneManager.LoadScene(battleScene);
+                    Game.SetGameState(GameStates.Battle);
+                    SceneManager.LoadScene(battleScene);
+                }
             }
         }
     }
