@@ -974,7 +974,7 @@ MonoBehaviour:
   - {fileID: 43104373}
   - {fileID: 808835968}
   - {fileID: 2114868595}
-  xOffset: 48
+  xOffset: 104
 --- !u!1 &8202276510249723259
 GameObject:
   m_ObjectHideFlags: 0
