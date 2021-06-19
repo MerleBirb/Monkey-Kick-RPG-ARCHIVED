@@ -907,21 +907,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1987448158636684408, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: Target
+    - target: {fileID: 831006529630981425, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
+      propertyPath: focus
       value: 
       objectReference: {fileID: 1266392270}
-    - target: {fileID: 1987448158636684408, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1266392270}
-    - target: {fileID: 4240403128028615958, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: m_FollowOffset.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4240403128028615958, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: m_FollowOffset.z
-      value: -4
+    - target: {fileID: 831006529630981425, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
+      propertyPath: focusCentering
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 4240403128900377937, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
       propertyPath: m_RootOrder
@@ -970,14 +962,6 @@ PrefabInstance:
     - target: {fileID: 4240403128900377938, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
       propertyPath: m_Name
       value: ---OverworldConstants---
-      objectReference: {fileID: 0}
-    - target: {fileID: 4240403129420363704, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4240403129420363704, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74b147b83ad3c554796cfc604822858b, type: 3}

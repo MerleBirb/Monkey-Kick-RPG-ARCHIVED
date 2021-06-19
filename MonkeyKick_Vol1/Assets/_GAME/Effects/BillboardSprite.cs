@@ -4,6 +4,7 @@
 Description: 
 - Makes the sprite rotate and face the camera. 
 
+Author: Merlebirb
 */
 
 using UnityEngine;
@@ -12,20 +13,20 @@ namespace MonkeyKick.Effects
 {
     public class BillboardSprite : MonoBehaviour
     {
-        private Camera mainCamera; // save the main camera
+        private Camera _mainCamera; // save the main camera
 
         // Start is called before the first frame update
         private void Start()
         {
-            mainCamera = Camera.main;
+            _mainCamera = Camera.main;
         }
 
         // LateUpdate is called once at the end of each frame
         private void LateUpdate()
         {
-            if (transform.rotation != mainCamera.transform.rotation)
+            if (transform.rotation != _mainCamera.transform.rotation)
             {
-                transform.rotation = mainCamera.transform.rotation;
+                transform.rotation = _mainCamera.transform.rotation;
             }
         }
     }
