@@ -17,6 +17,7 @@ namespace MonkeyKick.Overworld
         [SerializeField] protected GameStateData Game;
 
         protected Vector2 movement;
+        [SerializeField] private Transform characterSpace;
         [SerializeField] protected float moveSpeed;
 
         protected IPhysics physics;
@@ -46,13 +47,16 @@ namespace MonkeyKick.Overworld
                 ApplyPhysics(moveSpeed);
             }
         }
+
         public void ApplyPhysics(float _speed)
         {
-            rb.velocity = physics.Movement(movement, _speed, rb.velocity.y);
+            if (characterSpace) { rb.velocity = physics.Movement(movement, _speed, rb.velocity.y, characterSpace); }
+            else { rb.velocity = physics.Movement(movement, _speed, rb.velocity.y); }
 
             physics.UpdatePhysicsCount(SnapToGround());
             physics.ClearPhysicsCount();
         }
+
         public bool SnapToGround()
         {
             float _speed = rb.velocity.magnitude;

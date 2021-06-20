@@ -258,6 +258,10 @@ MonoBehaviour:
   focus: {fileID: 0}
   focusRadius: 0.4
   distance: 5
+  focusCentering: 0.95
+  rotationSpeed: 90
+  minVerticalAngle: 15
+  maxVerticalAngle: 30
 --- !u!1 &5117579759773501991
 GameObject:
   m_ObjectHideFlags: 0

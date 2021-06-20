@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Game: {fileID: 11400000, guid: f3e6f635e4d026d44982cd6b5ab7b7fb, type: 2}
+  characterSpace: {fileID: 0}
   moveSpeed: 3
   sprintSpeed: 5
   jumpHeight: 8
@@ -262,7 +263,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6702410976217091622, guid: f6371c9aa9eb0c44c8a2e1fa55fa6281, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6702410976217091622, guid: f6371c9aa9eb0c44c8a2e1fa55fa6281, type: 3}
       propertyPath: m_LocalRotation.w

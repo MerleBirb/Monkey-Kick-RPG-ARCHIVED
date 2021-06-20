@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &24155047 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4240403129420363704, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
+  m_PrefabInstance: {fileID: 4240403128536324907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &154226932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -182,6 +187,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4055757059798671378, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
+      propertyPath: characterSpace
+      value: 
+      objectReference: {fileID: 24155047}
     - target: {fileID: 5656932086517781852, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
       propertyPath: Party
       value: 
@@ -914,6 +923,14 @@ PrefabInstance:
     - target: {fileID: 831006529630981425, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
       propertyPath: focusCentering
       value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 831006529630981425, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
+      propertyPath: maxVerticalAngle
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 831006529630981425, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
+      propertyPath: minVerticalAngle
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4240403128900377937, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
       propertyPath: m_RootOrder

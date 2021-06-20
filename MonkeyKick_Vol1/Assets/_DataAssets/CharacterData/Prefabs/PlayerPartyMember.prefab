@@ -79,6 +79,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Game: {fileID: 0}
+  finishAction: 0
+  rb: {fileID: 0}
   Stats: {fileID: 0}
   Turn:
     turnSystem: {fileID: 0}
@@ -88,6 +90,10 @@ MonoBehaviour:
     charName: 
     charSpeed:
       BaseValue: 0
+  menuChoice:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
 --- !u!114 &6488277768684319111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6702410976217091622, guid: f6371c9aa9eb0c44c8a2e1fa55fa6281, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6702410976217091622, guid: f6371c9aa9eb0c44c8a2e1fa55fa6281, type: 3}
       propertyPath: m_LocalRotation.w

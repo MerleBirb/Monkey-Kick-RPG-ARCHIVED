@@ -25,11 +25,26 @@ namespace MonkeyKick.Overworld
             float _xMove = _movement.x * _currentSpeed;
             float _zMove = _movement.y * _currentSpeed;
 
-            Vector3 _movement3D = new Vector3(_xMove, _yVal, _zMove);
+            Vector3 desiredVelocity = new Vector3(_xMove, _yVal, _zMove);
 
             isMoving = Mathf.Abs(_movement.x) > 0 || Mathf.Abs(_movement.y) > 0;
 
-            return _movement3D;
+            return desiredVelocity;
+        }
+
+        public Vector3 Movement(Vector2 _movement, float _currentSpeed, float _yVal, Transform newDirection)
+        {
+            Vector3 forward = newDirection.forward;
+            forward.y = 0f;
+            forward.Normalize();
+
+            Vector3 right = newDirection.right;
+            right.y = 0f;
+            right.Normalize();
+
+            Vector3 desiredVelocity = (forward * _movement.y + right * _movement.x) * _currentSpeed;
+            Vector3 newVelocity = new Vector3(desiredVelocity.x, _yVal, desiredVelocity.z);
+            return newVelocity;
         }
 
         public bool OnGround()

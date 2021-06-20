@@ -1,0 +1,33 @@
+{
+    "name": "CameraControls",
+    "maps": [
+        {
+            "name": "Overworld",
+            "id": "0bb8b629-843c-4ea2-bc17-2d640e008e2a",
+            "actions": [
+                {
+                    "name": "OrbitCamera",
+                    "type": "PassThrough",
+                    "id": "2603d25a-f87e-4b89-a37b-7629558e3f6c",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9ff256b4-3f24-4055-934e-80326d256ece",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OrbitCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

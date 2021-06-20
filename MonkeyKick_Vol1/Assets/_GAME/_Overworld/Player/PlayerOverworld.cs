@@ -103,7 +103,7 @@ namespace MonkeyKick.Overworld
                 if (physics.OnGround())
                 {
                     physics.SetStepsSinceLastAerial(0);
-                    rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
+                    rb.velocity += new Vector3(0f, jumpHeight, 0f);
                 }
 
                 hasPressedJump = false;
