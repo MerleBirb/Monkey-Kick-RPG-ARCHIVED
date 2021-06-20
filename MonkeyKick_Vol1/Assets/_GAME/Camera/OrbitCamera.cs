@@ -17,10 +17,29 @@ namespace MonkeyKick.CameraTools
     public class OrbitCamera : MonoBehaviour
     {
         private Vector3 _focusPoint;
+        private Camera _camera;
         private CameraControls _input;
         private InputAction _orbitCamera;
         private Vector2 _orbitInput;
         private Vector2 _orbitAngles = new Vector2(22.5f, 0f);
+        public static float OrbitDirection;
+
+        ///<summary>
+        /// A box cast requires a 3D vector that contains the half extends of a box, which means half its width, height, and depth.
+        /// Half the height can be found by taking the tangent of half the camera's field-of-view angle in radians, scaled by its near clip plane distance.
+        /// Half the width is that scaled by the camera's aspect ratio. The depth of the box is zero. Let's calculate this in a convenient property.
+        ///<summary/>
+        private Vector3 CameraHalfExtends
+        {
+            get
+            {
+                Vector3 halfExtends;
+                halfExtends.y = _camera.nearClipPlane * Mathf.Tan(0.5f * Mathf.Deg2Rad * _camera.fieldOfView);
+                halfExtends.x = halfExtends.y * _camera.aspect;
+                halfExtends.z = 0f;
+                return halfExtends;
+            }
+        }
 
         [SerializeField] private Transform focus = default;
         [SerializeField, Min(0f)] private float focusRadius = 1f;
@@ -29,6 +48,7 @@ namespace MonkeyKick.CameraTools
         [SerializeField, Range(1f, 360f)] private float rotationSpeed = 90f; // degrees per second
         [SerializeField, Range(-89f, 89f)] private float minVerticalAngle = 0f;
         [SerializeField, Range(-89f, 89f)] private float maxVerticalAngle = 45f;
+        [SerializeField] private LayerMask obstructionMask = -1;
 
         private void Awake()
         {
@@ -40,6 +60,9 @@ namespace MonkeyKick.CameraTools
 
             _focusPoint = focus.position;
             transform.localRotation = Quaternion.Euler(_orbitAngles);
+
+            _camera = GetComponent<Camera>();
+            OrbitDirection = _orbitAngles.y;
         }
 
         private void LateUpdate()
@@ -65,17 +88,33 @@ namespace MonkeyKick.CameraTools
             Quaternion lookRotation = Quaternion.Euler(_orbitAngles);
             Vector3 lookDirection = transform.forward;
             Vector3 lookPosition = _focusPoint - (lookDirection * distance);
+
+            Vector3 rectOffset = lookDirection * _camera.nearClipPlane;
+            Vector3 rectPosition = lookPosition + rectOffset;
+            Vector3 castFrom = focus.position;
+            Vector3 castLine = rectPosition - castFrom;
+            float castDistance = castLine.magnitude;
+            Vector3 castDirection = castLine / castDistance;
+
+            // pulls the camera forward along its look direction if something ends up in between the camera and its focus point
+            if (Physics.BoxCast(castFrom, CameraHalfExtends, castDirection, out RaycastHit hit, lookRotation, castDistance, obstructionMask))
+            {
+                rectPosition = castFrom + (castDirection * hit.distance);
+			    lookPosition = rectPosition - rectOffset;
+            }
+
             transform.SetPositionAndRotation(lookPosition, lookRotation);
         }
 
         private bool ManualRotation()
         {
-            Vector2 unreversedOrbitInput = new Vector2(_orbitInput.y, -_orbitInput.x); // to unreverse the camera control
+            Vector2 unreversedOrbitInput = new Vector2(-_orbitInput.y, -_orbitInput.x); // to unreverse the camera control
             const float e = 0.1f;
 
             if (_orbitInput.x < -e || _orbitInput.x > e || _orbitInput.y < -e || _orbitInput.y > e)
             {
                 _orbitAngles += rotationSpeed * Time.unscaledDeltaTime * unreversedOrbitInput;
+                OrbitDirection = unreversedOrbitInput.x;
                 return true;
             }
 

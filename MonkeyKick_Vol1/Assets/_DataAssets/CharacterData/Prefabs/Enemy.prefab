@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2152875904321214173}
   - component: {fileID: 4275144333275975527}
   - component: {fileID: 2338293684575577699}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 2058690368216125982}
   - component: {fileID: 1563540908272846803}
   - component: {fileID: 296387247620423216}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -257,6 +257,10 @@ PrefabInstance:
     - target: {fileID: 354535071308288868, guid: f6371c9aa9eb0c44c8a2e1fa55fa6281, type: 3}
       propertyPath: m_Name
       value: Shadow
+      objectReference: {fileID: 0}
+    - target: {fileID: 354535071308288868, guid: f6371c9aa9eb0c44c8a2e1fa55fa6281, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6702410976217091622, guid: f6371c9aa9eb0c44c8a2e1fa55fa6281, type: 3}
       propertyPath: m_RootOrder

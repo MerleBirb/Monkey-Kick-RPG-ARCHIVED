@@ -13,7 +13,7 @@ namespace MonkeyKick.Overworld
 {
     public class CharacterPhysics : MonoBehaviour, IPhysics
     {
-        private bool isMoving = false;
+        [HideInInspector] public bool isMoving = false;
         [SerializeField] private float radius = 0.55f; // for raycasts, ground check, etc
         [SerializeField] private LayerMask groundLayer;
 
@@ -26,8 +26,6 @@ namespace MonkeyKick.Overworld
             float _zMove = _movement.y * _currentSpeed;
 
             Vector3 desiredVelocity = new Vector3(_xMove, _yVal, _zMove);
-
-            isMoving = Mathf.Abs(_movement.x) > 0 || Mathf.Abs(_movement.y) > 0;
 
             return desiredVelocity;
         }

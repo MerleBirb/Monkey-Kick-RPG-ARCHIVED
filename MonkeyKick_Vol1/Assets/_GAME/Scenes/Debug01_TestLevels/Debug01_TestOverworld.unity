@@ -920,18 +920,6 @@ PrefabInstance:
       propertyPath: focus
       value: 
       objectReference: {fileID: 1266392270}
-    - target: {fileID: 831006529630981425, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: focusCentering
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 831006529630981425, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: maxVerticalAngle
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 831006529630981425, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: minVerticalAngle
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 4240403128900377937, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
       propertyPath: m_RootOrder
       value: 0

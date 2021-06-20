@@ -22,6 +22,8 @@ namespace MonkeyKick.Overworld
 
         protected IPhysics physics;
         protected Rigidbody rb;
+        protected Animator _anim;
+        protected bool _isMoving = false;
 
         public virtual void Awake()
         {
@@ -30,6 +32,7 @@ namespace MonkeyKick.Overworld
             {
                 rb = GetComponent<Rigidbody>();
                 physics = GetComponent<IPhysics>();
+                _anim = GetComponentInChildren<Animator>();
             }
         }
 
@@ -55,6 +58,8 @@ namespace MonkeyKick.Overworld
 
             physics.UpdatePhysicsCount(SnapToGround());
             physics.ClearPhysicsCount();
+
+            _isMoving = Mathf.Abs(movement.x) > 0 || Mathf.Abs(movement.y) > 0;
         }
 
         public bool SnapToGround()

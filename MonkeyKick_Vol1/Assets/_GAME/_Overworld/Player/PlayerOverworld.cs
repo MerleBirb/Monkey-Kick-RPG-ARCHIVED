@@ -9,6 +9,8 @@ Author: Merlebirb
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MonkeyKick.QoL;
+using MonkeyKick.CameraTools;
 
 namespace MonkeyKick.Overworld
 {
@@ -26,6 +28,13 @@ namespace MonkeyKick.Overworld
 
         [SerializeField] private float sprintSpeed; // moveSpeed while sprint is pressed
         [SerializeField] private float jumpHeight;
+
+        #endregion
+
+        #region ANIMATIONS
+
+        private string _currentAnim;
+        const string IDLE = "Idle";
 
         #endregion
 
@@ -51,6 +60,7 @@ namespace MonkeyKick.Overworld
             base.Update();
 
             if (input != null) CheckForPlayerInput();
+            if (_anim != null) AnimatePlayer();
         }
 
         public override void FixedUpdate()
@@ -73,6 +83,15 @@ namespace MonkeyKick.Overworld
 
             ToggleSprint();
             PressedJump();
+        }
+
+        private void AnimatePlayer()
+        {
+            _anim.SetFloat("xDirection", movement.x);
+            _anim.SetFloat("zDirection", movement.y);
+
+            if (!_isMoving) { AnimQoL.PlayAnimation(_anim, _currentAnim, IDLE); }
+
         }
 
         private void ToggleSprint()
