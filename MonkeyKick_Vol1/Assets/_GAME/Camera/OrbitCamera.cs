@@ -8,8 +8,10 @@ Author: Merlebirb
 Special thanks to Catlike Coding!
 */
 
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MonkeyKick.QoL;
 
 namespace MonkeyKick.CameraTools
 {
@@ -22,7 +24,8 @@ namespace MonkeyKick.CameraTools
         private InputAction _orbitCamera;
         private Vector2 _orbitInput;
         private Vector2 _orbitAngles = new Vector2(22.5f, 0f);
-        public static float OrbitDirection;
+        public static int OrbitDirection;
+        public static bool IsOrbiting;
 
         ///<summary>
         /// A box cast requires a 3D vector that contains the half extends of a box, which means half its width, height, and depth.
@@ -62,7 +65,6 @@ namespace MonkeyKick.CameraTools
             transform.localRotation = Quaternion.Euler(_orbitAngles);
 
             _camera = GetComponent<Camera>();
-            OrbitDirection = _orbitAngles.y;
         }
 
         private void LateUpdate()
@@ -70,7 +72,8 @@ namespace MonkeyKick.CameraTools
             UpdateFocusPoint();
 
             Quaternion lookRotation;
-            if(ManualRotation())
+            IsOrbiting = ManualRotation();
+            if(IsOrbiting)
             {
                 ConstrainAngles();
                 lookRotation = Quaternion.Euler(_orbitAngles);
@@ -81,6 +84,7 @@ namespace MonkeyKick.CameraTools
             }
 
             OrbitAndLookAtFocus();
+            OrbitDirection = DirectionQoL.DetermineDirectionFromDegToInt(_orbitAngles.y);
         }
 
         private void OrbitAndLookAtFocus()
@@ -114,7 +118,6 @@ namespace MonkeyKick.CameraTools
             if (_orbitInput.x < -e || _orbitInput.x > e || _orbitInput.y < -e || _orbitInput.y > e)
             {
                 _orbitAngles += rotationSpeed * Time.unscaledDeltaTime * unreversedOrbitInput;
-                OrbitDirection = unreversedOrbitInput.x;
                 return true;
             }
 
@@ -139,6 +142,7 @@ namespace MonkeyKick.CameraTools
         private void UpdateFocusPoint()
         {
             Vector3 targetPoint = focus.position;
+            _focusPoint.y = focus.position.y;
 
             if (focusRadius > 0f)
             {

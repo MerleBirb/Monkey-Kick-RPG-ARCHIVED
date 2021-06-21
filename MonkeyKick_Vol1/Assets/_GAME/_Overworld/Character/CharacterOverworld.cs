@@ -8,7 +8,10 @@ Author: Merlebirb
 */
 
 using UnityEngine;
+using System;
 using MonkeyKick.Managers;
+using MonkeyKick.QoL;
+using MonkeyKick.CameraTools;
 
 namespace MonkeyKick.Overworld
 {
@@ -23,6 +26,10 @@ namespace MonkeyKick.Overworld
         protected IPhysics physics;
         protected Rigidbody rb;
         protected Animator _anim;
+        protected string _currentAnim;
+        protected Direction _directionState;
+        protected Vector2 _directionVector;
+        protected int _direction = 0;
         protected bool _isMoving = false;
 
         public virtual void Awake()
@@ -41,6 +48,7 @@ namespace MonkeyKick.Overworld
             if (!Game.CompareGameState(GameStates.Overworld)) { this.enabled = false; }
 
             physics?.CheckIfGravityShouldApply(rb);
+            DetermineDirectionState();
         }
 
         public virtual void FixedUpdate()
@@ -83,6 +91,23 @@ namespace MonkeyKick.Overworld
             }
 
             return true;
+        }
+
+        private void DetermineDirectionState()
+        {
+            int dir = OrbitCamera.OrbitDirection - _direction;
+
+            switch(dir)
+            {
+                case 0: { _directionState = Direction.South; break; }
+                case -1: case 7: { _directionState = Direction.SouthWest; break; }
+                case -2: case 6: { _directionState = Direction.West; break; }
+                case -3: case 5: { _directionState = Direction.NorthWest; break; }
+                case 4: case -4: { _directionState = Direction.North; break; }
+                case 3: case -5: { _directionState = Direction.NorthEast; break; }
+                case 2: case -6: { _directionState = Direction.East; break; }
+                case 1: case -7: { _directionState = Direction.SouthEast; break; }
+            }
         }
     }
 }

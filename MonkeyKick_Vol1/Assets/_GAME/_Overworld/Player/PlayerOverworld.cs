@@ -33,7 +33,6 @@ namespace MonkeyKick.Overworld
 
         #region ANIMATIONS
 
-        private string _currentAnim;
         const string IDLE = "Idle";
 
         #endregion
