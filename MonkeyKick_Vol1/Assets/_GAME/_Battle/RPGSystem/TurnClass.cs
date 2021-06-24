@@ -10,7 +10,6 @@ Author: Merlebirb
 using System;
 using UnityEngine;
 using Unity.Collections;
-using MonkeyKick.Managers;
 using MonkeyKick.Stats;
 
 namespace MonkeyKick.Battle

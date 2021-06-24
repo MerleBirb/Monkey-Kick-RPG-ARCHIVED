@@ -17,20 +17,20 @@ namespace MonkeyKick.Overworld
         [SerializeField] private float radius = 0.55f; // for raycasts, ground check, etc
         [SerializeField] private LayerMask groundLayer;
 
-        private int stepsSinceLastGrounded = 0;
-        private int stepsSinceLastAerial = 0;
+        private int _stepsSinceLastGrounded = 0;
+        private int _stepsSinceLastAerial = 0;
 
-        public Vector3 Movement(Vector2 _movement, float _currentSpeed, float _yVal)
+        public Vector3 Movement(Vector2 movement, float currentSpeed, float yVal)
         {
-            float _xMove = _movement.x * _currentSpeed;
-            float _zMove = _movement.y * _currentSpeed;
+            float xMove = movement.x * currentSpeed;
+            float zMove = movement.y * currentSpeed;
 
-            Vector3 desiredVelocity = new Vector3(_xMove, _yVal, _zMove);
+            Vector3 desiredVelocity = new Vector3(xMove, yVal, zMove);
 
             return desiredVelocity;
         }
 
-        public Vector3 Movement(Vector2 _movement, float _currentSpeed, float _yVal, Transform newDirection)
+        public Vector3 Movement(Vector2 movement, float currentSpeed, float yVal, Transform newDirection)
         {
             Vector3 forward = newDirection.forward;
             forward.y = 0f;
@@ -40,8 +40,8 @@ namespace MonkeyKick.Overworld
             right.y = 0f;
             right.Normalize();
 
-            Vector3 desiredVelocity = (forward * _movement.y + right * _movement.x) * _currentSpeed;
-            Vector3 newVelocity = new Vector3(desiredVelocity.x, _yVal, desiredVelocity.z);
+            Vector3 desiredVelocity = (forward * movement.y + right * movement.x) * currentSpeed;
+            Vector3 newVelocity = new Vector3(desiredVelocity.x, yVal, desiredVelocity.z);
             return newVelocity;
         }
 
@@ -50,31 +50,31 @@ namespace MonkeyKick.Overworld
             return Physics.Raycast(transform.position, Vector3.down, radius, groundLayer);
         }
 
-        public void CheckIfGravityShouldApply(Rigidbody _rb)
+        public void CheckIfGravityShouldApply(Rigidbody rb)
         {
-            _rb.useGravity = !OnGround();
+            rb.useGravity = !OnGround();
         }
 
-        public void UpdatePhysicsCount(bool _additionalChecks)
+        public void UpdatePhysicsCount(bool additionalChecks)
         {
             // useful for updating how long player has been on ground or air
-            stepsSinceLastGrounded++;
-            stepsSinceLastAerial++;
+            _stepsSinceLastGrounded++;
+            _stepsSinceLastAerial++;
 
-            if (OnGround() || _additionalChecks)
+            if (OnGround() || additionalChecks)
             {
-                stepsSinceLastGrounded = 0;
+                _stepsSinceLastGrounded = 0;
             }
         }
         public void ClearPhysicsCount()
         {
-            if (stepsSinceLastGrounded > 10) { stepsSinceLastGrounded = 10; }
-            if (stepsSinceLastAerial > 10) { stepsSinceLastAerial = 10; }
+            if (_stepsSinceLastGrounded > 10) { _stepsSinceLastGrounded = 10; }
+            if (_stepsSinceLastAerial > 10) { _stepsSinceLastAerial = 10; }
         }
 
-        public int GetStepsSinceLastGrounded() { return stepsSinceLastGrounded; }
-        public void SetStepsSinceLastGrounded(int newSteps) { stepsSinceLastGrounded = newSteps; }
-        public int GetStepsSinceLastAerial() { return stepsSinceLastAerial; }
-        public void SetStepsSinceLastAerial(int newSteps) { stepsSinceLastAerial = newSteps; }
+        public int GetStepsSinceLastGrounded() { return _stepsSinceLastGrounded; }
+        public void SetStepsSinceLastGrounded(int newSteps) { _stepsSinceLastGrounded = newSteps; }
+        public int GetStepsSinceLastAerial() { return _stepsSinceLastAerial; }
+        public void SetStepsSinceLastAerial(int newSteps) { _stepsSinceLastAerial = newSteps; }
     }
 }

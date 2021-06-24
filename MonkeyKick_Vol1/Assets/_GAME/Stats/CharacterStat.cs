@@ -22,39 +22,39 @@ namespace MonkeyKick.Stats
         {
             get
             {
-                if (isDirty || BaseValue != lastBaseValue)
+                if (_isDirty || BaseValue != _lastBaseValue)
                 {
-                    lastBaseValue = BaseValue;
+                    _lastBaseValue = BaseValue;
                     _value = CalculateFinalValue();
-                    isDirty = false;
+                    _isDirty = false;
                 }
 
                 return _value;
             }
             set
             {
-                if (isDirty || BaseValue != lastBaseValue)
+                if (_isDirty || BaseValue != _lastBaseValue)
                 {
-                    lastBaseValue = BaseValue;
+                    _lastBaseValue = BaseValue;
                     _value = CalculateFinalValue();
-                    isDirty = true;
+                    _isDirty = true;
                 }
 
                 _value = value;
             }
         }
 
-        protected bool isDirty = true;
+        protected bool _isDirty = true;
         protected int _value;
-        protected int lastBaseValue = int.MinValue;
+        protected int _lastBaseValue = int.MinValue;
 
-        protected readonly List<StatModifier> statModifiers;
+        protected readonly List<StatModifier> _statModifiers;
         public readonly ReadOnlyCollection<StatModifier> StatModifiers;
 
         public CharacterStat()
         {
-            statModifiers = new List<StatModifier>();
-            StatModifiers = statModifiers.AsReadOnly();
+            _statModifiers = new List<StatModifier>();
+            StatModifiers = _statModifiers.AsReadOnly();
         }
 
         public CharacterStat(int baseValue) : this()
@@ -64,9 +64,9 @@ namespace MonkeyKick.Stats
 
         public virtual void AddModifier(StatModifier mod)
         {
-            isDirty = true;
-            statModifiers.Add(mod);
-            statModifiers.Sort(CompareModifierOrder);
+            _isDirty = true;
+            _statModifiers.Add(mod);
+            _statModifiers.Sort(CompareModifierOrder);
         }
 
         protected virtual int CompareModifierOrder(StatModifier a, StatModifier b)
@@ -78,9 +78,9 @@ namespace MonkeyKick.Stats
 
         public virtual bool RemoveModifier(StatModifier mod)
         {
-            if (statModifiers.Remove(mod))
+            if (_statModifiers.Remove(mod))
             {
-                isDirty = true;
+                _isDirty = true;
                 return true;
             }
 
@@ -91,13 +91,13 @@ namespace MonkeyKick.Stats
         {
             bool didRemove = false;
 
-            for (int i = statModifiers.Count - 1; i >= 0; i--)
+            for (int i = _statModifiers.Count - 1; i >= 0; i--)
             {
-                if (statModifiers[i].Source == source)
+                if (_statModifiers[i].Source == source)
                 {
-                    isDirty = true;
+                    _isDirty = true;
                     didRemove = true;
-                    statModifiers.RemoveAt(i);
+                    _statModifiers.RemoveAt(i);
                 }
             }
 
@@ -109,9 +109,9 @@ namespace MonkeyKick.Stats
             float finalValue = (float)BaseValue;
             float sumPercentAdd = 0;
 
-            for (int i = 0; i < statModifiers.Count; i++)
+            for (int i = 0; i < _statModifiers.Count; i++)
             {
-                StatModifier mod = statModifiers[i];
+                StatModifier mod = _statModifiers[i];
 
                 if (mod.Type == StatModType.Flat)
                 {
@@ -121,7 +121,7 @@ namespace MonkeyKick.Stats
                 {
                     sumPercentAdd += mod.Value;
 
-                    if (i + 1 >= statModifiers.Count || statModifiers[i + 1].Type != StatModType.PercentAdd)
+                    if (i + 1 >= _statModifiers.Count || _statModifiers[i + 1].Type != StatModType.PercentAdd)
                     {
                         finalValue *= 1 + sumPercentAdd;
                         sumPercentAdd = 0;

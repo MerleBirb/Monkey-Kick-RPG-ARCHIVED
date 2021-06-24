@@ -14,14 +14,14 @@ namespace MonkeyKick.CameraTools
 {
     public class FollowTarget : MonoBehaviour
     {
-        private CinemachineVirtualCamera cineCamera;
+        private CinemachineVirtualCamera _cineCamera;
 
         public Transform Target; // the object the camera is going to follow
 
         private void Awake()
         {
-            cineCamera = GetComponent<CinemachineVirtualCamera>();
-            cineCamera.Follow = Target;
+            _cineCamera = GetComponent<CinemachineVirtualCamera>();
+            _cineCamera.Follow = Target;
         }
     }
 }

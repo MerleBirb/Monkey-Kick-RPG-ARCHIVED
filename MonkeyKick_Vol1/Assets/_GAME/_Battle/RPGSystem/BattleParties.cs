@@ -20,20 +20,20 @@ namespace MonkeyKick.Battle
         public static CharacterPartyData GetPlayerParty() { return PlayerParty; }
         public static CharacterPartyData GetEnemyParty() { return EnemyParty; }
 
-        public static void SetPlayerParty(CharacterPartyData _newParty)
+        public static void SetPlayerParty(CharacterPartyData newParty)
         {
-            if (PlayerParty == _newParty) return;
+            if (PlayerParty == newParty) return;
 
             PlayerParty = null;
-            PlayerParty = _newParty;
+            PlayerParty = newParty;
         }
 
-        public static void SetEnemyParty(CharacterPartyData _newParty)
+        public static void SetEnemyParty(CharacterPartyData newParty)
         {
-            if (EnemyParty == _newParty) return;
+            if (EnemyParty == newParty) return;
 
             EnemyParty = null;
-            EnemyParty = _newParty;
+            EnemyParty = newParty;
         }
 
         public static void ClearPlayerParty() { PlayerParty = null; }

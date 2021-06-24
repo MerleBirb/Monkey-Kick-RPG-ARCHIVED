@@ -8,7 +8,6 @@ Author: Merlebirb
 */
 
 using UnityEngine;
-using System;
 using MonkeyKick.Managers;
 using MonkeyKick.QoL;
 using MonkeyKick.CameraTools;
@@ -19,12 +18,12 @@ namespace MonkeyKick.Overworld
     {
         [SerializeField] protected GameStateData Game;
 
-        protected Vector2 movement;
+        protected Vector2 _movement;
         [SerializeField] private Transform characterSpace;
         [SerializeField] protected float moveSpeed;
 
-        protected IPhysics physics;
-        protected Rigidbody rb;
+        protected IPhysics _physics;
+        protected Rigidbody _rb;
         protected Animator _anim;
         protected string _currentAnim;
         protected Direction _directionState;
@@ -37,8 +36,8 @@ namespace MonkeyKick.Overworld
             if (!Game.CompareGameState(GameStates.Overworld)) { this.enabled = false; }
             else
             {
-                rb = GetComponent<Rigidbody>();
-                physics = GetComponent<IPhysics>();
+                _rb = GetComponent<Rigidbody>();
+                _physics = GetComponent<IPhysics>();
                 _anim = GetComponentInChildren<Animator>();
             }
         }
@@ -47,47 +46,47 @@ namespace MonkeyKick.Overworld
         {
             if (!Game.CompareGameState(GameStates.Overworld)) { this.enabled = false; }
 
-            physics?.CheckIfGravityShouldApply(rb);
+            _physics?.CheckIfGravityShouldApply(_rb);
             DetermineDirectionState();
         }
 
         public virtual void FixedUpdate()
         {
-            if (physics != null)
+            if (_physics != null)
             {
                 ApplyPhysics(moveSpeed);
             }
         }
 
-        public void ApplyPhysics(float _speed)
+        public void ApplyPhysics(float speed)
         {
-            if (characterSpace) { rb.velocity = physics.Movement(movement, _speed, rb.velocity.y, characterSpace); }
-            else { rb.velocity = physics.Movement(movement, _speed, rb.velocity.y); }
+            if (characterSpace) { _rb.velocity = _physics.Movement(_movement, speed, _rb.velocity.y, characterSpace); }
+            else { _rb.velocity = _physics.Movement(_movement, speed, _rb.velocity.y); }
 
-            physics.UpdatePhysicsCount(SnapToGround());
-            physics.ClearPhysicsCount();
+            _physics.UpdatePhysicsCount(SnapToGround());
+            _physics.ClearPhysicsCount();
 
-            _isMoving = Mathf.Abs(movement.x) > 0 || Mathf.Abs(movement.y) > 0;
+            _isMoving = Mathf.Abs(_movement.x) > 0 || Mathf.Abs(_movement.y) > 0;
         }
 
         public bool SnapToGround()
         {
-            float _speed = rb.velocity.magnitude;
+            float _speed = _rb.velocity.magnitude;
 
-            if (physics.GetStepsSinceLastGrounded() > 1 || physics.GetStepsSinceLastAerial() <= 3)
+            if (_physics.GetStepsSinceLastGrounded() > 1 || _physics.GetStepsSinceLastAerial() <= 3)
             {
                 return false;
             }
 
-            if (!Physics.Raycast(rb.position, -Vector3.up, out RaycastHit hit, 1f, -1))
+            if (!Physics.Raycast(_rb.position, -Vector3.up, out RaycastHit hit, 1f, -1))
             {
                 return false;
             }
 
-            float _dot = Vector3.Dot(rb.velocity, hit.normal);
+            float _dot = Vector3.Dot(_rb.velocity, hit.normal);
             if (_dot > 0f)
             {
-                rb.velocity = (rb.velocity - (hit.normal * _dot)).normalized * _speed;
+                _rb.velocity = (_rb.velocity - (hit.normal * _dot)).normalized * _speed;
             }
 
             return true;

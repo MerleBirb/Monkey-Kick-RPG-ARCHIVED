@@ -4,6 +4,7 @@
 Description:
 - Enum for battle states.
 
+Author: Merlebirb
 */
 
 namespace MonkeyKick.Battle

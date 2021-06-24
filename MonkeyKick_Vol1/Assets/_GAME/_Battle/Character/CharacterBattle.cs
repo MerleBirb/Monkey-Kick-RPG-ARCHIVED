@@ -7,9 +7,7 @@ Description:
 */
 
 using UnityEngine;
-using Unity.Collections;
 using MonkeyKick.Managers;
-using MonkeyKick.Overworld;
 
 namespace MonkeyKick.Battle
 {
@@ -17,8 +15,8 @@ namespace MonkeyKick.Battle
     {
         [SerializeField] private GameStateData Game;
 
-        protected BattleStates state;
-        protected bool isTurn = false;
+        protected BattleStates _state;
+        protected bool _isTurn = false;
 
         [HideInInspector] public bool finishAction = false;
         [HideInInspector] public Rigidbody rb;
@@ -35,7 +33,7 @@ namespace MonkeyKick.Battle
             if (!Game.CompareGameState(GameStates.Battle)) { enabled = false; }
             else
             {
-                state = BattleStates.EnterBattle;
+                _state = BattleStates.EnterBattle;
 
                 foreach (var tc in Turn.turnSystem.GetTurnOrder())
                 {
@@ -51,32 +49,32 @@ namespace MonkeyKick.Battle
         {
             if (!Game.CompareGameState(GameStates.Battle)) { this.enabled = false; }
 
-            if (isTurn != Turn.isTurn) { isTurn = Turn.isTurn; }
+            if (_isTurn != Turn.isTurn) { _isTurn = Turn.isTurn; }
         }
 
         public virtual void EnterBattle() // sets the initial state
         {
-            state = BattleStates.Wait;
+            _state = BattleStates.Wait;
         }
 
         public virtual void Wait()
         {
-            if (isTurn) { state = BattleStates.Action; }
+            if (_isTurn) { _state = BattleStates.Action; }
         }
 
         public virtual void Reset() // sets the turn to false
         {
-            isTurn = false;
-            Turn.isTurn = isTurn;
+            _isTurn = false;
+            Turn.isTurn = _isTurn;
             Turn.wasTurnPrev = true;
 
-            if (!isTurn) { state = BattleStates.Wait; }
+            if (!_isTurn) { _state = BattleStates.Wait; }
         }
 
         public void ChangeBattleState(BattleStates newState)
         {
-            if (state == newState) { return; }
-            state = newState;
+            if (_state == newState) { return; }
+            _state = newState;
         }
     }
 }

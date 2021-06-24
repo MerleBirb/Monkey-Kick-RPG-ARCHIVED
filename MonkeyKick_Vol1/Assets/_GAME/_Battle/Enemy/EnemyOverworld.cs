@@ -16,27 +16,27 @@ namespace MonkeyKick.Battle
 {
     public class EnemyOverworld : CharacterOverworld
     {
-        private CharacterParty enemyParty;
+        private CharacterParty _enemyParty;
         [SerializeField] private string battleScene;
 
         public override void Awake()
         {
             base.Awake();
 
-            enemyParty = GetComponent<CharacterParty>();
+            _enemyParty = GetComponent<CharacterParty>();
         }
 
-        private void OnTriggerEnter(Collider _col)
+        private void OnTriggerEnter(Collider col)
         {
             if (Game.CompareGameState(GameStates.Overworld))
             {
-                if (_col.CompareTag("Player"))
+                if (col.CompareTag("Player"))
                 {
                     // save the parties into the battle parties data
-                    var _playerParty = _col.GetComponent<CharacterParty>().Party;
+                    var _playerParty = col.GetComponent<CharacterParty>().Party;
 
                     BattleParties.SetPlayerParty(_playerParty);
-                    BattleParties.SetEnemyParty(enemyParty.Party);
+                    BattleParties.SetEnemyParty(_enemyParty.Party);
 
                     Game.SetGameState(GameStates.Battle);
                     SceneManager.LoadScene(battleScene);

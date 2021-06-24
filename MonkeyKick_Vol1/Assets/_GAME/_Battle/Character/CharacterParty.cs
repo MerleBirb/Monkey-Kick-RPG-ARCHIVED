@@ -4,6 +4,7 @@
 Description:
 - Holds and manages the party this character holds.
 
+Author: Merlebirb
 */
 
 using UnityEngine;

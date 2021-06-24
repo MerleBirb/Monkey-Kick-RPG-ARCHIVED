@@ -17,7 +17,7 @@ namespace MonkeyKick.Battle
         {
             base.Update();
 
-            switch(state)
+            switch(_state)
             {
                 case BattleStates.EnterBattle: EnterBattle(); break;
                 case BattleStates.Wait: Wait(); break;
@@ -27,7 +27,7 @@ namespace MonkeyKick.Battle
 
         private void FixedUpdate()
         {
-            switch(state)
+            switch(_state)
             {
                 case BattleStates.Action: Action(); break;
             }
@@ -35,7 +35,7 @@ namespace MonkeyKick.Battle
 
         public override void Wait()
         {
-            if (isTurn) { state = BattleStates.Action; }
+            if (_isTurn) { _state = BattleStates.Action; }
         }
 
         private void Action() // use the skill chosen

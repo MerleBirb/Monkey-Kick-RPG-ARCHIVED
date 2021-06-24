@@ -16,19 +16,19 @@ namespace MonkeyKick.Battle
 {
     public class PlayerBattle : CharacterBattle
     {
-        private PlayerControls input;
+        private PlayerControls _input;
 
         #region CONTROLS
 
         [SerializeField] private IntReference menuChoice;
 
-        private InputAction moveSelector;
-        private InputAction select;
-        private InputAction cancel;
+        private InputAction _moveSelector;
+        private InputAction _select;
+        private InputAction _cancel;
 
-        private Vector2 movementMenu;
-        private bool movePressed = false;
-        private bool selectPressed = false;
+        private Vector2 _movementMenu;
+        private bool _movePressed = false;
+        private bool _selectPressed = false;
 
         #endregion
 
@@ -36,14 +36,14 @@ namespace MonkeyKick.Battle
         {
             base.Awake();
 
-            input = new PlayerControls();
+            _input = new PlayerControls();
             InputSystem.pollingFrequency = 180;
 
-            moveSelector = input.BattleMenu.MoveSelector;
-            select = input.BattleMenu.Select;
-            cancel = input.BattleMenu.Cancel;
+            _moveSelector = _input.BattleMenu.MoveSelector;
+            _select = _input.BattleMenu.Select;
+            _cancel = _input.BattleMenu.Cancel;
 
-            moveSelector.performed += context => movementMenu = context.ReadValue<Vector2>();
+            _moveSelector.performed += context => _movementMenu = context.ReadValue<Vector2>();
         }
 
         // separate battle logic between normal update and fixed update
@@ -53,7 +53,7 @@ namespace MonkeyKick.Battle
             base.Update();
             CheckInput();
 
-            switch(state)
+            switch(_state)
             {
                 case BattleStates.EnterBattle: EnterBattle(); break;
                 case BattleStates.Wait: Wait(); break;
@@ -64,7 +64,7 @@ namespace MonkeyKick.Battle
 
         private void FixedUpdate()
         {
-            switch(state)
+            switch(_state)
             {
                 case BattleStates.Action: Action(); break;
             }
@@ -72,10 +72,10 @@ namespace MonkeyKick.Battle
 
         public override void Wait() // wait until it's the character's turn
         {
-            if (isTurn)
+            if (_isTurn)
             {
                 menuChoice.Variable.Value = 0;
-                state = BattleStates.NavigateMenu;
+                _state = BattleStates.NavigateMenu;
             }
         }
 
@@ -93,32 +93,32 @@ namespace MonkeyKick.Battle
 
             if(finishAction) finishAction = false;
 
-            if (movementMenu.y < -_deadZone)
+            if (_movementMenu.y < -_deadZone)
             {
-                if (!movePressed)
+                if (!_movePressed)
                 {
                     menuChoice.Variable.Value++;
-                    movePressed = true;
+                    _movePressed = true;
                 }
             }
-            else if (movementMenu.y > _deadZone)
+            else if (_movementMenu.y > _deadZone)
             {
-                if (!movePressed)
+                if (!_movePressed)
                 {
                     menuChoice.Variable.Value--;
-                    movePressed = true;
+                    _movePressed = true;
                 }
             }
             else
             {
-                movePressed = false;
+                _movePressed = false;
             }
 
-            if (selectPressed)
+            if (_selectPressed)
             {
                 switch(menuChoice.Variable.Value)
                 {
-                    case FIGHT: state = BattleStates.Action; break;
+                    case FIGHT: _state = BattleStates.Action; break;
                     case CHARGE: break;
                     case ITEMS: break;
                 }
@@ -132,11 +132,11 @@ namespace MonkeyKick.Battle
 
         private void CheckInput()
         {
-            selectPressed = select.triggered;
+            _selectPressed = _select.triggered;
         }
 
-        private void OnEnable() => input.BattleMenu.Enable();
+        private void OnEnable() => _input.BattleMenu.Enable();
 
-        private void OnDisable() => input.BattleMenu.Disable();
+        private void OnDisable() => _input.BattleMenu.Disable();
     }
 }

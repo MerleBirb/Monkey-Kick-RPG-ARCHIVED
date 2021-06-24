@@ -18,13 +18,13 @@ namespace MonkeyKick.Overworld
     {
         #region CONTROLS
 
-        private InputAction move;
-        private InputAction sprint;
-        private InputAction jump;
+        private InputAction _move;
+        private InputAction _sprint;
+        private InputAction _jump;
 
-        private bool hasPressedJump = false;
-        private bool hasPressedSprint = false;
-        private bool isSprinting = false;
+        private bool _hasPressedJump = false;
+        private bool _hasPressedSprint = false;
+        private bool _isSprinting = false;
 
         [SerializeField] private float sprintSpeed; // moveSpeed while sprint is pressed
         [SerializeField] private float jumpHeight;
@@ -37,7 +37,7 @@ namespace MonkeyKick.Overworld
 
         #endregion
 
-        private PlayerControls input;
+        private PlayerControls _input;
 
         public override void Awake()
         {
@@ -45,30 +45,30 @@ namespace MonkeyKick.Overworld
 
             InputSystem.pollingFrequency = 180;
 
-            input = new PlayerControls();
+            _input = new PlayerControls();
 
-            move = input.Overworld.Move;
-            jump = input.Overworld.Jump;
-            sprint = input.Overworld.Sprint;
+            _move = _input.Overworld.Move;
+            _jump = _input.Overworld.Jump;
+            _sprint = _input.Overworld.Sprint;
 
-            move.performed += context => movement = context.ReadValue<Vector2>();
+            _move.performed += context => _movement = context.ReadValue<Vector2>();
         }
 
         public override void Update()
         {
             base.Update();
 
-            if (input != null) CheckForPlayerInput();
+            if (_input != null) CheckForPlayerInput();
             if (_anim != null) AnimatePlayer();
         }
 
         public override void FixedUpdate()
         {
-            if (physics != null)
+            if (_physics != null)
             {
                 float _currentSpeed;
 
-                if (!isSprinting) _currentSpeed = moveSpeed;
+                if (!_isSprinting) _currentSpeed = moveSpeed;
                 else _currentSpeed = sprintSpeed;
 
                 ApplyPhysics(_currentSpeed);
@@ -77,8 +77,8 @@ namespace MonkeyKick.Overworld
 
         private void CheckForPlayerInput()
         {
-            hasPressedJump = jump.triggered;
-            hasPressedSprint = sprint.triggered;
+            _hasPressedJump = _jump.triggered;
+            _hasPressedSprint = _sprint.triggered;
 
             ToggleSprint();
             PressedJump();
@@ -86,8 +86,8 @@ namespace MonkeyKick.Overworld
 
         private void AnimatePlayer()
         {
-            _anim.SetFloat("xDirection", movement.x);
-            _anim.SetFloat("zDirection", movement.y);
+            _anim.SetFloat("xDirection", _movement.x);
+            _anim.SetFloat("zDirection", _movement.y);
 
             if (!_isMoving) { AnimQoL.PlayAnimation(_anim, _currentAnim, IDLE); }
 
@@ -95,20 +95,20 @@ namespace MonkeyKick.Overworld
 
         private void ToggleSprint()
         {
-            if (!isSprinting)
+            if (!_isSprinting)
             {
-                if (hasPressedSprint)
+                if (_hasPressedSprint)
                 {
-                    isSprinting = true;
-                    hasPressedSprint = false;
+                    _isSprinting = true;
+                    _hasPressedSprint = false;
                 }
             }
             else
             {
-                if (hasPressedSprint)
+                if (_hasPressedSprint)
                 {
-                    isSprinting = false;
-                    hasPressedSprint = false;
+                    _isSprinting = false;
+                    _hasPressedSprint = false;
                 }
             }
 
@@ -116,35 +116,35 @@ namespace MonkeyKick.Overworld
 
         private void PressedJump()
         {
-            if (hasPressedJump)
+            if (_hasPressedJump)
             {
-                if (physics.OnGround())
+                if (_physics.OnGround())
                 {
-                    physics.SetStepsSinceLastAerial(0);
-                    rb.velocity += new Vector3(0f, jumpHeight, 0f);
+                    _physics.SetStepsSinceLastAerial(0);
+                    _rb.velocity += new Vector3(0f, jumpHeight, 0f);
                 }
 
-                hasPressedJump = false;
+                _hasPressedJump = false;
             }
 
         }
 
         private void OnEnable()
         {
-            input.Overworld.Enable();
+            _input.Overworld.Enable();
 
-            hasPressedJump = false;
-            hasPressedSprint = false;
-            isSprinting = false;
+            _hasPressedJump = false;
+            _hasPressedSprint = false;
+            _isSprinting = false;
         }
 
         private void OnDisable()
         {
-            input.Overworld.Disable();
+            _input.Overworld.Disable();
 
-            hasPressedJump = false;
-            hasPressedSprint = false;
-            isSprinting = false;
+            _hasPressedJump = false;
+            _hasPressedSprint = false;
+            _isSprinting = false;
         }
     }
 }
