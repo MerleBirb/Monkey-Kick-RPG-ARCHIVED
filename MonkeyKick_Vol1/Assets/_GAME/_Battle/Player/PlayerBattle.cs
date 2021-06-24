@@ -8,6 +8,7 @@ Author: Merlebirb
 */
 
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using MonkeyKick.Overworld;
 using MonkeyKick.References;
@@ -58,15 +59,8 @@ namespace MonkeyKick.Battle
                 case BattleStates.EnterBattle: EnterBattle(); break;
                 case BattleStates.Wait: Wait(); break;
                 case BattleStates.NavigateMenu: NavigateMenu(); break;
+                case BattleStates.Action: break;
                 case BattleStates.Reset: Reset(); break;
-            }
-        }
-
-        private void FixedUpdate()
-        {
-            switch(_state)
-            {
-                case BattleStates.Action: Action(); break;
             }
         }
 
@@ -118,16 +112,11 @@ namespace MonkeyKick.Battle
             {
                 switch(menuChoice.Variable.Value)
                 {
-                    case FIGHT: _state = BattleStates.Action; break;
+                    case FIGHT: Action(Stats.skillList[0], Turn.turnSystem.enemyList[0]); break;
                     case CHARGE: break;
                     case ITEMS: break;
                 }
             }
-        }
-
-        private void Action() // use the skill chosen
-        {
-            Stats.skillList[0].Action(this, Turn.turnSystem.enemyList[0]);
         }
 
         private void CheckInput()

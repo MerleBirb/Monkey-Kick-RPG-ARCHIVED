@@ -21,26 +21,14 @@ namespace MonkeyKick.Battle
             {
                 case BattleStates.EnterBattle: EnterBattle(); break;
                 case BattleStates.Wait: Wait(); break;
+                case BattleStates.Action: break;
                 case BattleStates.Reset: Reset(); break;
-            }
-        }
-
-        private void FixedUpdate()
-        {
-            switch(_state)
-            {
-                case BattleStates.Action: Action(); break;
             }
         }
 
         public override void Wait()
         {
-            if (_isTurn) { _state = BattleStates.Action; }
-        }
-
-        private void Action() // use the skill chosen
-        {
-            Stats.skillList[0].Action(this, Turn.turnSystem.playerList[0]);
+            if (_isTurn) { Action(Stats.skillList[0], Turn.turnSystem.playerList[0]); _state = BattleStates.Action; }
         }
     }
 }

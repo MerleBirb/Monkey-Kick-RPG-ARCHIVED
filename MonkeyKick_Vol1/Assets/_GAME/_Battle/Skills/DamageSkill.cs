@@ -1,4 +1,5 @@
 
+using System.Collections;
 using MonkeyKick.Stats;
 using UnityEngine;
 
@@ -8,57 +9,161 @@ namespace MonkeyKick.Battle
     public class DamageSkill : Skill
     {
         [SerializeField] private int damageValue;
-        [SerializeField] private float speed;
+        [SerializeField] private float seconds;
         [SerializeField] private float xOffset;
 
         private enum SkillState
         {
             WaitingToBegin,
-            BeginSequence,
-            ActionSequence,
-            ReturnFromSequence,
+            FirstSequence,
+            SecondSequence,
+            ThirdSequence,
             EndSequence
         }
 
         [SerializeField] private SkillState sequence = SkillState.WaitingToBegin;
 
-        public override void Action(CharacterBattle _actor, CharacterBattle _target)
+        public bool IsReady => sequence == SkillState.WaitingToBegin;
+
+        public IEnumerator Cor_Action(CharacterBattle actor, CharacterBattle target)
         {
-            switch(sequence)
+            Vector3 targetPos = new Vector3(target.transform.position.x + xOffset, actor.transform.position.y, target.transform.position.z);
+            Vector3 returnPos = new Vector3(actor.Stats.battlePos.x, actor.transform.position.y, actor.Stats.battlePos.z);
+            WaitForSeconds time = new WaitForSeconds(seconds - Time.fixedDeltaTime);
+
+            if (sequence == SkillState.WaitingToBegin)
+            {
+                yield return null;
+
+                sequence = SkillState.FirstSequence;
+            }
+            if (sequence == SkillState.FirstSequence)
+            {
+                actor.rb.velocity = (targetPos - actor.transform.position) / seconds;
+
+                yield return new WaitForSeconds(seconds - Time.fixedDeltaTime);
+
+                actor.rb.velocity = Vector3.zero;
+                sequence = SkillState.SecondSequence;
+            }
+            if (sequence == SkillState.SecondSequence)
+            {
+                yield return null;
+
+                Damage(target.Stats.CurrentHP);
+                sequence = SkillState.ThirdSequence;
+            }
+            if (sequence == SkillState.ThirdSequence)
+            {
+                actor.rb.velocity = (returnPos - actor.transform.position) / seconds;
+
+                yield return new WaitForSeconds(seconds - Time.fixedDeltaTime);
+
+                actor.rb.velocity = Vector3.zero;
+                sequence = SkillState.EndSequence;
+            }
+            if (sequence == SkillState.EndSequence)
+            {
+                yield return null;
+
+                actor.ChangeBattleState(BattleStates.Reset);
+                sequence = SkillState.WaitingToBegin;
+            }
+
+            /*switch(sequence)
             {
                 case SkillState.WaitingToBegin:
                 {
-                    if (!_actor.finishAction) { sequence = SkillState.BeginSequence; }
+                    yield return null;
+
+                    sequence = SkillState.FirstSequence;
+
+                    break;
+                }
+                case SkillState.FirstSequence:
+                {
+                    actor.rb.velocity = (targetPos - actor.transform.position) / speed;
+
+                    yield return time;
+
+                    actor.rb.velocity = Vector3.zero;
+                    sequence = SkillState.SecondSequence;
+
+                    break;
+                }
+                case SkillState.SecondSequence:
+                {
+                    yield return null;
+
+                    Damage(target.Stats.CurrentHP);
+                    sequence = SkillState.ThirdSequence;
+
+                    break;
+                }
+                case SkillState.ThirdSequence:
+                {
+                    actor.rb.velocity = (returnPos - actor.transform.position) / speed;
+
+                    yield return time;
+
+                    actor.rb.velocity = Vector3.zero;
+                    sequence = SkillState.EndSequence;
+
+                    break;
+                }
+                case SkillState.EndSequence:
+                {
+                    yield return null;
+
+                    actor.ChangeBattleState(BattleStates.Reset);
+                    sequence = SkillState.WaitingToBegin;
+
+                    break;
+                }
+            }*/
+        }
+
+        public override void Action(CharacterBattle actor, CharacterBattle target)
+        {
+            actor.StartCoroutine(Cor_Action(actor, target));
+
+            #region OLD VERSION
+
+            /*switch(sequence)
+            {
+                case SkillState.WaitingToBegin:
+                {
+                    if (!actor.finishAction) { sequence = SkillState.FirstSequence; }
 
                     break;
                 }
 
-                case SkillState.BeginSequence:
+                case SkillState.FirstSequence:
                 {
-                    var _targetPos = new Vector3(_target.transform.position.x + xOffset, _target.transform.position.y, _target.transform.position.z);
-                    bool _atTheEnemyLocation = _actor.transform.position != _targetPos;
+                    var targetPos = new Vector3(target.transform.position.x + xOffset, target.transform.position.y, target.transform.position.z);
+                    bool atTheEnemyLocation = actor.transform.position == targetPos;
 
-                    if(_atTheEnemyLocation) {_actor.rb.velocity = new Vector3(speed, _actor.rb.velocity.y, _actor.rb.velocity.z); }
-                    else { sequence = SkillState.ActionSequence; }
+                    if(!atTheEnemyLocation) {actor.rb.velocity = new Vector3(speed, actor.rb.velocity.y, actor.rb.velocity.z); }
+                    else { sequence = SkillState.SecondSequence; }
 
                     break;
                 }
 
-                case SkillState.ActionSequence:
+                case SkillState.SecondSequence:
                 {
-                    Damage(_target.Stats.CurrentHP);
-                    sequence = SkillState.ReturnFromSequence;
+                    Damage(target.Stats.CurrentHP);
+                    sequence = SkillState.ThirdSequence;
 
                     break;
                 }
 
-                case SkillState.ReturnFromSequence:
+                case SkillState.ThirdSequence:
                 {
-                        bool _backAtBattlePosition = _actor.transform.position.x != _actor.Stats.battlePos.x;
-                        if (_backAtBattlePosition) { _actor.rb.velocity = new Vector3(-speed, _actor.rb.velocity.y, _actor.rb.velocity.z); }
+                        bool backAtBattlePosition = actor.transform.position.x != actor.Stats.battlePos.x;
+                        if (backAtBattlePosition) { actor.rb.velocity = new Vector3(-speed, actor.rb.velocity.y, actor.rb.velocity.z); }
                     else
                     {
-                        _actor.rb.velocity = Vector3.zero;
+                        actor.rb.velocity = Vector3.zero;
                         sequence = SkillState.EndSequence;
                     }
 
@@ -67,13 +172,15 @@ namespace MonkeyKick.Battle
 
                 case SkillState.EndSequence:
                 {
-                    _actor.finishAction = true;
-                    sequence = SkillState.BeginSequence;
-                    _actor.ChangeBattleState(BattleStates.Reset);
+                    actor.finishAction = true;
+                    sequence = SkillState.WaitingToBegin;
+                    actor.ChangeBattleState(BattleStates.Reset);
 
                     break;
                 }
-            }
+            }*/
+
+            #endregion
         }
 
         public int GetDamage()

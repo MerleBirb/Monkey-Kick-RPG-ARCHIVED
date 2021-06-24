@@ -7,6 +7,7 @@ Description:
 */
 
 using UnityEngine;
+using UnityEngine.Events;
 using MonkeyKick.Managers;
 
 namespace MonkeyKick.Battle
@@ -17,6 +18,7 @@ namespace MonkeyKick.Battle
 
         protected BattleStates _state;
         protected bool _isTurn = false;
+        protected UnityEvent _currentAction;
 
         [HideInInspector] public bool finishAction = false;
         [HideInInspector] public Rigidbody rb;
@@ -26,6 +28,7 @@ namespace MonkeyKick.Battle
         public virtual void Awake()
         {
             rb = GetComponent<Rigidbody>();
+            _currentAction = new UnityEvent();
         }
 
         public virtual void Start()
@@ -69,6 +72,13 @@ namespace MonkeyKick.Battle
             Turn.wasTurnPrev = true;
 
             if (!_isTurn) { _state = BattleStates.Wait; }
+        }
+        public virtual void Action(Skill skill, CharacterBattle target) // use the skill chosen
+        {
+            _currentAction.RemoveAllListeners();
+            _currentAction.AddListener(() => skill.Action(this, target));
+            _currentAction.Invoke();
+            _state = BattleStates.Action;
         }
 
         public void ChangeBattleState(BattleStates newState)

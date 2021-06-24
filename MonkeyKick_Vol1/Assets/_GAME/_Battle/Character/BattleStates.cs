@@ -18,6 +18,5 @@ namespace MonkeyKick.Battle
         Action,
         Counter,
         Reset
-
     }
 }

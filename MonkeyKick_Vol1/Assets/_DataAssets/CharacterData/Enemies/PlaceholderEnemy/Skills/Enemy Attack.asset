@@ -15,6 +15,6 @@ MonoBehaviour:
   skillName: Placeholder Attack
   skillDescription: Cool move. Not real though.
   damageValue: 3
-  speed: -3
+  seconds: 1
   xOffset: 1
   sequence: 0
