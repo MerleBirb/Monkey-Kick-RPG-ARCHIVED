@@ -86,5 +86,11 @@ namespace MonkeyKick.Battle
             if (_state == newState) { return; }
             _state = newState;
         }
+
+        public virtual void Kill()
+        {
+            Stats.isAlive = false;
+            gameObject.SetActive(false);
+        }
     }
 }

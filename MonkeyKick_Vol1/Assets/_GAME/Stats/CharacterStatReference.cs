@@ -39,5 +39,11 @@ namespace MonkeyKick.Stats
             if (UseConstant) { ConstantValue.BaseValue += changeByValue; }
             else { Variable.Stat.BaseValue += changeByValue; }
         }
+
+        public void SetStat(int setValue)
+        {
+            if (UseConstant) { ConstantValue.BaseValue = setValue; }
+            else { Variable.Stat.BaseValue = setValue; }
+        }
     }
 }

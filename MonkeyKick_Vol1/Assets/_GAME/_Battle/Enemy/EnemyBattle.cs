@@ -30,5 +30,12 @@ namespace MonkeyKick.Battle
         {
             if (_isTurn) { Action(Stats.skillList[0], Turn.turnSystem.playerList[0]); _state = BattleStates.Action; }
         }
+
+        public override void Kill()
+        {
+            base.Kill();
+
+            Turn.turnSystem.RemoveEnemyFromParty(this);
+        }
     }
 }

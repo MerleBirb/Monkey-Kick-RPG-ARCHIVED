@@ -23,7 +23,6 @@ namespace MonkeyKick.Battle
 
         public CharacterStatReference MaxHP;
         public CharacterStatReference CurrentHP;
-        [HideInInspector] public bool isAlive = true;
 
         public CharacterStatReference MaxKP; // energy / mana system
         public CharacterStatReference CurrentKP;
@@ -34,6 +33,8 @@ namespace MonkeyKick.Battle
         public CharacterStatReference Tenacity; // energy defense
         public CharacterStatReference Speed; // speed... what else?
         public CharacterStatReference Swag; // luck / crit chance
+
+        public bool isAlive;
 
         public Vector3 battlePos; // neutral position during battle
 

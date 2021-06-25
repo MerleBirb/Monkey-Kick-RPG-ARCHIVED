@@ -28,14 +28,14 @@ namespace MonkeyKick.Battle
 
         #endregion
 
-        [ReadOnly] public List<CharacterBattle> allCharacterList;
-        [ReadOnly] public List<CharacterBattle> playerList;
-        [ReadOnly] public List<CharacterBattle> enemyList;
-        [ReadOnly] public List<TurnClass> turnOrder;
-        public List<TurnClass> GetTurnOrder() { return turnOrder; }
+        [HideInInspector] public List<CharacterBattle> allCharacterList;
+        [HideInInspector] public List<CharacterBattle> playerList;
+        [HideInInspector] public List<CharacterBattle> enemyList;
+        [HideInInspector] public List<TurnClass> TurnOrder;
+        public List<TurnClass> GetTurnOrder() { return TurnOrder; }
 
-        [ReadOnly] public CharacterBattle ActiveCharacter;
-        [ReadOnly] public int TurnCounter = 0;
+        [HideInInspector] public CharacterBattle ActiveCharacter;
+        [HideInInspector] public int TurnCounter = 0;
 
         // Start is called before the first frame update
         private void Start()
@@ -45,17 +45,14 @@ namespace MonkeyKick.Battle
                 ActiveCharacter = null;
                 TurnCounter = 0;
 
-                if (BattleParties.GetPlayerParty() != null) { SpawnPlayerParty(); }
-                if (BattleParties.GetEnemyParty() != null) { SpawnEnemyParty(); }
+                if (SetUpBattle.GetPlayerParty() != null) { SpawnPlayerParty(); }
+                if (SetUpBattle.GetEnemyParty() != null) { SpawnEnemyParty(); }
 
                 if (EveryoneLoaded())
                 {
-                    Debug.Log("All characters have been loaded into the scene and into the turn order. "
-                    + "Setting the turn order...");
-
                     FillTurnOrder();
                     SetTurnOrder();
-                    ActiveCharacter = turnOrder[0].character;
+                    ActiveCharacter = TurnOrder[0].character;
                     ResetTurns();
                 }
             }
@@ -68,18 +65,18 @@ namespace MonkeyKick.Battle
 
         private void SpawnPlayerParty()
         {
-            for (int p = 0; p < BattleParties.GetPlayerParty().CharacterList.Count; p++)
+            for (int p = 0; p < SetUpBattle.GetPlayerParty().CharacterList.Count; p++)
             {
                 if (p == 0)
                 {
                     // spawn player in
                     var playerLeader = Instantiate<CharacterBattle>(
                         playerPrefab,
-                        BattleParties.GetPlayerParty().CharacterList[p].battlePos,
+                        SetUpBattle.GetPlayerParty().CharacterList[p].battlePos,
                         Quaternion.identity);
 
                     // set the stats and name
-                    playerLeader.Stats = BattleParties.GetPlayerParty().CharacterList[p];
+                    playerLeader.Stats = SetUpBattle.GetPlayerParty().CharacterList[p];
                     playerLeader.gameObject.name = playerLeader.Stats.CharacterName;
 
                     allCharacterList.Add(playerLeader); // add to the all characters list
@@ -90,11 +87,11 @@ namespace MonkeyKick.Battle
                     // spawn player in
                     var playerPartyMember = Instantiate<CharacterBattle>(
                         playerPartyMemberPrefab,
-                        BattleParties.GetPlayerParty().CharacterList[p].battlePos,
+                        SetUpBattle.GetPlayerParty().CharacterList[p].battlePos,
                         Quaternion.identity);
 
                     // set the stats and name
-                    playerPartyMember.Stats = BattleParties.GetPlayerParty().CharacterList[p];
+                    playerPartyMember.Stats = SetUpBattle.GetPlayerParty().CharacterList[p];
                     playerPartyMember.gameObject.name = playerPartyMember.Stats.CharacterName;
 
                     allCharacterList.Add(playerPartyMember); // add to the all characters list
@@ -105,18 +102,18 @@ namespace MonkeyKick.Battle
 
         private void SpawnEnemyParty()
         {
-            for (int e = 0; e < BattleParties.GetEnemyParty().CharacterList.Count; e++)
+            for (int e = 0; e < SetUpBattle.GetEnemyParty().CharacterList.Count; e++)
             {
                 if (e == 0)
                 {
                     // spawn enemy in
                     var enemyLeader = Instantiate<CharacterBattle>(
                         enemyPrefab,
-                        BattleParties.GetEnemyParty().CharacterList[e].battlePos,
+                        SetUpBattle.GetEnemyParty().CharacterList[e].battlePos,
                         Quaternion.identity);
 
                     // set the stats and the name
-                    enemyLeader.Stats = BattleParties.GetEnemyParty().CharacterList[e];
+                    enemyLeader.Stats = SetUpBattle.GetEnemyParty().CharacterList[e];
                     enemyLeader.gameObject.name = enemyLeader.Stats.CharacterName;
 
                     allCharacterList.Add(enemyLeader); // add to the all characters list
@@ -127,11 +124,11 @@ namespace MonkeyKick.Battle
                     // spawn enemy in
                     var enemyPartyMember = Instantiate<CharacterBattle>(
                         enemyPartyMemberPrefab,
-                        BattleParties.GetEnemyParty().CharacterList[e].battlePos,
+                        SetUpBattle.GetEnemyParty().CharacterList[e].battlePos,
                         Quaternion.identity);
 
                     // set the stats and the name
-                    enemyPartyMember.Stats = BattleParties.GetEnemyParty().CharacterList[e];
+                    enemyPartyMember.Stats = SetUpBattle.GetEnemyParty().CharacterList[e];
                     enemyPartyMember.gameObject.name = enemyPartyMember.Stats.CharacterName;
 
                     allCharacterList.Add(enemyPartyMember); // add to the all characters list
@@ -149,21 +146,21 @@ namespace MonkeyKick.Battle
         {
             for (int i = 0; i < allCharacterList.Count; i++)
             {
-                turnOrder.Add(allCharacterList[i].Turn);
-                turnOrder[i].character = allCharacterList[i];
+                TurnOrder.Add(allCharacterList[i].Turn);
+                TurnOrder[i].character = allCharacterList[i];
             }
 
-            for (int j = 0; j < turnOrder.Count; j++)
+            for (int j = 0; j < TurnOrder.Count; j++)
             {
-                turnOrder[j].turnSystem = this;
-                turnOrder[j].charSpeed = turnOrder[j].character.Stats.Speed.Stat;
-                turnOrder[j].charName = turnOrder[j].character.Stats.CharacterName;
+                TurnOrder[j].turnSystem = this;
+                TurnOrder[j].charSpeed = TurnOrder[j].character.Stats.Speed.Stat;
+                TurnOrder[j].charName = TurnOrder[j].character.Stats.CharacterName;
             }
         }
 
         private void SetTurnOrder()
         {
-            turnOrder.Sort((a, b) =>
+            TurnOrder.Sort((a, b) =>
             {
                 var speedA = a.charSpeed.Value;
                 var speedB = b.charSpeed.Value;
@@ -175,14 +172,14 @@ namespace MonkeyKick.Battle
 
         private void UpdateTurns() // cycles through the turn order 
         {
-            for (int i = 0; i < turnOrder.Count; i++)
+            for (int i = 0; i < TurnOrder.Count; i++)
             {
-                if (!turnOrder[i].wasTurnPrev)
+                if (!TurnOrder[i].wasTurnPrev)
                 {
-                    turnOrder[i].isTurn = true;
+                    TurnOrder[i].isTurn = true;
                     break;
                 }
-                else if ((i == turnOrder.Count - 1) && (turnOrder[i].wasTurnPrev))
+                else if ((i == TurnOrder.Count - 1) && (TurnOrder[i].wasTurnPrev))
                 {
                     SetTurnOrder();
                     ResetTurns();
@@ -191,31 +188,52 @@ namespace MonkeyKick.Battle
 
                 if (ActiveCharacter.transform.position == ActiveCharacter.Stats.battlePos)
                 {
-                    if (turnOrder[i].isTurn) { ActiveCharacter = turnOrder[i].character; }
+                    if (TurnOrder[i].isTurn) { ActiveCharacter = TurnOrder[i].character; }
+                }
+
+                if (enemyList.Count == 0)
+                {
+                    EndBattle();
                 }
             }
         }
 
         private void ResetTurns() // reset the turn order after every character has gone.
         {
-            for (int i = 0; i < turnOrder.Count; i++)
+            for (int i = 0; i < TurnOrder.Count; i++)
             {
                 if (i == 0)
                 {
-                    turnOrder[i].isTurn = true;
-                    turnOrder[i].wasTurnPrev = false;
+                    TurnOrder[i].isTurn = true;
+                    TurnOrder[i].wasTurnPrev = false;
                 }
                 else
                 {
-                    turnOrder[i].isTurn = false;
-                    turnOrder[i].wasTurnPrev = false;
+                    TurnOrder[i].isTurn = false;
+                    TurnOrder[i].wasTurnPrev = false;
                 }
 
-                if (turnOrder[i] == null)
+                if (TurnOrder[i] == null)
                 {
-                    turnOrder.Remove(turnOrder[i]);
+                    TurnOrder.Remove(TurnOrder[i]);
                 }
             }
+        }
+
+        public void RemovePlayerFromParty(CharacterBattle player)
+        {
+            playerList.Remove(player);
+        }
+
+        public void RemoveEnemyFromParty(CharacterBattle enemy)
+        {
+            enemyList.Remove(enemy);
+        }
+
+        private void EndBattle()
+        {
+            Game.SetGameState(GameStates.Overworld);
+            SetUpBattle.LoadPreviousScene();
         }
 
     }

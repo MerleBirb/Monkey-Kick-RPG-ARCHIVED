@@ -23,8 +23,6 @@ namespace MonkeyKick.Battle
 
         [SerializeField] private SkillState sequence = SkillState.WaitingToBegin;
 
-        public bool IsReady => sequence == SkillState.WaitingToBegin;
-
         public IEnumerator Cor_Action(CharacterBattle actor, CharacterBattle target)
         {
             Vector3 targetPos = new Vector3(target.transform.position.x + xOffset, actor.transform.position.y, target.transform.position.z);
@@ -50,7 +48,7 @@ namespace MonkeyKick.Battle
             {
                 yield return null;
 
-                Damage(target.Stats.CurrentHP);
+                Damage(target);
                 sequence = SkillState.ThirdSequence;
             }
             if (sequence == SkillState.ThirdSequence)
@@ -69,118 +67,11 @@ namespace MonkeyKick.Battle
                 actor.ChangeBattleState(BattleStates.Reset);
                 sequence = SkillState.WaitingToBegin;
             }
-
-            /*switch(sequence)
-            {
-                case SkillState.WaitingToBegin:
-                {
-                    yield return null;
-
-                    sequence = SkillState.FirstSequence;
-
-                    break;
-                }
-                case SkillState.FirstSequence:
-                {
-                    actor.rb.velocity = (targetPos - actor.transform.position) / speed;
-
-                    yield return time;
-
-                    actor.rb.velocity = Vector3.zero;
-                    sequence = SkillState.SecondSequence;
-
-                    break;
-                }
-                case SkillState.SecondSequence:
-                {
-                    yield return null;
-
-                    Damage(target.Stats.CurrentHP);
-                    sequence = SkillState.ThirdSequence;
-
-                    break;
-                }
-                case SkillState.ThirdSequence:
-                {
-                    actor.rb.velocity = (returnPos - actor.transform.position) / speed;
-
-                    yield return time;
-
-                    actor.rb.velocity = Vector3.zero;
-                    sequence = SkillState.EndSequence;
-
-                    break;
-                }
-                case SkillState.EndSequence:
-                {
-                    yield return null;
-
-                    actor.ChangeBattleState(BattleStates.Reset);
-                    sequence = SkillState.WaitingToBegin;
-
-                    break;
-                }
-            }*/
         }
 
         public override void Action(CharacterBattle actor, CharacterBattle target)
         {
             actor.StartCoroutine(Cor_Action(actor, target));
-
-            #region OLD VERSION
-
-            /*switch(sequence)
-            {
-                case SkillState.WaitingToBegin:
-                {
-                    if (!actor.finishAction) { sequence = SkillState.FirstSequence; }
-
-                    break;
-                }
-
-                case SkillState.FirstSequence:
-                {
-                    var targetPos = new Vector3(target.transform.position.x + xOffset, target.transform.position.y, target.transform.position.z);
-                    bool atTheEnemyLocation = actor.transform.position == targetPos;
-
-                    if(!atTheEnemyLocation) {actor.rb.velocity = new Vector3(speed, actor.rb.velocity.y, actor.rb.velocity.z); }
-                    else { sequence = SkillState.SecondSequence; }
-
-                    break;
-                }
-
-                case SkillState.SecondSequence:
-                {
-                    Damage(target.Stats.CurrentHP);
-                    sequence = SkillState.ThirdSequence;
-
-                    break;
-                }
-
-                case SkillState.ThirdSequence:
-                {
-                        bool backAtBattlePosition = actor.transform.position.x != actor.Stats.battlePos.x;
-                        if (backAtBattlePosition) { actor.rb.velocity = new Vector3(-speed, actor.rb.velocity.y, actor.rb.velocity.z); }
-                    else
-                    {
-                        actor.rb.velocity = Vector3.zero;
-                        sequence = SkillState.EndSequence;
-                    }
-
-                    break;
-                }
-
-                case SkillState.EndSequence:
-                {
-                    actor.finishAction = true;
-                    sequence = SkillState.WaitingToBegin;
-                    actor.ChangeBattleState(BattleStates.Reset);
-
-                    break;
-                }
-            }*/
-
-            #endregion
         }
 
         public int GetDamage()
@@ -188,9 +79,19 @@ namespace MonkeyKick.Battle
             return damageValue;
         }
 
-        private void Damage(CharacterStatReference _targetHP)
+        private void Damage(CharacterBattle target)
         {
-            _targetHP.ChangeStat(-damageValue);
+            bool damageGoesBelowZero = (target.Stats.CurrentHP.ConstantValue.Value - damageValue) <= 0;
+
+            if (damageGoesBelowZero)
+            {
+                target.Stats.CurrentHP.SetStat(0);
+                target.Kill();
+            }
+            else
+            {
+                target.Stats.CurrentHP.ChangeStat(-damageValue);
+            }
         }
     }
 }

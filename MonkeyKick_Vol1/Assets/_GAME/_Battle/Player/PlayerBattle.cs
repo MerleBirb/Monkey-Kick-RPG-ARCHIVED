@@ -124,6 +124,12 @@ namespace MonkeyKick.Battle
             _selectPressed = _select.triggered;
         }
 
+        public override void Kill()
+        {
+            base.Kill();
+            Turn.turnSystem.RemovePlayerFromParty(this);
+        }
+
         private void OnEnable() => _input.BattleMenu.Enable();
 
         private void OnDisable() => _input.BattleMenu.Disable();
