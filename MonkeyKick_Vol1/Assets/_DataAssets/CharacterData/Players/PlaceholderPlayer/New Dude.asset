@@ -25,7 +25,6 @@ MonoBehaviour:
     ConstantValue:
       BaseValue: 20
     Variable: {fileID: 0}
-  isAlive: 1
   MaxKP:
     UseConstant: 1
     ConstantValue:
@@ -66,6 +65,7 @@ MonoBehaviour:
     ConstantValue:
       BaseValue: 5
     Variable: {fileID: 0}
+  isAlive: 1
   battlePos: {x: -2, y: 0, z: 3}
   skillList:
   - {fileID: 11400000, guid: 6145ddebeb25c2846a30da001d2b89a2, type: 2}
