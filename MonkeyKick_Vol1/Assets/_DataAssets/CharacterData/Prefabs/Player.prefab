@@ -216,7 +216,7 @@ MonoBehaviour:
   Game: {fileID: 11400000, guid: f3e6f635e4d026d44982cd6b5ab7b7fb, type: 2}
   finishAction: 0
   rb: {fileID: 0}
-  Stats: {fileID: 0}
+  Stats: {fileID: 11400000, guid: b9ad988ae74e1294e9c11a8671ae573b, type: 2}
   Turn:
     turnSystem: {fileID: 0}
     character: {fileID: 0}
@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de88d96ce7f6c6249b27f5937fa48c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMoving: 0
   radius: 0.55
   groundLayer:
     serializedVersion: 2
@@ -257,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b27a4f7bb4ecf94a9cd5f319c321a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Party: {fileID: 0}
+  Party: {fileID: 11400000, guid: a9a557240430427418860cff41d7548a, type: 2}
 --- !u!1001 &182493123805851618
 PrefabInstance:
   m_ObjectHideFlags: 0
