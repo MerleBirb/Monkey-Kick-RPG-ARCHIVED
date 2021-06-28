@@ -135,6 +135,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 486307931781004813, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
+      propertyPath: m_Height
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649743399485571910, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 180930f76c8dd664ba7ed8233b1dc2ba, type: 2}
     - target: {fileID: 3835935537506116254, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -187,6 +195,30 @@ PrefabInstance:
       propertyPath: characterSpace
       value: 
       objectReference: {fileID: 24155047}
+    - target: {fileID: 5828904196730166514, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 6462680307702052073, guid: ad904ca6764abfd46be17ce446ab0f59, type: 3}
+    - target: {fileID: 5828904196730166514, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828904196730166514, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828904196730166514, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000344939465306489, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
+      propertyPath: radius
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000344939465306489, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
 --- !u!1 &494317223
@@ -198,7 +230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 494317224}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +327,7 @@ GameObject:
   - component: {fileID: 974743418}
   - component: {fileID: 974743417}
   - component: {fileID: 974743416}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -731,7 +763,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25732
+  m_Name: pb_Mesh26048
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -900,6 +932,14 @@ PrefabInstance:
       propertyPath: focus
       value: 
       objectReference: {fileID: 1266392270}
+    - target: {fileID: 831006529630981425, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
+      propertyPath: distance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240403127774184060, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4240403128900377937, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
       propertyPath: m_RootOrder
       value: 0
