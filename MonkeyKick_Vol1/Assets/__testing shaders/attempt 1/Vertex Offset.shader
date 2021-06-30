@@ -1,4 +1,4 @@
-Shader "Custom/Shader1"
+Shader "Custom/Vertex Offset"
 {
     Properties // input data
     {
@@ -12,17 +12,12 @@ Shader "Custom/Shader1"
     {
         Tags
         {
-            "RenderType"="Transparent" // tag to inform render pipeline what type this is, for post processing
-            "Queue"="Transparent" // changes the render order
+            "RenderType"="Opaque" // tag to inform render pipeline what type this is, for post processing
         }
 
         Pass
         {
             // pass tags
-
-            Cull Off
-            ZWrite Off
-            Blend One One // additive
             // Blend DstColor Zero // multiply
 
             CGPROGRAM
@@ -59,6 +54,11 @@ Shader "Custom/Shader1"
             Interpolators vert (MeshData v)
             {
                 Interpolators o;
+
+                float wave = cos((v.uv0.y - _Time.y * 0.1) * TAU * 5);
+
+                v.vertex.y = wave;
+
                 o.vertex = UnityObjectToClipPos(v.vertex); // converts local space to clip space
                 o.normal = UnityObjectToWorldNormal(v.normals); // just pass through
                 o.uv = v.uv0; //(v.uv0 + _Offset) * _Scale; // pass through
@@ -73,24 +73,8 @@ Shader "Custom/Shader1"
 
             float4 frag (Interpolators i) : SV_Target
             {
-                // lerp, blend between two colors based on x uv coordinates
-                // float t = saturate(InverseLerp(_ColorStart, _ColorEnd, i.uv.x));
-                
-                // float t = abs(frac(i.uv.x * 5) * 2 - 1);
-
-                //return float4(i.uv, 0, 1);
-
-                float xOffset = cos(i.uv.x * TAU * 8) * 0.01;
-
-                float t = cos((i.uv.y + xOffset + -_Time.y * 0.5) * TAU * 5) * 0.5 + 0.5;
-                t *= 1 - i.uv.y;
-
-                float topBottomRemover = (abs(i.normal.y) < 0.999);
-                float waves = t * topBottomRemover;
-
-                float4 gradient = lerp(_ColorA, _ColorB, i.uv.y);
-
-                return gradient * waves;
+                float wave = cos((i.uv.y - _Time.y * 0.1) * TAU * 5) * 0.5 + 0.5;
+                return wave;
             }
 
             ENDCG
