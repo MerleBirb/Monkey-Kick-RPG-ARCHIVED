@@ -7,6 +7,7 @@ Shader "Custom/Vertex Offset"
         _ColorB ("Color B", Color) = (1, 1, 1, 1)
         _ColorStart ("Color Start", Range(0, 1)) = 0
         _ColorEnd ("Color End", Range(0, 1)) = 1
+        _WaveAmp ("Wave Amplitude", Range(0, 1)) = 0.5
     }
     SubShader
     {
@@ -32,6 +33,7 @@ Shader "Custom/Vertex Offset"
             float4 _ColorB;
             float _ColorStart;
             float _ColorEnd;
+            float _WaveAmp;
 
             // automatically filled out by Unity
             struct MeshData // per-vertex mesh data
@@ -51,13 +53,28 @@ Shader "Custom/Vertex Offset"
                 float2 uv : TEXCOORD1;    
             };
 
+            float InverseLerp(float startValue, float endValue, float inputValue)
+            {
+                return (inputValue - startValue) / (endValue - startValue);
+            }
+
+            float GetWave(float2 uv)
+            {
+                float2 uvsCentered = uv * 2 - 1;
+                float radialDistance = length(uvsCentered);
+                float wave = cos((radialDistance - _Time.y * 0.1) * TAU * 5) * 0.5 + 0.5;
+                wave *= 1 - radialDistance;
+                return wave;
+            }
+
             Interpolators vert (MeshData v)
             {
                 Interpolators o;
 
-                float wave = cos((v.uv0.y - _Time.y * 0.1) * TAU * 5);
+                // float yWave = cos((v.uv0.y - _Time.y * 0.1) * TAU * 5);
+                // float xWave = cos((v.uv0.x - _Time.y * 0.1) * TAU * 5);
 
-                v.vertex.y = wave;
+                v.vertex.y = GetWave(v.uv0) * _WaveAmp;
 
                 o.vertex = UnityObjectToClipPos(v.vertex); // converts local space to clip space
                 o.normal = UnityObjectToWorldNormal(v.normals); // just pass through
@@ -66,15 +83,9 @@ Shader "Custom/Vertex Offset"
                 return o;
             }
 
-            float InverseLerp(float startValue, float endValue, float inputValue)
-            {
-                return (inputValue - startValue) / (endValue - startValue);
-            } 
-
             float4 frag (Interpolators i) : SV_Target
             {
-                float wave = cos((i.uv.y - _Time.y * 0.1) * TAU * 5) * 0.5 + 0.5;
-                return wave;
+                return GetWave(i.uv);
             }
 
             ENDCG
