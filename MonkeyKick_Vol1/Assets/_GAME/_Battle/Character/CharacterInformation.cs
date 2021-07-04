@@ -17,6 +17,7 @@ namespace MonkeyKick.Battle
     {
         protected int statClamp = 9999;
 
+        #region BATTLE STATS
         public string CharacterName = "New Character";
         [Multiline] public string Description;
         public int Level;
@@ -39,6 +40,13 @@ namespace MonkeyKick.Battle
         public Vector3 battlePos; // neutral position during battle
 
         public List<Skill> skillList;
+        #endregion
+
+        #region ANIMATION INFO
+
+        public float Height = 1f;
+
+        #endregion
 
         public virtual void OnValidate()
         {

@@ -66,9 +66,10 @@ MonoBehaviour:
       BaseValue: 10
     Variable: {fileID: 0}
   isAlive: 1
-  battlePos: {x: -2, y: 0, z: -3}
+  battlePos: {x: -2, y: 0, z: 3}
   skillList:
   - {fileID: 11400000, guid: 89edeea6be486704eac947bbb5b3a0d9, type: 2}
+  Height: 1.5
   MaxEXP: 25
   CurrentEXP: 0
   TotalEXP: 0

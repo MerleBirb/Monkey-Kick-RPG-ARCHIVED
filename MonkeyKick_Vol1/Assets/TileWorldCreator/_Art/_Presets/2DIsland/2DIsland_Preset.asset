@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 2DIsland_Preset
   m_EditorClassIdentifier: 
   ui:
-    showGeneralSettings: 1
+    showGeneralSettings: 0
     showPresetSettings: 1
-    showEdit: 1
+    showEdit: 0
     autoBuild: 1
     brushSize: 2
     cellColor: {r: 0.47058824, g: 1, b: 0.47058824, a: 0.5882353}
@@ -69,7 +69,37 @@ MonoBehaviour:
       - 0
       - 0
       - 0
-    showPresetEditor: 0
+    - blockOffset: {x: 0.5, y: 0, z: 0.5}
+      floorOffset: {x: 0.5, y: 0, z: 0.5}
+      tileI: {fileID: 100000, guid: 9f2d1cb74acd0154eacc09fae1bb480a, type: 3}
+      tileC: {fileID: 100000, guid: 9d82109b858190d438425d9a5bb2048f, type: 3}
+      tileCi: {fileID: 100000, guid: 9135e8e132b68664da2931f38cb430cd, type: 3}
+      tileB: {fileID: 100000, guid: 880b908e01344764986c66a541725340, type: 3}
+      tileF: {fileID: 100000, guid: bc9c53985a737e445bb41a08e30b3582, type: 3}
+      yRotationOffsetI: 0
+      yRotationOffsetC: 0
+      yRotationOffset:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - blockOffset: {x: 0.5, y: 0, z: 0.5}
+      floorOffset: {x: 0.5, y: 0, z: 0.5}
+      tileI: {fileID: 100000, guid: 9f2d1cb74acd0154eacc09fae1bb480a, type: 3}
+      tileC: {fileID: 100000, guid: 9d82109b858190d438425d9a5bb2048f, type: 3}
+      tileCi: {fileID: 100000, guid: 9135e8e132b68664da2931f38cb430cd, type: 3}
+      tileB: {fileID: 100000, guid: 880b908e01344764986c66a541725340, type: 3}
+      tileF: {fileID: 100000, guid: bc9c53985a737e445bb41a08e30b3582, type: 3}
+      yRotationOffsetI: 0
+      yRotationOffsetC: 0
+      yRotationOffset:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    showPresetEditor: 1
   - tiles:
     - blockOffset: {x: 0.5, y: 0, z: 0.5}
       floorOffset: {x: 0.5, y: 0, z: 0.5}

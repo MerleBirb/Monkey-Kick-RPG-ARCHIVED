@@ -219,6 +219,10 @@ PrefabInstance:
       propertyPath: groundLayer.m_Bits
       value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 8456826372629826873, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
+      propertyPath: Stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 8888a75a8a9b9de43bb03a02c2bf6de8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
 --- !u!1 &494317223
@@ -763,7 +767,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh26048
+  m_Name: pb_Mesh85302
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -928,6 +932,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 421340072357223560, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 831006529630981425, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
       propertyPath: focus
       value: 
@@ -987,6 +995,10 @@ PrefabInstance:
     - target: {fileID: 4240403128900377938, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
       propertyPath: m_Name
       value: ---OverworldConstants---
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181013917020543366, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74b147b83ad3c554796cfc604822858b, type: 3}

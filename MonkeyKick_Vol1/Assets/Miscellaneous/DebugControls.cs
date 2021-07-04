@@ -18,7 +18,11 @@ public class DebugControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!isDebugModeOn) { this.enabled = false; }
+        if (!isDebugModeOn)
+        {
+            Cursor.visible = false;
+            this.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -26,8 +30,6 @@ public class DebugControls : MonoBehaviour
     {
         if (isDebugModeOn)
         {
-            Cursor.visible = false;
-
             if (Keyboard.current.escapeKey.wasPressedThisFrame) { Application.Quit(); }
         }
     }

@@ -69,4 +69,5 @@ MonoBehaviour:
   battlePos: {x: 2, y: 0, z: 3}
   skillList:
   - {fileID: 11400000, guid: 7a07e6482bd7b1e4a81b1621e0e28383, type: 2}
+  Height: 1
   EXPGiven: 15
