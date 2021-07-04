@@ -1,0 +1,21 @@
+//===== #SCRIPTNAME# =====//
+/*
+Date
+Description:
+-
+
+Author: Merlebirb
+*/
+
+using UnityEngine;
+
+    #ROOTNAMESPACEBEGIN#
+public class #SCRIPTNAME# : MonoBehaviour
+{
+	//===== VARIABLES =====//
+
+	//===== INIT =====//
+
+	//===== METHODS =====//
+}
+#ROOTNAMESPACEEND#

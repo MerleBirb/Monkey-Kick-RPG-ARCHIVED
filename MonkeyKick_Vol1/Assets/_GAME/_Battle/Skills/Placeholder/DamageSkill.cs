@@ -1,6 +1,5 @@
 
 using System.Collections;
-using MonkeyKick.Stats;
 using UnityEngine;
 
 namespace MonkeyKick.Battle
@@ -8,7 +7,6 @@ namespace MonkeyKick.Battle
     [CreateAssetMenu(menuName = "Skills/Damage Skills/Placeholder Damage Skill", fileName = "Placeholder Attack")]
     public class DamageSkill : Skill
     {
-        [SerializeField] private int damageValue;
         [SerializeField] private float seconds;
         [SerializeField] private float xOffset;
 
@@ -23,7 +21,7 @@ namespace MonkeyKick.Battle
 
         [SerializeField] private SkillState sequence = SkillState.WaitingToBegin;
 
-        public IEnumerator Cor_Action(CharacterBattle actor, CharacterBattle target)
+        private IEnumerator Cor_Action(CharacterBattle actor, CharacterBattle target)
         {
             Vector3 targetPos = new Vector3(target.transform.position.x + xOffset, actor.transform.position.y, target.transform.position.z);
             Vector3 returnPos = new Vector3(actor.Stats.battlePos.x, actor.transform.position.y, actor.Stats.battlePos.z);
@@ -72,26 +70,6 @@ namespace MonkeyKick.Battle
         public override void Action(CharacterBattle actor, CharacterBattle target)
         {
             actor.StartCoroutine(Cor_Action(actor, target));
-        }
-
-        public int GetDamage()
-        {
-            return damageValue;
-        }
-
-        private void Damage(CharacterBattle target)
-        {
-            bool damageGoesBelowZero = (target.Stats.CurrentHP.ConstantValue.Value - damageValue) <= 0;
-
-            if (damageGoesBelowZero)
-            {
-                target.Stats.CurrentHP.SetStat(0);
-                target.Kill();
-            }
-            else
-            {
-                target.Stats.CurrentHP.ChangeStat(-damageValue);
-            }
         }
     }
 }

@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 241c6459e09d82a45ab5663d6760bbbc, type: 3}
-  m_Name: Enemy Attack
+  m_Script: {fileID: 11500000, guid: ed5f57da7df30e942be0ec8bd3de5566, type: 3}
+  m_Name: Dawg Combo
   m_EditorClassIdentifier: 
-  skillName: Placeholder Attack
-  skillDescription: Cool move. Not real though.
-  skillValue: 5
-  seconds: 1
-  xOffset: 1
+  skillName: Dawg Combo
+  skillDescription: P-Dawg's default combo.
+  skillValue: 7
   sequence: 0
+  jumpHeight: 3
+  returnSeconds: 1
+  newGravity: -35

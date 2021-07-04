@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Player Punch
   skillDescription: A placeholder attack.
-  damageValue: 8
+  skillValue: 7
   seconds: 1
   xOffset: -1
   sequence: 0
