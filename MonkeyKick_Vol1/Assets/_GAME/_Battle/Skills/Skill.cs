@@ -51,9 +51,9 @@ namespace MonkeyKick.Battle
             }
         }
 
-        ///<summary>
+        /// <summary>
         /// Turns off various variables from the rigidbody to make the physics entirely reliant on the skill.
-        ///</summary>
+        /// </summary>
         public virtual void FreeUpPhysics(CharacterBattle actor)
         {
             if (!_rb) _rb = actor.GetComponent<Rigidbody>();
@@ -62,15 +62,45 @@ namespace MonkeyKick.Battle
             _defaultGravity = Physics.gravity;
         }
 
-        ///<summary>
+        /// <summary>
         /// Resets all physics variables of the rigidbody
-        ///</summary>
+        /// </summary>
         public virtual void ResetPhysics(CharacterBattle actor)
         {
             if (!_rb) _rb = actor.GetComponent<Rigidbody>();
             _rb.useGravity = true;
 
             Physics.gravity = _defaultGravity;
+        }
+
+        /// <summary>
+        /// Parabolas used for animations for skills
+        /// </summary>
+        public struct ParabolaData
+        {
+            public readonly Vector3 initialVelocity;
+            public readonly float timeToTarget;
+
+            public ParabolaData(Vector3 initialVelocity, float timeToTarget)
+            {
+                this.initialVelocity = initialVelocity;
+                this.timeToTarget = timeToTarget;
+            }
+        }
+
+        public virtual ParabolaData CalculateParabolaData(CharacterBattle actor, CharacterBattle target, float height, float gravity)
+        {
+            Vector3 actorPos = actor.transform.position;
+            Vector3 targetPos = target.transform.position;
+
+            float displacementY = targetPos.y - actorPos.y;
+            Vector3 displacementXZ = new Vector3 (targetPos.x - actorPos.x, 0, targetPos.z - actorPos.z);
+
+            float time = Mathf.Sqrt((-2 * height) / gravity) + Mathf.Sqrt(2 *(displacementY - height) / gravity);
+            Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * height);
+            Vector3 velocityXZ = displacementXZ / time;
+
+            return new ParabolaData(velocityXZ + velocityY * -Mathf.Sign(gravity), time);
         }
     }
 }

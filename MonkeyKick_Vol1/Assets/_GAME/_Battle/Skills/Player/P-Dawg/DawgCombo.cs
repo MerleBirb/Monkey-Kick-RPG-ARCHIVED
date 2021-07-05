@@ -45,8 +45,6 @@ namespace MonkeyKick.Battle
                 if(!_actor) _actor = actor;
                 if(!_target) _target = target;
 
-                FreeUpPhysics(_actor); // turn off gravity by default
-
                 yield return null;
 
                 sequence = SequenceState.JumpingToTarget;
@@ -55,7 +53,8 @@ namespace MonkeyKick.Battle
             {
                 ParabolaJump();
 
-                yield return new WaitForSeconds(CalculateJumpData().timeToTarget);
+                float time = CalculateParabolaData(_actor, _target, jumpHeight, newGravity).timeToTarget;
+                yield return new WaitForSeconds(time);
 
                 _actor.rb.velocity = Vector3.zero;
                 Damage(_target);
@@ -89,54 +88,10 @@ namespace MonkeyKick.Battle
 
         private void ParabolaJump()
         {
-            ResetPhysics(_actor); // turn gravity back on for the jump
             Physics.gravity = Vector3.up * newGravity;
 
-            _actor.rb.velocity = CalculateJumpData().initialVelocity;
+            _actor.rb.velocity = CalculateParabolaData(_actor, _target, jumpHeight, newGravity).initialVelocity;
             _target.rb.mass = 10000;
-        }
-
-        private JumpData CalculateJumpData() // parabola for jump
-        {
-            Vector3 targetPos = _target.transform.position;
-            Vector3 actorPos = _actor.transform.position;
-
-            float displacementY = targetPos.y - actorPos.y;
-            Vector3 displacementXZ = new Vector3 (targetPos.x - actorPos.x, 0, targetPos.z - actorPos.z);
-
-            float time = Mathf.Sqrt((-2 * jumpHeight) / newGravity) + Mathf.Sqrt(2 *(displacementY - jumpHeight) / newGravity);
-            Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * newGravity * jumpHeight);
-            Vector3 velocityXZ = displacementXZ / time;
-
-            return new JumpData(velocityXZ + velocityY * -Mathf.Sign(newGravity), time);
-        }
-
-        private struct JumpData
-        {
-            public readonly Vector3 initialVelocity;
-            public readonly float timeToTarget;
-
-            public JumpData(Vector3 initialVelocity, float timeToTarget)
-            {
-                this.initialVelocity = initialVelocity;
-                this.timeToTarget = timeToTarget;
-            }
-        }
-
-        private void DrawPath()
-        {
-            JumpData jumpData = CalculateJumpData();
-            Vector3 previousDrawPoint = _actor.transform.position;
-
-            int resolution = 30;
-            for (int i = 1; i <= resolution; i++)
-            {
-                float simulationTime = i / (float)resolution * jumpData.timeToTarget;
-                Vector3 displacement = jumpData.initialVelocity * simulationTime + Vector3.up * newGravity * simulationTime * simulationTime / 2f;
-                Vector3 drawPoint = _actor.transform.position + displacement;
-                Debug.DrawLine(previousDrawPoint, -drawPoint, Color.green);
-                previousDrawPoint = drawPoint;
-            }
         }
     }
 }
