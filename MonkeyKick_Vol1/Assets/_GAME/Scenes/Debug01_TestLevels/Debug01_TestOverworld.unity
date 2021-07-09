@@ -936,26 +936,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 421340072357223560, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 831006529630981425, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
       propertyPath: focus
       value: 
       objectReference: {fileID: 1266392270}
-    - target: {fileID: 831006529630981425, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: distance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 831006529630981425, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: focusCentering
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 4240403127774184060, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: m_Intensity
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4240403128900377937, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1003,10 +987,6 @@ PrefabInstance:
     - target: {fileID: 4240403128900377938, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
       propertyPath: m_Name
       value: ---OverworldConstants---
-      objectReference: {fileID: 0}
-    - target: {fileID: 8181013917020543366, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74b147b83ad3c554796cfc604822858b, type: 3}

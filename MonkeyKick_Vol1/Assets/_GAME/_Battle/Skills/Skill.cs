@@ -7,8 +7,8 @@ Description:
 Author: Merlebirb
 */
 
-using MonkeyKick.Stats;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace MonkeyKick.Battle
 {
@@ -16,6 +16,7 @@ namespace MonkeyKick.Battle
     {
         private Rigidbody _rb;
         protected Vector3 _defaultGravity;
+        protected Camera _mainCam;
 
         public string skillName;
         [Multiline] public string skillDescription;
@@ -73,6 +74,31 @@ namespace MonkeyKick.Battle
             Physics.gravity = _defaultGravity;
         }
 
+        #region CAMERA CONTROLS
+
+        public virtual Vector3 GetCenterPoint(List<Transform> points, Vector3 offset)
+        {
+            if (points.Count == 1)
+            {
+                return points[0].position;
+            }
+
+            var bounds = new Bounds(points[0].position, Vector3.zero);
+            for (int i = 0; i < points.Count; i++)
+            {
+                bounds.Encapsulate(points[i].position);
+            }
+
+            Vector3 centerPoint = bounds.center;
+            Vector3 newPosition = centerPoint + offset;
+
+            return newPosition;
+        }
+
+        #endregion
+
+        #region PARABOLA
+
         /// <summary>
         /// Parabolas used for animations for skills
         /// </summary>
@@ -102,5 +128,18 @@ namespace MonkeyKick.Battle
 
             return new ParabolaData(velocityXZ + velocityY * -Mathf.Sign(gravity), time);
         }
+
+        /// <summary>
+        /// creates a jump using a parabola
+        /// </summary>
+        public virtual void ParabolaJump(float grav, ParabolaData parabola, CharacterBattle actor, CharacterBattle target)
+        {
+            Physics.gravity = Vector3.up * grav;
+
+            actor.rb.velocity = parabola.initialVelocity;
+            target.rb.mass = 10000;
+        }
+
+        #endregion
     }
 }

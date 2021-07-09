@@ -8,8 +8,9 @@ Author: Merlebirb
 */
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using Unity.Collections;
+using MonkeyKick.CameraTools;
 
 namespace MonkeyKick.Battle
 {
@@ -28,12 +29,13 @@ namespace MonkeyKick.Battle
 
         private CharacterBattle _target;
         private CharacterBattle _actor;
-        private float _seconds;
+        private List<Transform> _characters;
 
         [SerializeField] private SequenceState sequence = SequenceState.WaitingToBegin;
         [SerializeField] private float jumpHeight;
         [SerializeField] private float returnSeconds = 1;
         [SerializeField] private float newGravity = -30f;
+        [SerializeField] private Vector3 camOffset;
 
     	//===== METHODS =====//
 
@@ -41,19 +43,29 @@ namespace MonkeyKick.Battle
         {
             if (sequence == SequenceState.WaitingToBegin)
             {
-                // store the actor and target into private variables
-                if(!_actor) _actor = actor;
-                if(!_target) _target = target;
+                // store private vars
+                if (!_actor) _actor = actor;
+                if (!_target) _target = target;
+                if (!_mainCam) _mainCam = Camera.main;
+                _characters.Clear();
 
                 yield return null;
+
+                _characters.Add(_actor.transform);
+                _characters.Add(_target.transform);
 
                 sequence = SequenceState.JumpingToTarget;
             }
             if (sequence == SequenceState.JumpingToTarget)
             {
-                ParabolaJump();
-
                 float time = CalculateParabolaData(_actor, _target, jumpHeight, newGravity).timeToTarget;
+
+                ParabolaJump(
+                        newGravity,
+                        CalculateParabolaData(_actor, _target, jumpHeight, newGravity),
+                        _actor,
+                        _target);
+
                 yield return new WaitForSeconds(time);
 
                 _actor.rb.velocity = Vector3.zero;
@@ -84,14 +96,6 @@ namespace MonkeyKick.Battle
         public override void Action(CharacterBattle actor, CharacterBattle target)
         {
             actor.StartCoroutine(Cor_Action(actor, target));
-        }
-
-        private void ParabolaJump()
-        {
-            Physics.gravity = Vector3.up * newGravity;
-
-            _actor.rb.velocity = CalculateParabolaData(_actor, _target, jumpHeight, newGravity).initialVelocity;
-            _target.rb.mass = 10000;
         }
     }
 }

@@ -19,3 +19,4 @@ MonoBehaviour:
   jumpHeight: 3
   returnSeconds: 1
   newGravity: -35
+  camOffset: {x: 0, y: 1.5, z: -3}
