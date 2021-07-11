@@ -82,7 +82,7 @@ Shader "Custom/Shader1"
 
                 float xOffset = cos(i.uv.x * TAU * 8) * 0.01;
 
-                float t = cos((i.uv.y + xOffset + -_Time.y * 0.5) * TAU * 5) * 0.5 + 0.5;
+                float t = cos((i.uv.y + xOffset + -_Time.y * 1.2) * TAU * 5) * 0.5 + 0.5;
                 t *= 1 - i.uv.y;
 
                 float topBottomRemover = (abs(i.normal.y) < 0.999);
