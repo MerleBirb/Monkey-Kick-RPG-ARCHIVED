@@ -20,6 +20,12 @@ namespace MonkeyKick.UI
 
     	//===== INIT =====//
 
+        public void SetButton(ActionButton newButton)
+        {
+            if (button == newButton) return;
+            button = newButton;
+        }
+
     	//===== METHODS =====//
 
         private void OnValidate()

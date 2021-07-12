@@ -18,9 +18,9 @@ namespace MonkeyKick.Battle
         protected Vector3 _defaultGravity;
         protected Camera _mainCam;
 
-        public string skillName;
-        [Multiline] public string skillDescription;
-        public int skillValue;
+        public string SkillName;
+        [Multiline] public string SkillDescription;
+        public int SkillValue;
 
         public virtual void Action(CharacterBattle actor, CharacterBattle target)
         {
@@ -29,17 +29,17 @@ namespace MonkeyKick.Battle
 
         public string GetName()
         {
-            return skillName;
+            return SkillName;
         }
 
         public string GetDescription()
         {
-            return skillDescription;
+            return SkillDescription;
         }
 
         public virtual void Damage(CharacterBattle target)
         {
-            bool damageGoesBelowZero = (target.Stats.CurrentHP.ConstantValue.Value - skillValue) <= 0;
+            bool damageGoesBelowZero = (target.Stats.CurrentHP.ConstantValue.Value - SkillValue) <= 0;
 
             if (damageGoesBelowZero)
             {
@@ -48,7 +48,7 @@ namespace MonkeyKick.Battle
             }
             else
             {
-                target.Stats.CurrentHP.ChangeStat(-skillValue);
+                target.Stats.CurrentHP.ChangeStat(-SkillValue);
             }
         }
 
