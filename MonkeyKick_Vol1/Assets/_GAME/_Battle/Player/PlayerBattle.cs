@@ -8,10 +8,9 @@ Author: Merlebirb
 */
 
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using MonkeyKick.Overworld;
 using MonkeyKick.References;
+using MonkeyKick.Controls;
 
 namespace MonkeyKick.Battle
 {
@@ -19,19 +18,25 @@ namespace MonkeyKick.Battle
     {
         private PlayerControls _input;
 
-        #region CONTROLS
-
         [SerializeField] private IntReference menuChoice;
+
+        #region MENU CONTROLS
 
         private InputAction _moveSelector;
         private InputAction _select;
         private InputAction _cancel;
 
+        #endregion
+
+        #region BATTLE CONTROLS
+
+        [HideInInspector] public SkillControls skillControls;
+
+        #endregion
+
         private Vector2 _movementMenu;
         private bool _movePressed = false;
         private bool _selectPressed = false;
-
-        #endregion
 
         public override void Awake()
         {
@@ -45,6 +50,8 @@ namespace MonkeyKick.Battle
             _cancel = _input.BattleMenu.Cancel;
 
             _moveSelector.performed += context => _movementMenu = context.ReadValue<Vector2>();
+
+            skillControls = new SkillControls(_input);
         }
 
         // separate battle logic between normal update and fixed update
@@ -130,8 +137,16 @@ namespace MonkeyKick.Battle
             Turn.turnSystem.RemovePlayerFromParty(this);
         }
 
-        private void OnEnable() => _input.BattleMenu.Enable();
+        private void OnEnable()
+        {
+            _input.BattleMenu.Enable();
+            _input.Battle.Enable();
+        }
 
-        private void OnDisable() => _input.BattleMenu.Disable();
+        private void OnDisable()
+        {
+            _input.BattleMenu.Disable();
+            _input.Battle.Disable();
+        }
     }
 }

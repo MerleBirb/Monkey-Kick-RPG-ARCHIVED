@@ -15,7 +15,7 @@ using MonkeyKick.CameraTools;
 namespace MonkeyKick.Battle
 {
     [CreateAssetMenu(menuName = "Skills/Damage Skills/Dawg Combo", fileName = "Dawg Combo")]
-    public class DawgCombo : Skill
+    public class DawgCombo : PlayerSkill
     {
     	//===== VARIABLES =====//
 
@@ -35,11 +35,11 @@ namespace MonkeyKick.Battle
         [SerializeField] private float jumpHeight;
         [SerializeField] private float returnSeconds = 1;
         [SerializeField] private float newGravity = -30f;
-        [SerializeField] private Vector3 camOffset;
+        //[SerializeField] private Vector3 camOffset;
 
     	//===== METHODS =====//
 
-        private IEnumerator Cor_Action(CharacterBattle actor, CharacterBattle target)
+        public IEnumerator Cor_Action(CharacterBattle actor, CharacterBattle target)
         {
             if (sequence == SequenceState.WaitingToBegin)
             {
@@ -47,6 +47,7 @@ namespace MonkeyKick.Battle
                 if (!_actor) _actor = actor;
                 if (!_target) _target = target;
                 if (!_mainCam) _mainCam = Camera.main;
+                if (_skillControls == null) SetControls(actor.GetComponent<PlayerBattle>().skillControls);
                 _characters.Clear();
 
                 yield return null;
@@ -58,7 +59,13 @@ namespace MonkeyKick.Battle
             }
             if (sequence == SequenceState.JumpingToTarget)
             {
-                float time = CalculateParabolaData(_actor, _target, jumpHeight, newGravity).timeToTarget;
+                float totalTime = CalculateParabolaData(_actor, _target, jumpHeight, newGravity).timeToTarget;
+                float currentTime = 0f;
+                while(currentTime < totalTime)
+                {
+                    currentTime += Time.fixedDeltaTime;
+                   //yield return new WaitForFixedUpdate();
+                }
 
                 ParabolaJump(
                         newGravity,
@@ -66,7 +73,7 @@ namespace MonkeyKick.Battle
                         _actor,
                         _target);
 
-                yield return new WaitForSeconds(time);
+                yield return new WaitForSeconds(totalTime);
 
                 _actor.rb.velocity = Vector3.zero;
                 Damage(_target);

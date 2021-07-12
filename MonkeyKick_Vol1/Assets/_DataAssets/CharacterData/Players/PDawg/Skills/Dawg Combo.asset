@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5f57da7df30e942be0ec8bd3de5566, type: 3}
   m_Name: Dawg Combo
   m_EditorClassIdentifier: 
-  skillName: Dawg Combo
-  skillDescription: P-Dawg's default combo.
-  skillValue: 7
+  SkillName: 
+  SkillDescription: 
+  SkillValue: 7
   sequence: 0
   jumpHeight: 3
   returnSeconds: 1
   newGravity: -35
-  camOffset: {x: 0, y: 1.5, z: -3}

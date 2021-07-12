@@ -14,6 +14,7 @@ namespace MonkeyKick.Battle
 {
     public abstract class Skill : ScriptableObject
     {
+        //===== VARIABLES =====//
         private Rigidbody _rb;
         protected Vector3 _defaultGravity;
         protected Camera _mainCam;
@@ -22,10 +23,32 @@ namespace MonkeyKick.Battle
         [Multiline] public string SkillDescription;
         public int SkillValue;
 
+        //===== METHODS =====//
+
+        #region ACTION
+
         public virtual void Action(CharacterBattle actor, CharacterBattle target)
         {
             return;
         }
+        //public virtual void Action(PlayerBattle actor, EnemyBattle target)
+        //{
+        //    return;
+        //}
+        //public virtual void Action(PlayerBattle actor, PlayerBattle target)
+        //{
+        //    return;
+        //}
+        //public virtual void Action(EnemyBattle actor, PlayerBattle target)
+        //{
+        //    return;
+        //}
+        //public virtual void Action(EnemyBattle actor, EnemyBattle target)
+        //{
+        //    return;
+        //}
+
+        #endregion
 
         public string GetName()
         {
@@ -39,7 +62,7 @@ namespace MonkeyKick.Battle
 
         public virtual void Damage(CharacterBattle target)
         {
-            bool damageGoesBelowZero = (target.Stats.CurrentHP.ConstantValue.Value - SkillValue) <= 0;
+            bool damageGoesBelowZero = (target.Stats.CurrentHP.ConstantValue.BaseValue - SkillValue) <= 0;
 
             if (damageGoesBelowZero)
             {

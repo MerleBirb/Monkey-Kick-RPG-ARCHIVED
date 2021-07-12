@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 241c6459e09d82a45ab5663d6760bbbc, type: 3}
   m_Name: Enemy Attack
   m_EditorClassIdentifier: 
-  skillName: Placeholder Attack
-  skillDescription: Cool move. Not real though.
-  skillValue: 5
+  SkillName: 
+  SkillDescription: 
+  SkillValue: 4
   seconds: 1
   xOffset: 1
   sequence: 0

@@ -10,7 +10,7 @@ Author: Merlebirb
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MonkeyKick.QoL;
-using MonkeyKick.CameraTools;
+using MonkeyKick.Controls;
 
 namespace MonkeyKick.Overworld
 {

@@ -1,64 +1,40 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/_GAME/_Battle/Skills/SkillControls.inputactions'
+//===== SKILL CONTROLS =====//
+/*
+7/12/21
+Description:
+- Holds the controller inputs for skills and counterattacks
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
+Author: Merlebirb
+*/
+
+using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Utilities;
+using MonkeyKick.Controls;
 
-public class @SkillControls : IInputActionCollection, IDisposable
+namespace MonkeyKick.Battle
 {
-    public InputActionAsset asset { get; }
-    public @SkillControls()
+    public class SkillControls
     {
-        asset = InputActionAsset.FromJson(@"{
-    ""name"": ""SkillControls"",
-    ""maps"": [],
-    ""controlSchemes"": []
-}");
-    }
+        public readonly PlayerControls input;
+        public readonly InputAction joystick;
+        public Vector2 stickMove;
+        public readonly InputAction northButton;
+        public readonly InputAction southButton;
+        public readonly InputAction eastButton;
+        public readonly InputAction westButton;
 
-    public void Dispose()
-    {
-        UnityEngine.Object.Destroy(asset);
-    }
+        public SkillControls(PlayerControls input)
+        {
+            this.input = input;
 
-    public InputBinding? bindingMask
-    {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
-    }
+            joystick = input.Battle.Joystick;
+            stickMove = Vector2.zero;
+            joystick.performed += context => stickMove = context.ReadValue<Vector2>();
 
-    public ReadOnlyArray<InputDevice>? devices
-    {
-        get => asset.devices;
-        set => asset.devices = value;
-    }
-
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-    public bool Contains(InputAction action)
-    {
-        return asset.Contains(action);
-    }
-
-    public IEnumerator<InputAction> GetEnumerator()
-    {
-        return asset.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    public void Enable()
-    {
-        asset.Enable();
-    }
-
-    public void Disable()
-    {
-        asset.Disable();
+            northButton = input.Battle.North;
+            southButton = input.Battle.South;
+            eastButton = input.Battle.East;
+            westButton = input.Battle.West;
+        }
     }
 }

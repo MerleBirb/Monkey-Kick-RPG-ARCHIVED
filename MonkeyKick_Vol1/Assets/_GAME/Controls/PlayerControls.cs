@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace MonkeyKick.Overworld
+namespace MonkeyKick.Controls
 {
     public class @PlayerControls : IInputActionCollection, IDisposable
     {
@@ -332,6 +332,164 @@ namespace MonkeyKick.Overworld
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Battle"",
+            ""id"": ""ef39955d-3984-4725-9eb2-0f27ba0c88bc"",
+            ""actions"": [
+                {
+                    ""name"": ""Joystick"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""698b6525-b3da-4825-bcba-9e533f2cd8ed"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""North"",
+                    ""type"": ""Button"",
+                    ""id"": ""420e11fa-8212-4830-8d4c-adb55910fb39"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""South"",
+                    ""type"": ""Button"",
+                    ""id"": ""42033926-110f-4bed-9b8b-405f2e0d0d79"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""East"",
+                    ""type"": ""Button"",
+                    ""id"": ""95086235-9115-4a52-bd22-24f81fa2d29e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""West"",
+                    ""type"": ""Button"",
+                    ""id"": ""4ac21978-3180-4839-b0bb-b62f6616bdd7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7f2a138c-c74b-4f8c-9f22-053fe5d504f0"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Joystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""75314aa4-a4ec-446c-84e2-4418e5bb08e0"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Joystick"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""2bede422-3c69-425d-9478-8fe9992515b4"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Joystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""f2956779-a4c5-49c8-978c-c7529dc6651e"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Joystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""3820fff6-07b6-428f-a8b8-f5c5278bdd9d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Joystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""d26db4c2-9ed4-43e5-9961-c9a8d94a5c43"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Joystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""08b907d6-61bf-43d7-92d9-1127a58c71e8"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""South"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e2b7fcf1-1181-4e11-95bb-8a0a4409be14"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""North"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da4dc003-93bf-4c4d-8948-9c8305e4745c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""East"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6637ea21-8c1b-47c8-b2ea-0de6bf8a03b2"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""West"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -374,6 +532,13 @@ namespace MonkeyKick.Overworld
             m_BattleMenu_MoveSelector = m_BattleMenu.FindAction("MoveSelector", throwIfNotFound: true);
             m_BattleMenu_Select = m_BattleMenu.FindAction("Select", throwIfNotFound: true);
             m_BattleMenu_Cancel = m_BattleMenu.FindAction("Cancel", throwIfNotFound: true);
+            // Battle
+            m_Battle = asset.FindActionMap("Battle", throwIfNotFound: true);
+            m_Battle_Joystick = m_Battle.FindAction("Joystick", throwIfNotFound: true);
+            m_Battle_North = m_Battle.FindAction("North", throwIfNotFound: true);
+            m_Battle_South = m_Battle.FindAction("South", throwIfNotFound: true);
+            m_Battle_East = m_Battle.FindAction("East", throwIfNotFound: true);
+            m_Battle_West = m_Battle.FindAction("West", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -517,6 +682,71 @@ namespace MonkeyKick.Overworld
             }
         }
         public BattleMenuActions @BattleMenu => new BattleMenuActions(this);
+
+        // Battle
+        private readonly InputActionMap m_Battle;
+        private IBattleActions m_BattleActionsCallbackInterface;
+        private readonly InputAction m_Battle_Joystick;
+        private readonly InputAction m_Battle_North;
+        private readonly InputAction m_Battle_South;
+        private readonly InputAction m_Battle_East;
+        private readonly InputAction m_Battle_West;
+        public struct BattleActions
+        {
+            private @PlayerControls m_Wrapper;
+            public BattleActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Joystick => m_Wrapper.m_Battle_Joystick;
+            public InputAction @North => m_Wrapper.m_Battle_North;
+            public InputAction @South => m_Wrapper.m_Battle_South;
+            public InputAction @East => m_Wrapper.m_Battle_East;
+            public InputAction @West => m_Wrapper.m_Battle_West;
+            public InputActionMap Get() { return m_Wrapper.m_Battle; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(BattleActions set) { return set.Get(); }
+            public void SetCallbacks(IBattleActions instance)
+            {
+                if (m_Wrapper.m_BattleActionsCallbackInterface != null)
+                {
+                    @Joystick.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnJoystick;
+                    @Joystick.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnJoystick;
+                    @Joystick.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnJoystick;
+                    @North.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnNorth;
+                    @North.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnNorth;
+                    @North.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnNorth;
+                    @South.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
+                    @South.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
+                    @South.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
+                    @East.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnEast;
+                    @East.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnEast;
+                    @East.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnEast;
+                    @West.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnWest;
+                    @West.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnWest;
+                    @West.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnWest;
+                }
+                m_Wrapper.m_BattleActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Joystick.started += instance.OnJoystick;
+                    @Joystick.performed += instance.OnJoystick;
+                    @Joystick.canceled += instance.OnJoystick;
+                    @North.started += instance.OnNorth;
+                    @North.performed += instance.OnNorth;
+                    @North.canceled += instance.OnNorth;
+                    @South.started += instance.OnSouth;
+                    @South.performed += instance.OnSouth;
+                    @South.canceled += instance.OnSouth;
+                    @East.started += instance.OnEast;
+                    @East.performed += instance.OnEast;
+                    @East.canceled += instance.OnEast;
+                    @West.started += instance.OnWest;
+                    @West.performed += instance.OnWest;
+                    @West.canceled += instance.OnWest;
+                }
+            }
+        }
+        public BattleActions @Battle => new BattleActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         public InputControlScheme KeyboardMouseScheme
         {
@@ -546,6 +776,14 @@ namespace MonkeyKick.Overworld
             void OnMoveSelector(InputAction.CallbackContext context);
             void OnSelect(InputAction.CallbackContext context);
             void OnCancel(InputAction.CallbackContext context);
+        }
+        public interface IBattleActions
+        {
+            void OnJoystick(InputAction.CallbackContext context);
+            void OnNorth(InputAction.CallbackContext context);
+            void OnSouth(InputAction.CallbackContext context);
+            void OnEast(InputAction.CallbackContext context);
+            void OnWest(InputAction.CallbackContext context);
         }
     }
 }
