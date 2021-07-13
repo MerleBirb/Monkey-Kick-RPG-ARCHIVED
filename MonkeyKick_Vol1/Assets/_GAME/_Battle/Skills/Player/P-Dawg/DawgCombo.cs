@@ -63,7 +63,19 @@ namespace MonkeyKick.Battle
                 while(currentTime < totalTime)
                 {
                     currentTime += Time.deltaTime;
-                    if (_actor.southPressed) Debug.Log("Button Pressed");
+
+                    if (_actor.southPressed)
+                    {
+                        if (currentTime <= (totalTime * 0.5f)) { SetEffortRank(EffortRanks.Cringe); _effortValueMultiplier = 0.1f; }
+                        else if (currentTime <= (totalTime * 0.6f)) { SetEffortRank(EffortRanks.Coolio); _effortValueMultiplier = 0.4f; }
+                        else if (currentTime <= (totalTime * 0.7f)) { SetEffortRank(EffortRanks.Dope); _effortValueMultiplier = 0.75f; }
+                        else if (currentTime <= (totalTime * 0.8f)) { SetEffortRank(EffortRanks.Radical); _effortValueMultiplier = 1f; }
+                        else if (currentTime <= (totalTime * 0.9f)) { SetEffortRank(EffortRanks.Fantastalicious); _effortValueMultiplier = 1.2f; }
+                        else { SetEffortRank(EffortRanks.Cringe); }
+
+                        Debug.Log("Button Pressed");
+                    }
+
                     yield return null;
                 }
 

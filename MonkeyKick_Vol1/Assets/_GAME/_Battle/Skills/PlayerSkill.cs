@@ -9,6 +9,7 @@ Author: Merlebirb
 
 using UnityEngine;
 using System.Collections.Generic;
+using MonkeyKick.References;
 
 namespace MonkeyKick.Battle
 {
@@ -18,19 +19,20 @@ namespace MonkeyKick.Battle
 
         protected enum EffortRanks
         {
-            Doozy,
-            Groovy,
-            Swag,
-            Awesome,
-            Fantastalicious
+            Cringe = 0,
+            Coolio = 1,
+            Dope = 2,
+            Radical = 3,
+            Fantastalicious = 4
         }
 
         protected EffortRanks _effortRank;
-        protected string[] _effortRankStrings = { "DOOZY...", "GROOVY!", "SWAG!", "AWESOME!!", "FANTASTALICIOUS!!!" };
-        protected SkillControls _skillControls;
+        protected string[] _effortRankStrings = { "CRINGE...", "COOLIO!", "DOPE!", "RADICAL!!", "FANTASTALICIOUS!!!" };
         protected PlayerBattle _actor;
         protected CharacterBattle _target;
         protected List<Transform> _characters;
+
+        public StringReference EffortRankText;
 
     	//===== INIT =====//
 
@@ -43,6 +45,10 @@ namespace MonkeyKick.Battle
 
     	//===== METHODS =====//
 
-        
+        protected void SetEffortRank(EffortRanks newRank)
+        {
+            _effortRank = newRank;
+            EffortRankText.Variable.Value = _effortRankStrings[(int)newRank];
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace MonkeyKick.Battle
         private Rigidbody _rb;
         protected Vector3 _defaultGravity;
         protected Camera _mainCam;
+        protected float _effortValueMultiplier;
 
         public string SkillName;
         [Multiline] public string SkillDescription;
@@ -71,7 +72,8 @@ namespace MonkeyKick.Battle
             }
             else
             {
-                target.Stats.CurrentHP.ChangeStat(-SkillValue);
+                int finalValue = Mathf.Clamp(((int)((float)SkillValue * _effortValueMultiplier)), 1, 99999);
+                target.Stats.CurrentHP.ChangeStat(-finalValue);
             }
         }
 

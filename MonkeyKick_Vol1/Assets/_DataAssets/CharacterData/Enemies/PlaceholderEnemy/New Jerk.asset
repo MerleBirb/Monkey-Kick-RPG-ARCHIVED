@@ -18,12 +18,12 @@ MonoBehaviour:
   MaxHP:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 15
+      BaseValue: 50
     Variable: {fileID: 0}
   CurrentHP:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 15
+      BaseValue: 50
     Variable: {fileID: 0}
   MaxKP:
     UseConstant: 1
