@@ -8,9 +8,7 @@ Author: Merlebirb
 */
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using MonkeyKick.CameraTools;
 
 namespace MonkeyKick.Battle
 {
@@ -27,10 +25,6 @@ namespace MonkeyKick.Battle
             EndSequence
         }
 
-        private PlayerBattle _actor;
-        private EnemyBattle _target;
-        private List<Transform> _characters;
-
         [SerializeField] private SequenceState sequence = SequenceState.WaitingToBegin;
         [SerializeField] private float jumpHeight;
         [SerializeField] private float returnSeconds = 1;
@@ -43,11 +37,9 @@ namespace MonkeyKick.Battle
         {
             if (sequence == SequenceState.WaitingToBegin)
             {
-                // store private vars
-                if (!_actor) _actor = actor.GetComponent<PlayerBattle>();
-                if (!_target) _target = target.GetComponent<EnemyBattle>();
+                SettingUpCharacters(actor, target);
+
                 if (!_mainCam) _mainCam = Camera.main;
-                _characters.Clear();
 
                 yield return null;
 
@@ -84,8 +76,7 @@ namespace MonkeyKick.Battle
             }
             if (sequence == SequenceState.Return)
             {
-                Vector3 returnPos = new Vector3(_actor.Stats.battlePos.x, _actor.transform.position.y, _actor.Stats.battlePos.z);
-                _actor.rb.velocity = (returnPos - actor.transform.position) / returnSeconds;
+                _actor.rb.velocity = LinearReturn(_actor.Stats.battlePos, _actor.transform.position, returnSeconds);
 
                 yield return new WaitForSeconds(returnSeconds - Time.fixedDeltaTime);
 

@@ -164,5 +164,15 @@ namespace MonkeyKick.Battle
         }
 
         #endregion
+    
+        #region LINEAR
+
+        public virtual Vector3 LinearReturn(Vector3 battlePos, Vector3 currentPos, float time)
+        {
+            Vector3 returnPos = new Vector3(battlePos.x, currentPos.y, battlePos.z);
+            return (returnPos - currentPos) / time;
+        }
+
+        #endregion
     }
 }

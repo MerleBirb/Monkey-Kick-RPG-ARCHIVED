@@ -458,11 +458,33 @@ namespace MonkeyKick.Controls
                 },
                 {
                     ""name"": """",
+                    ""id"": ""56835c98-55c1-4c6e-a0f6-4571a8bac123"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""South"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""e2b7fcf1-1181-4e11-95bb-8a0a4409be14"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
+                    ""action"": ""North"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""770804be-2b18-428f-abda-29fd29c71a34"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""North"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -480,11 +502,33 @@ namespace MonkeyKick.Controls
                 },
                 {
                     ""name"": """",
+                    ""id"": ""32f86bf2-7134-408b-b84f-a753fd556895"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""East"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""6637ea21-8c1b-47c8-b2ea-0de6bf8a03b2"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
+                    ""action"": ""West"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c181a13-4cce-4997-84b6-b8e20ae9d06f"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""West"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
