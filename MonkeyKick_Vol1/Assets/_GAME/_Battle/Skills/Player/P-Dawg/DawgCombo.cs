@@ -27,8 +27,8 @@ namespace MonkeyKick.Battle
             EndSequence
         }
 
-        private CharacterBattle _target;
-        private CharacterBattle _actor;
+        private PlayerBattle _actor;
+        private EnemyBattle _target;
         private List<Transform> _characters;
 
         [SerializeField] private SequenceState sequence = SequenceState.WaitingToBegin;
@@ -44,10 +44,9 @@ namespace MonkeyKick.Battle
             if (sequence == SequenceState.WaitingToBegin)
             {
                 // store private vars
-                if (!_actor) _actor = actor;
-                if (!_target) _target = target;
+                if (!_actor) _actor = actor.GetComponent<PlayerBattle>();
+                if (!_target) _target = target.GetComponent<EnemyBattle>();
                 if (!_mainCam) _mainCam = Camera.main;
-                if (_skillControls == null) SetControls(actor.GetComponent<PlayerBattle>().skillControls);
                 _characters.Clear();
 
                 yield return null;
@@ -61,11 +60,6 @@ namespace MonkeyKick.Battle
             {
                 float totalTime = CalculateParabolaData(_actor, _target, jumpHeight, newGravity).timeToTarget;
                 float currentTime = 0f;
-                while(currentTime < totalTime)
-                {
-                    currentTime += Time.fixedDeltaTime;
-                   //yield return new WaitForFixedUpdate();
-                }
 
                 ParabolaJump(
                         newGravity,
@@ -73,7 +67,15 @@ namespace MonkeyKick.Battle
                         _actor,
                         _target);
 
-                yield return new WaitForSeconds(totalTime);
+
+                while(currentTime < totalTime)
+                {
+                    currentTime += Time.deltaTime;
+                    if (_actor.southPressed) Debug.Log("Button Pressed");
+                    yield return null;
+                }
+
+                yield return null;
 
                 _actor.rb.velocity = Vector3.zero;
                 Damage(_target);

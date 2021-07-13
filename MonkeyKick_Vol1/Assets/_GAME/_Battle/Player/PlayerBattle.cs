@@ -30,7 +30,16 @@ namespace MonkeyKick.Battle
 
         #region BATTLE CONTROLS
 
-        [HideInInspector] public SkillControls skillControls;
+        private InputAction _joystick;
+        private InputAction _northButton;
+        private InputAction _southButton;
+        private InputAction _eastButton;
+        private InputAction _westButton;
+        [HideInInspector] public Vector2 joystickMove;
+        [HideInInspector] public bool northPressed = false;
+        [HideInInspector] public bool southPressed = false;
+        [HideInInspector] public bool eastPressed = false;
+        [HideInInspector] public bool westPressed = false;
 
         #endregion
 
@@ -42,16 +51,23 @@ namespace MonkeyKick.Battle
         {
             base.Awake();
 
-            _input = new PlayerControls();
             InputSystem.pollingFrequency = 180;
+            _input = new PlayerControls();
 
+            // menu controls
             _moveSelector = _input.BattleMenu.MoveSelector;
             _select = _input.BattleMenu.Select;
             _cancel = _input.BattleMenu.Cancel;
-
             _moveSelector.performed += context => _movementMenu = context.ReadValue<Vector2>();
 
-            skillControls = new SkillControls(_input);
+            // battle controls
+            _joystick = _input.Battle.Joystick;
+            _joystick.performed += context => joystickMove = context.ReadValue<Vector2>();
+
+            _northButton = _input.Battle.North;
+            _southButton = _input.Battle.South;
+            _eastButton = _input.Battle.East;
+            _westButton = _input.Battle.West;
         }
 
         // separate battle logic between normal update and fixed update
@@ -59,14 +75,14 @@ namespace MonkeyKick.Battle
         public override void Update()
         {
             base.Update();
-            CheckInput();
+            CheckMenuInput();
 
             switch(_state)
             {
                 case BattleStates.EnterBattle: EnterBattle(); break;
                 case BattleStates.Wait: Wait(); break;
                 case BattleStates.NavigateMenu: NavigateMenu(); break;
-                case BattleStates.Action: break;
+                case BattleStates.Action: CheckActionInput(); break;
                 case BattleStates.Reset: Reset(); break;
             }
         }
@@ -126,9 +142,17 @@ namespace MonkeyKick.Battle
             }
         }
 
-        private void CheckInput()
+        private void CheckMenuInput()
         {
             _selectPressed = _select.triggered;
+        }
+
+        public void CheckActionInput()
+        {
+            northPressed = _northButton.triggered;
+            southPressed = _southButton.triggered;
+            eastPressed = _eastButton.triggered;
+            westPressed = _westButton.triggered;
         }
 
         public override void Kill()

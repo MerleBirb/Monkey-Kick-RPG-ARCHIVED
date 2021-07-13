@@ -1,4 +1,4 @@
-//===== SKILL CONTROLS =====//
+//===== SKILL CONTROLS (OBSELETE) =====//
 /*
 7/12/21
 Description:

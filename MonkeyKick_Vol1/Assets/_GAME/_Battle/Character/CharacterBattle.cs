@@ -73,6 +73,9 @@ namespace MonkeyKick.Battle
 
             if (!_isTurn) { _state = BattleStates.Wait; }
         }
+
+        #region ACTION
+
         public virtual void Action(Skill skill, CharacterBattle target) // use the skill chosen
         {
             _currentAction.RemoveAllListeners();
@@ -80,6 +83,8 @@ namespace MonkeyKick.Battle
             _currentAction.Invoke();
             _state = BattleStates.Action;
         }
+
+        #endregion
 
         public void ChangeBattleState(BattleStates newState)
         {
