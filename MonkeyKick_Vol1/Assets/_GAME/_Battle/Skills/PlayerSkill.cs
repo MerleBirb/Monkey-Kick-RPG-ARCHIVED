@@ -40,7 +40,7 @@ namespace MonkeyKick.Battle
         {
             if (!_actor) _actor = actor.GetComponent<PlayerBattle>();
             if (!_target) _target = target;
-            _characters.Clear();
+            _characters = new List<Transform>();
         }
 
     	//===== METHODS =====//

@@ -19,7 +19,7 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 
     Variable: {fileID: 11400000, guid: 4bab52cac88e348498e8d691ac6dafe3, type: 2}
-  sequence: 3
+  sequence: 0
   jumpHeight: 3
   returnSeconds: 1
   newGravity: -35
