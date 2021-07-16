@@ -28,19 +28,24 @@ namespace MonkeyKick.Battle
         [SerializeField] private SequenceState sequence = SequenceState.WaitingToBegin;
         [SerializeField] private float jumpHeight;
         [SerializeField] private float returnSeconds = 1;
-        [SerializeField] private float newGravity = -30f;
-        //[SerializeField] private Vector3 camOffset;
+        [SerializeField] private float newGravity = -30f; 
+
+        #region TIMERS
+
+        [SerializeField] private float jumpRankTimer1;
+        [SerializeField] private float jumpRankTimer2;
+        [SerializeField] private float jumpRankTimer3;
+        [SerializeField] private float jumpRankTimer4;
+        [SerializeField] private float jumpRankTimer5;
+
+        #endregion
 
     	//===== METHODS =====//
 
-        public IEnumerator Cor_Action(CharacterBattle actor, CharacterBattle target)
+        public IEnumerator Cor_Action()
         {
             if (sequence == SequenceState.WaitingToBegin)
             {
-                SettingUpCharacters(actor, target);
-
-                if (!_mainCam) _mainCam = Camera.main;
-
                 yield return null;
 
                 _characters.Add(_actor.transform);
@@ -59,6 +64,7 @@ namespace MonkeyKick.Battle
                         _actor,
                         _target);
 
+                _effortValueMultiplier = _effortRankValues[(int)EffortRanks.Woops];
 
                 while(currentTime < totalTime)
                 {
@@ -66,14 +72,8 @@ namespace MonkeyKick.Battle
 
                     if (_actor.southPressed)
                     {
-                        if (currentTime <= (totalTime * 0.5f)) { SetEffortRank(EffortRanks.Cringe); _effortValueMultiplier = 0.1f; }
-                        else if (currentTime <= (totalTime * 0.6f)) { SetEffortRank(EffortRanks.Coolio); _effortValueMultiplier = 0.4f; }
-                        else if (currentTime <= (totalTime * 0.7f)) { SetEffortRank(EffortRanks.Dope); _effortValueMultiplier = 0.75f; }
-                        else if (currentTime <= (totalTime * 0.8f)) { SetEffortRank(EffortRanks.Radical); _effortValueMultiplier = 1f; }
-                        else if (currentTime <= (totalTime * 0.9f)) { SetEffortRank(EffortRanks.Fantastalicious); _effortValueMultiplier = 1.2f; }
-                        else { SetEffortRank(EffortRanks.Cringe); }
-
-                        Debug.Log("Button Pressed");
+                        Vector3 rankPos = new Vector3(_actor.transform.position.x - _actor.Stats.Height, _actor.transform.position.y - _actor.Stats.Height, _actor.transform.position.z);
+                        TimedButtonPress(currentTime, totalTime, rankPos, jumpRankTimer1, jumpRankTimer2, jumpRankTimer3, jumpRankTimer4, jumpRankTimer5);
                     }
 
                     yield return null;
@@ -107,7 +107,10 @@ namespace MonkeyKick.Battle
 
         public override void Action(CharacterBattle actor, CharacterBattle target)
         {
-            actor.StartCoroutine(Cor_Action(actor, target));
+            SettingUpCharacters(actor, target);
+            if (!_mainCam) _mainCam = Camera.main;
+
+            actor.StartCoroutine(Cor_Action());
         }
     }
 }

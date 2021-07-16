@@ -8,6 +8,7 @@ Author: Merlebirb
 */
 
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using MonkeyKick.References;
 
@@ -19,15 +20,16 @@ namespace MonkeyKick.Battle
 
         protected enum EffortRanks
         {
-            Cringe = 0,
-            Coolio = 1,
-            Dope = 2,
-            Radical = 3,
-            Fantastalicious = 4
+            Woops = 0,
+            Nice = 1,
+            Great = 2,
+            Amazing = 3,
+            Perfect = 4
         }
 
         protected EffortRanks _effortRank;
-        protected string[] _effortRankStrings = { "CRINGE...", "COOLIO!", "DOPE!", "RADICAL!!", "FANTASTALICIOUS!!!" };
+        protected float[] _effortRankValues = { 0.05f, 0.25f, 0.5f, 0.8f, 1.3f };
+        protected string[] _effortRankStrings = { "WOOPS...", "NICE!", "GREAT!", "AMAZING!!", "PERFECT!!!" };
         protected PlayerBattle _actor;
         protected CharacterBattle _target;
         protected List<Transform> _characters;
@@ -45,10 +47,30 @@ namespace MonkeyKick.Battle
 
     	//===== METHODS =====//
 
-        protected void SetEffortRank(EffortRanks newRank)
+        protected void TimedButtonPress(float currentTime, float totalTime, Vector3 rankPos, float time1, float time2, float time3, float time4, float time5)
+        {
+            if (currentTime <= (totalTime * time1)) { SetEffortRank(EffortRanks.Woops, rankPos); return; }
+            else if (currentTime <= (totalTime * time2)) { SetEffortRank(EffortRanks.Nice, rankPos); return; }
+            else if (currentTime <= (totalTime * time3)) { SetEffortRank(EffortRanks.Great, rankPos); return; }
+            else if (currentTime <= (totalTime * time4)) { SetEffortRank(EffortRanks.Amazing, rankPos); return; }
+            else if (currentTime <= (totalTime * time5)) { SetEffortRank(EffortRanks.Perfect, rankPos); return; }
+            else { SetEffortRank(EffortRanks.Woops, rankPos); _effortValueMultiplier = 0.1f; return; }
+        }
+
+        protected void SetEffortRank(EffortRanks newRank, Vector3 pos)
         {
             _effortRank = newRank;
             EffortRankText.Variable.Value = _effortRankStrings[(int)newRank];
+            _effortValueMultiplier = _effortRankValues[(int)newRank];
+
+            RectTransform canvas = Instantiate<RectTransform>(effortRankPrefab, Vector3.zero, Quaternion.identity);
+            RectTransform efr = canvas.GetComponentInChildren<DisplayEffortRank>().rectTransform;
+            Vector2 viewportPos = _mainCam.WorldToViewportPoint(pos);
+            Vector2 efrScreenPos = new Vector2(
+            ((viewportPos.x * canvas.sizeDelta.x) - (canvas.sizeDelta.x * 0.5f)),
+            ((viewportPos.y * canvas.sizeDelta.y) - (canvas.sizeDelta.y * 0.5f)));
+
+            efr.anchoredPosition = efrScreenPos;
         }
     }
 }

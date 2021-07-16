@@ -26,10 +26,10 @@ namespace MonkeyKick.UI
 
         private void UpdateHPText()
         {
-            var _updateText = "HP: " + info.CurrentHP.Stat.BaseValue + " / " + info.MaxHP.Stat.BaseValue;
-            if (HPText.text.Contains(_updateText)) { return; }
+            var updateText = "HP: " + info.CurrentHP.Stat.BaseValue + " / " + info.MaxHP.Stat.BaseValue;
+            if (HPText.text.Contains(updateText)) { return; }
 
-            HPText.text = _updateText;
+            HPText.text = updateText;
         }
     }
 }

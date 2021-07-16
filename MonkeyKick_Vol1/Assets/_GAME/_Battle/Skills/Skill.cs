@@ -19,6 +19,7 @@ namespace MonkeyKick.Battle
         protected Vector3 _defaultGravity;
         protected Camera _mainCam;
         protected float _effortValueMultiplier;
+        [SerializeField] protected RectTransform effortRankPrefab;
 
         public string SkillName;
         [Multiline] public string SkillDescription;
@@ -142,7 +143,7 @@ namespace MonkeyKick.Battle
         public virtual ParabolaData CalculateParabolaData(CharacterBattle actor, CharacterBattle target, float height, float gravity)
         {
             Vector3 actorPos = actor.transform.position;
-            Vector3 targetPos = target.transform.position;
+            Vector3 targetPos = new Vector3(target.transform.position.x, target.transform.position.y + target.Stats.Height, target.transform.position.z);
 
             float displacementY = targetPos.y - actorPos.y;
             Vector3 displacementXZ = new Vector3 (targetPos.x - actorPos.x, 0, targetPos.z - actorPos.z);

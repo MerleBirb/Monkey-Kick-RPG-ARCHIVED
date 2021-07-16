@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5f57da7df30e942be0ec8bd3de5566, type: 3}
   m_Name: Dawg Combo
   m_EditorClassIdentifier: 
+  effortRankPrefab: {fileID: 2715437764787362585, guid: 73c2030229d13844496b88ad20f259d1, type: 3}
   SkillName: Dawg Combo
   SkillDescription: Cool ass move
   SkillValue: 7
@@ -23,3 +24,8 @@ MonoBehaviour:
   jumpHeight: 3
   returnSeconds: 1
   newGravity: -35
+  jumpRankTimer1: 0.5
+  jumpRankTimer2: 0.6
+  jumpRankTimer3: 0.7
+  jumpRankTimer4: 0.825
+  jumpRankTimer5: 0.95
