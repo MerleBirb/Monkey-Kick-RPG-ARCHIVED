@@ -1,8 +1,9 @@
 
 using System.Collections;
 using UnityEngine;
+using MonkeyKick.Battle;
 
-namespace MonkeyKick.Battle
+namespace MonkeyKick.Skills
 {
     [CreateAssetMenu(menuName = "Skills/Damage Skills/Placeholder Damage Skill", fileName = "Placeholder Attack")]
     public class DamageSkill : Skill

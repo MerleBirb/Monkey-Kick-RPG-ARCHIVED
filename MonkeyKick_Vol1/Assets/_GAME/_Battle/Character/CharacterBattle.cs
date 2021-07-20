@@ -9,6 +9,8 @@ Description:
 using UnityEngine;
 using UnityEngine.Events;
 using MonkeyKick.Managers;
+using MonkeyKick.EntityInformation;
+using MonkeyKick.Skills;
 
 namespace MonkeyKick.Battle
 {

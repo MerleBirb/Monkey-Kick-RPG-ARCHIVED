@@ -9,6 +9,7 @@ Author: Merlebirb
 
 using UnityEngine;
 using System.Collections.Generic;
+using MonkeyKick.EntityInformation;
 
 namespace MonkeyKick.Battle
 {

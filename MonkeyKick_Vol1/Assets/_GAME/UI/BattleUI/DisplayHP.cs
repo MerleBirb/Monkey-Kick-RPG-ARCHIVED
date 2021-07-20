@@ -9,7 +9,7 @@ Author: Merlebirb
 
 using UnityEngine;
 using UnityEngine.UI;
-using MonkeyKick.Battle;
+using MonkeyKick.EntityInformation;
 
 namespace MonkeyKick.UI
 {

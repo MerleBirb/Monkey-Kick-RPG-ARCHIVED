@@ -7,6 +7,7 @@ Description:
 Author: Merlebirb
 */
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MonkeyKick.QoL;
@@ -37,21 +38,27 @@ namespace MonkeyKick.Overworld
 
         #endregion
 
+        #region VFX PROPERTIES
+
+        [SerializeField] private ParticleSystem groundDust;
+
+        #endregion
+
         private PlayerControls _input;
+        private float _currentSpeed;
 
         public override void Awake()
         {
             base.Awake();
 
             InputSystem.pollingFrequency = 180;
-
             _input = new PlayerControls();
-
             _move = _input.Overworld.Move;
             _jump = _input.Overworld.Jump;
             _sprint = _input.Overworld.Sprint;
-
             _move.performed += context => _movement = context.ReadValue<Vector2>();
+
+            groundDust.transform.position = new Vector3(groundDust.transform.position.x, groundDust.transform.position.y - (Stats.Height / 2f), groundDust.transform.position.z);
         }
 
         public override void Update()
@@ -66,8 +73,6 @@ namespace MonkeyKick.Overworld
         {
             if (_physics != null)
             {
-                float _currentSpeed;
-
                 if (!_isSprinting) _currentSpeed = moveSpeed;
                 else _currentSpeed = sprintSpeed;
 
@@ -90,7 +95,6 @@ namespace MonkeyKick.Overworld
             _anim.SetFloat("zDirection", _movement.y);
 
             if (!_isMoving) { AnimQoL.PlayAnimation(_anim, _currentAnim, IDLE); }
-
         }
 
         private void ToggleSprint()
@@ -101,6 +105,7 @@ namespace MonkeyKick.Overworld
                 {
                     _isSprinting = true;
                     _hasPressedSprint = false;
+                    groundDust.Play();
                 }
             }
             else
@@ -111,7 +116,6 @@ namespace MonkeyKick.Overworld
                     _hasPressedSprint = false;
                 }
             }
-
         }
 
         private void PressedJump()

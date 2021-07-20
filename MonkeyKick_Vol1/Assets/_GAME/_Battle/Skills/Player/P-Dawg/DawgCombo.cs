@@ -9,8 +9,9 @@ Author: Merlebirb
 
 using System.Collections;
 using UnityEngine;
+using MonkeyKick.Battle;
 
-namespace MonkeyKick.Battle
+namespace MonkeyKick.Skills
 {
     [CreateAssetMenu(menuName = "Skills/Damage Skills/Dawg Combo", fileName = "Dawg Combo")]
     public class DawgCombo : PlayerSkill

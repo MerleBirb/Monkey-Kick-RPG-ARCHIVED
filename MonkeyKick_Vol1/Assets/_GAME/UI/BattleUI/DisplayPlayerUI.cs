@@ -8,9 +8,8 @@ Author: Merlebirb
 */
 
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using MonkeyKick.Battle;
+using MonkeyKick.EntityInformation;
 
 namespace MonkeyKick.UI
 {

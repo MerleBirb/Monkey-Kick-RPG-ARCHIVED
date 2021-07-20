@@ -13,7 +13,6 @@ namespace MonkeyKick.Overworld
 {
     public class CharacterPhysics : MonoBehaviour, IPhysics
     {
-        [HideInInspector] public bool isMoving = false;
         [SerializeField] private float radius = 0.55f; // for raycasts, ground check, etc
         [SerializeField] private LayerMask groundLayer;
 

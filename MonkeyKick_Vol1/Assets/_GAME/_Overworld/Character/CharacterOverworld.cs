@@ -11,11 +11,13 @@ using UnityEngine;
 using MonkeyKick.Managers;
 using MonkeyKick.QoL;
 using MonkeyKick.CameraTools;
+using MonkeyKick.EntityInformation;
 
 namespace MonkeyKick.Overworld
 {
     public class CharacterOverworld : MonoBehaviour
     {
+        [SerializeField] protected CharacterInformation Stats;
         [SerializeField] protected GameStateData Game;
 
         protected Vector2 _movement;
