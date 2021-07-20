@@ -664,6 +664,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5761225690427510113, guid: 2c3b80a38d7f59a409f44585e062178b, type: 3}
   m_PrefabInstance: {fileID: 8847329377212530443}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &1589820661 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3803553362448736884, guid: 2c3b80a38d7f59a409f44585e062178b, type: 3}
+  m_PrefabInstance: {fileID: 8847329377212530443}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1651905955
 Mesh:
   m_ObjectHideFlags: 0
@@ -901,6 +906,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4792101304627695597, guid: 2c3b80a38d7f59a409f44585e062178b, type: 3}
+      propertyPath: groundDust
+      value: 
+      objectReference: {fileID: 1589820661}
     - target: {fileID: 4792101304627695597, guid: 2c3b80a38d7f59a409f44585e062178b, type: 3}
       propertyPath: characterSpace
       value: 

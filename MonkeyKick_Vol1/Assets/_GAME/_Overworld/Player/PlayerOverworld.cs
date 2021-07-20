@@ -41,6 +41,7 @@ namespace MonkeyKick.Overworld
         #region VFX PROPERTIES
 
         [SerializeField] private ParticleSystem groundDust;
+        private bool _canDust;
 
         #endregion
 
@@ -94,7 +95,20 @@ namespace MonkeyKick.Overworld
             _anim.SetFloat("xDirection", _movement.x);
             _anim.SetFloat("zDirection", _movement.y);
 
+            /// Animations
+            // idle
             if (!_isMoving) { AnimQoL.PlayAnimation(_anim, _currentAnim, IDLE); }
+
+            /// VFX
+            // landing dust
+            bool notGrounded = _physics.GetStepsSinceLastGrounded() != 0 && !_physics.OnGround();
+            bool justLanded = _canDust && _physics.OnGround();
+            if (notGrounded) { _canDust = true; }
+            if (justLanded)
+            {
+                groundDust.Play();
+                _canDust = false;
+            }
         }
 
         private void ToggleSprint()
