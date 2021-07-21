@@ -12,10 +12,34 @@ using UnityEngine;
     #ROOTNAMESPACEBEGIN#
 public class #SCRIPTNAME# : MonoBehaviour
 {
-	//===== VARIABLES =====//
+	#region PRIVATE VARIABLES
 
-	//===== INIT =====//
+	
 
-	//===== METHODS =====//
+	#endregion
+
+	#region PUBLIC VARIABLES
+
+	
+
+	#endregion
+
+	#region UNITY METHODS
+
+	
+
+	#endregion
+
+	#region PRIVATE METHODS
+
+	
+
+	#endregion
+
+	#region PUBLIC METHODS
+
+	
+
+	#endregion
 }
 #ROOTNAMESPACEEND#
