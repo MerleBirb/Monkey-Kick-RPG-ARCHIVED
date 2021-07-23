@@ -7,11 +7,13 @@ Description:
 Author: Merlebirb
 */
 
+using System;
 using UnityEngine;
 using MonkeyKick.Managers;
 using MonkeyKick.QoL;
 using MonkeyKick.CameraTools;
 using MonkeyKick.EntityInformation;
+using MonkeyKick.AudioFX;
 
 namespace MonkeyKick.Overworld
 {
@@ -19,6 +21,7 @@ namespace MonkeyKick.Overworld
     {
         [SerializeField] protected CharacterInformation Stats;
         [SerializeField] protected GameStateData Game;
+        [SerializeField] protected AudioTable AudioTable;
 
         protected Vector2 _movement;
         [SerializeField] private Transform characterSpace;
@@ -32,6 +35,21 @@ namespace MonkeyKick.Overworld
         protected Vector2 _directionVector;
         protected int _direction = 0;
         protected bool _isMoving = false;
+        [SerializeField] protected float sprintSpeed; // moveSpeed while sprint is pressed
+        [SerializeField] protected float jumpHeight;
+
+        #region SFX PROPERTIES
+
+        [Serializable]
+        public class OverworldSFX
+        {
+            public AudioManager StepSFX;
+            public AudioManager FootBasedSFX;
+        }
+
+        [SerializeField] protected OverworldSFX overworldSFX;
+
+        #endregion
 
         public virtual void Awake()
         {

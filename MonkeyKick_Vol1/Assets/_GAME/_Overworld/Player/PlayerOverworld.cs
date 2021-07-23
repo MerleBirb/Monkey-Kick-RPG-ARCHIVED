@@ -7,11 +7,14 @@ Description:
 Author: Merlebirb
 */
 
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MonkeyKick.QoL;
 using MonkeyKick.Controls;
+using MonkeyKick.AudioFX;
 
 namespace MonkeyKick.Overworld
 {
@@ -27,9 +30,6 @@ namespace MonkeyKick.Overworld
         private bool _hasPressedSprint = false;
         private bool _isSprinting = false;
 
-        [SerializeField] private float sprintSpeed; // moveSpeed while sprint is pressed
-        [SerializeField] private float jumpHeight;
-
         #endregion
 
         #region ANIMATIONS
@@ -40,8 +40,16 @@ namespace MonkeyKick.Overworld
 
         #region VFX PROPERTIES
 
-        [SerializeField] private ParticleSystem groundDust;
-        private bool _canDust;
+        [Serializable]
+        public class OverworldVFX
+        {
+            public ParticleSystem groundDustPrefab;
+            internal bool canDust;
+        }
+
+        [SerializeField] private OverworldVFX overworldVFX;
+
+        private ParticleSystem _groundDust;
 
         #endregion
 
@@ -58,8 +66,12 @@ namespace MonkeyKick.Overworld
             _jump = _input.Overworld.Jump;
             _sprint = _input.Overworld.Sprint;
             _move.performed += context => _movement = context.ReadValue<Vector2>();
+        }
 
-            groundDust.transform.position = new Vector3(groundDust.transform.position.x, groundDust.transform.position.y - (Stats.Height / 2f), groundDust.transform.position.z);
+        private void Start()
+        {
+            _groundDust = Instantiate(overworldVFX.groundDustPrefab, transform);
+            _groundDust.transform.position = new Vector3(transform.position.x, transform.position.y - (Stats.Height / 2f), transform.position.z);
         }
 
         public override void Update()
@@ -102,12 +114,37 @@ namespace MonkeyKick.Overworld
             /// VFX
             // landing dust
             bool notGrounded = _physics.GetStepsSinceLastGrounded() != 0 && !_physics.OnGround();
-            bool justLanded = _canDust && _physics.OnGround();
-            if (notGrounded) { _canDust = true; }
+            bool justLanded = overworldVFX.canDust && _physics.OnGround();
+            if (notGrounded) { overworldVFX.canDust = true; }
             if (justLanded)
             {
-                groundDust.Play();
-                _canDust = false;
+                Sound landSfx = AudioTable.GetSound(SFXNames.LandGeneric001);
+
+                _groundDust.Play();
+                overworldSFX.FootBasedSFX.PlayRaw(
+                        landSfx.Clip,
+                        landSfx.Volume
+                    );
+                overworldVFX.canDust = false;
+            }
+
+            /// SFX
+            // step
+            if (_isMoving && _physics.OnGround())
+            {
+                Sound stepSfx = AudioTable.GetSound(SFXNames.RockStep001);
+                bool isPlayingStepSound =
+                    overworldSFX.StepSFX.source.clip == stepSfx.Clip &&
+                    overworldSFX.StepSFX.source.isPlaying;
+
+                if (!isPlayingStepSound)
+                {
+                    overworldSFX.StepSFX.PlayRaw(
+                        stepSfx.Clip,
+                        stepSfx.Volume,
+                        stepSfx.Pitch * (_currentSpeed / moveSpeed) * 0.5f
+                    );
+                }
             }
         }
 
@@ -117,9 +154,15 @@ namespace MonkeyKick.Overworld
             {
                 if (_hasPressedSprint)
                 {
+                    Sound dashSfx = AudioTable.GetSound(SFXNames.DashGeneric001);
+
                     _isSprinting = true;
                     _hasPressedSprint = false;
-                    groundDust.Play();
+                    _groundDust.Play();
+                    overworldSFX.FootBasedSFX.PlayRaw(
+                        dashSfx.Clip,
+                        dashSfx.Volume
+                    );
                 }
             }
             else
@@ -138,8 +181,14 @@ namespace MonkeyKick.Overworld
             {
                 if (_physics.OnGround())
                 {
+                    Sound jumpSfx = AudioTable.GetSound(SFXNames.JumpGeneric001);
+
                     _physics.SetStepsSinceLastAerial(0);
                     _rb.velocity += new Vector3(0f, jumpHeight, 0f);
+                    overworldSFX.FootBasedSFX.PlayRaw(
+                        jumpSfx.Clip,
+                        jumpSfx.Volume
+                    );
                 }
 
                 _hasPressedJump = false;
