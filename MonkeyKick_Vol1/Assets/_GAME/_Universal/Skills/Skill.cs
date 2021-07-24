@@ -10,6 +10,7 @@ Author: Merlebirb
 using UnityEngine;
 using System.Collections.Generic;
 using MonkeyKick.Battle;
+using MonkeyKick.AudioFX;
 
 namespace MonkeyKick.Skills
 {
@@ -20,6 +21,8 @@ namespace MonkeyKick.Skills
         protected Vector3 _defaultGravity;
         protected Camera _mainCam;
         protected float _effortValueMultiplier;
+        protected BattleSFX _battleSFX;
+        [SerializeField] protected AudioTable AudioTable;
         [SerializeField] protected RectTransform effortRankPrefab;
 
         public string SkillName;

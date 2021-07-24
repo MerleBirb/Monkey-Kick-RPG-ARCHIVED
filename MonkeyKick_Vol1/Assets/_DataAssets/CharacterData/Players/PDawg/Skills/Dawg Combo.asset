@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5f57da7df30e942be0ec8bd3de5566, type: 3}
   m_Name: Dawg Combo
   m_EditorClassIdentifier: 
+  AudioTable: {fileID: 11400000, guid: dad54e1781913284abdad6c8b4a14e30, type: 2}
   effortRankPrefab: {fileID: 2715437764787362585, guid: 73c2030229d13844496b88ad20f259d1, type: 3}
   SkillName: Dawg Combo
   SkillDescription: Cool ass move
@@ -29,3 +30,4 @@ MonoBehaviour:
   jumpRankTimer3: 0.7
   jumpRankTimer4: 0.825
   jumpRankTimer5: 0.95
+  button: {fileID: 8595726793597616824, guid: 6d159524e62c44442b226003b6c2178f, type: 3}

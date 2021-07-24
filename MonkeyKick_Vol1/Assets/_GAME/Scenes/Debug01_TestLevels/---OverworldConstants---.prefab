@@ -311,7 +311,7 @@ MonoBehaviour:
   focusRadius: 0.4
   distance: 2.25
   focusCentering: 1
-  rotationSpeed: 20
+  rotationSpeed: 8
   minVerticalAngle: 15
   maxVerticalAngle: 30
   obstructionMask:

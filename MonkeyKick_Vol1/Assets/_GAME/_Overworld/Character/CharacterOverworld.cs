@@ -40,13 +40,6 @@ namespace MonkeyKick.Overworld
 
         #region SFX PROPERTIES
 
-        [Serializable]
-        public class OverworldSFX
-        {
-            public AudioManager StepSFX;
-            public AudioManager FootBasedSFX;
-        }
-
         [SerializeField] protected OverworldSFX overworldSFX;
 
         #endregion

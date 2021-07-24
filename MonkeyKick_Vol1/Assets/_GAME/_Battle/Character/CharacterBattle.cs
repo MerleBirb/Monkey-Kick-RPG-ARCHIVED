@@ -6,17 +6,22 @@ Description:
 
 */
 
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using MonkeyKick.Managers;
 using MonkeyKick.EntityInformation;
 using MonkeyKick.Skills;
+using MonkeyKick.AudioFX;
 
 namespace MonkeyKick.Battle
 {
     public abstract class CharacterBattle : MonoBehaviour
     {
         [SerializeField] private GameStateData Game;
+
+        public BattleSFX battleSFX;
 
         protected BattleStates _state;
         protected bool _isTurn = false;

@@ -118,7 +118,7 @@ namespace MonkeyKick.CameraTools
 
         private void ManualRotation()
         {
-            Vector2 unreversedOrbitInput = new Vector2(-_orbitCameraY, -_orbitCameraX); // to unreverse the camera control
+            Vector2 unreversedOrbitInput = new Vector2(-_orbitCameraY, _orbitCameraX); // to unreverse the camera control
 
             _orbitAngles += rotationSpeed * unreversedOrbitInput * Time.fixedDeltaTime;
         }
