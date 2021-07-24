@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7917d3bc53ef273428389420a325bca0, type: 3}
+  m_Name: Audio Table
+  m_EditorClassIdentifier: 
+  entries:
+  - id: SFX_dashGeneric001
+    Clip: {fileID: 8300000, guid: 73e605a8d4113c64faeb05c75cfb8f0b, type: 3}
+    Volume: 0.25
+    Pitch: 1
+  - id: SFX_jumpGeneric001
+    Clip: {fileID: 8300000, guid: 8be31be6592001a44ac38fd63c249269, type: 3}
+    Volume: 1
+    Pitch: 1
+  - id: SFX_landGeneric001
+    Clip: {fileID: 8300000, guid: 010ce02f479e03644ab854236a5bbb04, type: 3}
+    Volume: 0.25
+    Pitch: 1
+  - id: SFX_rockStep001
+    Clip: {fileID: 8300000, guid: 0ea251bfb38598e46a21e023999c7141, type: 3}
+    Volume: 0.05
+    Pitch: 1
+  - id: SFX_sandStep001
+    Clip: {fileID: 8300000, guid: 09be2320eae6e9b48abe466d85827b1a, type: 3}
+    Volume: 0.05
+    Pitch: 1

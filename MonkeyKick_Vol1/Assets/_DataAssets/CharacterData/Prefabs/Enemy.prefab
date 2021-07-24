@@ -161,8 +161,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 1
+  m_Radius: 0.2
+  m_Height: 0.75
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0.05}
 --- !u!65 &5062901857347677251
@@ -190,9 +190,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c1c59cfd6cb6b047a7b2cbedeec92d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Stats: {fileID: 0}
   Game: {fileID: 11400000, guid: f3e6f635e4d026d44982cd6b5ab7b7fb, type: 2}
+  AudioTable: {fileID: 0}
   characterSpace: {fileID: 0}
   moveSpeed: 0
+  sprintSpeed: 0
+  jumpHeight: 0
+  overworldSFX:
+    StepSFX: {fileID: 0}
+    FootBasedSFX: {fileID: 0}
   battleScene: 
 --- !u!114 &2058690368216125982
 MonoBehaviour:
@@ -230,11 +237,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de88d96ce7f6c6249b27f5937fa48c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMoving: 0
-  radius: 0.55
+  radius: 0.6
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 128
 --- !u!114 &296387247620423216
 MonoBehaviour:
   m_ObjectHideFlags: 0

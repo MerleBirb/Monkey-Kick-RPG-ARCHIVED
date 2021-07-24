@@ -14,12 +14,6 @@ namespace MonkeyKick.AudioFX
 	[RequireComponent(typeof(AudioSource))]
     public class AudioManager : MonoBehaviour
     {
-    	#region PRIVATE VARIABLES
-
-		private int previousIndex = -1;
-
-    	#endregion
-
     	#region PUBLIC VARIABLES
 
 		internal AudioSource source;

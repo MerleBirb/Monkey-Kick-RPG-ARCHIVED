@@ -670,7 +670,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23692
+  m_Name: pb_Mesh33010
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -887,14 +887,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ---OverworldConstants---
       objectReference: {fileID: 0}
-    - target: {fileID: 7012623767486191295, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: m_Volume
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7012623767486191295, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4cf1403df72c1744ba5856fb49f45a65, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74b147b83ad3c554796cfc604822858b, type: 3}
 --- !u!108 &4240403128536324908 stripped

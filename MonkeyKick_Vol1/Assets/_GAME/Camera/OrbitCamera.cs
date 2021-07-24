@@ -18,11 +18,14 @@ namespace MonkeyKick.CameraTools
     [RequireComponent(typeof(Camera))]
     public class OrbitCamera : MonoBehaviour
     {
+        [SerializeField] private bool simplifyCamera = false;
         private Vector3 _focusPoint;
         private Camera _camera;
         private CameraControls _input;
-        private InputAction _orbitCamera;
-        private Vector2 _orbitInput;
+        private InputAction _orbitInputX;
+        private InputAction _orbitInputY;
+        private float _orbitCameraX;
+        private float _orbitCameraY;
         private Vector2 _orbitAngles = new Vector2(22.5f, 0f);
         public static int OrbitDirection;
         public static bool IsOrbiting;
@@ -58,8 +61,10 @@ namespace MonkeyKick.CameraTools
             InputSystem.pollingFrequency = 180;
 
             _input = new CameraControls();
-            _orbitCamera = _input.Overworld.OrbitCamera;
-            _orbitCamera.performed += context => _orbitInput = context.ReadValue<Vector2>();
+            _orbitInputX = _input.Overworld.RotationX;
+            _orbitInputX.performed += context => _orbitCameraX = context.ReadValue<float>();
+            _orbitInputY = _input.Overworld.RotationY;
+            _orbitInputY.performed += context => _orbitCameraY = context.ReadValue<float>();
 
             _focusPoint = focus.position;
             transform.localRotation = Quaternion.Euler(_orbitAngles);
@@ -67,24 +72,25 @@ namespace MonkeyKick.CameraTools
             _camera = GetComponent<Camera>();
         }
 
+        private void Update()
+        {
+            Quaternion lookRotation = Quaternion.Euler(_orbitAngles);
+
+            ManualRotation();
+            ConstrainAngles();
+            transform.rotation = lookRotation;
+
+            OrbitDirection = DirectionQoL.DetermineDirectionFromDegToInt(_orbitAngles.y);
+        }
+
         private void LateUpdate()
         {
-            UpdateFocusPoint();
+            if (!simplifyCamera) UpdateFocusPoint();
+            else _focusPoint = focus.position;
 
-            Quaternion lookRotation;
-            IsOrbiting = ManualRotation();
-            if(IsOrbiting)
-            {
-                ConstrainAngles();
-                lookRotation = Quaternion.Euler(_orbitAngles);
-            }
-            else
-            {
-                lookRotation = transform.localRotation;
-            }
-
-            OrbitAndLookAtFocus();
-            OrbitDirection = DirectionQoL.DetermineDirectionFromDegToInt(_orbitAngles.y);
+            Vector3 lookDirection = transform.forward;
+            Vector3 lookPosition = _focusPoint - (lookDirection * distance);
+            transform.position = lookPosition;
         }
 
         private void OrbitAndLookAtFocus()
@@ -110,25 +116,18 @@ namespace MonkeyKick.CameraTools
             transform.SetPositionAndRotation(lookPosition, lookRotation);
         }
 
-        private bool ManualRotation()
+        private void ManualRotation()
         {
-            Vector2 unreversedOrbitInput = new Vector2(-_orbitInput.y, -_orbitInput.x); // to unreverse the camera control
-            const float e = 0.1f;
+            Vector2 unreversedOrbitInput = new Vector2(-_orbitCameraY, -_orbitCameraX); // to unreverse the camera control
 
-            if (_orbitInput.x < -e || _orbitInput.x > e || _orbitInput.y < -e || _orbitInput.y > e)
-            {
-                _orbitAngles += rotationSpeed * Time.unscaledDeltaTime * unreversedOrbitInput;
-                return true;
-            }
-
-            return false;
+            _orbitAngles += rotationSpeed * unreversedOrbitInput * Time.fixedDeltaTime;
         }
 
         private void ConstrainAngles()
         {
             _orbitAngles.x = Mathf.Clamp(_orbitAngles.x, minVerticalAngle, maxVerticalAngle);
 
-            if (_orbitAngles.y < 0f) { _orbitAngles.y += 360f; }
+            if (_orbitAngles.y <= 0f) { _orbitAngles.y += 360f; }
             else if (_orbitAngles.y >= 360f) { _orbitAngles.y -= 360f; }
         }
 

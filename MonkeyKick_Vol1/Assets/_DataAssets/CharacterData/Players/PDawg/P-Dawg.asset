@@ -69,7 +69,7 @@ MonoBehaviour:
   battlePos: {x: -2, y: 0, z: 3}
   skillList:
   - {fileID: 11400000, guid: b397fc35a8b09c946a2e91424ba268eb, type: 2}
-  Height: 1.5
+  Height: 1
   MaxEXP: 25
   CurrentEXP: 0
   TotalEXP: 0

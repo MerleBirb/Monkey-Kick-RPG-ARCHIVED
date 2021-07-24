@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 486307931781004813, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
       propertyPath: m_Height
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1649743399485571910, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
       propertyPath: m_Controller
@@ -90,10 +90,6 @@ PrefabInstance:
     - target: {fileID: 6111373368890800737, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
       propertyPath: m_Mass
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8000344939465306489, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
-      propertyPath: radius
-      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8456826372629826873, guid: 85b8073db2453f145aeb98c20e90463e, type: 3}
       propertyPath: Stats

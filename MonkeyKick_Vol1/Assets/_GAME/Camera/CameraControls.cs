@@ -21,10 +21,18 @@ namespace MonkeyKick.CameraTools
             ""id"": ""0bb8b629-843c-4ea2-bc17-2d640e008e2a"",
             ""actions"": [
                 {
-                    ""name"": ""OrbitCamera"",
+                    ""name"": ""Rotation X"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""2603d25a-f87e-4b89-a37b-7629558e3f6c"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""id"": ""96527101-df07-4517-a266-84c3aba7acab"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Rotation Y"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6909538c-7441-49ff-bca7-479eb388f167"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -32,34 +40,85 @@ namespace MonkeyKick.CameraTools
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""9ff256b4-3f24-4055-934e-80326d256ece"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""id"": ""090ec263-5144-493b-a0f1-34a8f5e0bb6d"",
+                    ""path"": ""<Gamepad>/rightStick/x"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OrbitCamera"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Rotation X"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1e7ca59a-6933-4025-b5b1-2a57c6b38cd9"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""id"": ""e1e58597-b6d9-426a-867a-609ee25115fd"",
+                    ""path"": ""<Mouse>/delta/x"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OrbitCamera"",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Rotation X"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee4ce4c4-8f40-4689-8d94-d7ea9715d922"",
+                    ""path"": ""<Gamepad>/rightStick/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Rotation Y"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8bd184bd-e833-452d-a0b8-763b07765bfa"",
+                    ""path"": ""<Mouse>/delta/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Rotation Y"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Keyboard + Mouse"",
+            ""bindingGroup"": ""Keyboard + Mouse"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
             // Overworld
             m_Overworld = asset.FindActionMap("Overworld", throwIfNotFound: true);
-            m_Overworld_OrbitCamera = m_Overworld.FindAction("OrbitCamera", throwIfNotFound: true);
+            m_Overworld_RotationX = m_Overworld.FindAction("Rotation X", throwIfNotFound: true);
+            m_Overworld_RotationY = m_Overworld.FindAction("Rotation Y", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -109,12 +168,14 @@ namespace MonkeyKick.CameraTools
         // Overworld
         private readonly InputActionMap m_Overworld;
         private IOverworldActions m_OverworldActionsCallbackInterface;
-        private readonly InputAction m_Overworld_OrbitCamera;
+        private readonly InputAction m_Overworld_RotationX;
+        private readonly InputAction m_Overworld_RotationY;
         public struct OverworldActions
         {
             private @CameraControls m_Wrapper;
             public OverworldActions(@CameraControls wrapper) { m_Wrapper = wrapper; }
-            public InputAction @OrbitCamera => m_Wrapper.m_Overworld_OrbitCamera;
+            public InputAction @RotationX => m_Wrapper.m_Overworld_RotationX;
+            public InputAction @RotationY => m_Wrapper.m_Overworld_RotationY;
             public InputActionMap Get() { return m_Wrapper.m_Overworld; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -124,23 +185,48 @@ namespace MonkeyKick.CameraTools
             {
                 if (m_Wrapper.m_OverworldActionsCallbackInterface != null)
                 {
-                    @OrbitCamera.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnOrbitCamera;
-                    @OrbitCamera.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnOrbitCamera;
-                    @OrbitCamera.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnOrbitCamera;
+                    @RotationX.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnRotationX;
+                    @RotationX.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnRotationX;
+                    @RotationX.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnRotationX;
+                    @RotationY.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnRotationY;
+                    @RotationY.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnRotationY;
+                    @RotationY.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnRotationY;
                 }
                 m_Wrapper.m_OverworldActionsCallbackInterface = instance;
                 if (instance != null)
                 {
-                    @OrbitCamera.started += instance.OnOrbitCamera;
-                    @OrbitCamera.performed += instance.OnOrbitCamera;
-                    @OrbitCamera.canceled += instance.OnOrbitCamera;
+                    @RotationX.started += instance.OnRotationX;
+                    @RotationX.performed += instance.OnRotationX;
+                    @RotationX.canceled += instance.OnRotationX;
+                    @RotationY.started += instance.OnRotationY;
+                    @RotationY.performed += instance.OnRotationY;
+                    @RotationY.canceled += instance.OnRotationY;
                 }
             }
         }
         public OverworldActions @Overworld => new OverworldActions(this);
+        private int m_KeyboardMouseSchemeIndex = -1;
+        public InputControlScheme KeyboardMouseScheme
+        {
+            get
+            {
+                if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard + Mouse");
+                return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+            }
+        }
+        private int m_GamepadSchemeIndex = -1;
+        public InputControlScheme GamepadScheme
+        {
+            get
+            {
+                if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+                return asset.controlSchemes[m_GamepadSchemeIndex];
+            }
+        }
         public interface IOverworldActions
         {
-            void OnOrbitCamera(InputAction.CallbackContext context);
+            void OnRotationX(InputAction.CallbackContext context);
+            void OnRotationY(InputAction.CallbackContext context);
         }
     }
 }
