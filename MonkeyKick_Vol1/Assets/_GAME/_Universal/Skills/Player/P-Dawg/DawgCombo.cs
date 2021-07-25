@@ -46,7 +46,7 @@ namespace MonkeyKick.Skills
 
         #region BUTTONS
 
-        [SerializeField] private ActionButtonAnimation button;
+        [SerializeField] private RectTransform actionButtonPrefab;
 
         #endregion
 
@@ -70,7 +70,10 @@ namespace MonkeyKick.Skills
                 Sound jumpSFX = AudioTable.GetSound(SFXNames.DashGeneric001);
                 Sound attackSFX = AudioTable.GetSound(SFXNames.XtraLargeHit001);
 
-                ActionButtonAnimation xButton = Instantiate(button, Vector3.zero, Quaternion.identity);
+                RectTransform xButton = InstantiateUIPosition(
+                    actionButtonPrefab,
+                    new Vector3(_target.transform.position.x - _target.Stats.Height, _target.transform.position.y - _target.Stats.Height, _target.transform.position.z)
+                );
 
                 ParabolaJump(
                         newGravity,
@@ -92,7 +95,7 @@ namespace MonkeyKick.Skills
                     if (_actor.southPressed)
                     {
                         Destroy(xButton.gameObject);
-                        Vector3 rankPos = new Vector3(_actor.transform.position.x - _actor.Stats.Height, _actor.transform.position.y - _actor.Stats.Height, _actor.transform.position.z);
+                        Vector3 rankPos = new Vector3(_target.transform.position.x - _target.Stats.Height, _target.transform.position.y - _target.Stats.Height, _target.transform.position.z);
                         TimedButtonPress(currentTime, totalTime, rankPos, jumpRankTimer1, jumpRankTimer2, jumpRankTimer3, jumpRankTimer4, jumpRankTimer5);
                     }
 

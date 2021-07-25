@@ -181,5 +181,30 @@ namespace MonkeyKick.Skills
         }
 
         #endregion
+
+        #region UI
+
+        protected virtual RectTransform InstantiateUIPosition(RectTransform rectPrefab, Vector3 pos)
+        {
+            RectTransform canvas = Instantiate<RectTransform>(rectPrefab, Vector3.zero, Quaternion.identity);
+            RectTransform ui = canvas.GetComponentInChildren<RectTransform>();
+            Vector2 viewportPos = _mainCam.WorldToViewportPoint(pos);
+            Vector2 uiScreenPos = new Vector2(
+            ((viewportPos.x * canvas.sizeDelta.x) - (canvas.sizeDelta.x * 0.5f)),
+            ((viewportPos.y * canvas.sizeDelta.y) - (canvas.sizeDelta.y * 0.5f)));
+
+            Vector2 uiAnchor = ui.anchoredPosition;
+            float xPos = uiAnchor.x;
+            float yPos = uiAnchor.y;
+            xPos = Mathf.Clamp(xPos, uiScreenPos.x, Screen.width - ui.sizeDelta.x);
+            yPos = Mathf.Clamp(yPos, uiScreenPos.y, Screen.height - ui.sizeDelta.y);
+            uiAnchor.x = xPos;
+            uiAnchor.y = yPos;
+            ui.anchoredPosition = uiAnchor;
+
+            return canvas;
+        }
+
+        #endregion
     }
 }

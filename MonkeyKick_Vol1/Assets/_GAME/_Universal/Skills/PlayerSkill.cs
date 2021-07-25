@@ -63,14 +63,7 @@ namespace MonkeyKick.Skills
             EffortRankText.Variable.Value = _effortRankStrings[(int)newRank];
             _effortValueMultiplier = _effortRankValues[(int)newRank];
 
-            RectTransform canvas = Instantiate<RectTransform>(effortRankPrefab, Vector3.zero, Quaternion.identity);
-            RectTransform efr = canvas.GetComponentInChildren<DisplayEffortRank>().rectTransform;
-            Vector2 viewportPos = _mainCam.WorldToViewportPoint(pos);
-            Vector2 efrScreenPos = new Vector2(
-            ((viewportPos.x * canvas.sizeDelta.x) - (canvas.sizeDelta.x * 0.5f)),
-            ((viewportPos.y * canvas.sizeDelta.y) - (canvas.sizeDelta.y * 0.5f)));
-
-            efr.anchoredPosition = efrScreenPos;
+            RectTransform newEffortRank = InstantiateUIPosition(effortRankPrefab, pos);
         }
     }
 }

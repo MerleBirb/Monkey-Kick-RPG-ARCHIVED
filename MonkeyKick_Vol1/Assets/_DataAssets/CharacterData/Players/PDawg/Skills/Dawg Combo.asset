@@ -30,4 +30,4 @@ MonoBehaviour:
   jumpRankTimer3: 0.7
   jumpRankTimer4: 0.825
   jumpRankTimer5: 0.95
-  button: {fileID: 8595726793597616824, guid: 6d159524e62c44442b226003b6c2178f, type: 3}
+  actionButtonPrefab: {fileID: 2858119100512506680, guid: 6d159524e62c44442b226003b6c2178f, type: 3}
