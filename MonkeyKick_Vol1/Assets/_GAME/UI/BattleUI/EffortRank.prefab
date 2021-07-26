@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5513528479056415801}
   - component: {fileID: 5286925920577085825}
   - component: {fileID: 6493408684283623048}
+  - component: {fileID: 1729453652616345910}
   m_Layer: 5
   m_Name: EffortRank
   m_TagString: Untagged
@@ -100,6 +101,31 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1729453652616345910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2213566456573906024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d9751373ec3eb4282b7adefe6f798b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EffortRankText:
+    UseConstant: 0
+    ConstantValue: 
+    Variable: {fileID: 11400000, guid: 4bab52cac88e348498e8d691ac6dafe3, type: 2}
+  EffortText: {fileID: 6099061330095603370}
+  rectTransform: {fileID: 1388831047932404880}
+  Time: 1
+  colors:
+  - {r: 1, g: 0.00000012318293, b: 0, a: 1}
+  - {r: 1, g: 0.5694697, b: 0, a: 1}
+  - {r: 1, g: 0.99997795, b: 0, a: 1}
+  - {r: 0.22617829, g: 1, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2590280701424311948
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +137,6 @@ GameObject:
   - component: {fileID: 1388831047932404880}
   - component: {fileID: 7394328718712574550}
   - component: {fileID: 6099061330095603370}
-  - component: {fileID: 5552966325887287134}
   m_Layer: 5
   m_Name: EffortRankText
   m_TagString: Untagged
@@ -180,22 +205,3 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: BLANK
---- !u!114 &5552966325887287134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2590280701424311948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37d9751373ec3eb4282b7adefe6f798b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EffortRankText:
-    UseConstant: 0
-    ConstantValue: 
-    Variable: {fileID: 11400000, guid: 4bab52cac88e348498e8d691ac6dafe3, type: 2}
-  EffortText: {fileID: 6099061330095603370}
-  rectTransform: {fileID: 1388831047932404880}
-  Time: 1

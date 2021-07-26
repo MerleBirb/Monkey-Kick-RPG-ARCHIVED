@@ -11,6 +11,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using MonkeyKick.Battle;
 using MonkeyKick.AudioFX;
+using MonkeyKick.UI;
 
 namespace MonkeyKick.Skills
 {
@@ -184,25 +185,27 @@ namespace MonkeyKick.Skills
 
         #region UI
 
-        protected virtual RectTransform InstantiateUIPosition(RectTransform rectPrefab, Vector3 pos)
+        protected virtual IDisplayUI InstantiateUI(RectTransform rectPrefab, Vector3 pos)
         {
-            RectTransform canvas = Instantiate<RectTransform>(rectPrefab, Vector3.zero, Quaternion.identity);
-            RectTransform ui = canvas.GetComponentInChildren<RectTransform>();
+            RectTransform canvas = Instantiate(rectPrefab, Vector3.zero, Quaternion.identity);
+            IDisplayUI ui = canvas.GetComponentInChildren<IDisplayUI>();
+            ui.DisplayUI();
+            RectTransform uiTransform = ui.GetRectTransform();
             Vector2 viewportPos = _mainCam.WorldToViewportPoint(pos);
             Vector2 uiScreenPos = new Vector2(
             ((viewportPos.x * canvas.sizeDelta.x) - (canvas.sizeDelta.x * 0.5f)),
             ((viewportPos.y * canvas.sizeDelta.y) - (canvas.sizeDelta.y * 0.5f)));
 
-            Vector2 uiAnchor = ui.anchoredPosition;
+            Vector2 uiAnchor = uiTransform.anchoredPosition;
             float xPos = uiAnchor.x;
             float yPos = uiAnchor.y;
-            xPos = Mathf.Clamp(xPos, uiScreenPos.x, Screen.width - ui.sizeDelta.x);
-            yPos = Mathf.Clamp(yPos, uiScreenPos.y, Screen.height - ui.sizeDelta.y);
+            xPos = Mathf.Clamp(xPos, uiScreenPos.x, Screen.width - uiTransform.sizeDelta.x);
+            yPos = Mathf.Clamp(yPos, uiScreenPos.y, Screen.height - uiTransform.sizeDelta.y);
             uiAnchor.x = xPos;
             uiAnchor.y = yPos;
-            ui.anchoredPosition = uiAnchor;
+            uiTransform.anchoredPosition = uiAnchor;
 
-            return canvas;
+            return ui;
         }
 
         #endregion

@@ -70,7 +70,7 @@ namespace MonkeyKick.Skills
                 Sound jumpSFX = AudioTable.GetSound(SFXNames.DashGeneric001);
                 Sound attackSFX = AudioTable.GetSound(SFXNames.XtraLargeHit001);
 
-                RectTransform xButton = InstantiateUIPosition(
+                IDisplayUI xButton = InstantiateUI(
                     actionButtonPrefab,
                     new Vector3(_target.transform.position.x - _target.Stats.Height, _target.transform.position.y - _target.Stats.Height, _target.transform.position.z)
                 );
@@ -94,7 +94,7 @@ namespace MonkeyKick.Skills
 
                     if (_actor.southPressed)
                     {
-                        Destroy(xButton.gameObject);
+                        Destroy(xButton.GetGameObject());
                         Vector3 rankPos = new Vector3(_target.transform.position.x - _target.Stats.Height, _target.transform.position.y - _target.Stats.Height, _target.transform.position.z);
                         TimedButtonPress(currentTime, totalTime, rankPos, jumpRankTimer1, jumpRankTimer2, jumpRankTimer3, jumpRankTimer4, jumpRankTimer5);
                     }

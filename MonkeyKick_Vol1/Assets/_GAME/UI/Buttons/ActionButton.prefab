@@ -212,3 +212,4 @@ MonoBehaviour:
   button:
     buttonImage: {fileID: -6231571464857295279, guid: 5ef6c493a0cdafb4ab7fb204adaa18b6, type: 3}
     anim: {fileID: 4851156516657012177}
+  rectTransform: {fileID: 7009379313927639059}

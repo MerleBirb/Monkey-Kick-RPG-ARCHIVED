@@ -11,6 +11,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using MonkeyKick.References;
 using MonkeyKick.Battle;
+using MonkeyKick.UI;
 
 namespace MonkeyKick.Skills
 {
@@ -63,7 +64,8 @@ namespace MonkeyKick.Skills
             EffortRankText.Variable.Value = _effortRankStrings[(int)newRank];
             _effortValueMultiplier = _effortRankValues[(int)newRank];
 
-            RectTransform newEffortRank = InstantiateUIPosition(effortRankPrefab, pos);
+            IDisplayUI newEffortRank = InstantiateUI(effortRankPrefab, pos);
+            newEffortRank.SetColor((int)newRank);
         }
     }
 }
