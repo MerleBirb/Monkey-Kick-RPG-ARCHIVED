@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_idle_downright
+  m_Name: Moyire_idle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -6748569888285580119, guid: ad904ca6764abfd46be17ce446ab0f59, type: 3}
+      value: {fileID: 21300000, guid: 4f02cd7df77a4f545bb897d406c877fb, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -40,7 +40,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -6748569888285580119, guid: ad904ca6764abfd46be17ce446ab0f59, type: 3}
+    - {fileID: 21300000, guid: 4f02cd7df77a4f545bb897d406c877fb, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

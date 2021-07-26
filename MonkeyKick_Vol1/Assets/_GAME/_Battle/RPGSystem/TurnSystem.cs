@@ -70,38 +70,22 @@ namespace MonkeyKick.Battle
                 if (p == 0)
                 {
                     // spawn player in
-                    var playerLeader = Instantiate<CharacterBattle>(
+                    CharacterBattle playerLeader = Instantiate<CharacterBattle>(
                         playerPrefab,
                         SetUpBattle.GetPlayerParty().CharacterList[p].battlePos,
                         Quaternion.identity);
 
-                    // set the stats and name
-                    playerLeader.Stats = SetUpBattle.GetPlayerParty().CharacterList[p];
-                    playerLeader.gameObject.name = playerLeader.Stats.CharacterName;
-
-                    // set the animation information
-                    playerLeader.GetComponent<CapsuleCollider>().height = playerLeader.Stats.Height;
-
-                    allCharacterList.Add(playerLeader); // add to the all characters list
-                    playerList.Add(playerLeader);
+                    SpawnCharacter(playerLeader, p);
                 }
                 else
                 {
                     // spawn player in
-                    var playerPartyMember = Instantiate<CharacterBattle>(
+                    CharacterBattle playerPartyMember = Instantiate<CharacterBattle>(
                         playerPartyMemberPrefab,
                         SetUpBattle.GetPlayerParty().CharacterList[p].battlePos,
                         Quaternion.identity);
 
-                    // set the stats and name
-                    playerPartyMember.Stats = SetUpBattle.GetPlayerParty().CharacterList[p];
-                    playerPartyMember.gameObject.name = playerPartyMember.Stats.CharacterName;
-
-                    // set the animation information
-                    playerPartyMember.GetComponent<CapsuleCollider>().height = playerPartyMember.Stats.Height;
-
-                    allCharacterList.Add(playerPartyMember); // add to the all characters list
-                    playerList.Add(playerPartyMember);
+                    SpawnCharacter(playerPartyMember, p);
                 }
             }
         }
@@ -113,39 +97,55 @@ namespace MonkeyKick.Battle
                 if (e == 0)
                 {
                     // spawn enemy in
-                    var enemyLeader = Instantiate<CharacterBattle>(
+                    CharacterBattle enemyLeader = Instantiate<CharacterBattle>(
                         enemyPrefab,
                         SetUpBattle.GetEnemyParty().CharacterList[e].battlePos,
                         Quaternion.identity);
 
-                    // set the stats and the name
-                    enemyLeader.Stats = SetUpBattle.GetEnemyParty().CharacterList[e];
-                    enemyLeader.gameObject.name = enemyLeader.Stats.CharacterName;
-
-                    // set the animation information
-                    enemyLeader.GetComponent<CapsuleCollider>().height = enemyLeader.Stats.Height;
-
-                    allCharacterList.Add(enemyLeader); // add to the all characters list
-                    enemyList.Add(enemyLeader);
+                    SpawnCharacter(enemyLeader, e);
                 }
                 else
                 {
                     // spawn enemy in
-                    var enemyPartyMember = Instantiate<CharacterBattle>(
+                    CharacterBattle enemyPartyMember = Instantiate<CharacterBattle>(
                         enemyPartyMemberPrefab,
                         SetUpBattle.GetEnemyParty().CharacterList[e].battlePos,
                         Quaternion.identity);
 
-                    // set the stats and the name
-                    enemyPartyMember.Stats = SetUpBattle.GetEnemyParty().CharacterList[e];
-                    enemyPartyMember.gameObject.name = enemyPartyMember.Stats.CharacterName;
-
-                    // set the animation information
-                    enemyPartyMember.GetComponent<CapsuleCollider>().height = enemyPartyMember.Stats.Height;
-
-                    allCharacterList.Add(enemyPartyMember); // add to the all characters list
-                    enemyList.Add(enemyPartyMember);
+                    SpawnCharacter(enemyPartyMember, e);
                 }
+            }
+        }
+
+        private void SpawnCharacter(CharacterBattle character, int index)
+        {
+            if (character.tag == "Player")
+            {
+                // set the stats and the name
+                character.Stats = SetUpBattle.GetPlayerParty().CharacterList[index];
+
+                character.gameObject.name = character.Stats.CharacterName;
+
+                // set the animation information
+                character.GetComponent<CapsuleCollider>().height = character.Stats.Height;
+                character.GetComponentInChildren<Animator>().runtimeAnimatorController = character.Stats.anim;
+
+                allCharacterList.Add(character);
+                playerList.Add(character);
+            }
+            else if (character.tag == "Enemy")
+            {
+                // set the stats and the name
+                character.Stats = SetUpBattle.GetEnemyParty().CharacterList[index];
+
+                character.gameObject.name = character.Stats.CharacterName;
+
+                // set the animation information
+                character.GetComponent<CapsuleCollider>().height = character.Stats.Height;
+                character.GetComponentInChildren<Animator>().runtimeAnimatorController = character.Stats.anim;
+
+                allCharacterList.Add(character);
+                enemyList.Add(character);
             }
         }
 

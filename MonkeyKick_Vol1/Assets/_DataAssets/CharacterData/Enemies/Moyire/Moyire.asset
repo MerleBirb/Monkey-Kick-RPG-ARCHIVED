@@ -9,68 +9,66 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab2a6dedc8c21b94f93542cf735f7839, type: 3}
-  m_Name: P-Dawg
+  m_Script: {fileID: 11500000, guid: d86efd4b7418cfd4798513f5fec7b3de, type: 3}
+  m_Name: Moyire
   m_EditorClassIdentifier: 
-  CharacterName: P-Dawg
-  Description: The RADDEST dude ever!
-  anim: {fileID: 9100000, guid: 31d504bd881c5c44f8347785820c12b5, type: 2}
+  CharacterName: Moyire
+  Description: Firey Personality
+  anim: {fileID: 9100000, guid: 2a3f955e188b63a47bb1b07474e20c5a, type: 2}
   Level: 1
   MaxHP:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 28
+      BaseValue: 50
     Variable: {fileID: 0}
   CurrentHP:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 28
+      BaseValue: 50
     Variable: {fileID: 0}
   MaxKP:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 18
+      BaseValue: 25
     Variable: {fileID: 0}
   CurrentKP:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 18
+      BaseValue: 25
     Variable: {fileID: 0}
   Muscle:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 26
+      BaseValue: 8
     Variable: {fileID: 0}
   Toughness:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 25
+      BaseValue: 9
     Variable: {fileID: 0}
   Smarts:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 13
+      BaseValue: 1
     Variable: {fileID: 0}
   Tenacity:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 17
+      BaseValue: 9
     Variable: {fileID: 0}
   Speed:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 15
+      BaseValue: 4
     Variable: {fileID: 0}
   Swag:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 10
+      BaseValue: 7
     Variable: {fileID: 0}
   isAlive: 1
-  battlePos: {x: -1.5, y: 0, z: 2.5}
+  battlePos: {x: 1.5, y: 0, z: 2.5}
   skillList:
-  - {fileID: 11400000, guid: b397fc35a8b09c946a2e91424ba268eb, type: 2}
+  - {fileID: 11400000, guid: 73a93a0a75b15ae43932235fdcf2c67a, type: 2}
   Height: 1
-  MaxEXP: 25
-  CurrentEXP: 0
-  TotalEXP: 0
+  EXPGiven: 0

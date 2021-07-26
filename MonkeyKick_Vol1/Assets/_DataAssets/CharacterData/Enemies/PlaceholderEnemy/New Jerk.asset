@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: New Jerk
   Description: One bad dude.
+  anim: {fileID: 0}
   Level: 1
   MaxHP:
     UseConstant: 1

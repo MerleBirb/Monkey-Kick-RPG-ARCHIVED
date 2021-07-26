@@ -69,17 +69,15 @@ namespace MonkeyKick.Skills
 
         public virtual void Damage(CharacterBattle target)
         {
+            int finalValue = Mathf.Clamp(((int)((float)SkillValue * _effortValueMultiplier)), 1, 99999);
+            target.Stats.CurrentHP.ChangeStat(-finalValue);
+
             bool damageGoesBelowZero = (target.Stats.CurrentHP.ConstantValue.BaseValue - SkillValue) <= 0;
 
             if (damageGoesBelowZero)
             {
                 target.Stats.CurrentHP.SetStat(0);
                 target.Kill();
-            }
-            else
-            {
-                int finalValue = Mathf.Clamp(((int)((float)SkillValue * _effortValueMultiplier)), 1, 99999);
-                target.Stats.CurrentHP.ChangeStat(-finalValue);
             }
         }
 

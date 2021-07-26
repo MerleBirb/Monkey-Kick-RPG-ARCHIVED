@@ -18,9 +18,16 @@ namespace MonkeyKick.EntityInformation
     {
         protected int statClamp = 9999;
 
-        #region BATTLE STATS
+        #region UNIVERSAL INFO
+
         public string CharacterName = "New Character";
         [Multiline] public string Description;
+        public RuntimeAnimatorController anim;
+
+        #endregion
+
+        #region BATTLE INFO
+
         public int Level;
 
         public CharacterStatReference MaxHP;

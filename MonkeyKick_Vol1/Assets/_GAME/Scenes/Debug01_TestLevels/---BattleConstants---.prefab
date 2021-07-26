@@ -1431,7 +1431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HPText: {fileID: 4381422363716103571}
-  info: {fileID: 11400000, guid: 3e349a59841a84d41894a3c5cda748f8, type: 2}
+  info: {fileID: 11400000, guid: 98042db493a218a48ab6630780888379, type: 2}
 --- !u!1 &9057052297079405166
 GameObject:
   m_ObjectHideFlags: 0
