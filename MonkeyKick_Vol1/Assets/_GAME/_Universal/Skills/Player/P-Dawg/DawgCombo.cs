@@ -31,7 +31,6 @@ namespace MonkeyKick.Skills
 
         [SerializeField] private SequenceState sequence = SequenceState.WaitingToBegin;
         [SerializeField] private float jumpHeight;
-        [SerializeField] private float returnSeconds = 1;
         [SerializeField] private float newGravity = -30f; 
 
         #region TIMERS
@@ -64,7 +63,9 @@ namespace MonkeyKick.Skills
             }
             if (sequence == SequenceState.JumpingToTarget)
             {
-                float totalTime = CalculateParabolaData(_actor, _target, jumpHeight, newGravity).timeToTarget;
+                ParabolaData jumpData = CalculateParabolaData(_actor.transform.position, _target.transform.position,
+                                        jumpHeight, _target.Stats.Height, newGravity);
+                float totalTime = jumpData.timeToTarget;
                 float currentTime = 0f;
 
                 Sound jumpSFX = AudioTable.GetSound(SFXNames.DashGeneric001);
@@ -77,7 +78,7 @@ namespace MonkeyKick.Skills
 
                 ParabolaJump(
                         newGravity,
-                        CalculateParabolaData(_actor, _target, jumpHeight, newGravity),
+                        jumpData,
                         _actor,
                         _target);
 
@@ -115,9 +116,17 @@ namespace MonkeyKick.Skills
             }
             if (sequence == SequenceState.Return)
             {
-                _actor.rb.velocity = LinearReturn(_actor.Stats.battlePos, _actor.transform.position, returnSeconds);
+                ParabolaData jumpData = CalculateParabolaData(_actor.transform.position, _actor.Stats.battlePos,
+                                        jumpHeight, _actor.Stats.Height - 1f, newGravity);
+                float totalTime = jumpData.timeToTarget;
 
-                yield return new WaitForSeconds(returnSeconds - Time.fixedDeltaTime);
+                ParabolaJump(
+                        newGravity,
+                        jumpData,
+                        _actor,
+                        _target);
+
+                yield return new WaitForSeconds(totalTime);
 
                 _actor.rb.velocity = Vector3.zero;
 

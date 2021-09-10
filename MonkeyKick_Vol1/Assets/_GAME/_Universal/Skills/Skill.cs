@@ -143,16 +143,16 @@ namespace MonkeyKick.Skills
             }
         }
 
-        public virtual ParabolaData CalculateParabolaData(CharacterBattle actor, CharacterBattle target, float height, float gravity)
+        public virtual ParabolaData CalculateParabolaData(Vector3 firstPos, Vector3 secondPos, float jumpHeight, float targetHeight,
+        float gravity)
         {
-            Vector3 actorPos = actor.transform.position;
-            Vector3 targetPos = new Vector3(target.transform.position.x, target.transform.position.y + target.Stats.Height, target.transform.position.z);
+            Vector3 targetPos = new Vector3(secondPos.x, secondPos.y + targetHeight, secondPos.z);
 
-            float displacementY = targetPos.y - actorPos.y;
-            Vector3 displacementXZ = new Vector3 (targetPos.x - actorPos.x, 0, targetPos.z - actorPos.z);
+            float displacementY = targetPos.y - firstPos.y;
+            Vector3 displacementXZ = new Vector3 (targetPos.x - firstPos.x, 0, targetPos.z - firstPos.z);
 
-            float time = Mathf.Sqrt((-2 * height) / gravity) + Mathf.Sqrt(2 *(displacementY - height) / gravity);
-            Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * height);
+            float time = Mathf.Sqrt((-2 * jumpHeight) / gravity) + Mathf.Sqrt(2 *(displacementY - jumpHeight) / gravity);
+            Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * jumpHeight);
             Vector3 velocityXZ = displacementXZ / time;
 
             return new ParabolaData(velocityXZ + velocityY * -Mathf.Sign(gravity), time);
