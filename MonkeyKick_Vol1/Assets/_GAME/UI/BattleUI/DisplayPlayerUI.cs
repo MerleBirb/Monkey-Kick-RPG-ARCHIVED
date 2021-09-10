@@ -7,8 +7,10 @@ Description:
 Author: Merlebirb
 */
 
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using MonkeyKick.Battle;
 using MonkeyKick.EntityInformation;
 
 namespace MonkeyKick.UI
@@ -21,11 +23,17 @@ namespace MonkeyKick.UI
         [SerializeField] private TextMeshProUGUI hpText;
         [SerializeField] private TextMeshProUGUI kiText;
 
-        [SerializeField] private CharacterInformation player;
+        [SerializeField] private CharacterPartyData playerParty;
+        private List<CharacterInformation> _playerParty;
 
     	//===== INIT =====//
 
     	//===== METHODS =====//
+
+        private void Start()
+        {
+            _playerParty = playerParty.CharacterList;
+        }
 
         private void Update()
         {
@@ -34,9 +42,12 @@ namespace MonkeyKick.UI
 
         private void UpdateText()
         {
-            if (levelText.text != player.Level.ToString()) levelText.text = player.Level.ToString();
-            if (hpText.text != player.CurrentHP.ToString()) hpText.text = player.CurrentHP.Stat.BaseValue.ToString();
-            if (kiText.text != player.CurrentKP.ToString()) kiText.text = player.CurrentKP.Stat.BaseValue.ToString();
+            for (int i = 0; i < _playerParty.Count; i++)
+            {
+                if (levelText.text != _playerParty[i].Level.ToString()) levelText.text = _playerParty[i].Level.ToString();
+                if (hpText.text != _playerParty[i].CurrentHP.ToString()) hpText.text = _playerParty[i].CurrentHP.Stat.BaseValue.ToString();
+                if (kiText.text != _playerParty[i].CurrentKP.ToString()) kiText.text = _playerParty[i].CurrentKP.Stat.BaseValue.ToString();
+            }
         }
     }
 }

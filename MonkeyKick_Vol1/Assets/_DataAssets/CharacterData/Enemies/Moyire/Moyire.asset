@@ -24,7 +24,7 @@ MonoBehaviour:
   CurrentHP:
     UseConstant: 1
     ConstantValue:
-      BaseValue: 50
+      BaseValue: 41
     Variable: {fileID: 0}
   MaxKP:
     UseConstant: 1

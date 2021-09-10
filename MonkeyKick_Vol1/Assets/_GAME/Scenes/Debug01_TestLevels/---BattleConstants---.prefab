@@ -1417,7 +1417,7 @@ MonoBehaviour:
   levelText: {fileID: 7452502678018286644}
   hpText: {fileID: 1871600816599761841}
   kiText: {fileID: 3631743406760102279}
-  player: {fileID: 11400000, guid: 8888a75a8a9b9de43bb03a02c2bf6de8, type: 2}
+  playerParty: {fileID: 11400000, guid: a9a557240430427418860cff41d7548a, type: 2}
 --- !u!114 &7731505732651662488
 MonoBehaviour:
   m_ObjectHideFlags: 0
