@@ -19,4 +19,4 @@ MonoBehaviour:
   SkillValue: 5
   seconds: 0.5
   xOffset: 0.5
-  sequence: 2
+  sequence: 0

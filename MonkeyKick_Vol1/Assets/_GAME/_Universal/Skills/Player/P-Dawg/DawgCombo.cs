@@ -95,13 +95,15 @@ namespace MonkeyKick.Skills
 
                     if (_actor.southPressed)
                     {
-                        Destroy(xButton.GetGameObject());
+                        xButton.GetGameObject().SetActive(false);
                         Vector3 rankPos = new Vector3(_target.transform.position.x - _target.Stats.Height, _target.transform.position.y - _target.Stats.Height, _target.transform.position.z);
                         TimedButtonPress(currentTime, totalTime, rankPos, jumpRankTimer1, jumpRankTimer2, jumpRankTimer3, jumpRankTimer4, jumpRankTimer5);
                     }
 
                     yield return null;
                 }
+
+                Destroy(xButton.GetGameObject());
 
                 yield return null;
 
