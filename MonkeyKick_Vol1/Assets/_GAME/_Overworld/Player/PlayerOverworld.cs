@@ -207,7 +207,7 @@ namespace MonkeyKick.Overworld
 
         private void OnDisable()
         {
-            _input.Overworld.Disable();
+            //_input.Overworld.Disable();
 
             _hasPressedJump = false;
             _hasPressedSprint = false;
