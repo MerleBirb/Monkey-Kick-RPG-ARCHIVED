@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/_GAME/Camera/CameraControls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/_MK_Scripts/Camera/CameraControls.inputactions'
 
 using System;
 using System.Collections;
