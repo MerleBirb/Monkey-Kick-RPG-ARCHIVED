@@ -40,7 +40,7 @@ Material:
     - _GridSize: 1
     - _GridStrength: 0.3
     - _GridThickness: 0.03
-    - _GridToggle: 1
+    - _GridToggle: 0
     - _QueueOffset: 0
     - _SampleGI: 0
     - _SrcBlend: 1

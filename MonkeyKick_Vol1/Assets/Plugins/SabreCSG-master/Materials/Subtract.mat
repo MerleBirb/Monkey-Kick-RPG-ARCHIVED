@@ -38,7 +38,7 @@ Material:
     - _FaceToggle: 1
     - _GridAlpha: 0.3
     - _GridSize: 1
-    - _GridToggle: 1
+    - _GridToggle: 0
     - _QueueOffset: 0
     - _SampleGI: 0
     - _SrcBlend: 1
