@@ -104,8 +104,10 @@ namespace MonkeyKick.Overworld
 
         private void AnimatePlayer()
         {
-            _anim.SetFloat("horiz", _movement.x);
-            _anim.SetFloat("vert", _movement.y);
+            if (_movement.x != 0 || _movement.y !=0)
+            {
+                _anim.SetFloat("horiz", _movement.x);
+            }
 
             /// Animations
             // idle

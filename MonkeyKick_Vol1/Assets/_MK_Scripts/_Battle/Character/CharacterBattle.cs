@@ -14,12 +14,16 @@ using MonkeyKick.Managers;
 using MonkeyKick.EntityInformation;
 using MonkeyKick.Skills;
 using MonkeyKick.AudioFX;
+using MonkeyKick.QoL;
 
 namespace MonkeyKick.Battle
 {
     public abstract class CharacterBattle : MonoBehaviour
     {
         [SerializeField] private GameStateData Game;
+        protected Animator _anim;
+        protected string _currentAnim;
+
 
         public BattleSFX battleSFX;
 
@@ -36,6 +40,7 @@ namespace MonkeyKick.Battle
         {
             rb = GetComponent<Rigidbody>();
             _currentAction = new UnityEvent();
+            _anim = GetComponentInChildren<Animator>();
         }
 
         public virtual void Start()

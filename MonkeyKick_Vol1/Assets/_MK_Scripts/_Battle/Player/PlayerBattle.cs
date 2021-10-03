@@ -11,12 +11,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using MonkeyKick.References;
 using MonkeyKick.Controls;
+using MonkeyKick.QoL;
 
 namespace MonkeyKick.Battle
 {
     public class PlayerBattle : CharacterBattle
     {
         private PlayerControls _input;
+
+        const string BATTLE_STANCE = "BattleStance";
 
         [SerializeField] private IntReference menuChoice;
 
@@ -79,7 +82,12 @@ namespace MonkeyKick.Battle
 
             switch(_state)
             {
-                case BattleStates.EnterBattle: EnterBattle(); break;
+                case BattleStates.EnterBattle:
+                {
+                    AnimQoL.PlayAnimation(_anim, _currentAnim, BATTLE_STANCE);
+                    EnterBattle();
+                    break;
+                } 
                 case BattleStates.Wait: Wait(); break;
                 case BattleStates.NavigateMenu: NavigateMenu(); break;
                 case BattleStates.Action: CheckActionInput(); break;
