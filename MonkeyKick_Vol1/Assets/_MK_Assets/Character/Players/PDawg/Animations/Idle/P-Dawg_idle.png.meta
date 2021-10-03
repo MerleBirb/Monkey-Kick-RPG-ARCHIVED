@@ -1,31 +1,13 @@
 fileFormatVersion: 2
-guid: ad904ca6764abfd46be17ce446ab0f59
+guid: 36b1a8f17b40135449f24f4862c1ab45
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6462680307702052073
-    second: P-Dawg_0
+      213: 4959434430768793841
+    second: P-Dawg_idle_0
   - first:
-      213: -6748569888285580119
-    second: P-Dawg_1
-  - first:
-      213: -2157289579396422671
-    second: P-Dawg_2
-  - first:
-      213: -5648840832322810616
-    second: P-Dawg_3
-  - first:
-      213: -8503266119461537893
-    second: P-Dawg_4
-  - first:
-      213: 5608551986069611644
-    second: P-Dawg_5
-  - first:
-      213: -8000663331616172210
-    second: P-Dawg_6
-  - first:
-      213: -7385598446761900979
-    second: P-Dawg_7
+      213: -1580963604460972994
+    second: P-Dawg_idle_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -70,7 +52,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 96
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
@@ -89,8 +71,8 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
-    resizeAlgorithm: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -101,8 +83,8 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 4096
-    resizeAlgorithm: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -151,13 +133,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: P-Dawg_0
+      name: P-Dawg_idle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 96
-        height: 96
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e43e75cf7d00b950800000000000000
-      internalID: 6462680307702052073
+      spriteID: 1f8c0dca65373d440800000000000000
+      internalID: 4959434430768793841
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P-Dawg_1
+      name: P-Dawg_idle_1
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 0
-        width: 96
-        height: 96
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,134 +168,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a427da21734852a0800000000000000
-      internalID: -6748569888285580119
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P-Dawg_2
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1f3ac6eae84cf02e0800000000000000
-      internalID: -2157289579396422671
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P-Dawg_3
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 80d4dac11394b91b0800000000000000
-      internalID: -5648840832322810616
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P-Dawg_4
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b9771ee34845ef980800000000000000
-      internalID: -8503266119461537893
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P-Dawg_5
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c74adf1e05495dd40800000000000000
-      internalID: 5608551986069611644
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P-Dawg_6
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e475687d61fe7f090800000000000000
-      internalID: -8000663331616172210
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P-Dawg_7
-      rect:
-        serializedVersion: 2
-        x: 672
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d44841fd755118990800000000000000
-      internalID: -7385598446761900979
+      spriteID: e3458416af94f0ae0800000000000000
+      internalID: -1580963604460972994
       vertices: []
       indices: 
       edges: []
@@ -321,7 +177,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 8f635cce76d90f344880cabaaf147231
+    spriteID: 6873f8c3870fa7b46ae7dc908af86192
     internalID: 0
     vertices: []
     indices: 
