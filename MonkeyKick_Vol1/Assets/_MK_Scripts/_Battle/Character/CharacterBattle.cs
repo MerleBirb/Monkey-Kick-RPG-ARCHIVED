@@ -22,7 +22,7 @@ namespace MonkeyKick.Battle
     {
         [SerializeField] private GameStateData Game;
         protected Animator _anim;
-        protected string _currentAnim;
+        [HideInInspector] public string currentAnim;
 
         public BattleSFX battleSFX;
 

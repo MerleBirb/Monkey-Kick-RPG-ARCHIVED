@@ -87,7 +87,7 @@ namespace MonkeyKick.Skills
                     1f
                 );
 
-                _effortValueMultiplier = _effortRankValues[(int)EffortRanks.Woops];
+                _effortValueMultiplier = _effortRankValues[(int)EffortRanks.Miss];
 
                 while(currentTime < totalTime)
                 {

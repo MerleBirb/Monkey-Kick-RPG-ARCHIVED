@@ -33,6 +33,10 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 09be2320eae6e9b48abe466d85827b1a, type: 3}
     Volume: 0.05
     Pitch: 1
+  - id: SFX_smallHit001
+    Clip: {fileID: 8300000, guid: 0cf2f4ea6ce6c1b4dbbcc962ccbacbe2, type: 3}
+    Volume: 0.1
+    Pitch: 1
   - id: SFX_xtraLargeHit001
     Clip: {fileID: 8300000, guid: 1457bf6fa0efd6847b45e5d16cd6358d, type: 3}
     Volume: 0.1

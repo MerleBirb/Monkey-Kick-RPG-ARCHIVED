@@ -34,6 +34,7 @@ namespace MonkeyKick.AudioFX
 
 		#region PHYSICAL HITS
 
+		public const string SmallHit001 = "SFX_smallHit001";
 		public const string XtraLargeHit001 = "SFX_xtraLargeHit001";
 
 		#endregion

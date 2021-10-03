@@ -84,7 +84,7 @@ namespace MonkeyKick.Battle
             {
                 case BattleStates.EnterBattle:
                 {
-                    AnimQoL.PlayAnimation(_anim, _currentAnim, BATTLE_STANCE);
+                    AnimQoL.PlayAnimation(_anim, currentAnim, BATTLE_STANCE);
                     EnterBattle();
                     break;
                 } 

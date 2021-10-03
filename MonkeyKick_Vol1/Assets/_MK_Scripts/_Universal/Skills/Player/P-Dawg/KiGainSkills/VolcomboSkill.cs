@@ -56,6 +56,12 @@ namespace MonkeyKick.Skills
 
         #endregion
 
+        #region ANIMATIONS
+
+        const string JAB = "Jab 01";
+
+        #endregion
+
         //===== SKILL SEQUENCE =====//
         /*P-Dawg will dash to the opponent, jab punch, cross punch, then upwards
          thrust kick them, then flipping back into place.*/
@@ -82,7 +88,17 @@ namespace MonkeyKick.Skills
                 yield return new WaitForSeconds(dashTime - Time.deltaTime);
 
                 _actor.rb.velocity = Vector3.zero; // stop the actor
+
+                AnimQoL.PlayAnimation(_anim, _actor.currentAnim, JAB); // start jab animation
+                sequence = SequenceState.JabPunch;
+            }
+
+            if (sequence == SequenceState.JabPunch)
+            {
+                // set up the jab
                 AnimQoL.TogglePause(_anim); // pause
+                Sound jabSFX = AudioTable.GetSound(SFXNames.SmallHit001); // save the sfx
+                _effortValueMultiplier = _effortRankValues[(int)EffortRanks.Miss]; // miss by default
             }
         }
 

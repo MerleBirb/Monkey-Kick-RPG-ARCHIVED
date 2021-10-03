@@ -21,7 +21,7 @@ namespace MonkeyKick.Skills
 
         protected enum EffortRanks
         {
-            Woops = 0,
+            Miss = 0,
             Nice = 1,
             Great = 2,
             Amazing = 3,
@@ -30,7 +30,7 @@ namespace MonkeyKick.Skills
 
         protected EffortRanks _effortRank;
         protected float[] _effortRankValues = { 0.05f, 0.25f, 0.5f, 0.8f, 1.3f };
-        protected string[] _effortRankStrings = { "WOOPS...", "NICE!", "GREAT!", "AMAZING!!", "PERFECT!!!" };
+        protected string[] _effortRankStrings = { "MISS...", "NICE!", "GREAT!", "AMAZING!!", "PERFECT!!!" };
         protected PlayerBattle _actor;
         protected CharacterBattle _target;
         protected List<Transform> _characters;
@@ -50,12 +50,12 @@ namespace MonkeyKick.Skills
 
         protected void TimedButtonPress(float currentTime, float totalTime, Vector3 rankPos, float time1, float time2, float time3, float time4, float time5)
         {
-            if (currentTime <= (totalTime * time1)) { SetEffortRank(EffortRanks.Woops, rankPos); return; }
+            if (currentTime <= (totalTime * time1)) { SetEffortRank(EffortRanks.Miss, rankPos); return; }
             else if (currentTime <= (totalTime * time2)) { SetEffortRank(EffortRanks.Nice, rankPos); return; }
             else if (currentTime <= (totalTime * time3)) { SetEffortRank(EffortRanks.Great, rankPos); return; }
             else if (currentTime <= (totalTime * time4)) { SetEffortRank(EffortRanks.Amazing, rankPos); return; }
             else if (currentTime <= (totalTime * time5)) { SetEffortRank(EffortRanks.Perfect, rankPos); return; }
-            else { SetEffortRank(EffortRanks.Woops, rankPos); _effortValueMultiplier = 0.1f; return; }
+            else { SetEffortRank(EffortRanks.Miss, rankPos); _effortValueMultiplier = 0.1f; return; }
         }
 
         protected void SetEffortRank(EffortRanks newRank, Vector3 pos)
