@@ -19,6 +19,7 @@ namespace MonkeyKick.Skills
     {
         //===== VARIABLES =====//
         private Rigidbody _rb;
+        protected Animator _anim;
         protected Vector3 _defaultGravity;
         protected Camera _mainCam;
         protected float _effortValueMultiplier;
@@ -173,10 +174,16 @@ namespace MonkeyKick.Skills
     
         #region LINEAR
 
-        public virtual Vector3 LinearReturn(Vector3 battlePos, Vector3 currentPos, float time)
+        public virtual Vector3 LinearMove(Vector3 startPos, Vector3 endPos, float time)
         {
-            Vector3 returnPos = new Vector3(battlePos.x, currentPos.y, battlePos.z);
-            return (returnPos - currentPos) / time;
+            Vector3 returnPos = new Vector3(endPos.x, startPos.y, endPos.z);
+            return (returnPos - startPos) / time;
+        }
+
+        public virtual Vector3 LinearMove(Vector3 startPos, Vector3 endPos, float time, float xOffset)
+        {
+            Vector3 returnPos = new Vector3(endPos.x + xOffset, startPos.y, endPos.z);
+            return (returnPos - startPos) / time;
         }
 
         #endregion

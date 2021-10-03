@@ -69,7 +69,7 @@ MonoBehaviour:
   isAlive: 1
   battlePos: {x: -1.5, y: 0, z: 2.5}
   skillList:
-  - {fileID: 11400000, guid: b397fc35a8b09c946a2e91424ba268eb, type: 2}
+  - {fileID: 11400000, guid: 0736fbfb5a981c948ac30e60e099d9e0, type: 2}
   Height: 1
   MaxEXP: 25
   CurrentEXP: 0

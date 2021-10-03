@@ -21,5 +21,10 @@ namespace MonkeyKick.QoL
 
             anim.Play(currentAnim);
         }
+
+        public static void TogglePause(Animator anim)
+        {
+            anim.enabled = !anim.enabled;
+        }
     }
 }

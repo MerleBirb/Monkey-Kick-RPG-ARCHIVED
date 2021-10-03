@@ -24,7 +24,6 @@ namespace MonkeyKick.Battle
         protected Animator _anim;
         protected string _currentAnim;
 
-
         public BattleSFX battleSFX;
 
         protected BattleStates _state;
@@ -108,6 +107,11 @@ namespace MonkeyKick.Battle
         {
             Stats.isAlive = false;
             gameObject.SetActive(false);
+        }
+
+        public virtual Animator GetAnimator()
+        {
+            return _anim;
         }
     }
 }
