@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2a6dedc8c21b94f93542cf735f7839, type: 3}
+  m_Name: P-Dawg
+  m_EditorClassIdentifier: 
+  CharacterName: P-Dawg
+  Description: The RADDEST dude ever!
+  anim: {fileID: 9100000, guid: b0f479a1e65f1934b91d9c87722132fd, type: 2}
+  Level: 1
+  MaxHP:
+    UseConstant: 1
+    ConstantValue:
+      BaseValue: 28
+    Variable: {fileID: 0}
+  CurrentHP:
+    UseConstant: 1
+    ConstantValue:
+      BaseValue: 28
+    Variable: {fileID: 0}
+  MaxKP:
+    UseConstant: 1
+    ConstantValue:
+      BaseValue: 18
+    Variable: {fileID: 0}
+  CurrentKP:
+    UseConstant: 1
+    ConstantValue:
+      BaseValue: 18
+    Variable: {fileID: 0}
+  Muscle:
+    UseConstant: 1
+    ConstantValue:
+      BaseValue: 26
+    Variable: {fileID: 0}
+  Toughness:
+    UseConstant: 1
+    ConstantValue:
+      BaseValue: 25
+    Variable: {fileID: 0}
+  Smarts:
+    UseConstant: 1
+    ConstantValue:
+      BaseValue: 13
+    Variable: {fileID: 0}
+  Tenacity:
+    UseConstant: 1
+    ConstantValue:
+      BaseValue: 17
+    Variable: {fileID: 0}
+  Speed:
+    UseConstant: 1
+    ConstantValue:
+      BaseValue: 15
+    Variable: {fileID: 0}
+  Swag:
+    UseConstant: 1
+    ConstantValue:
+      BaseValue: 10
+    Variable: {fileID: 0}
+  isAlive: 1
+  battlePos: {x: -1.5, y: 0, z: 2.5}
+  skillList:
+  - {fileID: 11400000, guid: 0736fbfb5a981c948ac30e60e099d9e0, type: 2}
+  Height: 1
+  MaxEXP: 25
+  CurrentEXP: 0
+  TotalEXP: 0
