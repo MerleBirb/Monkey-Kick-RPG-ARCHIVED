@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aece26fc47478a6438dd2ce7e9b037de
+guid: 3409ffc579fa5a54e9b7091a4e69818d
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -8,6 +8,24 @@ TextureImporter:
   - first:
       213: -1580963604460972994
     second: P-Dawg_idle_1
+  - first:
+      213: -2202264464656975649
+    second: P-Dawg_idle_2
+  - first:
+      213: 8334113616380825785
+    second: P-Dawg_idle_3
+  - first:
+      213: -5607880248553888342
+    second: P-Dawg_idle_4
+  - first:
+      213: -3862537509513137324
+    second: P-Dawg_idle_5
+  - first:
+      213: 8632526103623795449
+    second: P-Dawg_idle_6
+  - first:
+      213: -1293512710752633688
+    second: P-Dawg_idle_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -138,10 +156,136 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: P-Dawg_idle_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd8b7a2332cff61e0800000000000000
+      internalID: -2202264464656975649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P-Dawg_idle_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b010269d28b8a370800000000000000
+      internalID: 8334113616380825785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P-Dawg_idle_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa5240230aecc22b0800000000000000
+      internalID: -5607880248553888342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P-Dawg_idle_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 453f8d58992856ac0800000000000000
+      internalID: -3862537509513137324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P-Dawg_idle_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f288c011c4ecc770800000000000000
+      internalID: 8632526103623795449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P-Dawg_idle_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8acf22bfa058c0ee0800000000000000
+      internalID: -1293512710752633688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 144fc09b3814e1047aafdaaa5decad30
     internalID: 0
     vertices: []
     indices: 

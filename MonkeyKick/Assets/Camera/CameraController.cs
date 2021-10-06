@@ -86,7 +86,7 @@ namespace MonkeyKick.Cameras
             if (Target)
             {
                 Quaternion angleRotation = Quaternion.Euler(_angle.y, _angle.x, 0); // swap x and y
-                Quaternion currentRotation = Quaternion.Lerp(_oldRotation, angleRotation, Time.fixedDeltaTime * RotationSmoothing);
+                Quaternion currentRotation = Quaternion.Lerp(_oldRotation, angleRotation, Time.deltaTime * RotationSmoothing);
 
                 _oldRotation = currentRotation;
 
