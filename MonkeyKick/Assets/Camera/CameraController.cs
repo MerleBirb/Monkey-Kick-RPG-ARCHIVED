@@ -3,9 +3,10 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MonkeyKick.Controls;
 using MonkeyKick.QualityOfLife;
 
-namespace MonkeyKick.Controls
+namespace MonkeyKick.Cameras
 {
     public class CameraController : MonoBehaviour
     {
@@ -17,6 +18,8 @@ namespace MonkeyKick.Controls
 
         #endregion
 
+        #region CAMERA
+
         public Transform Target;
         public float AngleY = 30f;
         public float RotationSmoothing = 10f;
@@ -27,6 +30,8 @@ namespace MonkeyKick.Controls
         private Quaternion _oldRotation = new Quaternion();
 
         public Vector2 CurrentRotation { get { return _angle; } }
+
+        #endregion
 
         #region UNITY METHODS
 
