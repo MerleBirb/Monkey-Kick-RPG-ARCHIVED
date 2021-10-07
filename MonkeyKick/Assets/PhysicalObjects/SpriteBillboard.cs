@@ -1,11 +1,12 @@
 // Merle Roji
 // 10/6/21
 
+using System;
 using UnityEngine;
 using MonkeyKick.QualityOfLife;
 using MonkeyKick.Cameras;
 
-namespace MonkeyKick.PhysicalObjects
+namespace MonkeyKick.PhysicalObjects.Characters
 {
     public class SpriteBillboard : MonoBehaviour
     {
@@ -13,6 +14,8 @@ namespace MonkeyKick.PhysicalObjects
         private Camera _mainCam;
         private Facing _facing = Facing.Down;
         private Animator _anim;
+        private CharacterMovement _character;
+        private int _offset = 4;
 
         #region ANIMATIONS
 
@@ -35,6 +38,7 @@ namespace MonkeyKick.PhysicalObjects
         private void Start()
         {
             _anim = GetComponent<Animator>();
+            _character = GetComponentInParent<CharacterMovement>();
             _mainCam = Camera.main;
             if (!CamDirection) CamDirection = _mainCam.GetComponent<CameraDirection>();
         }
@@ -56,13 +60,22 @@ namespace MonkeyKick.PhysicalObjects
 
         private void RotateSprite()
         {
-            int offset = _facing - CamDirection.Facing;
-            if (offset < 0) offset += 8; // if offset goes negative, reset
+            Vector2 movement = _character.CurrentVelocity; // save the movement
+            movement.Normalize(); // the vector must add up to 1
+            float roundedAngle = (float)Math.Round(PhysicsQoL.AngleTo(Vector2.zero, movement), 1); // angle of the vector from (0, 0) and round
+            int angleToFace = Convert.ToInt32((roundedAngle / 45f) % 7.5f); // algorithm to convert angle to 8 directions
 
-            Facing direction = (Facing)offset;
+            if (movement.x != 0f || movement.y != 0f)
+            {
+                _facing = angleToFace + CamDirection.Facing; // reset the offset if moving
+            }
 
-            // change animation based on direction
-            switch(direction)
+            _offset = _facing - CamDirection.Facing;
+            if (_offset < 0) _offset += 8; // if offset goes negative, reset
+            Facing direction = (Facing)_offset;
+
+            // change animation based on direction of camera         
+            switch (direction)
             {
                 case Facing.Up:
                     AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_UP);

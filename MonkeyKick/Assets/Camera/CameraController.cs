@@ -77,8 +77,8 @@ namespace MonkeyKick.Cameras
 
         private void CheckInput()
         {
-            PhysicsQoL.ClampAngle(ref _angle);
             _angle.x += _orbitCameraX * RotationSensitivity;
+            PhysicsQoL.ClampAngle(ref _angle);
         }
 
         private void RotateCamera()

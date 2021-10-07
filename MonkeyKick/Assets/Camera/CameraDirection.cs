@@ -18,19 +18,19 @@ namespace MonkeyKick.Cameras
 
         protected Facing _facing = Facing.Down;
 
-        public virtual Facing Facing { get { return _facing; } }
-        public virtual Vector2 Angle { get { return _camera.CurrentRotation; } }
+        public Facing Facing { get { return _facing; } }
+        public Vector2 Angle { get { return _camera.CurrentRotation; } }
 
         #endregion
 
         #region UNITY METHODS
 
-        public virtual void Awake()
+        public void Awake()
         {
             _camera = GetComponent<CameraController>();
         }
 
-        public virtual void LateUpdate()
+        public void LateUpdate()
         {
             CheckFace();
         }
@@ -39,7 +39,7 @@ namespace MonkeyKick.Cameras
 
         #region METHODS
 
-        public virtual void CheckFace()
+        public void CheckFace()
         {
             float rX = _camera.CurrentRotation.x;
             float x = Mathf.Abs(rX);

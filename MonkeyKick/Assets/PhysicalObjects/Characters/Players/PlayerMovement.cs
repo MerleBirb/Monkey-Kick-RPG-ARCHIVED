@@ -54,8 +54,9 @@ namespace MonkeyKick.PhysicalObjects.Characters
         {
             // normalize the movement input
             _movement.Normalize();
+            _isMoving = Mathf.Abs(_movement.x) > 0f || Mathf.Abs(_movement.y) > 0f;
 
-            if (!direction) _physics.Movement(_movement, _rb, moveSpeed, direction); // if a camera exists, use it's direction
+            if (direction) _physics.Movement(_movement, _rb, moveSpeed, direction); // if a camera exists, use it's direction
             else _physics.Movement(_movement, _rb, moveSpeed, direction);
         }
 
