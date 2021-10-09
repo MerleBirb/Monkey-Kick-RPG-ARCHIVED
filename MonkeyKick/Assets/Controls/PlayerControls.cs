@@ -27,6 +27,14 @@ namespace MonkeyKick.Controls
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""15caaca5-131e-4e24-b131-cab92950967f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -95,6 +103,28 @@ namespace MonkeyKick.Controls
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76837f9c-d7e9-4879-a19e-46a6754d9fff"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b8ccd13-b820-4bb3-b670-17843a085487"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -132,6 +162,7 @@ namespace MonkeyKick.Controls
             // Overworld
             m_Overworld = asset.FindActionMap("Overworld", throwIfNotFound: true);
             m_Overworld_Move = m_Overworld.FindAction("Move", throwIfNotFound: true);
+            m_Overworld_Jump = m_Overworld.FindAction("Jump", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -182,11 +213,13 @@ namespace MonkeyKick.Controls
         private readonly InputActionMap m_Overworld;
         private IOverworldActions m_OverworldActionsCallbackInterface;
         private readonly InputAction m_Overworld_Move;
+        private readonly InputAction m_Overworld_Jump;
         public struct OverworldActions
         {
             private @PlayerControls m_Wrapper;
             public OverworldActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Overworld_Move;
+            public InputAction @Jump => m_Wrapper.m_Overworld_Jump;
             public InputActionMap Get() { return m_Wrapper.m_Overworld; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -199,6 +232,9 @@ namespace MonkeyKick.Controls
                     @Move.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMove;
+                    @Jump.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnJump;
+                    @Jump.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnJump;
+                    @Jump.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnJump;
                 }
                 m_Wrapper.m_OverworldActionsCallbackInterface = instance;
                 if (instance != null)
@@ -206,6 +242,9 @@ namespace MonkeyKick.Controls
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @Jump.started += instance.OnJump;
+                    @Jump.performed += instance.OnJump;
+                    @Jump.canceled += instance.OnJump;
                 }
             }
         }
@@ -231,6 +270,7 @@ namespace MonkeyKick.Controls
         public interface IOverworldActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
         }
     }
 }

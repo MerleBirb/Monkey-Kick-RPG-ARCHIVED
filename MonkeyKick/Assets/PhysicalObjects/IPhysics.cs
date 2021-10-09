@@ -7,7 +7,16 @@ namespace MonkeyKick.PhysicalObjects
 {
     public interface IPhysics
     {
-        void Movement(Vector2 movementInput, Rigidbody rigidbody, float currentSpeed);
-        void Movement(Vector2 movementInput, Rigidbody rigidbody, float currentSpeed, Transform faceDirection);
+        float GetMoveSpeed();
+        float GetJumpHeight();
+        float GetHeight();
+        void Movement(Vector2 movementInput, float currentSpeed);
+        void Movement(Vector2 movementInput, float currentSpeed, Transform faceDirection);
+        void TurnOffGravity();
+        void Jump();
+        bool OnGround();
+        void ObeyGravity();
+        void CountPhysicsSteps();
+        bool SnapToGround();
     }
 }

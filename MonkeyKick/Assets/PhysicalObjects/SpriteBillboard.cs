@@ -75,8 +75,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
             if (_offset > 7) _offset -= 8;
             Facing direction = (Facing)_offset;
 
-            Debug.Log(_offset);
-
             // change animation based on direction of camera         
             switch (direction)
             {

@@ -9,18 +9,13 @@ namespace MonkeyKick.PhysicalObjects.Characters
     {
         #region PHYSICS
 
-        protected Rigidbody _rb;
         protected IPhysics _physics;
         protected Vector2 _movement;
         protected bool _isMoving;
 
-        public Vector2 CurrentVelocity { get { return _movement; } }
-        public bool IsMoving { get { return _isMoving; } }
-
         [SerializeField] protected Transform direction;
-        [SerializeField] protected float moveSpeed = 1;
 
-        public Transform CurrentDirection { get { return direction; } }
+        public Vector2 CurrentVelocity { get { return _movement; } }
 
         #endregion
 
@@ -28,8 +23,12 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         public virtual void Awake()
         {
-            _rb = GetComponent<Rigidbody>();
             _physics = GetComponent<IPhysics>();
+        }
+
+        public virtual void FixedUpdate()
+        {
+            _physics?.ObeyGravity();
         }
 
         #endregion
