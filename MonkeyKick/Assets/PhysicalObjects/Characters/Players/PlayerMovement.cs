@@ -16,6 +16,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         private InputAction _jump;
 
         private bool _hasPressedJump = false;
+        private bool _activateJump = false;
 
         #endregion
 
@@ -45,7 +46,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
             base.FixedUpdate();
 
             if (_physics != null) Movement();
-            if (_controls != null) CheckInput(); 
         }
 
         private void OnEnable()
@@ -66,7 +66,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         {
             _hasPressedJump = _jump.triggered;
 
-            Jump();
+            PressedJump();
         }
 
         private void Movement()
@@ -81,16 +81,25 @@ namespace MonkeyKick.PhysicalObjects.Characters
              // if no input, dont move
         }
 
-        private void Jump()
+        private void PressedJump()
         {
             if (_hasPressedJump)
             {
                 if (_physics.OnGround())
                 {
                     _physics.Jump();
+                    _hasPressedJump = false;
                 }
 
-                _hasPressedJump = false;
+            }
+        }
+
+        private void CheckJump()
+        {
+            if (_activateJump)
+            {
+                _physics.Jump();
+                _activateJump = false;
             }
         }
 
