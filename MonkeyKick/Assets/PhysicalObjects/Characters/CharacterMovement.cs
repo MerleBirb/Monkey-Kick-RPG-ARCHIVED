@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MonkeyKick.PhysicalObjects.Characters
 {
-    public abstract class CharacterMovement : MonoBehaviour
+    public class CharacterMovement : MonoBehaviour
     {
         #region PHYSICS
 
