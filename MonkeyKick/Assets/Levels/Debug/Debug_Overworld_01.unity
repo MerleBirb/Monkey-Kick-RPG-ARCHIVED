@@ -216,42 +216,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!84 &307990140
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 3
-  m_Width: 320
-  m_Height: 180
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 2
-  m_ColorFormat: 4
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &316257549
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,42 +626,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1467760300}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!84 &1604461668
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 3
-  m_Width: 320
-  m_Height: 180
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 2
-  m_ColorFormat: 4
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1991260214
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,10 +803,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2620644518890897368, guid: be54eb4d60128b64f9e851565748f140, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: d7356c449854f3148b5d7fa3782a3036, type: 2}
     - target: {fileID: 2620644518890897369, guid: be54eb4d60128b64f9e851565748f140, type: 3}
       propertyPath: CamDirection
       value: 
@@ -935,6 +859,18 @@ PrefabInstance:
       propertyPath: direction
       value: 
       objectReference: {fileID: 963194228}
+    - target: {fileID: 2620644519432455131, guid: be54eb4d60128b64f9e851565748f140, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2620644519432455131, guid: be54eb4d60128b64f9e851565748f140, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2620644519432455131, guid: be54eb4d60128b64f9e851565748f140, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be54eb4d60128b64f9e851565748f140, type: 3}
 --- !u!1001 &6759578735374117806
@@ -992,21 +928,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 6759578735472515261, guid: 2e15b17e3a40f0e4aa0e4b263a4b6973, type: 3}
-      propertyPath: m_Texture
-      value: 
-      objectReference: {fileID: 1604461668}
-    - target: {fileID: 6759578735534063561, guid: 2e15b17e3a40f0e4aa0e4b263a4b6973, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6759578736026912475, guid: 2e15b17e3a40f0e4aa0e4b263a4b6973, type: 3}
       propertyPath: Target
       value: 
       objectReference: {fileID: 936362227}
-    - target: {fileID: 6759578736026912477, guid: 2e15b17e3a40f0e4aa0e4b263a4b6973, type: 3}
-      propertyPath: m_TargetTexture
-      value: 
-      objectReference: {fileID: 307990140}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e15b17e3a40f0e4aa0e4b263a4b6973, type: 3}
