@@ -10,6 +10,8 @@ namespace MonkeyKick.PhysicalObjects.Characters
 {
     public class SpriteBillboard : MonoBehaviour
     {
+        [SerializeField] private bool useAnimations = true;
+
         public CameraDirection CamDirection;
         private Camera _mainCam;
         private Facing _facing = Facing.Down;
@@ -47,6 +49,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         {
             Billboard();
             RotateSprite();
+            Animate();
         }
 
         #endregion
@@ -72,36 +75,43 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
             _offset = _facing - CamDirection.Facing;
             if (_offset < 0) _offset += 8; // if offset goes negative, reset
-            if (_offset > 7) _offset -= 8;
+            if (_offset > 7) _offset -= 8;     
+        }
+
+        private void Animate()
+        {
             Facing direction = (Facing)_offset;
 
-            // change animation based on direction of camera         
-            switch (direction)
+            // change animation based on direction of camera
+            if (_anim && useAnimations)
             {
-                case Facing.Up:
-                    AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_UP);
-                    break;
-                case Facing.UpRight:
-                    AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_UPRIGHT);
-                    break;
-                case Facing.Right:
-                    AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_RIGHT);
-                    break;
-                case Facing.DownRight:
-                    AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_DOWNRIGHT);
-                    break;
-                case Facing.Down:
-                    AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_DOWN);
-                    break;
-                case Facing.DownLeft:
-                    AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_DOWNLEFT);
-                    break;
-                case Facing.Left:
-                    AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_LEFT);
-                    break;
-                case Facing.UpLeft:
-                    AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_UPLEFT);
-                    break;
+                switch (direction)
+                {
+                    case Facing.Up:
+                        AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_UP);
+                        break;
+                    case Facing.UpRight:
+                        AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_UPRIGHT);
+                        break;
+                    case Facing.Right:
+                        AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_RIGHT);
+                        break;
+                    case Facing.DownRight:
+                        AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_DOWNRIGHT);
+                        break;
+                    case Facing.Down:
+                        AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_DOWN);
+                        break;
+                    case Facing.DownLeft:
+                        AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_DOWNLEFT);
+                        break;
+                    case Facing.Left:
+                        AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_LEFT);
+                        break;
+                    case Facing.UpLeft:
+                        AnimationQoL.ChangeAnimation(_anim, _currentState, IDLE_UPLEFT);
+                        break;
+                }
             }
         }
 

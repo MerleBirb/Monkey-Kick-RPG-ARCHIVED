@@ -1,6 +1,7 @@
 // Merle Roji
 // 10/11/21
 
+using System;
 using UnityEngine;
 
 namespace MonkeyKick.Managers
@@ -15,6 +16,15 @@ namespace MonkeyKick.Managers
     public class GameManager : ScriptableObject
     {
         [Header("The state the game currently is in.")]
-        public GameStates GameState;
+        [SerializeField] private GameStates gameState = GameStates.Overworld;
+        public GameStates GameState
+        {
+            get { return gameState; }
+            set 
+            {
+                Type t = value.GetType(); // check if type is of GameStates
+                if (t.Equals(typeof(GameStates))) gameState = value;
+            }
+        }
     }
 }

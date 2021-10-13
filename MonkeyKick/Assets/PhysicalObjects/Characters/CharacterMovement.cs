@@ -2,11 +2,15 @@
 // 10/5/21
 
 using UnityEngine;
+using MonkeyKick.Managers;
 
 namespace MonkeyKick.PhysicalObjects.Characters
 {
     public class CharacterMovement : MonoBehaviour
     {
+        [Header("Store the Game Manager for the Game State")]
+        public GameManager GameManager;
+
         #region PHYSICS
 
         protected IPhysics _physics;

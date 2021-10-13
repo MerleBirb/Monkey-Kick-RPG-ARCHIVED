@@ -29,5 +29,46 @@ namespace MonkeyKick.QualityOfLife
 			return angle;
 		}
 
-	}
+        #region
+
+		public static Vector3 LinearMove(Vector3 startPos, Vector3 endPos, float time)
+        {
+			Vector3 returnPos = new Vector3(endPos.x, startPos.y, endPos.z);
+			return (returnPos - startPos) / time;
+        }
+
+		public static Vector3 LinearMove(Vector3 startPos, Vector3 endPos, float time, float xOffset)
+		{
+			Vector3 returnPos = new Vector3(endPos.x + xOffset, startPos.y, endPos.z);
+			return (returnPos - startPos) / time;
+		}
+
+		#endregion
+
+		#region PARABOLAS
+
+		public static ParabolaData CalculateParabolaData(Vector3 startPos, Vector3 endPos, float jumpHeight, float targetHeight, float gravity)
+        {
+			Vector3 targetPos = new Vector3(endPos.x, endPos.y + targetHeight, endPos.z); // adjust the target position by the height of the target.
+
+			float displacementY = targetPos.y - startPos.y;
+			Vector3 displacementXZ = new Vector3(targetPos.x - startPos.x, 0, targetPos.z - startPos.z);
+
+			// calculate time it takes to perform parabola movement
+			float time = Mathf.Sqrt((-2 * jumpHeight) / gravity) + Mathf.Sqrt(2 * (displacementY - jumpHeight) / gravity);
+			Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * jumpHeight);
+			Vector3 velocityXZ = displacementXZ / time;
+
+			return new ParabolaData(velocityXZ + velocityY * -Mathf.Sign(gravity), time); // return new ParabolaData using data
+		}
+
+		public static void ParabolaJump(ParabolaData parabola, Rigidbody jumperRb, Rigidbody targetRb)
+        {
+			jumperRb.velocity = parabola.InitialVelocity;
+			targetRb.isKinematic = true;
+        }
+
+        #endregion
+
+    }
 }
