@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MonkeyKick.Managers;
 using MonkeyKick.Controls;
 
 namespace MonkeyKick.PhysicalObjects.Characters
@@ -16,9 +17,12 @@ namespace MonkeyKick.PhysicalObjects.Characters
         private InputAction _jump;
 
         private bool _hasPressedJump = false;
-        private bool _activateJump = false;
 
         #endregion
+
+        [Header("If this player is the leader of the Party, enable this.")]
+        public bool isLeader = false;
+        const string ENEMY_TAG = "Enemy";
 
         #region UNITY METHODS
 
@@ -26,30 +30,53 @@ namespace MonkeyKick.PhysicalObjects.Characters
         {
             base.Awake();
 
-            // create a new instance of controls
-            InputSystem.pollingFrequency = 180;
-            _controls = new PlayerControls();
+            if (GameManager.InOverworld())
+            {
+                // create a new instance of controls
+                InputSystem.pollingFrequency = 180;
+                _controls = new PlayerControls();
 
-            // set controls
-            _move = _controls.Overworld.Move;
-            _jump = _controls.Overworld.Jump;
-            _move.performed += ctx => _movement = ctx.ReadValue<Vector2>();
+                // set controls
+                _move = _controls.Overworld.Move;
+                _jump = _controls.Overworld.Jump;
+                _move.performed += ctx => _movement = ctx.ReadValue<Vector2>();
+            }
         }
 
-        private void Update()
+        public override void Update()
         {
-            if (_controls != null) CheckInput();
+            base.Update();
+
+            if (GameManager.InOverworld())
+            {
+                if (_controls != null) CheckInput();
+            }           
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
-            if (_physics != null) Movement();
+            if (GameManager.InOverworld())
+            {
+                if (_physics != null) Movement();
+            }
         }
 
-        private void OnEnable()
+        private void OnTriggerEnter(Collider col)
         {
+            // running into an enemy to start battle
+            if (GameManager.InOverworld() && col.CompareTag(ENEMY_TAG))
+            {
+                _physics?.ResetMovement(); // zero current velocity
+                GameManager.InitiateBattle();
+            }
+        }
+
+        public override void OnEnable()
+        {
+            base.OnEnable();
+
             _controls?.Overworld.Enable();
         }
 
@@ -77,8 +104,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
             if (direction) _physics.Movement(_movement, _physics.GetMoveSpeed(), direction); // if a camera exists, use it's direction
             else _physics.Movement(_movement, _physics.GetMoveSpeed()); // if camera doesnt exist default is Vector3.forward
-
-             // if no input, dont move
         }
 
         private void PressedJump()
@@ -91,15 +116,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
                     _hasPressedJump = false;
                 }
 
-            }
-        }
-
-        private void CheckJump()
-        {
-            if (_activateJump)
-            {
-                _physics.Jump();
-                _activateJump = false;
             }
         }
 

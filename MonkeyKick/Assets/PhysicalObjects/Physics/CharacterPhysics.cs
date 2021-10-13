@@ -52,6 +52,11 @@ namespace MonkeyKick.PhysicalObjects
             rb.velocity = new Vector3(desiredVelocity.x, rb.velocity.y, desiredVelocity.z);
         }
 
+        public void ResetMovement()
+        {
+            rb.velocity = Vector3.zero;
+        }
+
         public void TurnOffGravity()
         {
             rb.useGravity = false;
@@ -78,41 +83,6 @@ namespace MonkeyKick.PhysicalObjects
             rb.AddForce(_currentGravity, ForceMode.Acceleration);
         }
 
-        public void CountPhysicsSteps()
-        {
-            // clamp step values so they dont go too high
-            _stepsSinceLastGrounded = Mathf.Clamp(_stepsSinceLastGrounded, _stepMin, _stepMax);
-            _stepsSinceLastAerial = Mathf.Clamp(_stepsSinceLastAerial, _stepMin, _stepMax);
-
-            // useful for updating how long player has been on ground or air
-            if (OnGround()) _stepsSinceLastGrounded = 0;
-            else _stepsSinceLastGrounded++;
-            if (!OnGround()) _stepsSinceLastAerial = 0;
-            else _stepsSinceLastAerial++;
-        }
-
-        public bool SnapToGround()
-        {
-            float speed = rb.velocity.magnitude;
-            float adjustHeight = (col.height / 2f) + 0.1f;
-
-            if (_stepsSinceLastGrounded > 1 || _stepsSinceLastAerial <= 3)
-            {
-                return false;
-            }
-
-            if (!Physics.Raycast(rb.position, -Vector3.up, out RaycastHit hit, adjustHeight, groundLayer))
-            {
-                return false;
-            }
-
-            float _dot = Vector3.Dot(rb.velocity, hit.normal);
-            if (_dot > 0f)
-            {
-                rb.velocity = (rb.velocity - (hit.normal * _dot)).normalized * speed;
-            }
-
-            return true;
-        }
+        
     }
 }

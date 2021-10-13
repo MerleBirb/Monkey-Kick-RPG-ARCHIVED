@@ -850,6 +850,10 @@ PrefabInstance:
       propertyPath: direction
       value: 
       objectReference: {fileID: 963194228}
+    - target: {fileID: 941248391278279463, guid: a7cd3189299d49e4cadc2d192442788a, type: 3}
+      propertyPath: direction
+      value: 
+      objectReference: {fileID: 963194228}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7cd3189299d49e4cadc2d192442788a, type: 3}
 --- !u!1001 &7091940861225342479

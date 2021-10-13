@@ -6,9 +6,34 @@ using MonkeyKick.Managers;
 
 namespace MonkeyKick.PhysicalObjects.Characters
 {
-    public class CharacterBattle : MonoBehaviour
+    public abstract class CharacterBattle : MonoBehaviour
     {
-        [Header("Store the Game Manager for the Game State")]
         public GameManager GameManager;
+
+        private CharacterMovement _movement;
+
+        #region UNITY METHODS
+
+        public virtual void Awake()
+        {
+            _movement = GetComponent<CharacterMovement>();
+        }
+
+        public virtual void Update()
+        {
+            if (!GameManager.InBattle())
+            {
+                if (GameManager.InOverworld()) _movement.enabled = true;
+
+                this.enabled = false;
+            }
+        }
+
+        public virtual void OnEnable()
+        {
+            if (!GameManager.InBattle()) this.enabled = false;
+        }
+
+        #endregion
     }
 }

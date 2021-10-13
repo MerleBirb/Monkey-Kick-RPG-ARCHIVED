@@ -15,6 +15,8 @@ namespace MonkeyKick.Managers
     [CreateAssetMenu(fileName = "GameManager", menuName = "Managers/Game Manager", order = 1)]
     public class GameManager : ScriptableObject
     {
+        #region GAME STATE
+
         [Header("The state the game currently is in.")]
         [SerializeField] private GameStates gameState = GameStates.Overworld;
         public GameStates GameState
@@ -26,5 +28,15 @@ namespace MonkeyKick.Managers
                 if (t.Equals(typeof(GameStates))) gameState = value;
             }
         }
+
+        public bool InOverworld() => GameState == GameStates.Overworld;
+        public bool InBattle() => GameState == GameStates.Battle;
+
+        public void InitiateBattle()
+        {
+            GameState = GameStates.Battle;
+        }
+
+        #endregion
     }
 }

@@ -6,10 +6,11 @@ using MonkeyKick.Managers;
 
 namespace MonkeyKick.PhysicalObjects.Characters
 {
-    public class CharacterMovement : MonoBehaviour
+    public abstract class CharacterMovement : MonoBehaviour
     {
-        [Header("Store the Game Manager for the Game State")]
         public GameManager GameManager;
+
+        private CharacterBattle _battle;
 
         #region PHYSICS
 
@@ -27,12 +28,34 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         public virtual void Awake()
         {
-            _physics = GetComponent<IPhysics>();
+            if (GameManager.InOverworld())
+            {
+                _physics = GetComponent<IPhysics>();
+                _battle = GetComponent<CharacterBattle>();
+            }
+        }
+
+        public virtual void Update()
+        {
+            if (!GameManager.InOverworld())
+            {
+                if (GameManager.InBattle()) _battle.enabled = true;
+
+                this.enabled = false;
+            }
         }
 
         public virtual void FixedUpdate()
         {
-            _physics?.ObeyGravity();
+            if (GameManager.InOverworld())
+            {
+                _physics?.ObeyGravity();
+            }
+        }
+
+        public virtual void OnEnable()
+        {
+            if (!GameManager.InOverworld()) this.enabled = false;
         }
 
         #endregion
