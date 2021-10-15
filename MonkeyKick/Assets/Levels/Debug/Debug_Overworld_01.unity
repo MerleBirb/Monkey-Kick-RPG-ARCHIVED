@@ -846,10 +846,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Placeholder Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 560959374942471581, guid: a7cd3189299d49e4cadc2d192442788a, type: 3}
-      propertyPath: direction
-      value: 
-      objectReference: {fileID: 963194228}
     - target: {fileID: 941248391278279463, guid: a7cd3189299d49e4cadc2d192442788a, type: 3}
       propertyPath: direction
       value: 

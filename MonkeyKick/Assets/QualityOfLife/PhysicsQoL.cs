@@ -7,7 +7,9 @@ namespace MonkeyKick.QualityOfLife
 {
     public static class PhysicsQoL
     {
-		public static void ClampAngle(ref Vector3 angle)
+        #region ANGLES
+
+        public static void ClampAngle(ref Vector3 angle)
 		{
 			if (angle.x < -180) angle.x += 360;
 			else if (angle.x > 180) angle.x -= 360;
@@ -29,9 +31,11 @@ namespace MonkeyKick.QualityOfLife
 			return angle;
 		}
 
-        #region
+        #endregion
 
-		public static Vector3 LinearMove(Vector3 startPos, Vector3 endPos, float time)
+        #region LINEAR
+
+        public static Vector3 LinearMove(Vector3 startPos, Vector3 endPos, float time)
         {
 			Vector3 returnPos = new Vector3(endPos.x, startPos.y, endPos.z);
 			return (returnPos - startPos) / time;
@@ -69,6 +73,5 @@ namespace MonkeyKick.QualityOfLife
         }
 
         #endregion
-
     }
 }

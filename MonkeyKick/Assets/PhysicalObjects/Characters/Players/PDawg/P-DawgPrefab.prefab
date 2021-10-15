@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 11400000, guid: 47d4b28d46bdafd47a8ee10561f4691a, type: 2}
+  _battlePos: {x: -2, y: 0}
 --- !u!114 &2620644519227634204
 MonoBehaviour:
   m_ObjectHideFlags: 0
