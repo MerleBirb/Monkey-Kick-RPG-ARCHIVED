@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4907805335081777099}
   - component: {fileID: 4907805335081776948}
   - component: {fileID: 4907805335081776949}
-  - component: {fileID: 4907805335081776950}
   - component: {fileID: 4907805335081776951}
   m_Layer: 6
   m_Name: CharacterPrefab
@@ -65,19 +64,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
---- !u!114 &4907805335081776950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4907805335081776944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2329512573be194499357b40dc3f636e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: {fileID: 0}
 --- !u!114 &4907805335081776951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fdd3af061c4a54c8adb28169fac75e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useAnimations: 1
   CamDirection: {fileID: 0}
 --- !u!1001 &4907805336072914702
 PrefabInstance:

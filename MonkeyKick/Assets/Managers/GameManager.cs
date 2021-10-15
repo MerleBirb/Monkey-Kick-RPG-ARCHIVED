@@ -29,9 +29,6 @@ namespace MonkeyKick.Managers
             }
         }
 
-        public bool InOverworld() => GameState == GameStates.Overworld;
-        public bool InBattle() => GameState == GameStates.Battle;
-
         public void InitiateBattle()
         {
             GameState = GameStates.Battle;

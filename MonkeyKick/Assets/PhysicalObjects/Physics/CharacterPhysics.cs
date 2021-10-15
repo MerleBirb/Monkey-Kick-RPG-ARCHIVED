@@ -24,10 +24,10 @@ namespace MonkeyKick.PhysicalObjects
         private Vector3 _currentGravity; // new gravity
         private Vector3 _groundNormal; // normal of whatever is grounding the character
 
-        private int _stepsSinceLastGrounded = 0;
-        private int _stepsSinceLastAerial = 0;
-        const int _stepMin = 0;
-        const int _stepMax = 10;
+        // private int _stepsSinceLastGrounded = 0;
+        // private int _stepsSinceLastAerial = 0;
+        // const int _stepMin = 0;
+        // const int _stepMax = 10;
 
         public void Movement(Vector2 movementInput, float currentSpeed)
         {

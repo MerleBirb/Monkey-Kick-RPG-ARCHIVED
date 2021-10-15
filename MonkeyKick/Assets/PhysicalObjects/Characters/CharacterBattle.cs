@@ -8,30 +8,19 @@ namespace MonkeyKick.PhysicalObjects.Characters
 {
     public abstract class CharacterBattle : MonoBehaviour
     {
-        public GameManager GameManager;
+        [SerializeField] protected GameManager gameManager;
 
-        private CharacterMovement _movement;
+        private ManageCharacterState _state;
 
         #region UNITY METHODS
 
         public virtual void Awake()
         {
-            _movement = GetComponent<CharacterMovement>();
-        }
-
-        public virtual void Update()
-        {
-            if (!GameManager.InBattle())
+            if (gameManager.GameState == GameStates.Battle)
             {
-                if (GameManager.InOverworld()) _movement.enabled = true;
-
-                this.enabled = false;
+                
             }
-        }
-
-        public virtual void OnEnable()
-        {
-            if (!GameManager.InBattle()) this.enabled = false;
+            else this.enabled = false;
         }
 
         #endregion

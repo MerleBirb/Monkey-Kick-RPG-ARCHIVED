@@ -30,53 +30,42 @@ namespace MonkeyKick.PhysicalObjects.Characters
         {
             base.Awake();
 
-            if (GameManager.InOverworld())
-            {
-                // create a new instance of controls
-                InputSystem.pollingFrequency = 180;
-                _controls = new PlayerControls();
+            // create a new instance of controls
+            InputSystem.pollingFrequency = 180;
+            _controls = new PlayerControls();
 
-                // set controls
-                _move = _controls.Overworld.Move;
-                _jump = _controls.Overworld.Jump;
-                _move.performed += ctx => _movement = ctx.ReadValue<Vector2>();
-            }
+            // set controls
+            _move = _controls.Overworld.Move;
+            _jump = _controls.Overworld.Jump;
+            _move.performed += ctx => _movement = ctx.ReadValue<Vector2>();
         }
 
-        public override void Update()
+        private void Update()
         {
-            base.Update();
-
-            if (GameManager.InOverworld())
-            {
-                if (_controls != null) CheckInput();
-            }           
+            CheckInput();
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
-            if (GameManager.InOverworld())
-            {
-                if (_physics != null) Movement();
-            }
+            Movement();
         }
 
         private void OnTriggerEnter(Collider col)
         {
             // running into an enemy to start battle
-            if (GameManager.InOverworld() && col.CompareTag(ENEMY_TAG))
+            if (col.CompareTag(ENEMY_TAG))
             {
                 _physics?.ResetMovement(); // zero current velocity
-                GameManager.InitiateBattle();
+                InvokeBattle(); // enter the player into battle
+                col.GetComponent<CharacterMovement>().InvokeBattle(); // enter the enemy into battle
+                gameManager.InitiateBattle();
             }
         }
 
-        public override void OnEnable()
+        private void OnEnable()
         {
-            base.OnEnable();
-
             _controls?.Overworld.Enable();
         }
 
@@ -91,6 +80,8 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         private void CheckInput()
         {
+            if (_controls == null) return;
+
             _hasPressedJump = _jump.triggered;
 
             PressedJump();
@@ -98,6 +89,8 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         private void Movement()
         {
+            if (_physics == null) return;
+
             // normalize the movement input
             _movement.Normalize();
             _isMoving = Mathf.Abs(_movement.x) > 0f || Mathf.Abs(_movement.y) > 0f;

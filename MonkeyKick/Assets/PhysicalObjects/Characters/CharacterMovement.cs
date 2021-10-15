@@ -8,9 +8,9 @@ namespace MonkeyKick.PhysicalObjects.Characters
 {
     public abstract class CharacterMovement : MonoBehaviour
     {
-        public GameManager GameManager;
+        [SerializeField] protected GameManager gameManager;
 
-        private CharacterBattle _battle;
+        private ManageCharacterState _state;
 
         #region PHYSICS
 
@@ -28,34 +28,37 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         public virtual void Awake()
         {
-            if (GameManager.InOverworld())
+            if (gameManager.GameState == GameStates.Overworld)
             {
                 _physics = GetComponent<IPhysics>();
-                _battle = GetComponent<CharacterBattle>();
             }
-        }
-
-        public virtual void Update()
-        {
-            if (!GameManager.InOverworld())
-            {
-                if (GameManager.InBattle()) _battle.enabled = true;
-
-                this.enabled = false;
-            }
+            else this.enabled = false;
         }
 
         public virtual void FixedUpdate()
         {
-            if (GameManager.InOverworld())
-            {
-                _physics?.ObeyGravity();
-            }
+            _physics?.ObeyGravity();
         }
 
-        public virtual void OnEnable()
+        #endregion
+
+        #region METHODS
+
+        public enum CharacterTypes
         {
-            if (!GameManager.InOverworld()) this.enabled = false;
+            Player,
+            Enemy
+        }
+
+        // Character interaction events
+
+        // enemy
+        public delegate void BattleTrigger();
+        public event BattleTrigger RanIntoBattlePartner;
+
+        public virtual void InvokeBattle()
+        {
+            RanIntoBattlePartner?.Invoke();
         }
 
         #endregion
