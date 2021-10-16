@@ -58,11 +58,11 @@ namespace MonkeyKick.Cameras
                     }
                 case GameStates.Battle:
                     {
-                        Quaternion overworldCamRot = _overworldCamObject.transform.rotation;
+                        _overworldCamObject.SetActive(false);
                         Vector3 overworldCamPos = _overworldCamObject.transform.position;
+
                         _battleCamObject.transform.position = new Vector3(overworldCamPos.x + 0.25f, overworldCamPos.y, overworldCamPos.z);
                         _battleCamObject.SetActive(true);
-                        _overworldCamObject.SetActive(false);
 
                         break;
                     }

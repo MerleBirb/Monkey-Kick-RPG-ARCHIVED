@@ -859,6 +859,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3914702989409951125, guid: 9c2b97edf685eec419abe891bb35cc8f, type: 3}
+      propertyPath: m_DefaultBlend.m_Style
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4760218422495134566, guid: 9c2b97edf685eec419abe891bb35cc8f, type: 3}
       propertyPath: m_Name
       value: Camera System
@@ -871,6 +875,22 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 936362227}
+    - target: {fileID: 6068726956829604270, guid: 9c2b97edf685eec419abe891bb35cc8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000023504354
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068726956829604270, guid: 9c2b97edf685eec419abe891bb35cc8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00000000629797
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068726957767285218, guid: 9c2b97edf685eec419abe891bb35cc8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000023504354
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068726957767285218, guid: 9c2b97edf685eec419abe891bb35cc8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00000000629797
+      objectReference: {fileID: 0}
     - target: {fileID: 9053228104467544640, guid: 9c2b97edf685eec419abe891bb35cc8f, type: 3}
       propertyPath: m_RootOrder
       value: 0

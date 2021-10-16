@@ -10,6 +10,7 @@ namespace MonkeyKick.PhysicalObjects
         float GetMoveSpeed();
         float GetJumpHeight();
         float GetHeight();
+        Rigidbody GetRigidbody();
         void Movement(Vector2 movementInput, float currentSpeed);
         void Movement(Vector2 movementInput, float currentSpeed, Transform faceDirection);
         void ResetMovement();

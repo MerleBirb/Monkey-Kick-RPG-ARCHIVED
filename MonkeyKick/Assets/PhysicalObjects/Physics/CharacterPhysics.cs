@@ -10,12 +10,13 @@ namespace MonkeyKick.PhysicalObjects
     {
         [SerializeField] private float moveSpeed = 1;
         [SerializeField] private float jumpHeight = 5;
+        [SerializeField] private Rigidbody rb;
 
         public float GetMoveSpeed() => moveSpeed;
         public float GetJumpHeight() => jumpHeight;
         public float GetHeight() => col.height;
+        public Rigidbody GetRigidbody() => rb;
 
-        [SerializeField] private Rigidbody rb;
         [SerializeField] private CapsuleCollider col;
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private float maxGroundedAngle = 60f; // for slope angles
@@ -82,7 +83,5 @@ namespace MonkeyKick.PhysicalObjects
 
             rb.AddForce(_currentGravity, ForceMode.Acceleration);
         }
-
-        
     }
 }

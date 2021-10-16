@@ -66,10 +66,9 @@ namespace MonkeyKick.QualityOfLife
 			return new ParabolaData(velocityXZ + velocityY * -Mathf.Sign(gravity), time); // return new ParabolaData using data
 		}
 
-		public static void ParabolaJump(ParabolaData parabola, Rigidbody jumperRb, Rigidbody targetRb)
+		public static void ParabolaMove(ParabolaData parabola, Rigidbody jumperRb)
         {
 			jumperRb.velocity = parabola.InitialVelocity;
-			targetRb.isKinematic = true;
         }
 
         #endregion

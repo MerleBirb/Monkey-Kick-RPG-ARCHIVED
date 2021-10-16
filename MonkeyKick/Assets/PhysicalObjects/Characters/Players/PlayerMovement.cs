@@ -56,15 +56,14 @@ namespace MonkeyKick.PhysicalObjects.Characters
             // running into an enemy to start battle
             if (col.CompareTag(TagsQoL.ENEMY_TAG))
             {
-                CharacterMovement enemy = col.GetComponent<CharacterMovement>();
+                CharacterMovement enemy = col.GetComponent<CharacterMovement>(); // save enemy movement
 
                 _physics?.ResetMovement(); // zero current velocity
+                gameManager.InitiateBattle();
 
                 // battle start on both the player and the enemy
                 InvokeOnBattleStart();
                 enemy.InvokeOnBattleStart();
-
-                gameManager.InitiateBattle();
             }
         }
 

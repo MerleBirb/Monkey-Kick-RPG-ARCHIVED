@@ -129,6 +129,10 @@ PrefabInstance:
       propertyPath: m_DefaultBlend.m_Time
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 1081999116, guid: d7b186dbd268c8444b9cfe9664c93117, type: 3}
+      propertyPath: m_DefaultBlend.m_Style
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3238952895925666547, guid: d7b186dbd268c8444b9cfe9664c93117, type: 3}
       propertyPath: gameManager
       value: 
