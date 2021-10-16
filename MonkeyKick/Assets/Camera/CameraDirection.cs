@@ -2,7 +2,6 @@
 // 10/6/21
 
 using UnityEngine;
-using MonkeyKick.Managers;
 
 namespace MonkeyKick.Cameras
 {

@@ -32,7 +32,15 @@ namespace MonkeyKick.Managers
         public void InitiateBattle()
         {
             GameState = GameStates.Battle;
+            OnBattleStart.Invoke();
         }
+
+        #endregion
+
+        #region GAME EVENTS
+
+        public delegate void BattleTrigger();
+        public event BattleTrigger OnBattleStart;
 
         #endregion
     }

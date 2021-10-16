@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using MonkeyKick.Controls;
 using MonkeyKick.QualityOfLife;
+using Cinemachine;
 
 namespace MonkeyKick.Cameras
 {
@@ -13,6 +14,7 @@ namespace MonkeyKick.Cameras
         #region CONTROLS
 
         private CameraControls _controls;
+        private CinemachineVirtualCamera _cinemachine;
         private InputAction _orbitX;
         private float _orbitCameraX;
 
@@ -91,7 +93,6 @@ namespace MonkeyKick.Cameras
                 _oldRotation = currentRotation;
 
                 transform.position = Target.position - currentRotation * Vector3.forward * Distance;
-                transform.LookAt(Target.position, Vector3.up);
             }
         }
 

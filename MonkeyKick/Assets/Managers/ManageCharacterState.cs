@@ -25,7 +25,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         private void Start()
         {
-            _movement.RanIntoBattlePartner += EnterBattle;
+            _movement.OnBattleStart += EnterBattle;
         }
 
         #endregion

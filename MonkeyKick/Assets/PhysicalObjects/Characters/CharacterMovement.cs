@@ -10,8 +10,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
     {
         [SerializeField] protected GameManager gameManager;
 
-        private ManageCharacterState _state;
-
         #region PHYSICS
 
         protected IPhysics _physics;
@@ -50,15 +48,16 @@ namespace MonkeyKick.PhysicalObjects.Characters
             Enemy
         }
 
-        // Character interaction events
+        #endregion
 
-        // enemy
+        #region EVENTS
+
+        // Battle event
         public delegate void BattleTrigger();
-        public event BattleTrigger RanIntoBattlePartner;
-
-        public virtual void InvokeBattle()
+        public event BattleTrigger OnBattleStart;
+        public void InvokeOnBattleStart()
         {
-            RanIntoBattlePartner?.Invoke();
+            OnBattleStart?.Invoke();
         }
 
         #endregion

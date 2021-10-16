@@ -3,7 +3,7 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
-using MonkeyKick.Managers;
+using MonkeyKick.QualityOfLife;
 using MonkeyKick.Controls;
 
 namespace MonkeyKick.PhysicalObjects.Characters
@@ -22,7 +22,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         [Header("If this player is the leader of the Party, enable this.")]
         public bool isLeader = false;
-        const string ENEMY_TAG = "Enemy";
 
         #region UNITY METHODS
 
@@ -55,11 +54,16 @@ namespace MonkeyKick.PhysicalObjects.Characters
         private void OnTriggerEnter(Collider col)
         {
             // running into an enemy to start battle
-            if (col.CompareTag(ENEMY_TAG))
+            if (col.CompareTag(TagsQoL.ENEMY_TAG))
             {
+                CharacterMovement enemy = col.GetComponent<CharacterMovement>();
+
                 _physics?.ResetMovement(); // zero current velocity
-                InvokeBattle(); // enter the player into battle
-                col.GetComponent<CharacterMovement>().InvokeBattle(); // enter the enemy into battle
+
+                // battle start on both the player and the enemy
+                InvokeOnBattleStart();
+                enemy.InvokeOnBattleStart();
+
                 gameManager.InitiateBattle();
             }
         }
