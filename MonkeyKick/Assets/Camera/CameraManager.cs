@@ -61,7 +61,31 @@ namespace MonkeyKick.Cameras
                         _overworldCamObject.SetActive(false);
                         Vector3 overworldCamPos = _overworldCamObject.transform.position;
 
-                        _battleCamObject.transform.position = new Vector3(overworldCamPos.x + 0.25f, overworldCamPos.y, overworldCamPos.z);
+                        _battleCamObject.transform.position = new Vector3(overworldCamPos.x, overworldCamPos.y, overworldCamPos.z);
+                        _battleCamObject.SetActive(true);
+
+                        break;
+                    }
+            }
+        }
+
+        private void InitiateCameras(Vector3 camPos)
+        {
+            switch (gameManager.GameState)
+            {
+                case GameStates.Overworld:
+                    {
+                        _overworldCamObject.SetActive(true);
+                        _battleCamObject.SetActive(false);
+
+                        break;
+                    }
+                case GameStates.Battle:
+                    {
+                        _overworldCamObject.SetActive(false);
+                        Vector3 overworldCamPos = _overworldCamObject.transform.position;
+
+                        _battleCamObject.transform.position = new Vector3(camPos.x, camPos.y, camPos.z);
                         _battleCamObject.SetActive(true);
 
                         break;

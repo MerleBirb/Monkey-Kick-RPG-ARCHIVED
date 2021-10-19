@@ -29,17 +29,17 @@ namespace MonkeyKick.Managers
             }
         }
 
-        public void InitiateBattle()
+        public void InitiateBattle(Vector3 camPos)
         {
             GameState = GameStates.Battle;
-            OnBattleStart.Invoke();
+            OnBattleStart.Invoke(camPos);
         }
 
         #endregion
 
         #region GAME EVENTS
 
-        public delegate void BattleTrigger();
+        public delegate void BattleTrigger(Vector3 camPos);
         public event BattleTrigger OnBattleStart;
 
         #endregion

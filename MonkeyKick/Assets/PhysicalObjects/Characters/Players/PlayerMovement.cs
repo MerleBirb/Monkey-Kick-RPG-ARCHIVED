@@ -57,9 +57,10 @@ namespace MonkeyKick.PhysicalObjects.Characters
             if (col.CompareTag(TagsQoL.ENEMY_TAG))
             {
                 CharacterMovement enemy = col.GetComponent<CharacterMovement>(); // save enemy movement
+                Vector3 betweenPos = new Vector3(col.transform.position.x - 0.25f, col.transform.position.y + 4.5f, col.transform.position.z - 7.5f);
 
                 _physics?.ResetMovement(); // zero current velocity
-                gameManager.InitiateBattle();
+                gameManager.InitiateBattle(betweenPos);
 
                 // battle start on both the player and the enemy
                 InvokeOnBattleStart();
