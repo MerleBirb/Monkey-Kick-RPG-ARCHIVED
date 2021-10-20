@@ -127,6 +127,44 @@ namespace MonkeyKick.Controls
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Battle"",
+            ""id"": ""d0d7e3c6-c4a5-4b42-94e4-030f07f64d53"",
+            ""actions"": [
+                {
+                    ""name"": ""South"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef514e60-a509-4943-bac0-477b005e5c36"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cb918d42-215d-4748-bdf8-935375b740bc"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""South"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d106db1f-9b8a-4407-8319-d042f0940ed5"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""South"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -163,6 +201,9 @@ namespace MonkeyKick.Controls
             m_Overworld = asset.FindActionMap("Overworld", throwIfNotFound: true);
             m_Overworld_Move = m_Overworld.FindAction("Move", throwIfNotFound: true);
             m_Overworld_Jump = m_Overworld.FindAction("Jump", throwIfNotFound: true);
+            // Battle
+            m_Battle = asset.FindActionMap("Battle", throwIfNotFound: true);
+            m_Battle_South = m_Battle.FindAction("South", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -249,6 +290,39 @@ namespace MonkeyKick.Controls
             }
         }
         public OverworldActions @Overworld => new OverworldActions(this);
+
+        // Battle
+        private readonly InputActionMap m_Battle;
+        private IBattleActions m_BattleActionsCallbackInterface;
+        private readonly InputAction m_Battle_South;
+        public struct BattleActions
+        {
+            private @PlayerControls m_Wrapper;
+            public BattleActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+            public InputAction @South => m_Wrapper.m_Battle_South;
+            public InputActionMap Get() { return m_Wrapper.m_Battle; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(BattleActions set) { return set.Get(); }
+            public void SetCallbacks(IBattleActions instance)
+            {
+                if (m_Wrapper.m_BattleActionsCallbackInterface != null)
+                {
+                    @South.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
+                    @South.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
+                    @South.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
+                }
+                m_Wrapper.m_BattleActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @South.started += instance.OnSouth;
+                    @South.performed += instance.OnSouth;
+                    @South.canceled += instance.OnSouth;
+                }
+            }
+        }
+        public BattleActions @Battle => new BattleActions(this);
         private int m_KeyboardSchemeIndex = -1;
         public InputControlScheme KeyboardScheme
         {
@@ -271,6 +345,10 @@ namespace MonkeyKick.Controls
         {
             void OnMove(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+        }
+        public interface IBattleActions
+        {
+            void OnSouth(InputAction.CallbackContext context);
         }
     }
 }

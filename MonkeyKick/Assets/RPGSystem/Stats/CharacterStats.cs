@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-namespace MonkeyKick.RPGSystem.Stats
+namespace MonkeyKick.RPGSystem
 {
     [CreateAssetMenu(fileName = "Stats", menuName = "RPGSystem/Stats/CharacterStats", order = 1)]
     public class CharacterStats : ScriptableObject

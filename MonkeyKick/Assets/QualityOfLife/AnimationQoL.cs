@@ -18,5 +18,20 @@ namespace MonkeyKick.QualityOfLife
 
             anim.Play(currentAnim);
         }
+
+        public static void ChangeAnimation(Animator anim, string currentAnim, string newAnim, bool flip)
+        {
+            // if flip, flip the sprite horizontally
+            if (flip) anim.GetComponent<SpriteRenderer>().flipX = flip;
+
+            // converts strings to hashes for faster comparison
+            int currentHash = Animator.StringToHash(currentAnim);
+            int newHash = Animator.StringToHash(newAnim);
+
+            if (currentHash.Equals(newHash)) return; // 'Equals()' faster than '=='
+            currentAnim = newAnim;
+
+            anim.Play(currentAnim);
+        }
     }
 }

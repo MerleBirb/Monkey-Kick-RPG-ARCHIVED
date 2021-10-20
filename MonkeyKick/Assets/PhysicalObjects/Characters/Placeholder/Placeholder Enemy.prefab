@@ -75,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1387700669465947771, guid: c7e99a3c9d75a2f47aa694908a0b73c6, type: 3}
-  m_Color: {r: 1, g: 0.2028302, b: 0.2028302, a: 1}
+  m_Sprite: {fileID: -3775748125889451718, guid: c7e99a3c9d75a2f47aa694908a0b73c6, type: 3}
+  m_Color: {r: 1, g: 0.759434, b: 0.759434, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 560959374057213053}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 68136ff75cd2cbf42809e44267d49c33, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8f93bdfe87983bb46b941362cdc2150c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fdd3af061c4a54c8adb28169fac75e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useAnimations: 0
+  gameManager: {fileID: 11400000, guid: 47d4b28d46bdafd47a8ee10561f4691a, type: 2}
   CamDirection: {fileID: 0}
 --- !u!1 &560959374942471579
 GameObject:
@@ -239,6 +239,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 11400000, guid: 47d4b28d46bdafd47a8ee10561f4691a, type: 2}
+  Turn:
+    character: {fileID: 0}
+    speed: 0
+    isTurn: 0
+    wasTurnPrev: 0
+  Stats: {fileID: 11400000, guid: f8df83176c7d75749930c2d480684a68, type: 2}
   _startingBattlePos: {x: 2, y: 0}
 --- !u!114 &560959374942471580
 MonoBehaviour:

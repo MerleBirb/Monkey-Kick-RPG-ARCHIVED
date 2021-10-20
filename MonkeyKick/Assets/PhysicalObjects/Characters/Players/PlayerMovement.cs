@@ -1,6 +1,7 @@
 // Merle Roji
 // 10/5/21
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MonkeyKick.QualityOfLife;
@@ -56,15 +57,21 @@ namespace MonkeyKick.PhysicalObjects.Characters
             // running into an enemy to start battle
             if (col.CompareTag(TagsQoL.ENEMY_TAG))
             {
-                CharacterMovement enemy = col.GetComponent<CharacterMovement>(); // save enemy movement
-                Vector3 betweenPos = new Vector3(col.transform.position.x - 0.25f, col.transform.position.y + 4.5f, col.transform.position.z - 7.5f);
+                CharacterMovement enemyMove = col.GetComponent<CharacterMovement>(); // save enemy movement
+                CharacterBattle enemy = col.GetComponent<CharacterBattle>(); // save enemy battle
+                Vector3 betweenPos = new Vector3(col.transform.position.x - 0.25f, col.transform.position.y + 5f, col.transform.position.z - 8f);
+
+                // make a new list of all combatants
+                List<CharacterBattle> fighters = new List<CharacterBattle>();
+                fighters.Add(this.GetComponent<CharacterBattle>());
+                fighters.Add(enemy);
 
                 _physics?.ResetMovement(); // zero current velocity
-                gameManager.InitiateBattle(betweenPos);
+                gameManager.InitiateBattle(betweenPos, fighters);
 
                 // battle start on both the player and the enemy
                 InvokeOnBattleStart();
-                enemy.InvokeOnBattleStart();
+                enemyMove.InvokeOnBattleStart();
             }
         }
 

@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine;
 using MonkeyKick.Managers;
 using MonkeyKick.QualityOfLife;
+using MonkeyKick.RPGSystem;
 
 namespace MonkeyKick.PhysicalObjects.Characters
 {
@@ -16,7 +17,15 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
     public abstract class CharacterBattle : MonoBehaviour
     {
+        #region RPG BATTLE SYSTEM
+
         [SerializeField] protected GameManager gameManager;
+        [HideInInspector] public TurnClass Turn;
+        public CharacterStats Stats;
+        protected TurnSystem _turnSystem;
+        protected BattleState _battleState = BattleState.EnterBattle;
+
+        #endregion
 
         #region PHYSICS
 
@@ -29,14 +38,20 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         #endregion
 
-        protected BattleState _battleState = BattleState.EnterBattle;
+        #region ANIMATIONS
+
+        protected Animator _anim;
+        protected string _currentState = "";
+        protected const string BATTLE_STANCE = "BattleStance";
+
+        #endregion
 
         #region UNITY METHODS
 
         private void Awake()
         {
             _physics = GetComponent<CharacterPhysics>();
-            _battleState = BattleState.EnterBattle;
+            _anim = GetComponentInChildren<Animator>();
             this.enabled = false;
         }
 
@@ -53,9 +68,15 @@ namespace MonkeyKick.PhysicalObjects.Characters
         {
             // set up battle position
             StartCoroutine(JumpIntoBattlePosition());
-            _battlePos.x = transform.position.x;
-            _battlePos.y = transform.position.z;
-            _battleState = BattleState.Wait;
+
+            // if turn system not injected
+            if (!_turnSystem) _turnSystem = FindObjectOfType<TurnSystem>();
+
+            // get dependencies for turn from turn order
+            foreach(TurnClass tc in _turnSystem.TurnOrder)
+            {
+                if (tc.character.name == gameObject.name) Turn = tc;
+            }
         }
 
         private IEnumerator JumpIntoBattlePosition()
@@ -69,6 +90,11 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
             // stop movement after jump
             _physics?.ResetMovement();
+
+            // save battle position for returning from skills and counterattacks
+            _battlePos.x = transform.position.x;
+            _battlePos.y = transform.position.z;
+
             yield return null;
         }
 

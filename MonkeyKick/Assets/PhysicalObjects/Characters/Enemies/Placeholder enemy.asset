@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0ae13caaa59da4faa42e5d53172a17, type: 3}
   m_Name: Placeholder enemy
   m_EditorClassIdentifier: 
-  CharacterName: Enemy Guy
+  CharacterName: Enemy
   Level: 1
-  Description: Description placeholder
-  MaxHP: 20
-  CurrentHP: 20
+  Description: Description
+  MaxHP: 15
+  CurrentHP: 15
   MaxKi: 10
   CurrentKi: 10
-  Muscle: 15
-  Toughness: 15
-  Smarts: 15
-  Willpower: 15
-  Speed: 15
-  Swag: 15
+  Muscle: 8
+  Toughness: 8
+  Smarts: 8
+  Willpower: 8
+  Speed: 8
+  Swag: 8
