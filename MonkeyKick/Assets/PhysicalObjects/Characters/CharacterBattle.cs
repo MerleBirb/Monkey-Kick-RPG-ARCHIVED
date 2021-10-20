@@ -23,13 +23,14 @@ namespace MonkeyKick.PhysicalObjects.Characters
         [HideInInspector] public TurnClass Turn;
         public CharacterStats Stats;
         protected TurnSystem _turnSystem;
+        protected bool _isTurn;
         protected BattleState _battleState = BattleState.EnterBattle;
 
         #endregion
 
         #region PHYSICS
 
-        private IPhysics _physics;
+        protected IPhysics _physics;
 
         [Header("The position the character goes when entering combat")]
         [SerializeField] private Vector2 _startingBattlePos;
@@ -48,11 +49,16 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         #region UNITY METHODS
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _physics = GetComponent<CharacterPhysics>();
             _anim = GetComponentInChildren<Animator>();
             this.enabled = false;
+        }
+
+        protected virtual void Update()
+        {
+            _isTurn = Turn.isTurn;
         }
 
         private void FixedUpdate()

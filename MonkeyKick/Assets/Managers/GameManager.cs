@@ -31,7 +31,7 @@ namespace MonkeyKick.Managers
             }
         }
 
-        private List<CharacterBattle> _currentFighters; // fighters in the turn order
+        private List<CharacterBattle> _currentFighters = new List<CharacterBattle>(); // fighters in the turn order
         public List<CharacterBattle> CurrentFighters { get { return _currentFighters; } }
 
         public void InitiateBattle(Vector3 camPos, List<CharacterBattle> newFighters)

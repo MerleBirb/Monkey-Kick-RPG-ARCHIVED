@@ -11,17 +11,16 @@ namespace MonkeyKick.PhysicalObjects.Characters
     {
         #region UNITY METHODS
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
+
             if (gameManager.GameState == GameStates.Battle)
             {
                 switch (_battleState)
                 {
-                    case BattleState.EnterBattle:
-                        {
-                            EnterBattle();
-                            break;
-                        }
+                    case BattleState.EnterBattle: EnterBattle(); break;
+                    case BattleState.Wait: Wait(); break;
                 }
 
             } 
@@ -36,6 +35,17 @@ namespace MonkeyKick.PhysicalObjects.Characters
             base.EnterBattle();
             AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE, true);
             _battleState = BattleState.Wait;
+        }
+
+        private void Wait()
+        {
+            if (_isTurn)
+            {
+                _physics.GetRigidbody().AddForce(Vector3.up * 300f);
+                _isTurn = false;
+                Turn.isTurn = _isTurn;
+                Turn.wasTurnPrev = true;
+            }
         }
 
         #endregion
