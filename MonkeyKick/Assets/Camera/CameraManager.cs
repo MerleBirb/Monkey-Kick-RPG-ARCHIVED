@@ -69,7 +69,7 @@ namespace MonkeyKick.Cameras
             }
         }
 
-        private void InitiateCameras(Vector3 camPos)
+        private void InitiateCameras(in Vector3 camPos)
         {
             switch (gameManager.GameState)
             {

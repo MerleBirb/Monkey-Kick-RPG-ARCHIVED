@@ -51,7 +51,7 @@ namespace MonkeyKick.Managers
 
         #region GAME EVENTS
 
-        public delegate void BattleTrigger(Vector3 camPos);
+        public delegate void BattleTrigger(in Vector3 camPos);
         public event BattleTrigger OnBattleStart;
 
         #endregion

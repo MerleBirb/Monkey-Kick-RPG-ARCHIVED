@@ -10,7 +10,7 @@ namespace MonkeyKick.QualityOfLife
         public readonly Vector3 InitialVelocity;
         public readonly float TimeToTarget;
 
-        public ParabolaData(Vector3 initialVelocity, float timeToTarget)
+        public ParabolaData(in Vector3 initialVelocity, in float timeToTarget)
         {
             this.InitialVelocity = initialVelocity;
             this.TimeToTarget = timeToTarget;

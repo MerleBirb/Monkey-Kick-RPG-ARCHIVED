@@ -22,7 +22,7 @@ namespace MonkeyKick.QualityOfLife
 		}
 
 		// AngleTo will return degrees (0-360) from one point ex. (x = 0, z = 0) to another point ex. (-x = 3, -z = 5)
-		public static float AngleTo(Vector2 from, Vector2 to)
+		public static float AngleTo(in Vector2 from, in Vector2 to)
 		{
 			Vector2 direction = to - from;
 			float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
@@ -35,13 +35,13 @@ namespace MonkeyKick.QualityOfLife
 
         #region LINEAR
 
-        public static Vector3 LinearMove(Vector3 startPos, Vector3 endPos, float time)
+        public static Vector3 LinearMove(in Vector3 startPos, in Vector3 endPos, in float time)
         {
 			Vector3 returnPos = new Vector3(endPos.x, startPos.y, endPos.z);
 			return (returnPos - startPos) / time;
         }
 
-		public static Vector3 LinearMove(Vector3 startPos, Vector3 endPos, float time, float xOffset)
+		public static Vector3 LinearMove(in Vector3 startPos, in Vector3 endPos, in float time, in float xOffset)
 		{
 			Vector3 returnPos = new Vector3(endPos.x + xOffset, startPos.y, endPos.z);
 			return (returnPos - startPos) / time;
@@ -51,7 +51,8 @@ namespace MonkeyKick.QualityOfLife
 
 		#region PARABOLAS
 
-		public static ParabolaData CalculateParabolaData(Vector3 startPos, Vector3 endPos, float jumpHeight, float targetHeight, float gravity)
+		public static ParabolaData CalculateParabolaData(in Vector3 startPos, in Vector3 endPos, in float jumpHeight,
+			in float targetHeight, in float gravity)
         {
 			Vector3 targetPos = new Vector3(endPos.x, endPos.y + targetHeight, endPos.z); // adjust the target position by the height of the target.
 
@@ -66,7 +67,7 @@ namespace MonkeyKick.QualityOfLife
 			return new ParabolaData(velocityXZ + velocityY * -Mathf.Sign(gravity), time); // return new ParabolaData using data
 		}
 
-		public static void ParabolaMove(ParabolaData parabola, Rigidbody jumperRb)
+		public static void ParabolaMove(in ParabolaData parabola, Rigidbody jumperRb)
         {
 			jumperRb.velocity = parabola.InitialVelocity;
         }

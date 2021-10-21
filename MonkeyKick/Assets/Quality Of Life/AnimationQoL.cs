@@ -7,19 +7,20 @@ namespace MonkeyKick.QualityOfLife
 {
     public static class AnimationQoL
     {
-        public static void ChangeAnimation(Animator anim, string currentAnim, string newAnim)
+        public static void ChangeAnimation(in Animator anim, string currentAnim, in string newAnim)
         {
             // converts strings to hashes for faster comparison
             int currentHash = Animator.StringToHash(currentAnim);
             int newHash = Animator.StringToHash(newAnim);
 
-            if (currentHash.Equals(newHash)) return; // 'Equals()' faster than '=='
+            if (currentHash == newHash) return;
             currentAnim = newAnim;
+            currentHash = newHash;
 
-            anim.Play(currentAnim);
+            anim.Play(currentHash);
         }
 
-        public static void ChangeAnimation(Animator anim, string currentAnim, string newAnim, bool flip)
+        public static void ChangeAnimation(in Animator anim, string currentAnim, in string newAnim, in bool flip)
         {
             // if flip, flip the sprite horizontally
             if (flip) anim.GetComponent<SpriteRenderer>().flipX = flip;
@@ -28,10 +29,11 @@ namespace MonkeyKick.QualityOfLife
             int currentHash = Animator.StringToHash(currentAnim);
             int newHash = Animator.StringToHash(newAnim);
 
-            if (currentHash.Equals(newHash)) return; // 'Equals()' faster than '=='
+            if (currentHash == newHash) return;
             currentAnim = newAnim;
+            currentHash = newHash;
 
-            anim.Play(currentAnim);
+            anim.Play(currentHash);
         }
     }
 }
