@@ -8,7 +8,7 @@ using MonkeyKick.QualityOfLife;
 
 namespace MonkeyKick.RPGSystem
 {
-    [CreateAssetMenu(fileName = "Test Player Attack", menuName = "Skills/Player Skills/Placeholder/Test Attack", order = 1)]
+    [CreateAssetMenu(fileName = "Test Attack", menuName = "RPGSystem/Skills/Player Skills/Placeholder/Test Attack", order = 1)]
     public class TestPlayerAttack : Skill
     {
         [SerializeField] private float timeItTakesToMoveToTarget; // cannot make this more literal
@@ -26,22 +26,25 @@ namespace MonkeyKick.RPGSystem
             Vector3 actorPos = actor.transform.position;
             Vector3 targetPos = new Vector3(target.transform.position.x + xOffsetFromTarget, 
                 actor.transform.position.y, target.transform.position.z);
-            Vector3 returnPos = new Vector3(actorPos.x, actorPos.y, targetPos.z); // line up the battle pos
-
-            // prepare the time it takes to move to the target as a WaitForSeconds
-            WaitForSeconds time = new WaitForSeconds(timeItTakesToMoveToTarget -= Time.fixedDeltaTime);
+            Vector3 returnPos = new Vector3(actor.BattlePos.x, actor.transform.position.y, actor.BattlePos.y);
 
             yield return null;
 
             // move to target
             actorRb.velocity = PhysicsQoL.LinearMove(actorPos, targetPos, timeItTakesToMoveToTarget, xOffsetFromTarget);
-            yield return time;
+            yield return new WaitForSeconds(timeItTakesToMoveToTarget - Time.fixedDeltaTime);
+            actorRb.velocity = Vector3.zero; // stop movement when target is reached
+            actorPos = actor.transform.position;
 
             yield return new WaitForSeconds(1.0f); // wait 1 second
 
             // move back to original position
-            actorRb.velocity = PhysicsQoL.LinearMove(actorPos, targetPos, timeItTakesToMoveToTarget, xOffsetFromTarget);
+            actorRb.velocity = PhysicsQoL.LinearMove(actorPos, returnPos, timeItTakesToMoveToTarget);
+            yield return new WaitForSeconds(timeItTakesToMoveToTarget - Time.fixedDeltaTime);
+            actorRb.velocity = Vector3.zero; // stop movement when original position is reached
 
+            yield return null;
+            actor.ResetAfterAction();
         }
 
         public override void Action(CharacterBattle actor, CharacterBattle target)

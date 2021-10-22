@@ -4,6 +4,7 @@
 using UnityEngine;
 using Cinemachine;
 using MonkeyKick.Managers;
+using MonkeyKick.UserInterface;
 
 namespace MonkeyKick.Cameras
 {
@@ -21,6 +22,13 @@ namespace MonkeyKick.Cameras
         [Header("Spawn when in the Battle State")]
         [SerializeField] private CinemachineVirtualCamera battleCamera;
         private GameObject _battleCamObject;
+
+        #endregion
+
+        #region UI
+
+        [Header("Spawn the Battle UI when battle starts")]
+        [SerializeField] private GameObject _battleUI;
 
         #endregion
 
@@ -63,6 +71,7 @@ namespace MonkeyKick.Cameras
 
                         _battleCamObject.transform.position = new Vector3(overworldCamPos.x, overworldCamPos.y, overworldCamPos.z);
                         _battleCamObject.SetActive(true);
+                        _battleUI.SetActive(true);
 
                         break;
                     }
@@ -87,6 +96,7 @@ namespace MonkeyKick.Cameras
 
                         _battleCamObject.transform.position = new Vector3(camPos.x, camPos.y, camPos.z);
                         _battleCamObject.SetActive(true);
+                        _battleUI.SetActive(true);
 
                         break;
                     }

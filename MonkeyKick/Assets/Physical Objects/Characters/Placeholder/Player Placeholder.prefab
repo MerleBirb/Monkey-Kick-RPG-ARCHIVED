@@ -232,7 +232,11 @@ MonoBehaviour:
     isTurn: 0
     wasTurnPrev: 0
   Stats: {fileID: 11400000, guid: 05c44a9e2c37ad94694277c190b3a686, type: 2}
-  _startingBattlePos: {x: -2, y: 0}
+  _startingBattlePos: {x: -3, y: 0}
+  menuChoice:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4727ded4f5257f7489b1aa0d76b8d6bc, type: 2}
 --- !u!114 &2620644519227634204
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -139,6 +139,14 @@ namespace MonkeyKick.Controls
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""d6f991b5-3aa5-4095-b655-4f07fc2f45b9"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -161,6 +169,72 @@ namespace MonkeyKick.Controls
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""South"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""b3ea482b-ac81-443f-814b-881206f759e4"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""8932a5a8-602b-467d-88ab-eb8994235001"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8e87233a-3b55-426d-a4f1-07682006f98e"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""295cfdb8-3909-43d4-985f-5280aa1b387e"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""87c557e0-6ed1-49a7-a2d7-69b7418a0c94"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6ba18ac-f275-4eee-a6bb-3418762ed1be"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -204,6 +278,7 @@ namespace MonkeyKick.Controls
             // Battle
             m_Battle = asset.FindActionMap("Battle", throwIfNotFound: true);
             m_Battle_South = m_Battle.FindAction("South", throwIfNotFound: true);
+            m_Battle_Move = m_Battle.FindAction("Move", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -295,11 +370,13 @@ namespace MonkeyKick.Controls
         private readonly InputActionMap m_Battle;
         private IBattleActions m_BattleActionsCallbackInterface;
         private readonly InputAction m_Battle_South;
+        private readonly InputAction m_Battle_Move;
         public struct BattleActions
         {
             private @PlayerControls m_Wrapper;
             public BattleActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @South => m_Wrapper.m_Battle_South;
+            public InputAction @Move => m_Wrapper.m_Battle_Move;
             public InputActionMap Get() { return m_Wrapper.m_Battle; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -312,6 +389,9 @@ namespace MonkeyKick.Controls
                     @South.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
                     @South.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
                     @South.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
+                    @Move.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnMove;
+                    @Move.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnMove;
+                    @Move.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnMove;
                 }
                 m_Wrapper.m_BattleActionsCallbackInterface = instance;
                 if (instance != null)
@@ -319,6 +399,9 @@ namespace MonkeyKick.Controls
                     @South.started += instance.OnSouth;
                     @South.performed += instance.OnSouth;
                     @South.canceled += instance.OnSouth;
+                    @Move.started += instance.OnMove;
+                    @Move.performed += instance.OnMove;
+                    @Move.canceled += instance.OnMove;
                 }
             }
         }
@@ -349,6 +432,7 @@ namespace MonkeyKick.Controls
         public interface IBattleActions
         {
             void OnSouth(InputAction.CallbackContext context);
+            void OnMove(InputAction.CallbackContext context);
         }
     }
 }

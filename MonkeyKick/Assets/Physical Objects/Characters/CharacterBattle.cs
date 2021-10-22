@@ -1,6 +1,7 @@
 // Merle Roji
 // 10/12/21
 
+using System;
 using System.Collections;
 using UnityEngine;
 using MonkeyKick.Managers;
@@ -9,10 +10,12 @@ using MonkeyKick.RPGSystem;
 
 namespace MonkeyKick.PhysicalObjects.Characters
 {
-    public enum BattleState
+    public enum BattleStates
     {
         EnterBattle,
-        Wait
+        Wait,
+        ChooseAction,
+        Action
     }
 
     public abstract class CharacterBattle : MonoBehaviour
@@ -24,7 +27,16 @@ namespace MonkeyKick.PhysicalObjects.Characters
         public CharacterStats Stats;
         protected TurnSystem _turnSystem;
         protected bool _isTurn;
-        protected BattleState _battleState = BattleState.EnterBattle;
+        protected BattleStates _battleState = BattleStates.EnterBattle;
+        public BattleStates BattleState
+        {
+            get { return _battleState; }
+            set
+            {
+                Type t = value.GetType(); // check if type is of BattleStates
+                if (t.Equals(typeof(BattleStates))) _battleState = value;
+            }
+        }
 
         #endregion
 
@@ -35,7 +47,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         [Header("The position the character goes when entering combat")]
         [SerializeField] private Vector2 _startingBattlePos;
         protected Vector2 _battlePos;
-        public Vector2 StartingBattlePos { get => _startingBattlePos; }
+        public Vector2 BattlePos { get => _battlePos; }
 
         #endregion
 
@@ -58,7 +70,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         protected virtual void Update()
         {
-            _isTurn = Turn.isTurn;
+            if (_isTurn != Turn.isTurn) { _isTurn = Turn.isTurn; }
         }
 
         private void FixedUpdate()
@@ -85,6 +97,11 @@ namespace MonkeyKick.PhysicalObjects.Characters
             }
         }
 
+        protected virtual void Wait()
+        {
+            if (_isTurn) _battleState = BattleStates.ChooseAction;
+        }
+
         private IEnumerator JumpIntoBattlePosition()
         {
             Vector3 landPos = transform.position + new Vector3(_startingBattlePos.x, 0f, _startingBattlePos.y);
@@ -97,11 +114,16 @@ namespace MonkeyKick.PhysicalObjects.Characters
             // stop movement after jump
             _physics?.ResetMovement();
 
-            // save battle position for returning from skills and counterattacks
-            _battlePos.x = transform.position.x;
-            _battlePos.y = transform.position.z;
-
             yield return null;
+        }
+
+        public void ResetAfterAction()
+        {
+            _isTurn = false;
+            Turn.isTurn = _isTurn;
+            Turn.wasTurnPrev = true;
+
+            if (!_isTurn) _battleState = BattleStates.Wait;
         }
 
         #endregion

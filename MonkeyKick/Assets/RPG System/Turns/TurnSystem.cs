@@ -13,7 +13,21 @@ namespace MonkeyKick.RPGSystem
     public class TurnSystem : MonoBehaviour
     {
         [SerializeField] private GameManager gameManager;
+
+        #region CHARACTER LISTS
+
+        const string PLAYER_TAG = "Player";
+        const string ENEMY_TAG = "Enemy";
         private List<CharacterBattle> _allCombatants = new List<CharacterBattle>();
+        private List<CharacterBattle> _playerParty = new List<CharacterBattle>();
+        private List<CharacterBattle> _enemyParty = new List<CharacterBattle>();
+        public List<CharacterBattle> PlayerParty { get {return _playerParty;} }
+        public List<CharacterBattle> EnemyParty { get {return _enemyParty;} }
+        private bool _allLoaded = false;
+
+        #endregion
+
+        public bool TurnSystemLoaded { get {return _allLoaded;} }
         [SerializeField] private List<TurnClass> _turnOrder = new List<TurnClass>(); // all characters in battle
         public List<TurnClass> TurnOrder { get {return _turnOrder; } }
 
@@ -47,7 +61,13 @@ namespace MonkeyKick.RPGSystem
                 _turnOrder.Add(_allCombatants[i].Turn);
                 _turnOrder[i].character = _allCombatants[i];
                 _turnOrder[i].speed = _allCombatants[i].Stats.Speed;
+
+                // add characters to the player party or enemy party
+                if (_allCombatants[i].CompareTag(PLAYER_TAG)) _playerParty.Add(_allCombatants[i]);
+                else if(_allCombatants[i].CompareTag(ENEMY_TAG)) _enemyParty.Add(_allCombatants[i]);
             }
+
+            _allLoaded = true;
         }
 
         private void SortTurnOrder()

@@ -25,3 +25,5 @@ MonoBehaviour:
   Willpower: 16
   Speed: 13
   Swag: 20
+  SkillList:
+  - {fileID: 11400000, guid: 179c54a68d01e8247ae279e1f50841f2, type: 2}

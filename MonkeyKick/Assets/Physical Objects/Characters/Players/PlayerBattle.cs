@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using MonkeyKick.Controls;
 using MonkeyKick.Managers;
 using MonkeyKick.QualityOfLife;
+using MonkeyKick.References;
 
 namespace MonkeyKick.PhysicalObjects.Characters
 {
@@ -15,6 +16,10 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         private PlayerControls _controls;
         private InputAction _buttonSouth;
+        private InputAction _move;
+        private Vector2 _movement;
+        private bool _movePressed = false;
+        [SerializeField] private IntReference menuChoice;
 
         #endregion
 
@@ -30,6 +35,8 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
             // set controls
             _buttonSouth = _controls.Battle.South;
+            _move = _controls.Battle.Move;
+            _move.performed += context => _movement = context.ReadValue<Vector2>();
         }
 
         protected override void Update()
@@ -40,8 +47,10 @@ namespace MonkeyKick.PhysicalObjects.Characters
             {
                 switch (_battleState)
                 {
-                    case BattleState.EnterBattle: EnterBattle(); break;
-                    case BattleState.Wait: Wait(); break;
+                    case BattleStates.EnterBattle: EnterBattle(); break;
+                    case BattleStates.Wait: Wait(); break;
+                    case BattleStates.ChooseAction: ChooseAction(); break;
+                    case BattleStates.Action: break;
                 }
 
             } 
@@ -49,12 +58,12 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         private void OnEnable()
         {
-            _controls.Battle.Enable();
+            _controls?.Battle.Enable();
         }
 
         private void OnDisable()
         {
-            _controls.Battle.Disable();
+            _controls?.Battle.Disable();
         }
 
         #endregion
@@ -64,20 +73,55 @@ namespace MonkeyKick.PhysicalObjects.Characters
         protected override void EnterBattle()
         {
             base.EnterBattle();
-            AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE);
-            _battleState = BattleState.Wait;
+            menuChoice.Variable.Value = 0; // reset it every battle
+            AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE); // get into battle idle
+            if (_turnSystem.TurnSystemLoaded && _physics.OnGround()) _battleState = BattleStates.Wait;
         }
 
-        private void Wait()
+        protected virtual void ChooseAction()
         {
-            if (_isTurn)
+            // menu options
+            const float deadzone = 0.3f;
+            const int FIGHT = 0;
+            const int CHARGE = 1;
+            const int ITEM = 2;
+
+            // scrolling through the menu
+            if (_movement.y < -deadzone)
             {
-                if (_buttonSouth.triggered)
+                if (!_movePressed)
                 {
-                    _physics.GetRigidbody().AddForce(Vector3.up * 300f);
-                    _isTurn = false;
-                    Turn.isTurn = _isTurn;
-                    Turn.wasTurnPrev = true;
+                    menuChoice.Variable.Value++;
+                    _movePressed = true;
+                }
+            }
+            else if (_movement.y > deadzone)
+            {
+                if (!_movePressed)
+                {
+                    menuChoice.Variable.Value--;
+                    _movePressed = true;
+                }
+            }
+            else _movePressed = false;
+
+            if (_buttonSouth.triggered) 
+            {
+                switch(menuChoice.Variable.Value)
+                {
+                    case FIGHT:
+                    {
+                        // save battle position for returning from skills and counterattacks
+                        _battlePos.x = transform.position.x;
+                        _battlePos.y = transform.position.z;
+
+                        Stats.SkillList[0].Action(this, _turnSystem.EnemyParty[0]);
+                        _battleState = BattleStates.Action;
+
+                        break;
+                    }
+                    case CHARGE: break;
+                    case ITEM: break;
                 }
             }
         }

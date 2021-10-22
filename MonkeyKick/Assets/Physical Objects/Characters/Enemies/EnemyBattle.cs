@@ -19,8 +19,10 @@ namespace MonkeyKick.PhysicalObjects.Characters
             {
                 switch (_battleState)
                 {
-                    case BattleState.EnterBattle: EnterBattle(); break;
-                    case BattleState.Wait: Wait(); break;
+                    case BattleStates.EnterBattle: EnterBattle(); break;
+                    case BattleStates.Wait: Wait(); break;
+                    case BattleStates.ChooseAction: ChooseAction(); break;
+                    case BattleStates.Action: break;
                 }
 
             } 
@@ -34,18 +36,17 @@ namespace MonkeyKick.PhysicalObjects.Characters
         {
             base.EnterBattle();
             AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE, true);
-            _battleState = BattleState.Wait;
+            if (_turnSystem.TurnSystemLoaded && _physics.OnGround()) _battleState = BattleStates.Wait;
         }
 
-        private void Wait()
+        protected virtual void ChooseAction()
         {
-            if (_isTurn)
-            {
-                _physics.GetRigidbody().AddForce(Vector3.up * 300f);
-                _isTurn = false;
-                Turn.isTurn = _isTurn;
-                Turn.wasTurnPrev = true;
-            }
+                // save battle position for returning from skills and counterattacks
+                _battlePos.x = transform.position.x;
+                _battlePos.y = transform.position.z;
+
+            Stats.SkillList[0].Action(this, _turnSystem.PlayerParty[0]);
+            _battleState = BattleStates.Action;
         }
 
         #endregion

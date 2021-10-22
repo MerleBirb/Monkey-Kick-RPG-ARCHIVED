@@ -2,6 +2,7 @@
 // 10/11/21
 
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace MonkeyKick.RPGSystem
 {
@@ -39,5 +40,8 @@ namespace MonkeyKick.RPGSystem
 
         [Header("Critical Chance and Shop Price")]
         public uint Swag;
+
+        [Header("List of Skills the player can use.")]
+        public List<Skill> SkillList;
     }
 }
