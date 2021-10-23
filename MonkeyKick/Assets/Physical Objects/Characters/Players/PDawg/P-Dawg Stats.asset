@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0ae13caaa59da4faa42e5d53172a17, type: 3}
   m_Name: P-Dawg Stats
   m_EditorClassIdentifier: 
-  CharacterName: P-Dawg
-  Level: 1
-  Description: Coolest guy ever.
-  MaxHP: 28
-  CurrentHP: 28
-  MaxKi: 15
-  CurrentKi: 15
-  Muscle: 25
-  Toughness: 22
-  Smarts: 12
-  Willpower: 16
-  Speed: 13
-  Swag: 20
-  SkillList:
+  _characterName: P-Dawg
+  _level: 1
+  _description: Coolest guy
+  _maxHP: 28
+  _currentHP: 28
+  _maxKi: 15
+  _currentKi: 15
+  _muscle: 25
+  _toughness: 22
+  _smarts: 11
+  _willpower: 16
+  _speed: 14
+  _swag: 20
+  _skillList:
   - {fileID: 11400000, guid: 179c54a68d01e8247ae279e1f50841f2, type: 2}

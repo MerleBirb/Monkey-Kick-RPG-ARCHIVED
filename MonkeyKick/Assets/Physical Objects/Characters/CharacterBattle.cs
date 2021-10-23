@@ -27,6 +27,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         public CharacterStats Stats;
         protected TurnSystem _turnSystem;
         protected bool _isTurn;
+        private bool _battleStarted = false;
         protected BattleStates _battleState = BattleStates.EnterBattle;
         public BattleStates BattleState
         {
@@ -85,7 +86,11 @@ namespace MonkeyKick.PhysicalObjects.Characters
         protected virtual void EnterBattle()
         {
             // set up battle position
-            StartCoroutine(JumpIntoBattlePosition());
+            if (!_battleStarted)
+            {
+                StartCoroutine(JumpIntoBattlePosition());
+                _battleStarted = true;
+            }
 
             // if turn system not injected
             if (!_turnSystem) _turnSystem = FindObjectOfType<TurnSystem>();
@@ -113,6 +118,9 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
             // stop movement after jump
             _physics?.ResetMovement();
+            // change to Wait state
+            if (_turnSystem.TurnSystemLoaded && _physics.OnGround()) _battleState = BattleStates.Wait;
+            _battleStarted = false;
 
             yield return null;
         }

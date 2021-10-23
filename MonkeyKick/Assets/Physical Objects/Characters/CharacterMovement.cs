@@ -30,7 +30,10 @@ namespace MonkeyKick.PhysicalObjects.Characters
             {
                 _physics = GetComponent<IPhysics>();
             }
-            else this.enabled = false;
+            else
+            {
+                this.enabled = false;
+            }
         }
 
         public virtual void FixedUpdate()

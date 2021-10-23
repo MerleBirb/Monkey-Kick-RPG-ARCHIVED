@@ -36,6 +36,9 @@ namespace MonkeyKick.RPGSystem
             actorRb.velocity = Vector3.zero; // stop movement when target is reached
             actorPos = actor.transform.position;
 
+            // Damage the target
+            int damageScaling = (int)(actor.Stats.Muscle * skillValue);
+            target.Stats.Damage(damageScaling);
             yield return new WaitForSeconds(1.0f); // wait 1 second
 
             // move back to original position

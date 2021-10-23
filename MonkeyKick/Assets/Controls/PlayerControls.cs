@@ -133,45 +133,31 @@ namespace MonkeyKick.Controls
             ""id"": ""d0d7e3c6-c4a5-4b42-94e4-030f07f64d53"",
             ""actions"": [
                 {
-                    ""name"": ""South"",
-                    ""type"": ""Button"",
-                    ""id"": ""ef514e60-a509-4943-bac0-477b005e5c36"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Move"",
                     ""type"": ""PassThrough"",
                     ""id"": ""d6f991b5-3aa5-4095-b655-4f07fc2f45b9"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""acd4140b-e2b8-435c-9d59-8302035bf9bb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""South"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef514e60-a509-4943-bac0-477b005e5c36"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""cb918d42-215d-4748-bdf8-935375b740bc"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""South"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d106db1f-9b8a-4407-8319-d042f0940ed5"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""South"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": ""WASD"",
                     ""id"": ""b3ea482b-ac81-443f-814b-881206f759e4"",
@@ -237,6 +223,50 @@ namespace MonkeyKick.Controls
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""724195b1-defc-4c6c-9968-ab84d27628d4"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53c82d61-6283-4f05-85f3-a5a514f854ff"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb918d42-215d-4748-bdf8-935375b740bc"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""South"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d106db1f-9b8a-4407-8319-d042f0940ed5"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""South"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -277,8 +307,9 @@ namespace MonkeyKick.Controls
             m_Overworld_Jump = m_Overworld.FindAction("Jump", throwIfNotFound: true);
             // Battle
             m_Battle = asset.FindActionMap("Battle", throwIfNotFound: true);
-            m_Battle_South = m_Battle.FindAction("South", throwIfNotFound: true);
             m_Battle_Move = m_Battle.FindAction("Move", throwIfNotFound: true);
+            m_Battle_Select = m_Battle.FindAction("Select", throwIfNotFound: true);
+            m_Battle_South = m_Battle.FindAction("South", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -369,14 +400,16 @@ namespace MonkeyKick.Controls
         // Battle
         private readonly InputActionMap m_Battle;
         private IBattleActions m_BattleActionsCallbackInterface;
-        private readonly InputAction m_Battle_South;
         private readonly InputAction m_Battle_Move;
+        private readonly InputAction m_Battle_Select;
+        private readonly InputAction m_Battle_South;
         public struct BattleActions
         {
             private @PlayerControls m_Wrapper;
             public BattleActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-            public InputAction @South => m_Wrapper.m_Battle_South;
             public InputAction @Move => m_Wrapper.m_Battle_Move;
+            public InputAction @Select => m_Wrapper.m_Battle_Select;
+            public InputAction @South => m_Wrapper.m_Battle_South;
             public InputActionMap Get() { return m_Wrapper.m_Battle; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -386,22 +419,28 @@ namespace MonkeyKick.Controls
             {
                 if (m_Wrapper.m_BattleActionsCallbackInterface != null)
                 {
-                    @South.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
-                    @South.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
-                    @South.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
                     @Move.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnMove;
+                    @Select.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnSelect;
+                    @Select.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnSelect;
+                    @Select.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnSelect;
+                    @South.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
+                    @South.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
+                    @South.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
                 }
                 m_Wrapper.m_BattleActionsCallbackInterface = instance;
                 if (instance != null)
                 {
-                    @South.started += instance.OnSouth;
-                    @South.performed += instance.OnSouth;
-                    @South.canceled += instance.OnSouth;
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @Select.started += instance.OnSelect;
+                    @Select.performed += instance.OnSelect;
+                    @Select.canceled += instance.OnSelect;
+                    @South.started += instance.OnSouth;
+                    @South.performed += instance.OnSouth;
+                    @South.canceled += instance.OnSouth;
                 }
             }
         }
@@ -431,8 +470,9 @@ namespace MonkeyKick.Controls
         }
         public interface IBattleActions
         {
-            void OnSouth(InputAction.CallbackContext context);
             void OnMove(InputAction.CallbackContext context);
+            void OnSelect(InputAction.CallbackContext context);
+            void OnSouth(InputAction.CallbackContext context);
         }
     }
 }

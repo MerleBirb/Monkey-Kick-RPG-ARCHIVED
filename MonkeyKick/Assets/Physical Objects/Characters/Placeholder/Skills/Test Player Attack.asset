@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Player Dash
   skillDescription: 
-  skillValue: 1
+  skillValue: 0.25
   timeItTakesToMoveToTarget: 1
   xOffsetFromTarget: -0.5

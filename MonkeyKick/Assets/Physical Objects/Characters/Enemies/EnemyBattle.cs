@@ -36,7 +36,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
         {
             base.EnterBattle();
             AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE, true);
-            if (_turnSystem.TurnSystemLoaded && _physics.OnGround()) _battleState = BattleStates.Wait;
         }
 
         protected virtual void ChooseAction()

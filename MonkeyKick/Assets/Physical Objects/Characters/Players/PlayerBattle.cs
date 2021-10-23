@@ -15,8 +15,9 @@ namespace MonkeyKick.PhysicalObjects.Characters
         #region CONTROLS
 
         private PlayerControls _controls;
-        private InputAction _buttonSouth;
         private InputAction _move;
+        private InputAction _select;
+        private InputAction _buttonSouth;
         private Vector2 _movement;
         private bool _movePressed = false;
         [SerializeField] private IntReference menuChoice;
@@ -34,9 +35,11 @@ namespace MonkeyKick.PhysicalObjects.Characters
             _controls = new PlayerControls();
 
             // set controls
-            _buttonSouth = _controls.Battle.South;
             _move = _controls.Battle.Move;
             _move.performed += context => _movement = context.ReadValue<Vector2>();
+
+            _select = _controls.Battle.Select;
+            _buttonSouth = _controls.Battle.South;
         }
 
         protected override void Update()
@@ -75,7 +78,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
             base.EnterBattle();
             menuChoice.Variable.Value = 0; // reset it every battle
             AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE); // get into battle idle
-            if (_turnSystem.TurnSystemLoaded && _physics.OnGround()) _battleState = BattleStates.Wait;
         }
 
         protected virtual void ChooseAction()
@@ -103,9 +105,12 @@ namespace MonkeyKick.PhysicalObjects.Characters
                     _movePressed = true;
                 }
             }
-            else _movePressed = false;
+            else
+            {
+                _movePressed = false;
+            }
 
-            if (_buttonSouth.triggered) 
+            if (_select.triggered)
             {
                 switch(menuChoice.Variable.Value)
                 {

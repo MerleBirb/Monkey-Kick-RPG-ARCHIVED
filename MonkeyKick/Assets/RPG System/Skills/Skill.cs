@@ -15,20 +15,9 @@ namespace MonkeyKick.RPGSystem
         [SerializeField] [TextArea(15, 20)] protected string skillDescription;
 
         [Header("Base Damage / Healing / Value for the skill to use")]
-        [SerializeField] protected int skillValue;
+        [SerializeField] protected float skillValue;
 
         #endregion
-
-        // Damage Calc
-        public virtual void Damage(ref int targetHP)
-        {
-            int finalValue = Mathf.Clamp(skillValue, 1, 99999);    
-            bool damageHPBelowZero = (targetHP - finalValue) <= 0;
-
-            // make sure the HP never goes below zero
-            if (damageHPBelowZero) targetHP = 0;
-            else targetHP -= finalValue;
-        }
 
         // Action
         public abstract void Action(CharacterBattle actor, CharacterBattle target);
