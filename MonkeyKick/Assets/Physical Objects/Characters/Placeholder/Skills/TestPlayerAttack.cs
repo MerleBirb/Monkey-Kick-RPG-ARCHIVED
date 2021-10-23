@@ -14,6 +14,10 @@ namespace MonkeyKick.RPGSystem
         [SerializeField] private float timeItTakesToMoveToTarget; // cannot make this more literal
         [SerializeField] private float xOffsetFromTarget;
 
+        const string BATTLE_STANCE = "BattleStance";
+        const string WINDUP = "Punch_windup";
+        const string ATTACK = "Punch_attack";
+
         /// <summary>
         /// The actor is the one who uses the ability, while the target is the one who gets hit by the ability.
         /// </summary>
@@ -33,15 +37,21 @@ namespace MonkeyKick.RPGSystem
             // move to target
             actorRb.velocity = PhysicsQoL.LinearMove(actorPos, targetPos, timeItTakesToMoveToTarget, xOffsetFromTarget);
             yield return new WaitForSeconds(timeItTakesToMoveToTarget - Time.fixedDeltaTime);
+
+            // wind up the attack
+            actor.ChangeAnimation(WINDUP);
             actorRb.velocity = Vector3.zero; // stop movement when target is reached
             actorPos = actor.transform.position;
+            yield return new WaitForSeconds(0.25f);
 
             // Damage the target
+            actor.ChangeAnimation(ATTACK);
             int damageScaling = (int)(actor.Stats.Muscle * skillValue);
             target.Stats.Damage(damageScaling);
-            yield return new WaitForSeconds(1.0f); // wait 1 second
+            yield return new WaitForSeconds(0.25f);
 
             // move back to original position
+            actor.ChangeAnimation(BATTLE_STANCE);
             actorRb.velocity = PhysicsQoL.LinearMove(actorPos, returnPos, timeItTakesToMoveToTarget);
             yield return new WaitForSeconds(timeItTakesToMoveToTarget - Time.fixedDeltaTime);
             actorRb.velocity = Vector3.zero; // stop movement when original position is reached

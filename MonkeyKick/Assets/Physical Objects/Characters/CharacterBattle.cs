@@ -134,6 +134,8 @@ namespace MonkeyKick.PhysicalObjects.Characters
             if (!_isTurn) _battleState = BattleStates.Wait;
         }
 
+        public void ChangeAnimation(string newAnim) => AnimationQoL.ChangeAnimation(_anim, _currentState, newAnim);
+
         #endregion
     }
 }
