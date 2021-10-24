@@ -15,15 +15,16 @@ namespace MonkeyKick.UserInterface
         [SerializeField] private TextMeshProUGUI hpText;
         [SerializeField] private TextMeshProUGUI kiText;
         [SerializeField] private CharacterStats character;
+        public RectTransform GetRectTransform() => GetComponent<RectTransform>();
 
         #endregion
 
         private void LateUpdate()
         {
-            UpdateText();
+            DisplayUI();
         }
 
-        private void UpdateText()
+        public void DisplayUI()
         {
             hpText.text = "HP: " + character.CurrentHP.ToString() + "/" + character.MaxHP.ToString();
             kiText.text = "KI: " + character.CurrentKi.ToString() + "/" + character.MaxKi.ToString();

@@ -118,6 +118,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
             // stop movement after jump
             _physics?.ResetMovement();
+
             // change to Wait state
             if (_turnSystem.TurnSystemLoaded && _physics.OnGround()) _battleState = BattleStates.Wait;
             _battleStarted = false;
