@@ -2,23 +2,21 @@
 // 10/23/21
 
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using MonkeyKick.References;
+using MonkeyKick.QualityOfLife;
 
-namespace MonkeyKick
+namespace MonkeyKick.UserInterface
 {
-    public class DisplayEffortRank : MonoBehaviour, IDisplayUI
+    public class DisplayEffortRank : MonoBehaviour
     {
-        [SerializeField] private StringReference effortRankReference;
         [SerializeField] private TextMeshProUGUI effortRankText;
         [SerializeField] private float secondsUntilDestroyed;
         [SerializeField] private Color[] color;
-        public RectTransform GetRectTransform() => GetComponent<RectTransform>();
-        public void SetColorFromIndex(int index) => effortRankText.color = color[index];
-        public void DisplayUI()
+        private string _effortRankString;
+        public void DisplayUI(AttackRating attackRating)
         {
-            effortRankText.text = effortRankReference.Variable.Value;
+            effortRankText.color = color[(int)attackRating];
+            effortRankText.text = SkillQoL.AttackRatingStrings[(int)attackRating];
             Destroy(gameObject, secondsUntilDestroyed);
         }
     }

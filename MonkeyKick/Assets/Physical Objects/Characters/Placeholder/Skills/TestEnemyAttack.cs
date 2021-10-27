@@ -1,5 +1,5 @@
 // Merle Roji
-// 10/21/21
+// 10/26/21
 
 using UnityEngine;
 using System.Collections;
@@ -9,18 +9,12 @@ using MonkeyKick.UserInterface;
 
 namespace MonkeyKick.RPGSystem
 {
-    [CreateAssetMenu(fileName = "Test Attack", menuName = "RPGSystem/Skills/Player Skills/Placeholder/Test Attack", order = 1)]
-    public class TestPlayerAttack : Skill
+    [CreateAssetMenu(fileName = "Test Attack", menuName = "RPGSystem/Skills/Enemy Skills/Placeholder/Test Attack", order = 1)]
+    public class TestEnemyAttack : Skill
     {
-        [Header("To display how good the player did with their button press")]
-        [SerializeField] protected DisplayEffortRank effortRankPrefab;
-        [SerializeField] protected DisplayDebugUI debugUIPrefab;
-
         [Header("Specific Skill Variables.")]
         [SerializeField] private float timeItTakesToMoveToTarget;
-        [SerializeField] private float timeForPunch;
         [SerializeField] private float xOffsetFromTarget;
-        [SerializeField] private float[] timeChecks; 
 
         const string BATTLE_STANCE = "BattleStance";
         const string WINDUP = "Punch_windup";
@@ -33,9 +27,6 @@ namespace MonkeyKick.RPGSystem
         {
             // save the rigidbody of the actor
             Rigidbody actorRb = actor.GetComponent<Rigidbody>();
-            PlayerBattle actorPlayer = actor.GetComponent<PlayerBattle>();
-            float currentTime = timeForPunch;
-            AttackRating rating = AttackRating.Miss;
 
             // save the positions of characters involved with the script
             Vector3 actorPos = actor.transform.position;
@@ -53,33 +44,10 @@ namespace MonkeyKick.RPGSystem
             actor.ChangeAnimation(WINDUP);
             actorRb.velocity = Vector3.zero; // stop movement when target is reached
             actorPos = actor.transform.position;
-
-            DisplayDebugUI debugUI = Instantiate(debugUIPrefab);
-
-            while(currentTime >= 0f)
-            {
-                currentTime -= Time.deltaTime;
-                debugUI.DisplayUI(currentTime);
-
-                if (actorPlayer.pressedButtonSouth)
-                {
-                    rating = SkillQoL.TimedButtonPress(currentTime, timeForPunch, timeChecks);
-                    Destroy(debugUI.gameObject);
-                    break;
-                }
-
-                yield return null;
-            }
-
-            Destroy(debugUI.gameObject);
-            yield return null;
+            yield return new WaitForSeconds(0.25f);
 
             // Damage the target
             actor.ChangeAnimation(ATTACK);
-
-            DisplayEffortRank effortRank = Instantiate(effortRankPrefab);
-            effortRank.DisplayUI(rating);
-
             int damageScaling = (int)(actor.Stats.Muscle * skillValue);
             target.Stats.Damage(damageScaling);
             yield return new WaitForSeconds(0.25f);

@@ -15,5 +15,13 @@ MonoBehaviour:
   skillName: Player Dash
   skillDescription: 
   skillValue: 0.25
+  effortRankPrefab: {fileID: 3626742917333672594, guid: a3b996c15f5fa5c4d97422c4604253f7, type: 3}
+  debugUIPrefab: {fileID: 549593222790643254, guid: a5417fcf3b60c9d428d3b3885363514f, type: 3}
   timeItTakesToMoveToTarget: 1
+  timeForPunch: 1
   xOffsetFromTarget: -0.5
+  timeChecks:
+  - 0.9
+  - 0.8
+  - 0.45
+  - 0.2

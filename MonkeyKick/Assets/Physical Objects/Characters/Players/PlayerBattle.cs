@@ -15,9 +15,10 @@ namespace MonkeyKick.PhysicalObjects.Characters
         #region CONTROLS
 
         private PlayerControls _controls;
-        private InputAction _move;
+        protected InputAction _move;
         private InputAction _select;
         private InputAction _buttonSouth;
+        [HideInInspector] public bool pressedButtonSouth;
         private Vector2 _movement;
         private bool _movePressed = false;
         [SerializeField] private IntReference menuChoice;
@@ -53,7 +54,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
                     case BattleStates.EnterBattle: EnterBattle(); break;
                     case BattleStates.Wait: Wait(); break;
                     case BattleStates.ChooseAction: ChooseAction(); break;
-                    case BattleStates.Action: break;
+                    case BattleStates.Action: CheckInput(); break;
                 }
 
             } 
@@ -72,6 +73,11 @@ namespace MonkeyKick.PhysicalObjects.Characters
         #endregion
 
         #region METHODS
+
+        private void CheckInput()
+        {
+            pressedButtonSouth = _buttonSouth.triggered;
+        }
 
         protected override void EnterBattle()
         {

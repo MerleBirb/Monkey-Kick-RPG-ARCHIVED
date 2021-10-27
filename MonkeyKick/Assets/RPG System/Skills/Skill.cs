@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using MonkeyKick.PhysicalObjects.Characters;
+using MonkeyKick.UserInterface;
 
 namespace MonkeyKick.RPGSystem
 {
