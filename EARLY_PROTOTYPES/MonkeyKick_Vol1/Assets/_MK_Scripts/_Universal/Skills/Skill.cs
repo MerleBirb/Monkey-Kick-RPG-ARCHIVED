@@ -199,7 +199,7 @@ namespace MonkeyKick.Skills
             Vector2 viewportPos = _mainCam.WorldToViewportPoint(pos);
             Vector2 uiScreenPos = new Vector2(
             ((viewportPos.x * canvas.sizeDelta.x) - (canvas.sizeDelta.x * 0.5f)),
-            ((viewportPos.y * canvas.sizeDelta.y) - (canvas.sizeDelta.y * 0.5f)));
+            ((viewportPos.y * canvas.sizeDelta.y) - (canvas.sizeDelta.y * 0.5f)));  
 
             Vector2 uiAnchor = uiTransform.anchoredPosition;
             float xPos = uiAnchor.x;

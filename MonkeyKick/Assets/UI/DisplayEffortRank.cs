@@ -7,13 +7,14 @@ using MonkeyKick.QualityOfLife;
 
 namespace MonkeyKick.UserInterface
 {
-    public class DisplayEffortRank : MonoBehaviour
+    public class DisplayEffortRank : DisplayUserInterface
     {
         [SerializeField] private TextMeshProUGUI effortRankText;
         [SerializeField] private float secondsUntilDestroyed;
         [SerializeField] private Color[] color;
         private string _effortRankString;
-        public void DisplayUI(AttackRating attackRating)
+
+        public override void DisplayUI(AttackRating attackRating)
         {
             effortRankText.color = color[(int)attackRating];
             effortRankText.text = SkillQoL.AttackRatingStrings[(int)attackRating];

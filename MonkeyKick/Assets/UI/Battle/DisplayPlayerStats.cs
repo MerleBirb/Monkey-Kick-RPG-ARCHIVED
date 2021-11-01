@@ -8,7 +8,7 @@ using MonkeyKick.RPGSystem;
 
 namespace MonkeyKick.UserInterface
 {
-    public class DisplayPlayerStats : MonoBehaviour
+    public class DisplayPlayerStats : DisplayUserInterface
     {
         #region STAT TEXTS
 
@@ -24,7 +24,7 @@ namespace MonkeyKick.UserInterface
             DisplayUI();
         }
 
-        public void DisplayUI()
+        public override void DisplayUI()
         {
             hpText.text = "HP: " + character.CurrentHP.ToString() + "/" + character.MaxHP.ToString();
             kiText.text = "KI: " + character.CurrentKi.ToString() + "/" + character.MaxKi.ToString();

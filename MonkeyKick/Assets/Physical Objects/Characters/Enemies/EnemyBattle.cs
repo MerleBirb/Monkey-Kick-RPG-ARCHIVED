@@ -35,7 +35,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         protected override void EnterBattle()
         {
             base.EnterBattle();
-            AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE, true);
+            AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE_L);
         }
 
         protected virtual void ChooseAction()

@@ -155,6 +155,14 @@ namespace MonkeyKick.Controls
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""efa93534-e885-4e85-ae04-b93048793575"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -267,6 +275,28 @@ namespace MonkeyKick.Controls
                     ""action"": ""South"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6cd364bc-af1d-4c48-87ef-9a2614a1cb93"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d2018251-85b5-45a8-b9ce-cd3ee0e48893"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -310,6 +340,7 @@ namespace MonkeyKick.Controls
             m_Battle_Move = m_Battle.FindAction("Move", throwIfNotFound: true);
             m_Battle_Select = m_Battle.FindAction("Select", throwIfNotFound: true);
             m_Battle_South = m_Battle.FindAction("South", throwIfNotFound: true);
+            m_Battle_Jump = m_Battle.FindAction("Jump", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -403,6 +434,7 @@ namespace MonkeyKick.Controls
         private readonly InputAction m_Battle_Move;
         private readonly InputAction m_Battle_Select;
         private readonly InputAction m_Battle_South;
+        private readonly InputAction m_Battle_Jump;
         public struct BattleActions
         {
             private @PlayerControls m_Wrapper;
@@ -410,6 +442,7 @@ namespace MonkeyKick.Controls
             public InputAction @Move => m_Wrapper.m_Battle_Move;
             public InputAction @Select => m_Wrapper.m_Battle_Select;
             public InputAction @South => m_Wrapper.m_Battle_South;
+            public InputAction @Jump => m_Wrapper.m_Battle_Jump;
             public InputActionMap Get() { return m_Wrapper.m_Battle; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -428,6 +461,9 @@ namespace MonkeyKick.Controls
                     @South.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
                     @South.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
                     @South.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
+                    @Jump.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnJump;
+                    @Jump.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnJump;
+                    @Jump.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnJump;
                 }
                 m_Wrapper.m_BattleActionsCallbackInterface = instance;
                 if (instance != null)
@@ -441,6 +477,9 @@ namespace MonkeyKick.Controls
                     @South.started += instance.OnSouth;
                     @South.performed += instance.OnSouth;
                     @South.canceled += instance.OnSouth;
+                    @Jump.started += instance.OnJump;
+                    @Jump.performed += instance.OnJump;
+                    @Jump.canceled += instance.OnJump;
                 }
             }
         }
@@ -473,6 +512,7 @@ namespace MonkeyKick.Controls
             void OnMove(InputAction.CallbackContext context);
             void OnSelect(InputAction.CallbackContext context);
             void OnSouth(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
         }
     }
 }

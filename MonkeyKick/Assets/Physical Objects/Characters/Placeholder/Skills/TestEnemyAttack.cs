@@ -5,7 +5,7 @@ using UnityEngine;
 using System.Collections;
 using MonkeyKick.PhysicalObjects.Characters;
 using MonkeyKick.QualityOfLife;
-using MonkeyKick.UserInterface;
+using MonkeyKick.RPGSystem.Hitboxes;
 
 namespace MonkeyKick.RPGSystem
 {
@@ -15,10 +15,11 @@ namespace MonkeyKick.RPGSystem
         [Header("Specific Skill Variables.")]
         [SerializeField] private float timeItTakesToMoveToTarget;
         [SerializeField] private float xOffsetFromTarget;
+        [SerializeField] private Hitbox hitboxPrefab;
 
-        const string BATTLE_STANCE = "BattleStance";
-        const string WINDUP = "Punch_windup";
-        const string ATTACK = "Punch_attack";
+        const string BATTLE_STANCE = "BattleStance_left";
+        const string WINDUP = "Punch_windup_left";
+        const string ATTACK = "Punch_attack_left";
 
         /// <summary>
         /// The actor is the one who uses the ability, while the target is the one who gets hit by the ability.
@@ -33,6 +34,8 @@ namespace MonkeyKick.RPGSystem
             Vector3 targetPos = new Vector3(target.transform.position.x + xOffsetFromTarget, 
                 actor.transform.position.y, target.transform.position.z);
             Vector3 returnPos = new Vector3(actor.BattlePos.x, actor.transform.position.y, actor.BattlePos.y);
+
+            target.BattleState = BattleStates.Counter; // set the player to counter attack
 
             yield return null;
 
@@ -49,7 +52,11 @@ namespace MonkeyKick.RPGSystem
             // Damage the target
             actor.ChangeAnimation(ATTACK);
             int damageScaling = (int)(actor.Stats.Muscle * skillValue);
-            target.Stats.Damage(damageScaling);
+
+            Hitbox hurtbox = Instantiate(hitboxPrefab, actor.HurtBoxes[(int)BodyParts.LeftArm]);
+            hurtbox.Init(target, damageScaling);
+            hurtbox.DestroyAfterTime(0.25f);
+
             yield return new WaitForSeconds(0.25f);
 
             // move back to original position
@@ -59,6 +66,7 @@ namespace MonkeyKick.RPGSystem
 
             actorRb.velocity = Vector3.zero; // stop movement when original position is reached
             yield return null;
+            target.BattleState = BattleStates.Wait;
             actor.ResetAfterAction();
         }
 

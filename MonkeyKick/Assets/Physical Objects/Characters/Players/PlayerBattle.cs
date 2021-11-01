@@ -18,9 +18,11 @@ namespace MonkeyKick.PhysicalObjects.Characters
         protected InputAction _move;
         private InputAction _select;
         private InputAction _buttonSouth;
-        [HideInInspector] public bool pressedButtonSouth;
+        private InputAction _jump;
         private Vector2 _movement;
         private bool _movePressed = false;
+        [HideInInspector] public bool pressedButtonSouth;
+
         [SerializeField] private IntReference menuChoice;
 
         #endregion
@@ -41,6 +43,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
             _select = _controls.Battle.Select;
             _buttonSouth = _controls.Battle.South;
+            _jump = _controls.Battle.Jump;
         }
 
         protected override void Update()
@@ -55,6 +58,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
                     case BattleStates.Wait: Wait(); break;
                     case BattleStates.ChooseAction: ChooseAction(); break;
                     case BattleStates.Action: CheckInput(); break;
+                    case BattleStates.Counter: Jump(); break;
                 }
 
             } 
@@ -83,7 +87,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         {
             base.EnterBattle();
             menuChoice.Variable.Value = 0; // reset it every battle
-            AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE); // get into battle idle
+            AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE_R); // get into battle idle
         }
 
         protected virtual void ChooseAction()
@@ -133,6 +137,21 @@ namespace MonkeyKick.PhysicalObjects.Characters
                     }
                     case CHARGE: break;
                     case ITEM: break;
+                }
+            }
+        }
+
+        #endregion
+
+        #region COUNTER ATTACKS
+
+        public void Jump()
+        {
+            if (_jump.triggered)
+            {
+                if (_physics.OnGround())
+                {
+                    _physics.Jump();
                 }
             }
         }

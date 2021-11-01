@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using MonkeyKick.Managers;
 using MonkeyKick.QualityOfLife;
@@ -15,11 +16,28 @@ namespace MonkeyKick.PhysicalObjects.Characters
         EnterBattle,
         Wait,
         ChooseAction,
-        Action
+        Action,
+        Counter
+    }
+
+    public enum BodyParts
+    {
+        Head,
+        Torso,
+        RightArm,
+        LeftArm,
+        RightLeg,
+        LeftLeg
     }
 
     public abstract class CharacterBattle : MonoBehaviour
     {
+        #region HITBOXES
+
+        public List<Transform> HurtBoxes;
+
+        #endregion
+
         #region RPG BATTLE SYSTEM
 
         [SerializeField] protected GameManager gameManager;
@@ -56,7 +74,8 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         protected Animator _anim;
         protected string _currentState = "";
-        protected const string BATTLE_STANCE = "BattleStance";
+        protected const string BATTLE_STANCE_R = "BattleStance_right";
+        protected const string BATTLE_STANCE_L = "BattleStance_left";
 
         #endregion
 

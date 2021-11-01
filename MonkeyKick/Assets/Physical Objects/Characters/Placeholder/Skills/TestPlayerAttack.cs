@@ -13,7 +13,7 @@ namespace MonkeyKick.RPGSystem
     public class TestPlayerAttack : Skill
     {
         [Header("To display how good the player did with their button press")]
-        [SerializeField] protected DisplayEffortRank effortRankPrefab;
+        [SerializeField] protected DisplayUserInterface effortRankPrefab;
         [SerializeField] protected DisplayDebugUI debugUIPrefab;
 
         [Header("Specific Skill Variables.")]
@@ -22,9 +22,9 @@ namespace MonkeyKick.RPGSystem
         [SerializeField] private float xOffsetFromTarget;
         [SerializeField] private float[] timeChecks; 
 
-        const string BATTLE_STANCE = "BattleStance";
-        const string WINDUP = "Punch_windup";
-        const string ATTACK = "Punch_attack";
+        const string BATTLE_STANCE = "BattleStance_right";
+        const string WINDUP = "Punch_windup_right";
+        const string ATTACK = "Punch_attack_right";
 
         /// <summary>
         /// The actor is the one who uses the ability, while the target is the one who gets hit by the ability.
@@ -77,7 +77,8 @@ namespace MonkeyKick.RPGSystem
             // Damage the target
             actor.ChangeAnimation(ATTACK);
 
-            DisplayEffortRank effortRank = Instantiate(effortRankPrefab);
+            // Display effort rank
+            DisplayUserInterface effortRank = Instantiate(effortRankPrefab);
             effortRank.DisplayUI(rating);
 
             int damageScaling = (int)(actor.Stats.Muscle * skillValue);
