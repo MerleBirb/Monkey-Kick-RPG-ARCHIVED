@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae0ae13caaa59da4faa42e5d53172a17, type: 3}
-  m_Name: P-Dawg Stats
+  m_Name: Placeholder enemy 2
   m_EditorClassIdentifier: 
-  _characterName: P-Dawg
+  _characterName: Evil Guy 2
   _level: 1
-  _description: Coolest guy
-  _maxHP: 28
-  _currentHP: 20
-  _maxKi: 15
-  _currentKi: 15
-  _muscle: 25
-  _toughness: 22
-  _smarts: 11
-  _willpower: 16
-  _speed: 14
-  _swag: 20
+  _description: Description
+  _maxHP: 15
+  _currentHP: 15
+  _maxKi: 10
+  _currentKi: 10
+  _muscle: 10
+  _toughness: 10
+  _smarts: 10
+  _willpower: 10
+  _speed: 10
+  _swag: 10
   _skillList:
-  - {fileID: 11400000, guid: 179c54a68d01e8247ae279e1f50841f2, type: 2}
+  - {fileID: 11400000, guid: d30fe8a216ba69947b14d8f5609b80ec, type: 2}

@@ -17,7 +17,8 @@ namespace MonkeyKick.PhysicalObjects.Characters
         Wait,
         ChooseAction,
         Action,
-        Counter
+        Counter,
+        Dead
     }
 
     public enum BodyParts
@@ -44,7 +45,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         [HideInInspector] public TurnClass Turn;
         public CharacterStats Stats;
         protected TurnSystem _turnSystem;
-        protected bool _isTurn;
+        protected bool _isTurn = false;
         private bool _battleStarted = false;
         protected BattleStates _battleState = BattleStates.EnterBattle;
         public BattleStates BattleState
@@ -89,7 +90,8 @@ namespace MonkeyKick.PhysicalObjects.Characters
         }
 
         protected virtual void Update()
-        {
+        {   
+            CheckHealth();
             if (_isTurn != Turn.isTurn) { _isTurn = Turn.isTurn; }
         }
 
@@ -98,9 +100,14 @@ namespace MonkeyKick.PhysicalObjects.Characters
             _physics?.ObeyGravity();
         }
 
+        private void OnEnable()
+        {
+            _battleState = BattleStates.EnterBattle;
+        }
+
         #endregion
 
-        #region BATTLE STATES
+        #region METHODS
 
         protected virtual void EnterBattle()
         {
@@ -124,6 +131,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         protected virtual void Wait()
         {
             if (_isTurn) _battleState = BattleStates.ChooseAction;
+            if (_turnSystem.EnemyPartyDefeated()) { OnBattleEnd.Invoke(); }
         }
 
         private IEnumerator JumpIntoBattlePosition()
@@ -154,7 +162,28 @@ namespace MonkeyKick.PhysicalObjects.Characters
             if (!_isTurn) _battleState = BattleStates.Wait;
         }
 
+        protected void CheckHealth()
+        {
+            if (Stats.CurrentHP <= 0)
+            {
+                Turn.isDead = true;
+                _battleState = BattleStates.Dead;
+            }
+        }
+
         public void ChangeAnimation(string newAnim) => AnimationQoL.ChangeAnimation(_anim, _currentState, newAnim);
+
+        #endregion
+
+        #region EVENTS
+
+        // Battle end event
+        public delegate void BattleEndTrigger();
+        public BattleEndTrigger OnBattleEnd;
+        public void InvokeOnBattleEnd()
+        {
+            OnBattleEnd?.Invoke();
+        }
 
         #endregion
     }

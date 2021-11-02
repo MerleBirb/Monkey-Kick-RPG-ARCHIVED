@@ -38,11 +38,23 @@ namespace MonkeyKick.RPGSystem
             FillTurnOrder();
             SortTurnOrder();
             ResetTurns();
+
+            gameManager.OnBattleEnd += ResetBattle;
         }
 
         void Update()
         {
             UpdateTurns();
+        }
+
+        private void OnEnable()
+        {
+            ResetBattle();
+        }
+
+        private void OnDisable()
+        {
+            ResetBattle();
         }
 
         #endregion
@@ -101,18 +113,55 @@ namespace MonkeyKick.RPGSystem
 
         private void UpdateTurns()
         {
-            for (int i = 0; i < _turnOrder.Count; i++)
+            if (!EnemyPartyDefeated())
             {
-                if (!_turnOrder[i].wasTurnPrev)
+                for (int i = 0; i < _turnOrder.Count; i++)
                 {
-                    _turnOrder[i].isTurn = true;
-                    break;
-                }
-                else if (i == _turnOrder.Count - 1 && _turnOrder[i].wasTurnPrev)
-                {
-                    ResetTurns();
+                    CheckIfCharacterIsDead(i);
+
+                    if (!_turnOrder[i].wasTurnPrev)
+                    {
+                        _turnOrder[i].isTurn = true;
+                        break;
+                    }
+                    else if (i == _turnOrder.Count - 1 && _turnOrder[i].wasTurnPrev)
+                    {
+                        ResetTurns();
+                    }
                 }
             }
+            else
+            {
+                gameManager.EndBattle();
+            }
+        }
+
+        // remove the character if they're dead
+        private void CheckIfCharacterIsDead(int index)
+        {
+            if (_turnOrder[index].isDead)
+            {
+                if (_turnOrder[index].character.CompareTag(PLAYER_TAG)) { _playerParty.Remove(_turnOrder[index].character); }
+                else if (_turnOrder[index].character.CompareTag(ENEMY_TAG)) { _enemyParty.Remove(_turnOrder[index].character); }
+                _turnOrder.RemoveAt(index);
+            }
+        }
+
+        // check if the enemy party has been wiped out
+        public bool EnemyPartyDefeated()
+        {
+            if (_enemyParty.Count == 0) return true;
+            return false;
+        }
+
+        // end battle and reset every list
+        private void ResetBattle()
+        {
+            _allCombatants.Clear();
+            _playerParty.Clear();
+            _enemyParty.Clear();
+            _turnOrder.Clear();
+            _allLoaded = false;
         }
 
         #endregion

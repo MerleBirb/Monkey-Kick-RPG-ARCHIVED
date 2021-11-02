@@ -47,17 +47,15 @@ namespace MonkeyKick.RPGSystem
             actor.ChangeAnimation(WINDUP);
             actorRb.velocity = Vector3.zero; // stop movement when target is reached
             actorPos = actor.transform.position;
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.4f);
 
-            // Damage the target
+            // Damage the target with a hitbox
             actor.ChangeAnimation(ATTACK);
             int damageScaling = (int)(actor.Stats.Muscle * skillValue);
+            Vector3 hitboxScale = new Vector3(0.75f, 0.5f, 0.75f);
+            InstantiateHitbox(hitboxPrefab, actor.HurtBoxes[(int)BodyParts.LeftArm], hitboxScale, target, damageScaling, 0.10f);
 
-            Hitbox hurtbox = Instantiate(hitboxPrefab, actor.HurtBoxes[(int)BodyParts.LeftArm]);
-            hurtbox.Init(target, damageScaling);
-            hurtbox.DestroyAfterTime(0.25f);
-
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.3f);
 
             // move back to original position
             actor.ChangeAnimation(BATTLE_STANCE);

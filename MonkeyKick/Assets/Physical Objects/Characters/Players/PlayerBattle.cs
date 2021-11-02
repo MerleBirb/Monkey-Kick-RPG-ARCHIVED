@@ -76,7 +76,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         #endregion
 
-        #region METHODS
+        #region GENERAL METHODS
 
         private void CheckInput()
         {
@@ -89,6 +89,8 @@ namespace MonkeyKick.PhysicalObjects.Characters
             menuChoice.Variable.Value = 0; // reset it every battle
             AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE_R); // get into battle idle
         }
+
+        
 
         protected virtual void ChooseAction()
         {

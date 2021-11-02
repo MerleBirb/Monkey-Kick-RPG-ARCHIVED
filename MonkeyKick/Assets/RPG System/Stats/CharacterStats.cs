@@ -67,10 +67,10 @@ namespace MonkeyKick.RPGSystem
             _level = Mathf.Clamp(Level, 1, 100);
 
             _maxHP = Mathf.Clamp(MaxHP, 1, STAT_CLAMP);
-            _currentHP = Mathf.Clamp(CurrentHP, 0, STAT_CLAMP);
+            _currentHP = Mathf.Clamp(CurrentHP, 0, _maxHP);
 
             _maxKi = Mathf.Clamp(MaxKi, 1, STAT_CLAMP);
-            _currentKi = Mathf.Clamp(CurrentKi, 1, STAT_CLAMP);
+            _currentKi = Mathf.Clamp(CurrentKi, 0, _maxKi);
 
             _muscle = Mathf.Clamp(Muscle, 1, STAT_CLAMP);
             _toughness = Mathf.Clamp(Toughness, 1, STAT_CLAMP);

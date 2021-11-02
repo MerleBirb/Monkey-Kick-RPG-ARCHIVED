@@ -3,7 +3,7 @@
 
 using UnityEngine;
 using MonkeyKick.PhysicalObjects.Characters;
-using MonkeyKick.UserInterface;
+using MonkeyKick.RPGSystem.Hitboxes;
 
 namespace MonkeyKick.RPGSystem
 {
@@ -22,5 +22,20 @@ namespace MonkeyKick.RPGSystem
 
         // Action
         public abstract void Action(CharacterBattle actor, CharacterBattle target);
+
+        #region HITBOX METHODS
+
+        public virtual Hitbox InstantiateHitbox(Hitbox prefab, Transform bodyPart, Vector3 scale, CharacterBattle target, int damage, float time)
+        {
+            Hitbox newHitbox = Instantiate(prefab, bodyPart);
+            newHitbox.transform.localScale = scale;
+            newHitbox.target = target;
+            newHitbox.damage = damage;
+            Destroy(newHitbox.gameObject, time);
+
+            return newHitbox;
+        }
+
+        #endregion
     }
 }

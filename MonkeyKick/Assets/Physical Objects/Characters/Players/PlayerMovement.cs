@@ -63,7 +63,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
                 // make a new list of all combatants
                 List<CharacterBattle> fighters = new List<CharacterBattle>();
-                fighters.Add(this.GetComponent<CharacterBattle>());
+                fighters.Add(GetComponent<CharacterBattle>());
                 fighters.Add(enemy);
 
                 _physics?.ResetMovement(); // zero current velocity

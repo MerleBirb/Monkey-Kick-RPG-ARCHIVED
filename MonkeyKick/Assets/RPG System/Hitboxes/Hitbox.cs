@@ -9,26 +9,17 @@ namespace MonkeyKick.RPGSystem.Hitboxes
 {
     public class Hitbox : MonoBehaviour
     {
-        private int _damage;
-        private CharacterBattle _target;
+        [HideInInspector] public int damage;
+        [HideInInspector] public CharacterBattle target;
 
-        public void Init(CharacterBattle target, int damage)
-        {
-            _target = target;
-            _damage = damage;
-        }
-
-        public void DestroyAfterTime(float time)
-        {
-            Destroy(gameObject, time);
-        }
+        private bool _hasHit = false;
 
         private void OnTriggerEnter(Collider col)
         {
-            if (col.CompareTag(TagsQoL.PLAYER_TAG))
+            if (!_hasHit && col.CompareTag(TagsQoL.PLAYER_TAG))
             {
-                _target.Stats.Damage(_damage);
-                Destroy(gameObject);
+                target.Stats.Damage(damage);
+                _hasHit = true;
             }
         }
     }

@@ -47,6 +47,7 @@ namespace MonkeyKick.Cameras
         private void Start()
         {
             gameManager.OnBattleStart += InitiateCameras; // add the InitiateCameras() function to the OnBattleStart event
+            gameManager.OnBattleEnd += InitiateCameras; // add the InitiateCameras() function to the OnBattleEnd event
         }
 
         #endregion
@@ -61,6 +62,7 @@ namespace MonkeyKick.Cameras
                     {
                         _overworldCamObject.SetActive(true);
                         _battleCamObject.SetActive(false);
+                        _battleUI.SetActive(false);
 
                         break;
                     }
@@ -86,6 +88,7 @@ namespace MonkeyKick.Cameras
                     {
                         _overworldCamObject.SetActive(true);
                         _battleCamObject.SetActive(false);
+                        _battleUI.SetActive(false);
 
                         break;
                     }

@@ -19,7 +19,7 @@ MonoBehaviour:
   debugUIPrefab: {fileID: 549593222790643254, guid: a5417fcf3b60c9d428d3b3885363514f, type: 3}
   timeItTakesToMoveToTarget: 1
   timeForPunch: 1
-  xOffsetFromTarget: -0.5
+  xOffsetFromTarget: -0.3
   timeChecks:
   - 0.9
   - 0.8

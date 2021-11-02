@@ -26,6 +26,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         private void Start()
         {
             _movement.OnBattleStart += EnterBattle;
+            _battle.OnBattleEnd += ExitBattle;
         }
 
         #endregion
@@ -36,6 +37,14 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
             // turn every other character component off
             _movement.enabled = false;
+        }
+
+        public void ExitBattle()
+        {
+            _movement.enabled = true; // turn on movement script
+
+            // turn every other character component off
+            _battle.enabled = false;
         }
     }
 }

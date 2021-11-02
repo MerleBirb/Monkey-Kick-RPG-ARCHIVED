@@ -38,8 +38,14 @@ namespace MonkeyKick.Managers
         {
             _currentFighters.Clear(); // clear the fighters list in case there are any
             _currentFighters.AddRange(newFighters); // add the new fighters to the current fighters list
-            GameState = GameStates.Battle;
+            gameState = GameStates.Battle;
             OnBattleStart.Invoke(camPos);
+        }
+
+        public void EndBattle()
+        {
+            gameState = GameStates.Overworld;  
+            OnBattleEnd.Invoke();  
         }
 
         public void ClearCurrentFighters()
@@ -51,8 +57,11 @@ namespace MonkeyKick.Managers
 
         #region GAME EVENTS
 
-        public delegate void BattleTrigger(in Vector3 camPos);
-        public event BattleTrigger OnBattleStart;
+        public delegate void BattleStartTrigger(in Vector3 camPos);
+        public event BattleStartTrigger OnBattleStart;
+
+        public delegate void BattleEndTrigger();
+        public event BattleEndTrigger OnBattleEnd;
 
         #endregion
     }

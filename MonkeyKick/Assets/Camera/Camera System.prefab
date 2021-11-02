@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6068726957767285218}
   - {fileID: 6068726956829604270}
@@ -105,6 +106,10 @@ PrefabInstance:
     - target: {fileID: 7430557789255352398, guid: 4ccb3739aabd4ea48868eef210647889, type: 3}
       propertyPath: m_LookAt
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430557789255352398, guid: 4ccb3739aabd4ea48868eef210647889, type: 3}
+      propertyPath: m_Lens.m_SensorSize.x
+      value: 5.2194095
       objectReference: {fileID: 0}
     - target: {fileID: 7430557789255352399, guid: 4ccb3739aabd4ea48868eef210647889, type: 3}
       propertyPath: m_Name
@@ -236,6 +241,10 @@ PrefabInstance:
     - target: {fileID: 143298657033945302, guid: 5855eea929cc3d64bbf018aa675bab52, type: 3}
       propertyPath: m_TagString
       value: MainCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 6083728569883610765, guid: 5855eea929cc3d64bbf018aa675bab52, type: 3}
+      propertyPath: m_Lens.m_SensorSize.x
+      value: 5.2194095
       objectReference: {fileID: 0}
     - target: {fileID: 7161563319465371639, guid: 5855eea929cc3d64bbf018aa675bab52, type: 3}
       propertyPath: m_RootOrder

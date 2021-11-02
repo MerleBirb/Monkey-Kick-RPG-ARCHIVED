@@ -56,8 +56,8 @@ namespace MonkeyKick.PhysicalObjects.Characters
         #region EVENTS
 
         // Battle event
-        public delegate void BattleTrigger();
-        public event BattleTrigger OnBattleStart;
+        public delegate void BattleStartTrigger();
+        public event BattleStartTrigger OnBattleStart;
         public void InvokeOnBattleStart()
         {
             OnBattleStart?.Invoke();
