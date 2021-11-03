@@ -40,14 +40,14 @@ namespace MonkeyKick.RPGSystem
             ResetTurns();
         }
 
-        void Update()
-        {
-            UpdateTurns();
-        }
-
         private void OnDisable()
         {
             ResetBattle();
+        }
+
+        void Update()
+        {
+            UpdateTurns();
         }
 
         #endregion

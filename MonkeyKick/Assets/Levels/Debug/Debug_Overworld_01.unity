@@ -443,6 +443,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433044633}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &531000687 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2386541117402980431, guid: 9c2b97edf685eec419abe891bb35cc8f, type: 3}
+  m_PrefabInstance: {fileID: 6068726956850377878}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80c4201eb2773d48a3aef6081c6ed8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &936362227 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2620644519227634201, guid: be54eb4d60128b64f9e851565748f140, type: 3}
@@ -895,6 +906,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1587871313, guid: e4b3c1c3279ee894ebbca0c6e1db7e94, type: 3}
+      propertyPath: turnSystem
+      value: 
+      objectReference: {fileID: 531000687}
     - target: {fileID: 1177747609784560613, guid: e4b3c1c3279ee894ebbca0c6e1db7e94, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1035,19 +1050,19 @@ PrefabInstance:
       objectReference: {fileID: 936362227}
     - target: {fileID: 6068726956829604270, guid: 9c2b97edf685eec419abe891bb35cc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000023504354
+      value: 0.00000002350435
       objectReference: {fileID: 0}
     - target: {fileID: 6068726956829604270, guid: 9c2b97edf685eec419abe891bb35cc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000000629797
+      value: -0.0000000062979697
       objectReference: {fileID: 0}
     - target: {fileID: 6068726957767285218, guid: 9c2b97edf685eec419abe891bb35cc8f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000023504354
+      value: 0.00000002350435
       objectReference: {fileID: 0}
     - target: {fileID: 6068726957767285218, guid: 9c2b97edf685eec419abe891bb35cc8f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000000629797
+      value: -0.0000000062979697
       objectReference: {fileID: 0}
     - target: {fileID: 9053228104467544640, guid: 9c2b97edf685eec419abe891bb35cc8f, type: 3}
       propertyPath: m_RootOrder
