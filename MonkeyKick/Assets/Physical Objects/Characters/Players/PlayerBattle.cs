@@ -61,7 +61,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
                     case BattleStates.Counter: Jump(); break;
                 }
 
-            } 
+            }
         }
 
         private void OnEnable()
@@ -69,8 +69,9 @@ namespace MonkeyKick.PhysicalObjects.Characters
             _controls?.Battle.Enable();
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
             _controls?.Battle.Disable();
         }
 
@@ -89,8 +90,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
             menuChoice.Variable.Value = 0; // reset it every battle
             AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE_R); // get into battle idle
         }
-
-        
 
         protected virtual void ChooseAction()
         {

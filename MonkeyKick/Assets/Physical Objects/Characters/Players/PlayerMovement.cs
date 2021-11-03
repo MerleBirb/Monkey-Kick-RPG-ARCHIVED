@@ -67,11 +67,12 @@ namespace MonkeyKick.PhysicalObjects.Characters
                 fighters.Add(enemy);
 
                 _physics?.ResetMovement(); // zero current velocity
-                gameManager.InitiateBattle(betweenPos, fighters);
+                _movement = Vector2.zero;
 
                 // battle start on both the player and the enemy
                 InvokeOnBattleStart();
                 enemyMove.InvokeOnBattleStart();
+                gameManager.InitiateBattle(betweenPos, fighters);
             }
         }
 

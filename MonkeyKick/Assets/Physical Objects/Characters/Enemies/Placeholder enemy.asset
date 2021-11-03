@@ -16,7 +16,7 @@ MonoBehaviour:
   _level: 1
   _description: Bruh
   _maxHP: 15
-  _currentHP: 0
+  _currentHP: 15
   _maxKi: 10
   _currentKi: 10
   _muscle: 10

@@ -16,7 +16,7 @@ MonoBehaviour:
   _level: 1
   _description: Coolest guy
   _maxHP: 28
-  _currentHP: 20
+  _currentHP: 28
   _maxKi: 15
   _currentKi: 15
   _muscle: 25

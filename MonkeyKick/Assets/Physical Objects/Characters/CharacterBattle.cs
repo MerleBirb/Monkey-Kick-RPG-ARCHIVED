@@ -90,7 +90,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         }
 
         protected virtual void Update()
-        {   
+        {
             CheckHealth();
             if (_isTurn != Turn.isTurn) { _isTurn = Turn.isTurn; }
         }
@@ -100,7 +100,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
             _physics?.ObeyGravity();
         }
 
-        private void OnEnable()
+        protected virtual void OnDisable()
         {
             _battleState = BattleStates.EnterBattle;
         }

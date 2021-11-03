@@ -33,23 +33,16 @@ namespace MonkeyKick.RPGSystem
 
         #region UNITY METHODS
 
-        private void Start()
+        private void OnEnable()
         {
             FillTurnOrder();
             SortTurnOrder();
             ResetTurns();
-
-            gameManager.OnBattleEnd += ResetBattle;
         }
 
         void Update()
         {
             UpdateTurns();
-        }
-
-        private void OnEnable()
-        {
-            ResetBattle();
         }
 
         private void OnDisable()
@@ -64,9 +57,7 @@ namespace MonkeyKick.RPGSystem
         private void FillTurnOrder()
         {
             // transfer the list to the turn order, clear from game manager when done
-            _allCombatants.Clear();
             _allCombatants.AddRange(gameManager.CurrentFighters);
-            gameManager.ClearCurrentFighters();
 
             for (int i = 0; i < _allCombatants.Count; i++)
             {
@@ -79,6 +70,7 @@ namespace MonkeyKick.RPGSystem
                 else if(_allCombatants[i].CompareTag(ENEMY_TAG)) _enemyParty.Add(_allCombatants[i]);
             }
 
+            gameManager.ClearCurrentFighters();
             _allLoaded = true;
         }
 
@@ -113,38 +105,40 @@ namespace MonkeyKick.RPGSystem
 
         private void UpdateTurns()
         {
-            if (!EnemyPartyDefeated())
+            for (int i = 0; i < _turnOrder.Count; i++)
             {
-                for (int i = 0; i < _turnOrder.Count; i++)
+                if (!_turnOrder[i].wasTurnPrev)
                 {
-                    CheckIfCharacterIsDead(i);
-
-                    if (!_turnOrder[i].wasTurnPrev)
-                    {
-                        _turnOrder[i].isTurn = true;
-                        break;
-                    }
-                    else if (i == _turnOrder.Count - 1 && _turnOrder[i].wasTurnPrev)
-                    {
-                        ResetTurns();
-                    }
+                    if (CheckIfCharacterIsDead(i)) continue;
+                    _turnOrder[i].isTurn = true;
+                    break;
                 }
-            }
-            else
-            {
-                gameManager.EndBattle();
+                else if (i == _turnOrder.Count - 1 && _turnOrder[i].wasTurnPrev)
+                {
+                    if (EnemyPartyDefeated())
+                    {
+                        gameManager.EndBattle();
+                        return;
+                    }
+
+                    ResetTurns();
+                }
             }
         }
 
         // remove the character if they're dead
-        private void CheckIfCharacterIsDead(int index)
+        private bool CheckIfCharacterIsDead(int index)
         {
             if (_turnOrder[index].isDead)
             {
                 if (_turnOrder[index].character.CompareTag(PLAYER_TAG)) { _playerParty.Remove(_turnOrder[index].character); }
                 else if (_turnOrder[index].character.CompareTag(ENEMY_TAG)) { _enemyParty.Remove(_turnOrder[index].character); }
                 _turnOrder.RemoveAt(index);
+
+                return true;
             }
+
+            return false;
         }
 
         // check if the enemy party has been wiped out
