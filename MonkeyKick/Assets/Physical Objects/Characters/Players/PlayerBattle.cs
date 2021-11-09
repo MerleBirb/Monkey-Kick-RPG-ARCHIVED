@@ -1,6 +1,7 @@
 // Merle Roji
 // 10/13/21
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MonkeyKick.Controls;
@@ -146,15 +147,17 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         #region COUNTER ATTACKS
 
-        public void Jump()
+        private void Jump()
         {
-            if (_jump.triggered)
+            if (_jump.triggered && _physics.OnGround())
             {
-                if (_physics.OnGround())
-                {
-                    _physics.Jump();
-                }
+                _physics.Jump();
             }
+        }
+
+        private IEnumerator CoroutinePunch()
+        {
+            yield return null;
         }
 
         #endregion

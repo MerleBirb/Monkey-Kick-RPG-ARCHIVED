@@ -9,6 +9,13 @@ namespace MonkeyKick.RPGSystem.Hitboxes
 {
     public class Hitbox : MonoBehaviour
     {
+        private enum TypeOfTarget
+        {
+            Player,
+            Enemy
+        }
+        [SerializeField] private TypeOfTarget typeOfTarget;
+
         [HideInInspector] public int damage;
         [HideInInspector] public CharacterBattle target;
 
@@ -16,10 +23,21 @@ namespace MonkeyKick.RPGSystem.Hitboxes
 
         private void OnTriggerEnter(Collider col)
         {
-            if (!_hasHit && col.CompareTag(TagsQoL.PLAYER_TAG))
+            if (typeOfTarget == TypeOfTarget.Player)
             {
-                target.Stats.Damage(damage);
-                _hasHit = true;
+                if (!_hasHit && col.CompareTag(TagsQoL.PLAYER_TAG))
+                {
+                    target.Stats.Damage(damage);
+                    _hasHit = true;
+                }
+            }
+            else if (typeOfTarget == TypeOfTarget.Enemy)
+            {
+                if (!_hasHit && col.CompareTag(TagsQoL.ENEMY_TAG))
+                {
+                    target.Stats.Damage(damage);
+                    _hasHit = true;
+                }
             }
         }
     }

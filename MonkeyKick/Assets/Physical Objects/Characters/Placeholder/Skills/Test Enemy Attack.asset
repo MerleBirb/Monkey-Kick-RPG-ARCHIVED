@@ -17,4 +17,4 @@ MonoBehaviour:
   skillValue: 0.25
   timeItTakesToMoveToTarget: 1
   xOffsetFromTarget: 0.3
-  hitboxPrefab: {fileID: 4828626079058610803, guid: 45cf11604a6bccc43ad990ea81220132, type: 3}
+  hitboxPrefab: {fileID: 3214673851013663870, guid: f3c6c75fd43e65e4c84f8d5e00c3dc6b, type: 3}

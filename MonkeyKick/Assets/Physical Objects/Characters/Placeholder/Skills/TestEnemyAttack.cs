@@ -52,7 +52,7 @@ namespace MonkeyKick.RPGSystem
             // Damage the target with a hitbox
             actor.ChangeAnimation(ATTACK);
             int damageScaling = (int)(actor.Stats.Muscle * skillValue);
-            Vector3 hitboxScale = new Vector3(0.75f, 0.5f, 0.75f);
+            Vector3 hitboxScale = new Vector3(0.5f, 0.4f, 0.5f);
             InstantiateHitbox(hitboxPrefab, actor.HurtBoxes[(int)BodyParts.LeftArm], hitboxScale, target, damageScaling, 0.10f);
 
             yield return new WaitForSeconds(0.3f);

@@ -256,7 +256,7 @@ MonoBehaviour:
     isTurn: 0
     wasTurnPrev: 0
     isDead: 0
-  Stats: {fileID: 11400000, guid: f8df83176c7d75749930c2d480684a68, type: 2}
+  Stats: {fileID: 11400000, guid: 6a9df6ba2791dfa4c9eb702c04ff5e6b, type: 2}
   _startingBattlePos: {x: 3, y: 0}
 --- !u!114 &560959374942471580
 MonoBehaviour:

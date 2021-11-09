@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2192200883825006259}
   - component: {fileID: 3214673851013663870}
   m_Layer: 0
-  m_Name: Cube Hitbox
+  m_Name: Hitbox for enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -25,7 +25,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
                     case BattleStates.Action: break;
                 }
 
-            } 
+            }
         }
 
         #endregion
@@ -38,7 +38,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
             AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE_L);
         }
 
-        protected virtual void ChooseAction()
+        protected void ChooseAction()
         {
                 // save battle position for returning from skills and counterattacks
                 _battlePos.x = transform.position.x;
@@ -46,6 +46,11 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
             Stats.SkillList[0].Action(this, _turnSystem.PlayerParty[0]);
             _battleState = BattleStates.Action;
+        }
+
+        protected void CheckInterrupt()
+        {
+            
         }
 
         #endregion
