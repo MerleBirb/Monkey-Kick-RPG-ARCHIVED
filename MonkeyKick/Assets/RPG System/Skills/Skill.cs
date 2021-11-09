@@ -4,10 +4,11 @@
 using UnityEngine;
 using MonkeyKick.PhysicalObjects.Characters;
 using MonkeyKick.RPGSystem.Hitboxes;
+using MonkeyKick.LogicPatterns.StateMachines;
 
 namespace MonkeyKick.RPGSystem
 {
-    public abstract class Skill : ScriptableObject
+    public abstract class Skill : ScriptableObjectStateMachine
     {
         #region DESCRIPTORS
 
@@ -20,8 +21,12 @@ namespace MonkeyKick.RPGSystem
 
         #endregion
 
-        // Action
-        public abstract void Action(CharacterBattle actor, CharacterBattle target);
+        #region STATE MACHINE METHODS
+
+        // sets the actor, target, and actions of the attack
+        public abstract void Init(CharacterBattle newActor, CharacterBattle[] newTargets);
+
+        #endregion
 
         #region HITBOX METHODS
 
