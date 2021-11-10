@@ -7,26 +7,25 @@ namespace MonkeyKick.LogicPatterns.StateMachines
 {
     public class State
     {
-        
-        protected StateAction[] fixedActions; // actions that run in the FixedUpdate() function
-        protected StateAction[] updateActions; // actions that run in the Update() function
+        protected StateAction[] _fixedUpdateActions; // actions that run in the FixedUpdate() function
+        protected StateAction[] _updateActions; // actions that run in the Update() function
         protected bool forceSkip;
 
         // Constructor
-        public State(StateAction[] fixedActions, StateAction[] updateActions)
+        public State(StateAction[] fixedUpdateActions, StateAction[] updateActions)
         {
-            this.fixedActions = fixedActions;
-            this.updateActions = updateActions;
+            _fixedUpdateActions = fixedUpdateActions;
+            _updateActions = updateActions;
         }
 
         public void FixedTick()
         {
-            ExecuteActionsArray(fixedActions);
+            ExecuteActionsArray(_fixedUpdateActions);
         }
 
         public void Tick()
         {
-            ExecuteActionsArray(updateActions);
+            ExecuteActionsArray(_updateActions);
             forceSkip = false; // force skip happens in normal tick because FixedUpdate() has priority over Update()
         }
 
@@ -37,9 +36,8 @@ namespace MonkeyKick.LogicPatterns.StateMachines
             for (int i = 0; i < array.Length; i++)
             {
                 if (forceSkip) break; // skip if action is already executing
-                forceSkip = updateActions[i].Execute();
+                forceSkip = _updateActions[i].Execute();
             }
         }
-        
     }
 }

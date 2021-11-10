@@ -29,43 +29,37 @@ namespace MonkeyKick.RPGSystem
         const string WINDUP = "Punch_windup_right";
         const string ATTACK = "Punch_attack_right";
 
-        // actor
-        protected PlayerBattle _actor;
-        protected Transform _actorTransform;
-        protected Rigidbody _actorRb;
-
-        // target
-        protected EnemyBattle _target;
-        protected Transform _targetTransform;
-        protected Rigidbody _targetRb;
-
         #endregion
 
         public override void Init(CharacterBattle newActor, CharacterBattle[] newTargets)
         {
             // set up actor
-            _actor = (PlayerBattle)newActor;
-            _actorRb = _actor.GetComponent<Rigidbody>();
-            _actorTransform = newActor.transform;
-            
+            actor = (PlayerBattle)newActor;
+            actorRb = actor.GetComponent<Rigidbody>();
+            actorTransform = actor.transform;
+            actorAnim = actor.GetComponent<Animator>();
+
             // set up target
-            _target = (EnemyBattle)newTargets[0];
-            _targetRb = _target.GetComponent<Rigidbody>();
-            _targetTransform = _target.transform;
+            target = (EnemyBattle)newTargets[0];
+            targetRb = target.GetComponent<Rigidbody>();
+            targetTransform = target.transform;
+            targetAnim = target.GetComponent<Animator>();
 
             State moveToEnemy = new State
             (
                 // Fixed Update actions
                 new StateAction[]
                 {
-
+                    new ActorMoveToTarget(this, "TimedInputAttack", timeItTakesToMoveToTarget, xOffsetFromTarget)
                 },
-                // Update actions
+                // Update Actions
                 new StateAction[]
                 {
-
+                    new ChangeAnimation(actorAnim, BATTLE_STANCE)
                 }
             );
+
+            allStates.Add("MoveToEnemy", moveToEnemy);
         }
 
         /// <summary>
@@ -135,11 +129,6 @@ namespace MonkeyKick.RPGSystem
             actorRb.velocity = Vector3.zero; // stop movement when original position is reached
             yield return null;
             actor.ResetAfterAction();
-        }
-
-        public override void Action(CharacterBattle actor, CharacterBattle target)
-        {
-            actor.StartCoroutine(CoroutineAction(actor, target));
         }
     }
 }

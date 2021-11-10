@@ -47,6 +47,22 @@ namespace MonkeyKick.PhysicalObjects.Characters
             _jump = _controls.Battle.Jump;
         }
 
+        protected void FixedUpdate()
+        {
+            if (gameManager.GameState == GameStates.Battle)
+            {
+                switch(_battleState)
+                {
+                    case BattleStates.Action:
+                    {
+                        Stats.SkillList[0].FixedTick();
+
+                        break;
+                    }
+                }
+            }
+        }
+
         protected override void Update()
         {
             base.Update();
@@ -58,7 +74,13 @@ namespace MonkeyKick.PhysicalObjects.Characters
                     case BattleStates.EnterBattle: EnterBattle(); break;
                     case BattleStates.Wait: Wait(); break;
                     case BattleStates.ChooseAction: ChooseAction(); break;
-                    case BattleStates.Action: CheckInput(); break;
+                    case BattleStates.Action:
+                    {
+                        CheckInput();
+                        Stats.SkillList[0].Tick();
+
+                        break;
+                    }
                     case BattleStates.Counter: Jump(); break;
                 }
 
@@ -132,7 +154,9 @@ namespace MonkeyKick.PhysicalObjects.Characters
                         _battlePos.x = transform.position.x;
                         _battlePos.y = transform.position.z;
 
-                        Stats.SkillList[0].Action(this, _turnSystem.EnemyParty[0]);
+                        // initiate the skill
+                        Stats.SkillList[0].Init(this, new CharacterBattle[] { _turnSystem.EnemyParty[0] });
+
                         _battleState = BattleStates.Action;
 
                         break;
@@ -153,11 +177,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
             {
                 _physics.Jump();
             }
-        }
-
-        private IEnumerator CoroutinePunch()
-        {
-            yield return null;
         }
 
         #endregion

@@ -21,6 +21,22 @@ namespace MonkeyKick.RPGSystem
 
         #endregion
 
+        #region PRIVATE FIELDS
+
+        // actor
+        [HideInInspector] public PlayerBattle actor;
+        [HideInInspector] public Transform actorTransform;
+        [HideInInspector] public Rigidbody actorRb;
+        [HideInInspector] public Animator actorAnim;
+
+        // target
+        [HideInInspector] public EnemyBattle target;
+        [HideInInspector] public Transform targetTransform;
+        [HideInInspector] public Rigidbody targetRb;
+        [HideInInspector] public Animator targetAnim;
+
+        #endregion
+
         #region STATE MACHINE METHODS
 
         // sets the actor, target, and actions of the attack

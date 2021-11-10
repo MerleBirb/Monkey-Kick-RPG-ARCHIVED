@@ -19,7 +19,7 @@ namespace MonkeyKick.LogicPatterns.StateMachines
             return returnValue;
         }
 
-        protected void SetState(string targetID)
+        public void SetState(string targetID)
         {
             State targetState = GetState(targetID);
             if (targetState == null) Debug.LogError(targetID + " was not found."); // if the targetID wasnt found 
@@ -30,12 +30,12 @@ namespace MonkeyKick.LogicPatterns.StateMachines
 
         #region STATE PATTERN METHODS
 
-        protected void FixedTick()
+        public void FixedTick()
         {
             if (currentState != null) currentState.FixedTick(); // set the current state to execute its actions in the FixedUpdate() loop
         }
 
-        protected void Tick()
+        public void Tick()
         {
             if (currentState != null) currentState.Tick(); // set the current state to execute its actions in the Update() loop
         }
