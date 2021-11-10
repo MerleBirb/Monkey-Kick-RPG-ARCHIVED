@@ -1,12 +1,9 @@
 // Merle Roji
 // 11/9/21
 
-using System;
 using UnityEngine;
-using MonkeyKick.RPGSystem;
-using MonkeyKick.LogicPatterns.StateMachines;
 
-namespace MonkeyKick
+namespace MonkeyKick.LogicPatterns.StateMachines
 {
     public class ChangeAnimation : StateAction
     {
@@ -26,11 +23,11 @@ namespace MonkeyKick
 
             if (currentAnimHash == newAnimHash)
             {
-                return true;
+                return true; // return and don't change the animation if the current animation is equal to the new animation
             }
             else if (currentAnimHash != newAnimHash)
             {
-                _anim.Play(newAnimHash);
+                _anim.Play(newAnimHash); // return and change the animation if the current animation is NOT equal to the new animation
                 return true;
             }
 

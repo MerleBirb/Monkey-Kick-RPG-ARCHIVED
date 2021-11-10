@@ -15,6 +15,15 @@ MonoBehaviour:
   skillName: Enemy Dash
   skillDescription: 
   skillValue: 0.25
-  timeItTakesToMoveToTarget: 1
+  currentRating: 0
+  actor: {fileID: 0}
+  actorTransform: {fileID: 0}
+  actorRb: {fileID: 0}
+  actorAnim: {fileID: 0}
+  target: {fileID: 0}
+  targetTransform: {fileID: 0}
+  targetRb: {fileID: 0}
+  targetAnim: {fileID: 0}
+  xVelToTarget: -8
   xOffsetFromTarget: 0.3
   hitboxPrefab: {fileID: 3214673851013663870, guid: f3c6c75fd43e65e4c84f8d5e00c3dc6b, type: 3}

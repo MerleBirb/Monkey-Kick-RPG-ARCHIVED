@@ -59,6 +59,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
                         break;
                     }
+                    case BattleStates.Counter: Jump(); break;
                 }
             }
         }
@@ -81,7 +82,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
                         break;
                     }
-                    case BattleStates.Counter: Jump(); break;
                 }
 
             }

@@ -103,6 +103,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         protected virtual void OnDisable()
         {
             _battleState = BattleStates.EnterBattle;
+            _battleStarted = false;
         }
 
         #endregion
@@ -111,13 +112,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         protected virtual void EnterBattle()
         {
-            // set up battle position
-            if (!_battleStarted)
-            {
-                StartCoroutine(JumpIntoBattlePosition());
-                _battleStarted = true;
-            }
-
             // if turn system not injected
             if (!_turnSystem) _turnSystem = FindObjectOfType<TurnSystem>();
 
@@ -125,6 +119,27 @@ namespace MonkeyKick.PhysicalObjects.Characters
             foreach(TurnClass tc in _turnSystem.TurnOrder)
             {
                 if (tc.character.name == gameObject.name) Turn = tc;
+            }
+
+            // set up battle position
+            if (!_battleStarted)
+            {
+                // jump into position
+                transform.position += new Vector3(_startingBattlePos.x, 0f, _startingBattlePos.y);
+                //Vector3 landPos = transform.position + new Vector3(_startingBattlePos.x, 0f, _startingBattlePos.y);
+                //ParabolaData jumpData = PhysicsQoL.CalculateParabolaData(transform.position, landPos, 1f, 0f, Physics.gravity.y);
+                //PhysicsQoL.ParabolaMove(jumpData, _physics?.GetRigidbody());
+
+                _battleStarted = true;
+            }
+            else
+            {
+                if (_turnSystem.TurnSystemLoaded && _physics.OnGround())
+                {
+                    // stop movement after jump
+                    _physics?.ResetMovement();
+                    _battleState = BattleStates.Wait;
+                }
             }
         }
 
@@ -143,12 +158,10 @@ namespace MonkeyKick.PhysicalObjects.Characters
             PhysicsQoL.ParabolaMove(jumpData, _physics?.GetRigidbody());
             yield return new WaitForSeconds(jumpData.TimeToTarget);
 
-            // stop movement after jump
-            _physics?.ResetMovement();
+            
 
             // change to Wait state
-            if (_turnSystem.TurnSystemLoaded && _physics.OnGround()) _battleState = BattleStates.Wait;
-            _battleStarted = false;
+            if (_turnSystem.TurnSystemLoaded && _physics.OnGround()) 
 
             yield return null;
         }

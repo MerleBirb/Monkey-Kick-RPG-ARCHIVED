@@ -4,36 +4,33 @@
 using System;
 using UnityEngine;
 using MonkeyKick.RPGSystem;
-using MonkeyKick.LogicPatterns.StateMachines;
 
-namespace MonkeyKick
+namespace MonkeyKick.LogicPatterns.StateMachines
 {
     public class ActorMoveToTarget : StateAction
     {
         private Skill _skill; // store the state machine of the skill
         private string _targetState; // the target state that this state will transition to
-        private float _time; // time it takes to reach the target
+        private Vector3 _targetPos; // target position to reach
+        private Vector3 _velocity; // velocity to reach the target
         private float _xOffset; // x offset from the target
 
-        public ActorMoveToTarget(Skill skill, string targetState, float time = 1f, float xOffset = 0f)
+        public ActorMoveToTarget(Skill skill, string targetState, Vector3 targetPos, Vector3 velocity, float xOffset = 0f)
         {
             _skill = skill;
             _targetState = targetState;
-            _time = time;
+            _targetPos = targetPos;
+            _velocity = velocity;
             _xOffset = xOffset;
         }
 
         public override bool Execute()
         {
-            Vector3 actorPos = _skill.actorTransform.position; // store the actor's position
-            Vector3 targetPos = _skill.targetTransform.position; // store the target's position
+            _skill.actorRb.velocity = _velocity; // set the velocity of the actor
 
-            Vector3 goalPosition = new Vector3(targetPos.x + _xOffset, targetPos.y, targetPos.z); // where to move to
-            Vector3 goalVelocity = (goalPosition - actorPos) / _time; // velocity equation to reach the goalPosition
-            _skill.actorRb.velocity = goalVelocity; // set the velocity of the actor
-
-            if ((float)Math.Round(actorPos.x) == (float)Math.Round(goalPosition.x))
+            if ((float)Math.Round(_skill.actorTransform.position.x) == (float)Math.Round(_targetPos.x + _xOffset))
             {
+                _skill.actorRb.velocity = Vector3.zero;
                 _skill.SetState(_targetState); // change state when ready
                 return true;
             }

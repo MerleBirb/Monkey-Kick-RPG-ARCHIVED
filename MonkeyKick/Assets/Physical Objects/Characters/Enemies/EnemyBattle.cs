@@ -11,6 +11,23 @@ namespace MonkeyKick.PhysicalObjects.Characters
     {
         #region UNITY METHODS
 
+        protected void FixedUpdate()
+        {
+            if (gameManager.GameState == GameStates.Battle)
+            {
+                switch (_battleState)
+                {
+                    case BattleStates.Action:
+                    {
+                        Stats.SkillList[0].FixedTick();
+
+                        break;
+                    }
+                }
+
+            }
+        }
+
         protected override void Update()
         {
             base.Update();
@@ -22,7 +39,12 @@ namespace MonkeyKick.PhysicalObjects.Characters
                     case BattleStates.EnterBattle: EnterBattle(); break;
                     case BattleStates.Wait: Wait(); break;
                     case BattleStates.ChooseAction: ChooseAction(); break;
-                    case BattleStates.Action: break;
+                    case BattleStates.Action:
+                    {
+                        Stats.SkillList[0].Tick();
+
+                        break;
+                    }
                 }
 
             }
@@ -40,11 +62,11 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         protected void ChooseAction()
         {
-                // save battle position for returning from skills and counterattacks
-                _battlePos.x = transform.position.x;
-                _battlePos.y = transform.position.z;
+            // save battle position for returning from skills and counterattacks
+            _battlePos.x = transform.position.x;
+            _battlePos.y = transform.position.z;
 
-            Stats.SkillList[0].Action(this, _turnSystem.PlayerParty[0]);
+            Stats.SkillList[0].Init(this, new CharacterBattle[] { _turnSystem.PlayerParty[0] });
             _battleState = BattleStates.Action;
         }
 

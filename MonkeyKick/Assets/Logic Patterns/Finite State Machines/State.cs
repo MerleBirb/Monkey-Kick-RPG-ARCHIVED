@@ -9,7 +9,7 @@ namespace MonkeyKick.LogicPatterns.StateMachines
     {
         protected StateAction[] _fixedUpdateActions; // actions that run in the FixedUpdate() function
         protected StateAction[] _updateActions; // actions that run in the Update() function
-        protected bool forceSkip;
+        protected bool forceSkip = false;
 
         // Constructor
         public State(StateAction[] fixedUpdateActions, StateAction[] updateActions)
@@ -36,7 +36,7 @@ namespace MonkeyKick.LogicPatterns.StateMachines
             for (int i = 0; i < array.Length; i++)
             {
                 if (forceSkip) break; // skip if action is already executing
-                forceSkip = _updateActions[i].Execute();
+                forceSkip = array[i].Execute();
             }
         }
     }

@@ -2,9 +2,10 @@
 // 10/21/21
 
 using UnityEngine;
+using MonkeyKick.LogicPatterns.StateMachines;
 using MonkeyKick.PhysicalObjects.Characters;
 using MonkeyKick.RPGSystem.Hitboxes;
-using MonkeyKick.LogicPatterns.StateMachines;
+using MonkeyKick.QualityOfLife;
 
 namespace MonkeyKick.RPGSystem
 {
@@ -18,19 +19,20 @@ namespace MonkeyKick.RPGSystem
 
         [Header("Base Damage / Healing / Value for the skill to use")]
         [SerializeField] protected float skillValue;
+        [HideInInspector] public AttackRating currentRating; // how good you did on your current skill
 
         #endregion
 
         #region PRIVATE FIELDS
 
         // actor
-        [HideInInspector] public PlayerBattle actor;
+        [HideInInspector] public CharacterBattle actor;
         [HideInInspector] public Transform actorTransform;
         [HideInInspector] public Rigidbody actorRb;
         [HideInInspector] public Animator actorAnim;
 
         // target
-        [HideInInspector] public EnemyBattle target;
+        [HideInInspector] public CharacterBattle target;
         [HideInInspector] public Transform targetTransform;
         [HideInInspector] public Rigidbody targetRb;
         [HideInInspector] public Animator targetAnim;

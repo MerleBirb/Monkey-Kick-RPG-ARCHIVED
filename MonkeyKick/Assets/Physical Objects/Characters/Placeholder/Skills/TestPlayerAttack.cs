@@ -2,9 +2,8 @@
 // 10/21/21
 
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using MonkeyKick.PhysicalObjects.Characters;
-using MonkeyKick.QualityOfLife;
 using MonkeyKick.UserInterface;
 using MonkeyKick.LogicPatterns.StateMachines;
 
@@ -19,11 +18,14 @@ namespace MonkeyKick.RPGSystem
         [SerializeField] protected DisplayUserInterface effortRankPrefab;
         [SerializeField] protected DisplayDebugUI debugUIPrefab;
 
-        [Header("Specific Skill Variables.")]
-        [SerializeField] private float timeItTakesToMoveToTarget;
+        [Header("Velocity on the x-axis while moving towards the target")]
+        [SerializeField] private float xVelToTarget;
+        [Header("Time you have to input your button press")]
         [SerializeField] private float timeForPunch;
+        [Header("Offset on the x-axis for reaching target destination")]
         [SerializeField] private float xOffsetFromTarget;
-        [SerializeField] private float[] timeChecks; 
+        [Header("Your attack rating is proportional to what time interval you press your input in")]
+        [SerializeField] private float[] timeChecks;
 
         const string BATTLE_STANCE = "BattleStance_right";
         const string WINDUP = "Punch_windup_right";
@@ -33,102 +35,93 @@ namespace MonkeyKick.RPGSystem
 
         public override void Init(CharacterBattle newActor, CharacterBattle[] newTargets)
         {
+            allStates = new Dictionary<string, State>();
+
             // set up actor
-            actor = (PlayerBattle)newActor;
+            actor = newActor;
             actorRb = actor.GetComponent<Rigidbody>();
             actorTransform = actor.transform;
-            actorAnim = actor.GetComponent<Animator>();
+            actorAnim = actor.GetComponentInChildren<Animator>();
+            Vector3 returnPos = new Vector3(actor.BattlePos.x, actor.transform.position.y, actor.BattlePos.y);
 
             // set up target
-            target = (EnemyBattle)newTargets[0];
+            target = newTargets[0];
             targetRb = target.GetComponent<Rigidbody>();
             targetTransform = target.transform;
-            targetAnim = target.GetComponent<Animator>();
+            targetAnim = target.GetComponentInChildren<Animator>();
 
             State moveToEnemy = new State
             (
-                // Fixed Update actions
+                // fixed update actions
                 new StateAction[]
                 {
-                    new ActorMoveToTarget(this, "TimedInputAttack", timeItTakesToMoveToTarget, xOffsetFromTarget)
+                    new ActorMoveToTarget(this, "timedInputAttack", targetTransform.position, new Vector3(xVelToTarget, 0f, 0f), xOffsetFromTarget)
                 },
-                // Update Actions
+                // update Actions
                 new StateAction[]
                 {
                     new ChangeAnimation(actorAnim, BATTLE_STANCE)
                 }
             );
 
-            allStates.Add("MoveToEnemy", moveToEnemy);
-        }
-
-        /// <summary>
-        /// The actor is the one who uses the ability, while the target is the one who gets hit by the ability.
-        /// </summary>
-        private IEnumerator CoroutineAction(CharacterBattle actor, CharacterBattle target)
-        {
-            // save the rigidbody of the actor
-            Rigidbody actorRb = actor.GetComponent<Rigidbody>();
-            PlayerBattle actorPlayer = actor.GetComponent<PlayerBattle>();
-            float currentTime = timeForPunch;
-            AttackRating rating = AttackRating.Miss;
-
-            // save the positions of characters involved with the script
-            Vector3 actorPos = actor.transform.position;
-            Vector3 targetPos = new Vector3(target.transform.position.x + xOffsetFromTarget, 
-                actor.transform.position.y, target.transform.position.z);
-            Vector3 returnPos = new Vector3(actor.BattlePos.x, actor.transform.position.y, actor.BattlePos.y);
-
-            yield return null;
-
-            // move to target
-            actorRb.velocity = PhysicsQoL.LinearMove(actorPos, targetPos, timeItTakesToMoveToTarget, xOffsetFromTarget);
-            yield return new WaitForSeconds(timeItTakesToMoveToTarget - Time.fixedDeltaTime);
-
-            // wind up the attack
-            actor.ChangeAnimation(WINDUP);
-            actorRb.velocity = Vector3.zero; // stop movement when target is reached
-            actorPos = actor.transform.position;
-
-            DisplayDebugUI debugUI = Instantiate(debugUIPrefab);
-
-            while(currentTime >= 0f)
-            {
-                currentTime -= Time.deltaTime;
-                debugUI.DisplayUI(currentTime);
-
-                if (actorPlayer.pressedButtonSouth)
+            State timedInputAttack = new State
+            (
+                // fixed update actions
+                null,
+                // update actions
+                new StateAction[]
                 {
-                    rating = SkillQoL.TimedButtonPress(currentTime, timeForPunch, timeChecks);
-                    Destroy(debugUI.gameObject);
-                    break;
+                    new SingleTapTimedInput(this, "finishAttack", timeForPunch, timeChecks),
+                    new ChangeAnimation(actorAnim, WINDUP)
                 }
+            );
 
-                yield return null;
-            }
+            State finishAttack = new State
+            (
+                // fixed update actions
+                null,
+                // update actions
+                new StateAction[]
+                {
+                    new DamageTarget(this, "returnToBattlePos", actor.Stats.Muscle, skillValue, 0.25f),
+                    new ChangeAnimation(actorAnim, ATTACK)
+                }
+            );
 
-            Destroy(debugUI.gameObject);
-            yield return null;
+            State returnToBattlePos = new State
+            (
+                // fixed update actions
+                new StateAction[]
+                {
+                    new ActorMoveToTarget(this, "endSkill", returnPos, new Vector3(-xVelToTarget, 0f, 0f))
+                },
+                // update actions
+                new StateAction[]
+                {
+                    new ChangeAnimation(actorAnim, BATTLE_STANCE)
+                }
+            );
 
-            // Damage the target
-            actor.ChangeAnimation(ATTACK);
+            State endSkill = new State
+            (
+                // fixed update actions
+                null,
+                // update actions
+                new StateAction[]
+                {
+                    new EndSkill(this),
+                    new ChangeAnimation(actorAnim, BATTLE_STANCE)
+                }
+            );
 
-            // Display effort rank
-            DisplayUserInterface effortRank = Instantiate(effortRankPrefab);
-            effortRank.DisplayUI(rating);
+            allStates.Add("moveToEnemy", moveToEnemy);
+            allStates.Add("timedInputAttack", timedInputAttack);
+            allStates.Add("finishAttack", finishAttack);
+            allStates.Add("returnToBattlePos", returnToBattlePos);
+            allStates.Add("endSkill", endSkill);
 
-            int damageScaling = (int)(actor.Stats.Muscle * skillValue);
-            target.Stats.Damage(damageScaling);
-            yield return new WaitForSeconds(0.25f);
-
-            // move back to original position
-            actor.ChangeAnimation(BATTLE_STANCE);
-            actorRb.velocity = PhysicsQoL.LinearMove(actorPos, returnPos, timeItTakesToMoveToTarget);
-            yield return new WaitForSeconds(timeItTakesToMoveToTarget - Time.fixedDeltaTime);
-
-            actorRb.velocity = Vector3.zero; // stop movement when original position is reached
-            yield return null;
-            actor.ResetAfterAction();
+            // set first state
+            SetState("moveToEnemy");
         }
     }
 }
