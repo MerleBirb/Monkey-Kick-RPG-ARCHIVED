@@ -90,6 +90,7 @@ namespace MonkeyKick.RPGSystem
                 // fixed update actions
                 new StateAction[]
                 {
+                    new SetPlayerToStateFromEnemy(this, BattleStates.Wait),
                     new ActorMoveToTarget(this, "endSkill", returnPos, new Vector3(-xVelToTarget, 0f, 0f))
                 },
                 // update actions
@@ -106,7 +107,6 @@ namespace MonkeyKick.RPGSystem
                 // update actions
                 new StateAction[]
                 {
-                    new SetPlayerToStateFromEnemy(this, BattleStates.Wait),
                     new EndSkill(this),
                     new ChangeAnimation(actorAnim, BATTLE_STANCE)
                 }
