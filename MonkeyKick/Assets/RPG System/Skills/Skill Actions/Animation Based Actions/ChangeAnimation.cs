@@ -21,13 +21,12 @@ namespace MonkeyKick.LogicPatterns.StateMachines
             int currentAnimHash = _anim.GetCurrentAnimatorStateInfo(0).GetHashCode(); // store the current animation's hashcode
             int newAnimHash = Animator.StringToHash(_newAnim);
 
-            if (currentAnimHash == newAnimHash)
-            {
-                return true; // return and don't change the animation if the current animation is equal to the new animation
-            }
-            else if (currentAnimHash != newAnimHash)
+            if (currentAnimHash != newAnimHash)
             {
                 _anim.Play(newAnimHash); // return and change the animation if the current animation is NOT equal to the new animation
+            }
+            else
+            {
                 return true;
             }
 

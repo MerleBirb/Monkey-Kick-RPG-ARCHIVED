@@ -47,8 +47,10 @@ namespace MonkeyKick.PhysicalObjects.Characters
             _jump = _controls.Battle.Jump;
         }
 
-        protected void FixedUpdate()
+        protected override void FixedUpdate()
         {
+            base.FixedUpdate();
+
             if (gameManager.GameState == GameStates.Battle)
             {
                 switch(_battleState)
@@ -59,7 +61,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
                         break;
                     }
-                    case BattleStates.Counter: Jump(); break;
                 }
             }
         }
@@ -82,6 +83,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
                         break;
                     }
+                    case BattleStates.Counter: Jump(); break;
                 }
 
             }

@@ -11,8 +11,10 @@ namespace MonkeyKick.PhysicalObjects.Characters
     {
         #region UNITY METHODS
 
-        protected void FixedUpdate()
+        protected override void FixedUpdate()
         {
+            base.FixedUpdate();
+
             if (gameManager.GameState == GameStates.Battle)
             {
                 switch (_battleState)

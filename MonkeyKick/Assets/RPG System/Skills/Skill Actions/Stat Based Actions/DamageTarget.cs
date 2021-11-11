@@ -1,7 +1,6 @@
 // Merle Roji
 // 11/9/21
 
-using System;
 using UnityEngine;
 using MonkeyKick.RPGSystem;
 

@@ -19,8 +19,13 @@ namespace MonkeyKick.LogicPatterns.StateMachines
 
         public override bool Execute()
         {
-            _skill.target.BattleState = _newState;
-            return true;
+            if (_skill.target.BattleState != _newState)
+            {
+                _skill.target.BattleState = _newState;
+                return true;
+            }
+            
+            return false;
         }
     }
 }

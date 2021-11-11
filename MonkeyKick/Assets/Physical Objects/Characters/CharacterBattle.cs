@@ -95,7 +95,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
             if (_isTurn != Turn.isTurn) { _isTurn = Turn.isTurn; }
         }
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             _physics?.ObeyGravity();
         }
@@ -125,15 +125,13 @@ namespace MonkeyKick.PhysicalObjects.Characters
             if (!_battleStarted)
             {
                 // jump into position
-                transform.position += new Vector3(_startingBattlePos.x, 0f, _startingBattlePos.y);
-                //Vector3 landPos = transform.position + new Vector3(_startingBattlePos.x, 0f, _startingBattlePos.y);
-                //ParabolaData jumpData = PhysicsQoL.CalculateParabolaData(transform.position, landPos, 1f, 0f, Physics.gravity.y);
-                //PhysicsQoL.ParabolaMove(jumpData, _physics?.GetRigidbody());
-
+                StartCoroutine(JumpIntoBattlePosition());
                 _battleStarted = true;
             }
             else
             {
+                StopCoroutine(JumpIntoBattlePosition());
+
                 if (_turnSystem.TurnSystemLoaded && _physics.OnGround())
                 {
                     // stop movement after jump
@@ -154,14 +152,12 @@ namespace MonkeyKick.PhysicalObjects.Characters
             Vector3 landPos = transform.position + new Vector3(_startingBattlePos.x, 0f, _startingBattlePos.y);
 
             // jump into position
-            ParabolaData jumpData = PhysicsQoL.CalculateParabolaData(transform.position, landPos, 1f, 0f, Physics.gravity.y);
-            PhysicsQoL.ParabolaMove(jumpData, _physics?.GetRigidbody());
-            yield return new WaitForSeconds(jumpData.TimeToTarget);
+            // ParabolaData jumpData = PhysicsQoL.CalculateParabolaData(transform.position, landPos, 1f, 0f, Physics.gravity.y);
+            // PhysicsQoL.ParabolaMove(jumpData, _physics?.GetRigidbody());
+            // yield return new WaitForSeconds(jumpData.TimeToTarget);
 
-            
-
-            // change to Wait state
-            if (_turnSystem.TurnSystemLoaded && _physics.OnGround()) 
+            transform.position += new Vector3(_startingBattlePos.x, 0f, _startingBattlePos.y);
+            _battleState = BattleStates.Wait;
 
             yield return null;
         }

@@ -14,6 +14,7 @@ namespace MonkeyKick.LogicPatterns.StateMachines
         private Vector3 _targetPos; // target position to reach
         private Vector3 _velocity; // velocity to reach the target
         private float _xOffset; // x offset from the target
+        private bool _keepMoving = true;
 
         public ActorMoveToTarget(Skill skill, string targetState, Vector3 targetPos, Vector3 velocity, float xOffset = 0f)
         {
@@ -26,13 +27,27 @@ namespace MonkeyKick.LogicPatterns.StateMachines
 
         public override bool Execute()
         {
-            _skill.actorRb.velocity = _velocity; // set the velocity of the actor
+            if (_keepMoving) _skill.actorRb.velocity = _velocity; // set the velocity of the actor
 
-            if ((float)Math.Round(_skill.actorTransform.position.x) == (float)Math.Round(_targetPos.x + _xOffset))
+            if (_xOffset != 0f)
             {
-                _skill.actorRb.velocity = Vector3.zero;
-                _skill.SetState(_targetState); // change state when ready
-                return true;
+                if ((_skill.actorTransform.position - _targetPos).sqrMagnitude < _xOffset)
+                {
+                    _keepMoving = false;
+                    _skill.actorRb.velocity = Vector3.zero;
+                    _skill.SetState(_targetState); // change state when ready
+                    return true;
+                }
+            }
+            else
+            {
+                if (_skill.actorTransform.position == _targetPos)
+                {
+                    _keepMoving = false;
+                    _skill.actorRb.velocity = Vector3.zero;
+                    _skill.SetState(_targetState); // change state when ready
+                    return true;
+                }
             }
 
             return false;

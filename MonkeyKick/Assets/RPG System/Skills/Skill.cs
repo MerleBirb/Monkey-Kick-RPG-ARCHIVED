@@ -52,6 +52,7 @@ namespace MonkeyKick.RPGSystem
         {
             Hitbox newHitbox = Instantiate(prefab, bodyPart);
             newHitbox.transform.localScale = scale;
+            newHitbox.transform.rotation = Quaternion.identity;
             newHitbox.target = target;
             newHitbox.damage = damage;
             Destroy(newHitbox.gameObject, time);
