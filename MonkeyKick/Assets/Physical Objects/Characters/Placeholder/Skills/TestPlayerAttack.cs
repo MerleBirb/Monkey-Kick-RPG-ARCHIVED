@@ -15,7 +15,7 @@ namespace MonkeyKick.RPGSystem
         #region SKILL INFORMATION
 
         [Header("To display how good the player did with their button press")]
-        [SerializeField] protected DisplayUserInterface effortRankPrefab;
+        [SerializeField] protected DisplayEffortRank effortRankPrefab;
         [SerializeField] protected DisplayDebugUI debugUIPrefab;
 
         [Header("Velocity on the x-axis while moving towards the target")]
@@ -71,7 +71,8 @@ namespace MonkeyKick.RPGSystem
                 // update actions
                 new StateAction[]
                 {
-                    new SingleTapTimedInput(this, "finishAttack", timeForPunch, timeChecks),
+                    new SingleTapTimedInput(this, "finishAttack", timeForPunch, timeChecks, effortRankPrefab),
+                    new SpawnDebugUI(this, debugUIPrefab, timeForPunch),
                     new ChangeAnimation(actorAnim, WINDUP)
                 }
             );

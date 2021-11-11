@@ -6,6 +6,7 @@ using MonkeyKick.LogicPatterns.StateMachines;
 using MonkeyKick.PhysicalObjects.Characters;
 using MonkeyKick.RPGSystem.Hitboxes;
 using MonkeyKick.QualityOfLife;
+using MonkeyKick.UserInterface;
 
 namespace MonkeyKick.RPGSystem
 {
@@ -19,11 +20,11 @@ namespace MonkeyKick.RPGSystem
 
         [Header("Base Damage / Healing / Value for the skill to use")]
         [SerializeField] protected float skillValue;
-        [HideInInspector] public AttackRating currentRating; // how good you did on your current skill
+        [HideInInspector] public AttackRating currentRating;
 
         #endregion
 
-        #region PRIVATE FIELDS
+        #region CHARACTER FIELDS
 
         // actor
         [HideInInspector] public CharacterBattle actor;
@@ -46,8 +47,9 @@ namespace MonkeyKick.RPGSystem
 
         #endregion
 
-        #region HITBOX METHODS
+        #region INSTANTIATION METHODS
 
+        // Hitbox
         public virtual Hitbox InstantiateHitbox(Hitbox prefab, Transform bodyPart, Vector3 scale, CharacterBattle target, int damage, float time)
         {
             Hitbox newHitbox = Instantiate(prefab, bodyPart);
@@ -58,6 +60,24 @@ namespace MonkeyKick.RPGSystem
             Destroy(newHitbox.gameObject, time);
 
             return newHitbox;
+        }
+
+        // UI
+        public virtual DisplayEffortRank InstantiateEffortRank(DisplayEffortRank prefab, AttackRating attackRating, float time)
+        {
+            DisplayEffortRank newRank = Instantiate(prefab);
+            newRank.DisplayUI(attackRating);
+            Destroy(newRank.gameObject, time);
+
+            return newRank;
+        }
+
+        public virtual DisplayDebugUI InstantiateDebugUI(DisplayDebugUI prefab, float time)
+        {
+            DisplayDebugUI newDebugUI = Instantiate(prefab);
+            Destroy(newDebugUI.gameObject, time);
+
+            return newDebugUI;
         }
 
         #endregion

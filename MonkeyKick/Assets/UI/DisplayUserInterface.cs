@@ -9,7 +9,7 @@ namespace MonkeyKick.UserInterface
 {
     public abstract class DisplayUserInterface : MonoBehaviour
     {
-        public virtual void DisplayUI() { return; }
-        public virtual void DisplayUI(AttackRating attackRating) { return; }
+        public virtual void DisplayUI() {  }
+        public virtual void DisplayUI(AttackRating attackRating) { }
     }
 }

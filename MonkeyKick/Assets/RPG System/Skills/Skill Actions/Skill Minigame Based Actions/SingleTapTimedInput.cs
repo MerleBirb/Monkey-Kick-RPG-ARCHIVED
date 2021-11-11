@@ -5,6 +5,7 @@ using UnityEngine;
 using MonkeyKick.PhysicalObjects.Characters;
 using MonkeyKick.RPGSystem;
 using MonkeyKick.QualityOfLife;
+using MonkeyKick.UserInterface;
 
 namespace MonkeyKick.LogicPatterns.StateMachines
 {
@@ -16,9 +17,10 @@ namespace MonkeyKick.LogicPatterns.StateMachines
         private float _limitTime; // the limit for the timner
         private float _currentTime; // the current time on the timer
         private float[] _timeChecks; // the timestamps on which your rating changes
+        private DisplayEffortRank _prefab; // prefab for UI
 
 
-        public SingleTapTimedInput(Skill skill, string targetState, float limitTime, float[] timeChecks)
+        public SingleTapTimedInput(Skill skill, string targetState, float limitTime, float[] timeChecks, DisplayEffortRank prefab)
         {
             _skill = skill;
             _playerActor = skill.actor.GetComponent<PlayerBattle>();
@@ -26,6 +28,7 @@ namespace MonkeyKick.LogicPatterns.StateMachines
             _limitTime = limitTime;
             _currentTime = limitTime;
             _timeChecks = timeChecks;
+            _prefab = prefab;
         }
 
         public override bool Execute()
@@ -36,14 +39,13 @@ namespace MonkeyKick.LogicPatterns.StateMachines
 
                 if (_playerActor.pressedButtonSouth)
                 {
-                    _skill.currentRating = SkillQoL.TimedButtonPress(_currentTime, _limitTime, _timeChecks);
+                    _skill.InstantiateEffortRank(_prefab, SkillQoL.TimedButtonPress(_currentTime, _limitTime, _timeChecks), 0.2f);
                     _skill.SetState(_targetState);
                     return true;
                 }
             }
             else
             {
-                _skill.currentRating = AttackRating.Miss;
                 _skill.SetState(_targetState);
                 return true;
             }

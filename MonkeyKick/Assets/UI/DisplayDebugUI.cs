@@ -10,7 +10,7 @@ namespace MonkeyKick.UserInterface
     {
         [SerializeField] private TextMeshProUGUI effortRankText;
 
-        public void DisplayUI(float value)
+        public void DisplayTimer(float value)
         {
             effortRankText.text = value.ToString("F2") + " sec.";
         }

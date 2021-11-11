@@ -12,7 +12,6 @@ namespace MonkeyKick.UserInterface
         [SerializeField] private TextMeshProUGUI effortRankText;
         [SerializeField] private float secondsUntilDestroyed;
         [SerializeField] private Color[] color;
-        private string _effortRankString;
 
         public override void DisplayUI(AttackRating attackRating)
         {

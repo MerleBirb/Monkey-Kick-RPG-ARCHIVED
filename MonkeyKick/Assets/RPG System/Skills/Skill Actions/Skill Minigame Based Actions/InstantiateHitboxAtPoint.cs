@@ -40,6 +40,8 @@ namespace MonkeyKick.LogicPatterns.StateMachines
             {
                 return true;
             }
+
+            return false;
         }
     }
 }
