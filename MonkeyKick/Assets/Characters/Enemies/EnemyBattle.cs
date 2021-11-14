@@ -5,7 +5,7 @@ using UnityEngine;
 using MonkeyKick.Managers;
 using MonkeyKick.QualityOfLife;
 
-namespace MonkeyKick.PhysicalObjects.Characters
+namespace MonkeyKick.Characters
 {
     public class EnemyBattle : CharacterBattle
     {

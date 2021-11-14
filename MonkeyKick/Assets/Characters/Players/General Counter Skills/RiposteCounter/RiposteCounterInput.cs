@@ -4,8 +4,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MonkeyKick.RPGSystem;
-using MonkeyKick.QualityOfLife;
-using MonkeyKick.UserInterface;
 
 namespace MonkeyKick.LogicPatterns.StateMachines
 {

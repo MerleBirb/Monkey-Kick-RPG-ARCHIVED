@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cb91c72ad99b3b48a1cb8b3356ce04c, type: 3}
-  m_Name: Jump Counter
+  m_Script: {fileID: 11500000, guid: d9c0b52105012614987beaf82849e9b3, type: 3}
+  m_Name: Riposte Counter
   m_EditorClassIdentifier: 
-  skillName: Jump
+  skillName: Riposte
   skillDescription: 
-  skillValue: 0
+  skillValue: 0.5
   currentRating: 0
   actor: {fileID: 0}
   actorTransform: {fileID: 0}
@@ -24,4 +24,6 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   targetRb: {fileID: 0}
   targetAnim: {fileID: 0}
-  jumpHeight: 9.5
+  limitWindupTime: 0.3
+  attackDelay: 0.3
+  hitboxPrefab: {fileID: 5995252566311227569, guid: e119a390895600d47b84c582588f5fe4, type: 3}

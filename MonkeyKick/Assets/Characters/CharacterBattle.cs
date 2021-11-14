@@ -9,7 +9,7 @@ using MonkeyKick.Managers;
 using MonkeyKick.QualityOfLife;
 using MonkeyKick.RPGSystem;
 
-namespace MonkeyKick.PhysicalObjects.Characters
+namespace MonkeyKick.Characters
 {
     public enum BattleStates
     {

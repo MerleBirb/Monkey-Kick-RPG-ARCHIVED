@@ -7,7 +7,7 @@ using MonkeyKick.Managers;
 using MonkeyKick.QualityOfLife;
 using MonkeyKick.Cameras;
 
-namespace MonkeyKick.PhysicalObjects.Characters
+namespace MonkeyKick.Characters
 {
     public class SpriteBillboard : MonoBehaviour
     {

@@ -4,7 +4,7 @@
 using UnityEngine;
 using MonkeyKick.Managers;
 
-namespace MonkeyKick.PhysicalObjects.Characters
+namespace MonkeyKick.Characters
 {
     public class ManageCharacterState : MonoBehaviour
     {

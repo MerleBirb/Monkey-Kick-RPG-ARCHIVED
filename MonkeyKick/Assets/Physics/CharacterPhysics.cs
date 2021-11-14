@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-namespace MonkeyKick.PhysicalObjects
+namespace MonkeyKick.Characters
 {
     [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
     public class CharacterPhysics : MonoBehaviour, IPhysics

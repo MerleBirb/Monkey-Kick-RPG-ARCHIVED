@@ -5,7 +5,7 @@ using UnityEngine;
 using Unity.Collections;
 using System.Collections;
 using System.Collections.Generic;
-using MonkeyKick.PhysicalObjects.Characters;
+using MonkeyKick.Characters;
 using MonkeyKick.Managers;
 
 namespace MonkeyKick.RPGSystem

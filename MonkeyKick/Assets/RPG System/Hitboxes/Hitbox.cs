@@ -2,7 +2,7 @@
 // 10/31/21 (spooky)
 
 using UnityEngine;
-using MonkeyKick.PhysicalObjects.Characters;
+using MonkeyKick.Characters;
 using MonkeyKick.QualityOfLife;
 
 namespace MonkeyKick.RPGSystem.Hitboxes

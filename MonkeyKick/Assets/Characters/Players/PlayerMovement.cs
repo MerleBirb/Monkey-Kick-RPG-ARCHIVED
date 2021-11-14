@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using MonkeyKick.QualityOfLife;
 using MonkeyKick.Controls;
 
-namespace MonkeyKick.PhysicalObjects.Characters
+namespace MonkeyKick.Characters
 {
     public class PlayerMovement : CharacterMovement
     {

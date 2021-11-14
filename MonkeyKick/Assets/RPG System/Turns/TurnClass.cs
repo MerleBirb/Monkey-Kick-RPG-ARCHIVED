@@ -2,7 +2,7 @@
 // 10/19/21
 
 using Unity.Collections;
-using MonkeyKick.PhysicalObjects.Characters;
+using MonkeyKick.Characters;
 
 namespace MonkeyKick.RPGSystem
 {

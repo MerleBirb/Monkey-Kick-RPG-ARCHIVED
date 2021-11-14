@@ -1,7 +1,7 @@
 // Merle Roji
 // 11/14/21
 
-using MonkeyKick.PhysicalObjects.Characters;
+using MonkeyKick.Characters;
 
 namespace MonkeyKick.LogicPatterns.StateMachines
 {

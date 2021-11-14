@@ -4,11 +4,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MonkeyKick.RPGSystem.Hitboxes;
-using MonkeyKick.PhysicalObjects.Characters;
+using MonkeyKick.Characters;
 using MonkeyKick.LogicPatterns.StateMachines;
 
 namespace MonkeyKick.RPGSystem
 {
+    [CreateAssetMenu(fileName = "Riposte Counter", menuName = "RPGSystem/Counter Skills/Riposte Counter", order = 2)]
     public class RiposteCounter : Skill
     {
         [Header("Limit the windup timer goes to")]
@@ -39,13 +40,11 @@ namespace MonkeyKick.RPGSystem
             State idle = new State
             (
                 // fixed update actions
-                new StateAction[]
-                {
-
-                },
+                null,
                 // update actions
                 new StateAction[]
                 {
+                    new RiposteCounterPrepare(this, "prepping", player.ButtonEast),
                     new ChangeAnimation(actorAnim, BATTLE_STANCE)
                 }
             );
@@ -57,7 +56,7 @@ namespace MonkeyKick.RPGSystem
                 // update actions
                 new StateAction[]
                 {
-                    new RiposteCounterInput(this, "prepared", "idle", player.ButtonEast, 0.3f),
+                    new RiposteCounterInput(this, "prepared", "idle", player.ButtonEast, limitWindupTime),
                     new ChangeAnimation(actorAnim, WINDUP)
                 }
             );
@@ -65,13 +64,11 @@ namespace MonkeyKick.RPGSystem
             State prepared = new State
             (
                 // fixed update actions
-                new StateAction[]
-                {
-
-                },
+                null,
                 // update actions
                 new StateAction[]
                 {
+                    new RiposteCounterLaunch(this, "launchAttack", player.ButtonEast),
                     new ChangeAnimation(actorAnim, WINDUP)
                 }
             );
@@ -86,7 +83,7 @@ namespace MonkeyKick.RPGSystem
                 // update actions
                 new StateAction[]
                 {
-                    new DelayState(this, "idle", 0.4f),
+                    new DelayState(this, "idle", attackDelay),
                     new InstantiateHitboxAtPoint(this, hitboxPrefab, actor.HurtBoxes[(int)BodyParts.RightArm], hitboxScale, damageScaling, 0.1f),
                     new ChangeAnimation(actorAnim, ATTACK)
                 }

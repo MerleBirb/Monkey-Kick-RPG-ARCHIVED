@@ -9,7 +9,7 @@ using MonkeyKick.Managers;
 using MonkeyKick.QualityOfLife;
 using MonkeyKick.References;
 
-namespace MonkeyKick.PhysicalObjects.Characters
+namespace MonkeyKick.Characters
 {
     public class PlayerBattle : CharacterBattle
     {
