@@ -270,8 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c9b036b873e6c4eabf024543ddc24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  jumpHeight: 5
+  moveSpeed: 3
+  jumpHeight: 9
   rb: {fileID: 560959374942471582}
   col: {fileID: 560959374942471583}
   groundLayer:

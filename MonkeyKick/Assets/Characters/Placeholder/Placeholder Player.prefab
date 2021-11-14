@@ -216,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 11400000, guid: 47d4b28d46bdafd47a8ee10561f4691a, type: 2}
   direction: {fileID: 0}
-  isLeader: 1
+  isLeader: 0
 --- !u!114 &7617607231334096646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +245,11 @@ MonoBehaviour:
     isDead: 0
   Stats: {fileID: 11400000, guid: 05c44a9e2c37ad94694277c190b3a686, type: 2}
   _startingBattlePos: {x: -3, y: 0}
+  pressedJump: 0
+  pressedButtonNorth: 0
+  pressedButtonEast: 0
   pressedButtonSouth: 0
+  pressedButtonWest: 0
   menuChoice:
     UseConstant: 0
     ConstantValue: 0
