@@ -35,20 +35,10 @@ namespace MonkeyKick.RPGSystem
 
         public override void Init(CharacterBattle newActor, CharacterBattle[] newTargets)
         {
+            base.Init(newActor, newTargets);
+
             allStates = new Dictionary<string, State>();
-
-            // set up actor
-            actor = newActor;
-            actorRb = actor.GetComponent<Rigidbody>();
-            actorTransform = actor.transform;
-            actorAnim = actor.GetComponentInChildren<Animator>();
             Vector3 returnPos = new Vector3(actor.BattlePos.x, actor.transform.position.y, actor.BattlePos.y);
-
-            // set up target
-            target = newTargets[0];
-            targetRb = target.GetComponent<Rigidbody>();
-            targetTransform = target.transform;
-            targetAnim = target.GetComponentInChildren<Animator>();
 
             State moveToEnemy = new State
             (

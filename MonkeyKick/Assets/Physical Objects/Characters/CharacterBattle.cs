@@ -63,6 +63,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         #region PHYSICS
 
         protected IPhysics _physics;
+        public IPhysics CharacterPhysics { get => _physics; }
 
         [Header("The position the character goes when entering combat")]
         [SerializeField] private Vector2 _startingBattlePos;

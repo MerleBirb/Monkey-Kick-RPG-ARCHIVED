@@ -16,6 +16,7 @@ namespace MonkeyKick.PhysicalObjects
         void ResetMovement();
         void TurnOffGravity();
         void Jump();
+        void Jump(float height);
         bool OnGround();
         void ObeyGravity();
     }

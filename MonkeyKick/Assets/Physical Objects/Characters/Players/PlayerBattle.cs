@@ -23,6 +23,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         private Vector2 _movement;
         private bool _movePressed = false;
         [HideInInspector] public bool pressedButtonSouth;
+        [HideInInspector] public bool pressedJump;
 
         [SerializeField] private IntReference menuChoice;
 
@@ -83,7 +84,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
                         break;
                     }
-                    case BattleStates.Counter: Jump(); break;
+                    case BattleStates.Counter: CheckInput(); break;
                 }
 
             }
@@ -107,6 +108,7 @@ namespace MonkeyKick.PhysicalObjects.Characters
         private void CheckInput()
         {
             pressedButtonSouth = _buttonSouth.triggered;
+            pressedJump = _jump.triggered;
         }
 
         protected override void EnterBattle()
@@ -173,13 +175,13 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         #region COUNTER ATTACKS
 
-        private void Jump()
-        {
-            if (_jump.triggered && _physics.OnGround())
-            {
-                _physics.Jump();
-            }
-        }
+        //private void Jump()
+        //{
+        //    if (_jump.triggered && _physics.OnGround())
+        //    {
+        //        _physics.Jump();
+        //    }
+        //}
 
         #endregion
     }

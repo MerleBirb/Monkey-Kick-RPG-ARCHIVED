@@ -68,6 +68,11 @@ namespace MonkeyKick.PhysicalObjects
             rb.velocity += new Vector3(0f, jumpHeight, 0f);
         }
 
+        public void Jump(float height)
+        {
+            rb.velocity += new Vector3(0f, height, 0f);
+        }
+
         public bool OnGround()
         {
             float adjustHeight = (col.height / 2f) + 0.1f;
