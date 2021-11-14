@@ -3,7 +3,6 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
-using MonkeyKick.PhysicalObjects.Characters;
 using MonkeyKick.RPGSystem;
 using MonkeyKick.QualityOfLife;
 using MonkeyKick.UserInterface;
@@ -20,6 +19,15 @@ namespace MonkeyKick.LogicPatterns.StateMachines
         private float[] _timeChecks; // the timestamps on which your rating changes
         private DisplayEffortRank _prefab; // prefab for UI
 
+        public SingleTapTimedInput(Skill skill, string targetState, InputAction button, float limitTime, float[] timeChecks)
+        {
+            _skill = skill;
+            _button = button;
+            _targetState = targetState;
+            _limitTime = limitTime;
+            _currentTime = limitTime;
+            _timeChecks = timeChecks;
+        }
 
         public SingleTapTimedInput(Skill skill, string targetState, InputAction button, float limitTime, float[] timeChecks, DisplayEffortRank prefab)
         {
@@ -40,13 +48,14 @@ namespace MonkeyKick.LogicPatterns.StateMachines
 
                 if (_button.triggered)
                 {
-                    _skill.InstantiateEffortRank(_prefab, SkillQoL.TimedButtonPress(_currentTime, _limitTime, _timeChecks), 0.2f);
+                    if (_prefab) _skill.InstantiateEffortRank(_prefab, SkillQoL.SingleTapTimedButtonPress(_currentTime, _limitTime, _timeChecks), 0.2f);
                     _skill.SetState(_targetState);
                     return true;
                 }
             }
             else
             {
+                if (_prefab) _skill.InstantiateEffortRank(_prefab, AttackRating.Miss, 0.2f);
                 _skill.SetState(_targetState);
                 return true;
             }

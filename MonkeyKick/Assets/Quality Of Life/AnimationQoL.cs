@@ -13,7 +13,7 @@ namespace MonkeyKick.QualityOfLife
             int newAnimHash = Animator.StringToHash(newAnim);
 
             if (currentAnimHash == newAnimHash) return; // return and don't change the animation if the current animation is equal to the new animation
-            else if (currentAnimHash != newAnimHash) anim.Play(newAnimHash); // return and change the animation if the current animation is NOT equal to the new animation
+            anim.Play(newAnimHash); // return and change the animation if the current animation is NOT equal to the new animation
         }
 
         public static void ChangeAnimation(in Animator anim, string currentAnim, in string newAnim)

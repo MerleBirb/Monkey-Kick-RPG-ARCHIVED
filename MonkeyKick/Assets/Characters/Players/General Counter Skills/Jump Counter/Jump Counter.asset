@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb91c72ad99b3b48a1cb8b3356ce04c, type: 3}
   m_Name: Jump Counter
   m_EditorClassIdentifier: 
-  counterName: Jump
-  counterDescription: go up i guess
-  counterValue: 0
+  skillName: 
+  skillDescription: 
+  skillValue: 0
+  currentRating: 0
   actor: {fileID: 0}
   actorTransform: {fileID: 0}
   actorRb: {fileID: 0}

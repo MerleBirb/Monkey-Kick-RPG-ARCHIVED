@@ -7,22 +7,32 @@ namespace MonkeyKick.LogicPatterns.StateMachines
 {
     public class ExecuteCounterSkill : StateAction
     {
-        private Skill _skill; // store the state machine of the skill
-        private CounterSkill[] _possibleCounters;
+        private Skill[] _possibleCounters; // list of all possible counters
+        private bool _fixedUpdate; // if this is on a fixed update action or not
 
-        public ExecuteCounterSkill(Skill skill, CounterSkill[] possibleCounters)
+        public ExecuteCounterSkill(Skill[] possibleCounters, bool fixedUpdate)
         {
-            _skill = skill;
             _possibleCounters = possibleCounters;
+            _fixedUpdate = fixedUpdate;
         }
 
         public override bool Execute()
         {
             if (_possibleCounters != null)
             {
-                foreach (CounterSkill c in _possibleCounters)
+                if (_fixedUpdate)
                 {
-                    c.Execute();
+                    foreach (Skill c in _possibleCounters)
+                    {
+                        c.FixedTick();
+                    }
+                }
+                else
+                {
+                    foreach (Skill c in _possibleCounters)
+                    {
+                        c.Tick();
+                    }
                 }
             }
 

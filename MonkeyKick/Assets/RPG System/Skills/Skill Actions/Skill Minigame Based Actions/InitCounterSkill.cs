@@ -9,9 +9,9 @@ namespace MonkeyKick.LogicPatterns.StateMachines
     public class InitCounterSkill : StateAction
     {
         private Skill _skill; // store the state machine of the skill
-        private CounterSkill[] _possibleCounters;
+        private Skill[] _possibleCounters;
 
-        public InitCounterSkill(Skill skill, CounterSkill[] possibleCounters)
+        public InitCounterSkill(Skill skill, Skill[] possibleCounters)
         {
             _skill = skill;
             _possibleCounters = possibleCounters;
@@ -23,7 +23,7 @@ namespace MonkeyKick.LogicPatterns.StateMachines
             {
                 for (int i = 0; i < _possibleCounters.Length; i++)
                 {
-                    _possibleCounters[i].Init((PlayerBattle)_skill.target, (EnemyBattle)_skill.actor);
+                    _possibleCounters[i].Init(_skill.target, new CharacterBattle[] { _skill.actor });
 
                     if (i < _possibleCounters.Length - 1) return false;
                     else return true;

@@ -24,7 +24,7 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   targetRb: {fileID: 0}
   targetAnim: {fileID: 0}
-  xVelToTarget: -1
+  xVelToTarget: -8
   xOffsetFromTarget: 0.5
   hitboxPrefab: {fileID: 3214673851013663870, guid: f3c6c75fd43e65e4c84f8d5e00c3dc6b, type: 3}
   possibleCounters:

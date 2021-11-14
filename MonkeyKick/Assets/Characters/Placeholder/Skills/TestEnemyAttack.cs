@@ -21,7 +21,7 @@ namespace MonkeyKick.RPGSystem
         [Header("Prefab for spawning the punch hitbox")]
         [SerializeField] private Hitbox hitboxPrefab;
         [Header("A list of possible counters that the player can do")]
-        [SerializeField] private CounterSkill[] possibleCounters;
+        [SerializeField] private Skill[] possibleCounters;
 
         const string BATTLE_STANCE = "BattleStance_left";
         const string WINDUP = "Punch_windup_left";
@@ -37,7 +37,7 @@ namespace MonkeyKick.RPGSystem
             Vector3 returnPos = new Vector3(actor.BattlePos.x, actor.transform.position.y, actor.BattlePos.y);
 
             int damageScaling = (int)(actor.Stats.Muscle * skillValue);
-            Vector3 hitboxScale = new Vector3(0.5f, 0.4f, 0.5f);
+            Vector3 hitboxScale = new Vector3(0.3f, 0.3f, 0.3f);
 
             State setUp = new State
             (
@@ -62,8 +62,8 @@ namespace MonkeyKick.RPGSystem
                 // update Actions
                 new StateAction[]
                 {
-                    new ChangeAnimation(actorAnim, BATTLE_STANCE),
-                    new ExecuteCounterSkill(this, possibleCounters)
+                    new ExecuteCounterSkill(possibleCounters, false),
+                    new ChangeAnimation(actorAnim, BATTLE_STANCE)
                 }
             );
 
@@ -74,7 +74,7 @@ namespace MonkeyKick.RPGSystem
                 // update actions
                 new StateAction[]
                 {
-                    new ExecuteCounterSkill(this, possibleCounters),
+                    new ExecuteCounterSkill(possibleCounters, false),
                     new DelayState(this, "launchAttack", 0.4f),
                     new ChangeAnimation(actorAnim, WINDUP),
                 }
@@ -87,7 +87,7 @@ namespace MonkeyKick.RPGSystem
                 // update actions
                 new StateAction[]
                 {
-                    new ExecuteCounterSkill(this, possibleCounters),
+                    new ExecuteCounterSkill(possibleCounters, false),
                     new DelayState(this, "returnToBattlePos", 0.4f),
                     new InstantiateHitboxAtPoint(this, hitboxPrefab, actor.HurtBoxes[(int)BodyParts.LeftArm], hitboxScale, damageScaling, 0.1f),
                     new ChangeAnimation(actorAnim, ATTACK)
@@ -104,7 +104,7 @@ namespace MonkeyKick.RPGSystem
                 // update actions
                 new StateAction[]
                 {
-                    new ExecuteCounterSkill(this, possibleCounters),
+                    new ExecuteCounterSkill(possibleCounters, false),
                     new ChangeAnimation(actorAnim, BATTLE_STANCE)
                 }
             );
