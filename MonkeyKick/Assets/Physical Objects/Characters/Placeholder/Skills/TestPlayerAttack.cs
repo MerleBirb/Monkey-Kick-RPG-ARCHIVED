@@ -37,6 +37,8 @@ namespace MonkeyKick.RPGSystem
         {
             base.Init(newActor, newTargets);
 
+            PlayerBattle player = actor.GetComponent<PlayerBattle>();
+
             allStates = new Dictionary<string, State>();
             Vector3 returnPos = new Vector3(actor.BattlePos.x, actor.transform.position.y, actor.BattlePos.y);
 
@@ -61,7 +63,7 @@ namespace MonkeyKick.RPGSystem
                 // update actions
                 new StateAction[]
                 {
-                    new SingleTapTimedInput(this, "finishAttack", timeForPunch, timeChecks, effortRankPrefab),
+                    new SingleTapTimedInput(this, "finishAttack", player.ButtonEast, timeForPunch, timeChecks, effortRankPrefab),
                     new SpawnDebugUI(this, debugUIPrefab, timeForPunch),
                     new ChangeAnimation(actorAnim, WINDUP)
                 }

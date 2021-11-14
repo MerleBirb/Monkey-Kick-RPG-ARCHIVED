@@ -2,6 +2,7 @@
 // 11/9/21
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 using MonkeyKick.PhysicalObjects.Characters;
 using MonkeyKick.RPGSystem;
 using MonkeyKick.QualityOfLife;
@@ -12,7 +13,7 @@ namespace MonkeyKick.LogicPatterns.StateMachines
     public class SingleTapTimedInput : StateAction
     {
         private Skill _skill; // store the state machine of the skill
-        private PlayerBattle _playerActor; // a player actor who can press buttons
+        private InputAction _button; // store the button being pressed
         private string _targetState; // the target state that this state will transition to
         private float _limitTime; // the limit for the timner
         private float _currentTime; // the current time on the timer
@@ -20,10 +21,10 @@ namespace MonkeyKick.LogicPatterns.StateMachines
         private DisplayEffortRank _prefab; // prefab for UI
 
 
-        public SingleTapTimedInput(Skill skill, string targetState, float limitTime, float[] timeChecks, DisplayEffortRank prefab)
+        public SingleTapTimedInput(Skill skill, string targetState, InputAction button, float limitTime, float[] timeChecks, DisplayEffortRank prefab)
         {
             _skill = skill;
-            _playerActor = skill.actor.GetComponent<PlayerBattle>();
+            _button = button;
             _targetState = targetState;
             _limitTime = limitTime;
             _currentTime = limitTime;
@@ -37,7 +38,7 @@ namespace MonkeyKick.LogicPatterns.StateMachines
             {
                 _currentTime -= Time.deltaTime;
 
-                if (_playerActor.pressedButtonSouth)
+                if (_button.triggered)
                 {
                     _skill.InstantiateEffortRank(_prefab, SkillQoL.TimedButtonPress(_currentTime, _limitTime, _timeChecks), 0.2f);
                     _skill.SetState(_targetState);

@@ -162,9 +162,36 @@ namespace MonkeyKick.Controls
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""North"",
+                    ""type"": ""Button"",
+                    ""id"": ""6849bd8f-8573-431d-9f4a-8d5a8d9cad17"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""South"",
                     ""type"": ""Button"",
                     ""id"": ""ef514e60-a509-4943-bac0-477b005e5c36"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""East"",
+                    ""type"": ""Button"",
+                    ""id"": ""437cb91c-618b-4e90-8535-44ebb2e4b140"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""West"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d7a9888-5e9d-4b8f-89fc-206827d000b6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -271,28 +298,6 @@ namespace MonkeyKick.Controls
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cb918d42-215d-4748-bdf8-935375b740bc"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""South"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d106db1f-9b8a-4407-8319-d042f0940ed5"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""South"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""6cd364bc-af1d-4c48-87ef-9a2614a1cb93"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -310,6 +315,94 @@ namespace MonkeyKick.Controls
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0de071b-21f1-472c-98e4-70f391acec5c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""North"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3055c786-90a5-489b-a6bf-4bc046338612"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""North"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d08b6838-329d-4858-8010-233a9654831a"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""East"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10b4574b-ea1d-4edf-9f77-71f348e602af"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""East"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""43b4e752-e7ef-433d-893c-e7e739b74e82"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""West"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""551a008a-0337-46dc-86cd-361bf9b222c3"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""West"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb918d42-215d-4748-bdf8-935375b740bc"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""South"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d106db1f-9b8a-4407-8319-d042f0940ed5"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""South"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -354,7 +447,10 @@ namespace MonkeyKick.Controls
             m_Battle = asset.FindActionMap("Battle", throwIfNotFound: true);
             m_Battle_Move = m_Battle.FindAction("Move", throwIfNotFound: true);
             m_Battle_Select = m_Battle.FindAction("Select", throwIfNotFound: true);
+            m_Battle_North = m_Battle.FindAction("North", throwIfNotFound: true);
             m_Battle_South = m_Battle.FindAction("South", throwIfNotFound: true);
+            m_Battle_East = m_Battle.FindAction("East", throwIfNotFound: true);
+            m_Battle_West = m_Battle.FindAction("West", throwIfNotFound: true);
             m_Battle_Jump = m_Battle.FindAction("Jump", throwIfNotFound: true);
         }
 
@@ -458,7 +554,10 @@ namespace MonkeyKick.Controls
         private IBattleActions m_BattleActionsCallbackInterface;
         private readonly InputAction m_Battle_Move;
         private readonly InputAction m_Battle_Select;
+        private readonly InputAction m_Battle_North;
         private readonly InputAction m_Battle_South;
+        private readonly InputAction m_Battle_East;
+        private readonly InputAction m_Battle_West;
         private readonly InputAction m_Battle_Jump;
         public struct BattleActions
         {
@@ -466,7 +565,10 @@ namespace MonkeyKick.Controls
             public BattleActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Battle_Move;
             public InputAction @Select => m_Wrapper.m_Battle_Select;
+            public InputAction @North => m_Wrapper.m_Battle_North;
             public InputAction @South => m_Wrapper.m_Battle_South;
+            public InputAction @East => m_Wrapper.m_Battle_East;
+            public InputAction @West => m_Wrapper.m_Battle_West;
             public InputAction @Jump => m_Wrapper.m_Battle_Jump;
             public InputActionMap Get() { return m_Wrapper.m_Battle; }
             public void Enable() { Get().Enable(); }
@@ -483,9 +585,18 @@ namespace MonkeyKick.Controls
                     @Select.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnSelect;
                     @Select.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnSelect;
                     @Select.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnSelect;
+                    @North.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnNorth;
+                    @North.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnNorth;
+                    @North.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnNorth;
                     @South.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
                     @South.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
                     @South.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnSouth;
+                    @East.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnEast;
+                    @East.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnEast;
+                    @East.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnEast;
+                    @West.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnWest;
+                    @West.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnWest;
+                    @West.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnWest;
                     @Jump.started -= m_Wrapper.m_BattleActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_BattleActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_BattleActionsCallbackInterface.OnJump;
@@ -499,9 +610,18 @@ namespace MonkeyKick.Controls
                     @Select.started += instance.OnSelect;
                     @Select.performed += instance.OnSelect;
                     @Select.canceled += instance.OnSelect;
+                    @North.started += instance.OnNorth;
+                    @North.performed += instance.OnNorth;
+                    @North.canceled += instance.OnNorth;
                     @South.started += instance.OnSouth;
                     @South.performed += instance.OnSouth;
                     @South.canceled += instance.OnSouth;
+                    @East.started += instance.OnEast;
+                    @East.performed += instance.OnEast;
+                    @East.canceled += instance.OnEast;
+                    @West.started += instance.OnWest;
+                    @West.performed += instance.OnWest;
+                    @West.canceled += instance.OnWest;
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
@@ -536,7 +656,10 @@ namespace MonkeyKick.Controls
         {
             void OnMove(InputAction.CallbackContext context);
             void OnSelect(InputAction.CallbackContext context);
+            void OnNorth(InputAction.CallbackContext context);
             void OnSouth(InputAction.CallbackContext context);
+            void OnEast(InputAction.CallbackContext context);
+            void OnWest(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
         }
     }

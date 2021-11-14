@@ -18,12 +18,22 @@ namespace MonkeyKick.PhysicalObjects.Characters
         private PlayerControls _controls;
         protected InputAction _move;
         private InputAction _select;
-        private InputAction _buttonSouth;
         private InputAction _jump;
+        [HideInInspector] public bool pressedJump;
         private Vector2 _movement;
         private bool _movePressed = false;
+        private InputAction _buttonNorth;
+        public InputAction ButtonNorth { get => _buttonNorth; }
+        [HideInInspector] public bool pressedButtonNorth;
+        private InputAction _buttonEast;
+        public InputAction ButtonEast { get => _buttonEast; }
+        [HideInInspector] public bool pressedButtonEast;
+        private InputAction _buttonSouth;
+        public InputAction ButtonSouth { get => _buttonSouth; }
         [HideInInspector] public bool pressedButtonSouth;
-        [HideInInspector] public bool pressedJump;
+        private InputAction _buttonWest;
+        public InputAction ButtonWest { get => _buttonWest; }
+        [HideInInspector] public bool pressedButtonWest;
 
         [SerializeField] private IntReference menuChoice;
 
@@ -44,8 +54,11 @@ namespace MonkeyKick.PhysicalObjects.Characters
             _move.performed += context => _movement = context.ReadValue<Vector2>();
 
             _select = _controls.Battle.Select;
-            _buttonSouth = _controls.Battle.South;
             _jump = _controls.Battle.Jump;
+            _buttonNorth = _controls.Battle.North;
+            _buttonSouth = _controls.Battle.South;
+            _buttonEast = _controls.Battle.East;
+            _buttonWest = _controls.Battle.West;
         }
 
         protected override void FixedUpdate()
@@ -107,8 +120,11 @@ namespace MonkeyKick.PhysicalObjects.Characters
 
         private void CheckInput()
         {
-            pressedButtonSouth = _buttonSouth.triggered;
             pressedJump = _jump.triggered;
+            pressedButtonNorth = _buttonNorth.triggered;
+            pressedButtonSouth = _buttonSouth.triggered;
+            pressedButtonEast = _buttonEast.triggered;
+            pressedButtonWest = _buttonWest.triggered;
         }
 
         protected override void EnterBattle()
@@ -170,18 +186,6 @@ namespace MonkeyKick.PhysicalObjects.Characters
                 }
             }
         }
-
-        #endregion
-
-        #region COUNTER ATTACKS
-
-        //private void Jump()
-        //{
-        //    if (_jump.triggered && _physics.OnGround())
-        //    {
-        //        _physics.Jump();
-        //    }
-        //}
 
         #endregion
     }

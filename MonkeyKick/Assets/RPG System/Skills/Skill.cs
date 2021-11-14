@@ -10,6 +10,14 @@ using MonkeyKick.UserInterface;
 
 namespace MonkeyKick.RPGSystem
 {
+    public enum Buttons
+    {
+        North,
+        East,
+        South,
+        West
+    }
+
     public abstract class Skill : ScriptableObjectStateMachine
     {
         #region DESCRIPTORS
