@@ -97,7 +97,13 @@ namespace MonkeyKick.Characters
 
                         break;
                     }
-                    case BattleStates.Counter: CheckInput(); break;
+                    case BattleStates.Counter: 
+                    {
+                        CheckInput();
+                        if (_turnSystem.EnemyPartyDefeated()) { OnBattleEnd.Invoke(); }
+
+                        break;
+                    }
                 }
 
             }

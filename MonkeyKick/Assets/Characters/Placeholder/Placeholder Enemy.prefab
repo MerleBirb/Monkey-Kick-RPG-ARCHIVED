@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a43273b90dac54944ae7fcd4eaa4d360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: 47d4b28d46bdafd47a8ee10561f4691a, type: 2}
 --- !u!114 &941248391278279463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +250,7 @@ MonoBehaviour:
   - {fileID: 9051963085901385923}
   - {fileID: 518214316736655904}
   - {fileID: 1490218876538364870}
+  isInterrupted: 0
   gameManager: {fileID: 11400000, guid: 47d4b28d46bdafd47a8ee10561f4691a, type: 2}
   Turn:
     character: {fileID: 0}

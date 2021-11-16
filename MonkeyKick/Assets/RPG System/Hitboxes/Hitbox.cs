@@ -14,6 +14,7 @@ namespace MonkeyKick.RPGSystem.Hitboxes
             Player,
             Enemy
         }
+
         [SerializeField] private TypeOfTarget typeOfTarget;
 
         [HideInInspector] public int damage;
@@ -36,6 +37,7 @@ namespace MonkeyKick.RPGSystem.Hitboxes
                 if (!_hasHit && col.CompareTag(TagsQoL.ENEMY_TAG))
                 {
                     target.Stats.Damage(damage);
+                    target.isInterrupted = true;
                     _hasHit = true;
                 }
             }

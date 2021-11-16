@@ -37,6 +37,8 @@ namespace MonkeyKick.Characters
 
         public List<Transform> HurtBoxes;
 
+        [HideInInspector] public bool isInterrupted; // have they been interrupted by an attack
+
         #endregion
 
         #region RPG BATTLE SYSTEM
@@ -150,7 +152,7 @@ namespace MonkeyKick.Characters
 
         private IEnumerator JumpIntoBattlePosition()
         {
-            Vector3 landPos = transform.position + new Vector3(_startingBattlePos.x, 0f, _startingBattlePos.y);
+            // Vector3 landPos = transform.position + new Vector3(_startingBattlePos.x, 0f, _startingBattlePos.y);
 
             // jump into position
             // ParabolaData jumpData = PhysicsQoL.CalculateParabolaData(transform.position, landPos, 1f, 0f, Physics.gravity.y);
@@ -176,6 +178,7 @@ namespace MonkeyKick.Characters
         {
             if (Stats.CurrentHP <= 0)
             {
+                _physics.ResetMovement();
                 Turn.isDead = true;
                 _battleState = BattleStates.Dead;
             }

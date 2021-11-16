@@ -16,7 +16,7 @@ namespace MonkeyKick.LogicPatterns.StateMachines
         private Vector3 _scale = Vector3.one; // scaling for the hitbox
         private int _totalDamage; // damage that the hitbox will deal
         private float _time; // time until the hitbox is destroyed
-        private bool _hasSpawned = false; // has the hitbox spawned yet?
+        private Hitbox _newHitbox; // is the hitbox created
 
         public InstantiateHitboxAtPoint(Skill skill, Hitbox prefab, Transform spawnPoint, Vector3 scale, int totalDamage = 1, float time = 1f)
         {
@@ -30,14 +30,9 @@ namespace MonkeyKick.LogicPatterns.StateMachines
 
         public override bool Execute()
         {
-            if (!_hasSpawned)
+            if (_newHitbox == null)
             {
-                _skill.InstantiateHitbox(_prefab, _spawnPoint, _scale, _skill.target, _totalDamage, _time);
-                _hasSpawned = true;
-                return false;
-            }
-            else
-            {
+                _newHitbox = _skill.InstantiateHitbox(_prefab, _spawnPoint, _scale, _skill.target, _totalDamage, _time);
                 return true;
             }
 

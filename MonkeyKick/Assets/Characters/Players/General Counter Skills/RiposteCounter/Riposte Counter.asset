@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Riposte
   skillDescription: 
-  skillValue: 0.5
+  skillValue: 0.25
   currentRating: 0
   actor: {fileID: 0}
   actorTransform: {fileID: 0}
@@ -27,3 +27,4 @@ MonoBehaviour:
   limitWindupTime: 0.3
   attackDelay: 0.3
   hitboxPrefab: {fileID: 5995252566311227569, guid: e119a390895600d47b84c582588f5fe4, type: 3}
+  counterTimer: 0

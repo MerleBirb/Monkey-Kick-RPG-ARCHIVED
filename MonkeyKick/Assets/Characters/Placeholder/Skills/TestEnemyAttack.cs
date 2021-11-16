@@ -47,8 +47,8 @@ namespace MonkeyKick.RPGSystem
                 new StateAction[]
                 {
                     new DelayState(this, "moveToPlayer", 0.1f),
+                    new InitCounterSkill(this, possibleCounters),
                     new SetPlayerToStateFromEnemy(this, BattleStates.Counter),
-                    new InitCounterSkill(this, possibleCounters)
                 }
             );
 
@@ -63,6 +63,7 @@ namespace MonkeyKick.RPGSystem
                 new StateAction[]
                 {
                     new ExecuteCounterSkill(possibleCounters, false),
+                    new InterruptState(this, "interrupted"),
                     new ChangeAnimation(actorAnim, BATTLE_STANCE)
                 }
             );
@@ -75,7 +76,8 @@ namespace MonkeyKick.RPGSystem
                 new StateAction[]
                 {
                     new ExecuteCounterSkill(possibleCounters, false),
-                    new DelayState(this, "launchAttack", 0.4f),
+                    new DelayState(this, "launchAttack", 0.25f),
+                    new InterruptState(this, "interrupted"),
                     new ChangeAnimation(actorAnim, WINDUP),
                 }
             );
@@ -89,8 +91,19 @@ namespace MonkeyKick.RPGSystem
                 {
                     new ExecuteCounterSkill(possibleCounters, false),
                     new DelayState(this, "returnToBattlePos", 0.4f),
-                    new InstantiateHitboxAtPoint(this, hitboxPrefab, actor.HurtBoxes[(int)BodyParts.LeftArm], hitboxScale, damageScaling, 0.1f),
+                    new InterruptState(this, "interrupted"),
+                    new InstantiateHitboxAtPoint(this, hitboxPrefab, actor.HurtBoxes[(int)BodyParts.LeftArm], hitboxScale, damageScaling, 0.4f),
                     new ChangeAnimation(actorAnim, ATTACK)
+                }
+            );
+
+            State interrupted = new State
+            (
+                null,
+                new StateAction[]
+                {
+                    new DelayState(this, "returnToBattlePos"),
+                    new ChangeAnimation(actorAnim, BATTLE_STANCE)
                 }
             );
 
@@ -116,9 +129,10 @@ namespace MonkeyKick.RPGSystem
                 // update actions
                 new StateAction[]
                 {
+                    new ChangeAnimation(actorAnim, BATTLE_STANCE),
+                    new ChangeAnimation(targetAnim, "BattleStance_right"),
                     new SetPlayerToStateFromEnemy(this, BattleStates.Wait),
-                    new EndSkill(this),
-                    new ChangeAnimation(actorAnim, BATTLE_STANCE)
+                    new EndSkill(this)
                 }
             );
 
@@ -126,6 +140,7 @@ namespace MonkeyKick.RPGSystem
             allStates.Add("moveToPlayer", moveToPlayer);
             allStates.Add("windUp", windUp);
             allStates.Add("launchAttack", launchAttack);
+            allStates.Add("interrupted", interrupted);
             allStates.Add("returnToBattlePos", returnToBattlePos);
             allStates.Add("endSkill", endSkill);
 

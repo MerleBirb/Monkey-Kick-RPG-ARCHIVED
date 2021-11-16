@@ -19,11 +19,13 @@ namespace MonkeyKick.RPGSystem
         [Header("Hitbox prefab for the riposte")]
         [SerializeField] private Hitbox hitboxPrefab;
 
+        [HideInInspector] public float counterTimer = 0f;
+
         #region ANIMATIONS
 
-        protected const string BATTLE_STANCE = "BattleStance_right";
-        protected const string WINDUP = "Punch_windup_right";
-        protected const string ATTACK = "Punch_attack_right";
+        const string BATTLE_STANCE = "BattleStance_right";
+        const string WINDUP = "Punch_windup_right";
+        const string ATTACK = "Punch_attack_right";
 
         #endregion
 
@@ -31,23 +33,12 @@ namespace MonkeyKick.RPGSystem
         {
             base.Init(newActor, newTargets);
 
-            allStates = new Dictionary<string, LogicPatterns.StateMachines.State>();
+            allStates = new Dictionary<string, State>();
+            counterTimer = 0f;
 
             PlayerBattle player = actor.GetComponent<PlayerBattle>();
             int damageScaling = (int)(actor.Stats.Muscle * skillValue);
             Vector3 hitboxScale = new Vector3(0.3f, 0.3f, 0.3f);
-
-            State idle = new State
-            (
-                // fixed update actions
-                null,
-                // update actions
-                new StateAction[]
-                {
-                    new RiposteCounterPrepare(this, "prepping", player.ButtonEast),
-                    new ChangeAnimation(actorAnim, BATTLE_STANCE)
-                }
-            );
 
             State prepping = new State
             (
@@ -56,46 +47,40 @@ namespace MonkeyKick.RPGSystem
                 // update actions
                 new StateAction[]
                 {
-                    new RiposteCounterInput(this, "prepared", "idle", player.ButtonEast, limitWindupTime),
-                    new ChangeAnimation(actorAnim, WINDUP)
-                }
-            );
-
-            State prepared = new State
-            (
-                // fixed update actions
-                null,
-                // update actions
-                new StateAction[]
-                {
-                    new RiposteCounterLaunch(this, "launchAttack", player.ButtonEast),
-                    new ChangeAnimation(actorAnim, WINDUP)
+                    new RiposteCounterInput(this, "launchAttack", player.ButtonEast, WINDUP, BATTLE_STANCE, limitWindupTime)
                 }
             );
 
             State launchAttack = new State
             (
                 // fixed update actions
-                new StateAction[]
-                {
-
-                },
+                null,
                 // update actions
                 new StateAction[]
                 {
-                    new DelayState(this, "idle", attackDelay),
-                    new InstantiateHitboxAtPoint(this, hitboxPrefab, actor.HurtBoxes[(int)BodyParts.RightArm], hitboxScale, damageScaling, 0.1f),
+                    new DelayState(this, "endRiposte", attackDelay),
+                    new InstantiateHitboxAtPoint(this, hitboxPrefab, actor.HurtBoxes[(int)BodyParts.RightArm], hitboxScale, damageScaling, attackDelay),
                     new ChangeAnimation(actorAnim, ATTACK)
                 }
             );
 
-            allStates.Add("idle", idle);
+            State endRiposte = new State
+            (
+                null,
+                new StateAction[]
+                {
+                    new RiposteCounterEnd(this),
+                    new DelayState(this, "prepping", 0.05f),
+                    new ChangeAnimation(actorAnim, BATTLE_STANCE)
+                }
+            );
+
             allStates.Add("prepping", prepping);
-            allStates.Add("prepared", prepared);
             allStates.Add("launchAttack", launchAttack);
+            allStates.Add("endRiposte", endRiposte);
 
             // first state
-            SetState("idle");
+            SetState("prepping");
         }
     }
 }

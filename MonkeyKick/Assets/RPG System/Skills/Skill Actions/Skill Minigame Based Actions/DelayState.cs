@@ -18,7 +18,6 @@ namespace MonkeyKick.LogicPatterns.StateMachines
             _skill = skill;
             _targetState = targetState;
             _time = delayTime;
-            _currentTime = 0f;
         }
 
         public override bool Execute()
@@ -26,13 +25,15 @@ namespace MonkeyKick.LogicPatterns.StateMachines
             if (_currentTime < _time)
             {
                 _currentTime += Time.deltaTime;
-                return false;
             }
             else
             {
                 _skill.SetState(_targetState);
-                return true;  
+                _currentTime = 0f;
+                return true;
             }
+
+            return false;
         }
     }
 }

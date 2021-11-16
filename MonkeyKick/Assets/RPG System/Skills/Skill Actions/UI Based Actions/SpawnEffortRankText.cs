@@ -29,7 +29,6 @@ namespace MonkeyKick.LogicPatterns.StateMachines
             {   
                 _skill.InstantiateEffortRank(_prefab, _rating, _time);
                 _hasSpawned = true;
-                return false;
             }
             else
             {

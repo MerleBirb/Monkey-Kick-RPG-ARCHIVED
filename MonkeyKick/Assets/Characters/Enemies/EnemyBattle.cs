@@ -72,11 +72,6 @@ namespace MonkeyKick.Characters
             _battleState = BattleStates.Action;
         }
 
-        protected void CheckInterrupt()
-        {
-            
-        }
-
         #endregion
     }
 }

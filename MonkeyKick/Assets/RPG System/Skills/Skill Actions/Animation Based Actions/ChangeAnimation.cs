@@ -25,10 +25,6 @@ namespace MonkeyKick.LogicPatterns.StateMachines
             {
                 _anim.Play(newAnimHash); // return and change the animation if the current animation is NOT equal to the new animation
             }
-            else
-            {
-                return true;
-            }
 
             return false;
         }

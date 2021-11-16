@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using MonkeyKick.QualityOfLife;
 using MonkeyKick.Controls;
+using MonkeyKick.Managers;
 
 namespace MonkeyKick.Characters
 {
@@ -55,7 +56,7 @@ namespace MonkeyKick.Characters
         private void OnTriggerEnter(Collider col)
         {
             // running into an enemy to start battle
-            if (col.CompareTag(TagsQoL.ENEMY_TAG))
+            if (col.CompareTag(TagsQoL.ENEMY_TAG) && gameManager.GameState == GameStates.Overworld)
             {
                 CharacterMovement enemyMove = col.GetComponent<CharacterMovement>(); // save enemy movement
                 CharacterBattle enemy = col.GetComponent<CharacterBattle>(); // save enemy battle

@@ -2,7 +2,6 @@
 // 10/14/21
 
 using UnityEngine;
-using MonkeyKick.Managers;
 
 namespace MonkeyKick.Characters
 {

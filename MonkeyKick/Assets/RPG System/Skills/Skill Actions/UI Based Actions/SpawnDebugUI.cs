@@ -28,8 +28,6 @@ namespace MonkeyKick.LogicPatterns.StateMachines
             {   
                 _newDebugUI = _skill.InstantiateDebugUI(_prefab, _time);
                 _hasSpawned = true;
-
-                return false;
             }
             else
             {
@@ -37,8 +35,6 @@ namespace MonkeyKick.LogicPatterns.StateMachines
                 {
                     _time -= Time.deltaTime;
                     _newDebugUI.DisplayTimer(_time);
-
-                    return false;
                 }
                 else
                 {
