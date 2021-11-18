@@ -22,9 +22,6 @@ namespace MonkeyKick.Characters
 
         #endregion
 
-        [Header("If this player is the leader of the Party, enable this.")]
-        public bool isLeader = false;
-
         #region UNITY METHODS
 
         public override void Awake()

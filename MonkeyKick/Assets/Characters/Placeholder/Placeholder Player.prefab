@@ -202,7 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a43273b90dac54944ae7fcd4eaa4d360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 11400000, guid: 47d4b28d46bdafd47a8ee10561f4691a, type: 2}
 --- !u!114 &2620644519227634207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +216,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 11400000, guid: 47d4b28d46bdafd47a8ee10561f4691a, type: 2}
   direction: {fileID: 0}
-  isLeader: 0
 --- !u!114 &7617607231334096646
 MonoBehaviour:
   m_ObjectHideFlags: 0

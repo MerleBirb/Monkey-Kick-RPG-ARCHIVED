@@ -2,9 +2,8 @@
 // 10/15/21
 
 using UnityEngine;
-using Cinemachine;
 using MonkeyKick.Managers;
-using MonkeyKick.UserInterface;
+using MonkeyKick.QualityOfLife;
 
 namespace MonkeyKick.Cameras
 {
@@ -15,20 +14,17 @@ namespace MonkeyKick.Cameras
         #region CAMERAS
 
         [Header("Spawn when in the Overworld State")]
-        [SerializeField] private CinemachineVirtualCamera overworldCamera;
-        private GameObject _overworldCamObject;
-        private CameraController _overworldCamController;
+        [SerializeField] private GameObject overworldCamera;
 
         [Header("Spawn when in the Battle State")]
-        [SerializeField] private CinemachineVirtualCamera battleCamera;
-        private GameObject _battleCamObject;
+        [SerializeField] private GameObject battleCamera;
 
         #endregion
 
         #region UI
 
         [Header("Spawn the Battle UI when battle starts")]
-        [SerializeField] private GameObject _battleUI;
+        [SerializeField] private GameObject battleUI;
 
         #endregion
 
@@ -36,23 +32,35 @@ namespace MonkeyKick.Cameras
 
         private void Awake()
         {
-            // save the cameras as GameObjects
-            _overworldCamObject = overworldCamera.gameObject;
-            _overworldCamController = overworldCamera.GetComponent<CameraController>();
-            _battleCamObject = battleCamera.gameObject;
-
-            InitiateCameras();
+            CameraQoL.OnBattleStart += InitializeBattleCamera;
+            CameraQoL.OnBattleEnd += InitializeOverworldCamera;
         }
 
-        private void Start()
+        private void OnDestroy()
         {
-            gameManager.OnBattleStart += InitiateCameras; // add the InitiateCameras() function to the OnBattleStart event
-            gameManager.OnBattleEnd += InitiateCameras; // add the InitiateCameras() function to the OnBattleEnd event
+            CameraQoL.OnBattleStart -= InitializeBattleCamera;
+            CameraQoL.OnBattleEnd -= InitializeOverworldCamera;
         }
 
         #endregion
 
         #region CAMERA METHODS
+
+        private void InitializeOverworldCamera()
+        {
+            overworldCamera?.SetActive(true);
+            battleCamera?.SetActive(false);
+            battleUI?.SetActive(false);
+        }
+
+        private void InitializeBattleCamera(Vector3 camPos)
+        {
+            battleCamera?.SetActive(true);
+            overworldCamera?.SetActive(false);
+
+            battleCamera.transform.position = new Vector3(camPos.x, camPos.y, camPos.z);
+            battleUI?.SetActive(true);
+        }
 
         private void InitiateCameras()
         {
@@ -60,20 +68,20 @@ namespace MonkeyKick.Cameras
             {
                 case GameStates.Overworld:
                     {
-                        _overworldCamObject.SetActive(true);
-                        _battleCamObject.SetActive(false);
-                        _battleUI.SetActive(false);
+                        overworldCamera.SetActive(true);
+                        battleCamera.SetActive(false);
+                        battleUI.SetActive(false);
 
                         break;
                     }
                 case GameStates.Battle:
                     {
-                        _overworldCamObject.SetActive(false);
-                        Vector3 overworldCamPos = _overworldCamObject.transform.position;
+                        overworldCamera.SetActive(false);
+                        battleCamera.SetActive(true);
 
-                        _battleCamObject.transform.position = new Vector3(overworldCamPos.x, overworldCamPos.y, overworldCamPos.z);
-                        _battleCamObject.SetActive(true);
-                        _battleUI.SetActive(true);
+                        Vector3 overworldCamPos = overworldCamera.transform.position;
+                        battleCamera.transform.position = new Vector3(overworldCamPos.x, overworldCamPos.y, overworldCamPos.z);
+                        battleUI.SetActive(true);
 
                         break;
                     }
@@ -86,20 +94,19 @@ namespace MonkeyKick.Cameras
             {
                 case GameStates.Overworld:
                     {
-                        _overworldCamObject.SetActive(true);
-                        _battleCamObject.SetActive(false);
-                        _battleUI.SetActive(false);
+                        overworldCamera.SetActive(true);
+                        battleCamera.SetActive(false);
+                        battleUI.SetActive(false);
 
                         break;
                     }
                 case GameStates.Battle:
                     {
-                        _overworldCamObject.SetActive(false);
-                        Vector3 overworldCamPos = _overworldCamObject.transform.position;
+                        overworldCamera.SetActive(false);
+                        battleCamera.SetActive(true);
 
-                        _battleCamObject.transform.position = new Vector3(camPos.x, camPos.y, camPos.z);
-                        _battleCamObject.SetActive(true);
-                        _battleUI.SetActive(true);
+                        battleCamera.transform.position = new Vector3(camPos.x, camPos.y, camPos.z);
+                        battleUI.SetActive(true);
 
                         break;
                     }

@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MonkeyKick.Characters;
+using MonkeyKick.QualityOfLife;
 
 namespace MonkeyKick.Managers
 {
@@ -33,29 +34,19 @@ namespace MonkeyKick.Managers
         {
             _currentFighters = newFighters; // add the new fighters to the current fighters list
             _gameState = GameStates.Battle;
-            OnBattleStart.Invoke(camPos);
+            CameraQoL.InvokeOnBattleStart(camPos);
         }
 
         public void EndBattle()
         {
             _gameState = GameStates.Overworld;
-            OnBattleEnd.Invoke();
+            CameraQoL.InvokeOnBattleEnd();
         }
 
         public void ClearCurrentFighters()
         {
             _currentFighters.Clear();
         }
-
-        #endregion
-
-        #region GAME EVENTS
-
-        public delegate void BattleStartTrigger(Vector3 camPos);
-        public event BattleStartTrigger OnBattleStart;
-
-        public delegate void BattleEndTrigger();
-        public event BattleEndTrigger OnBattleEnd;
 
         #endregion
     }

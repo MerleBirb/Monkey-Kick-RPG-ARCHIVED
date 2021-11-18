@@ -111,22 +111,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ccb3739aabd4ea48868eef210647889, type: 3}
+--- !u!1 &6068726956829604256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7430557789255352399, guid: 4ccb3739aabd4ea48868eef210647889, type: 3}
+  m_PrefabInstance: {fileID: 3685870784854211055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6068726956829604270 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7430557789255352385, guid: 4ccb3739aabd4ea48868eef210647889, type: 3}
   m_PrefabInstance: {fileID: 3685870784854211055}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6068726956829604257 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7430557789255352398, guid: 4ccb3739aabd4ea48868eef210647889, type: 3}
-  m_PrefabInstance: {fileID: 3685870784854211055}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3914702990477189785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,13 +141,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 47d4b28d46bdafd47a8ee10561f4691a, type: 2}
     - target: {fileID: 3238952895925666547, guid: d7b186dbd268c8444b9cfe9664c93117, type: 3}
+      propertyPath: BattleCamera
+      value: 
+      objectReference: {fileID: 6180463012099604631}
+    - target: {fileID: 3238952895925666547, guid: d7b186dbd268c8444b9cfe9664c93117, type: 3}
       propertyPath: battleCamera
       value: 
-      objectReference: {fileID: 24151756973870796}
+      objectReference: {fileID: 6180463012099604631}
+    - target: {fileID: 3238952895925666547, guid: d7b186dbd268c8444b9cfe9664c93117, type: 3}
+      propertyPath: OverworldCamera
+      value: 
+      objectReference: {fileID: 6068726956829604256}
     - target: {fileID: 3238952895925666547, guid: d7b186dbd268c8444b9cfe9664c93117, type: 3}
       propertyPath: overworldCamera
       value: 
-      objectReference: {fileID: 6068726956829604257}
+      objectReference: {fileID: 6068726956829604256}
     - target: {fileID: 7091940860262300539, guid: d7b186dbd268c8444b9cfe9664c93117, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -288,17 +290,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7161563319465371639, guid: 5855eea929cc3d64bbf018aa675bab52, type: 3}
   m_PrefabInstance: {fileID: 6068726957337460801}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &24151756973870796 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6083728569883610765, guid: 5855eea929cc3d64bbf018aa675bab52, type: 3}
-  m_PrefabInstance: {fileID: 6068726957337460801}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6180463012099604631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2386541117402980431
 MonoBehaviour:
   m_ObjectHideFlags: 0

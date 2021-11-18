@@ -20,12 +20,15 @@ namespace MonkeyKick.Characters
         {
             _movement = GetComponent<CharacterMovement>();
             _battle = GetComponent<CharacterBattle>();
-        }
 
-        private void Start()
-        {
             _movement.OnBattleStart += EnterBattle;
             _battle.OnBattleEnd += ExitBattle;
+        }
+
+        private void OnDestroy()
+        {
+            _movement.OnBattleStart -= EnterBattle;
+            _battle.OnBattleEnd -= ExitBattle;
         }
 
         #endregion

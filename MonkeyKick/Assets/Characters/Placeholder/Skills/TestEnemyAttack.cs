@@ -90,9 +90,9 @@ namespace MonkeyKick.RPGSystem
                 new StateAction[]
                 {
                     new ExecuteCounterSkill(possibleCounters, false),
-                    new DelayState(this, "returnToBattlePos", 0.4f),
+                    new DelayState(this, "returnToBattlePos", 0.3f),
                     new InterruptState(this, "interrupted"),
-                    new InstantiateHitboxAtPoint(this, hitboxPrefab, actor.HurtBoxes[(int)BodyParts.LeftArm], hitboxScale, damageScaling, 0.4f),
+                    new InstantiateHitboxAtPoint(this, hitboxPrefab, actor.HurtBoxes[(int)BodyParts.LeftArm], hitboxScale, damageScaling, 0.3f),
                     new ChangeAnimation(actorAnim, ATTACK)
                 }
             );
