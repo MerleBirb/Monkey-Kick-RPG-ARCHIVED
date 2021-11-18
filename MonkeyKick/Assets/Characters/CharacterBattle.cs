@@ -116,7 +116,11 @@ namespace MonkeyKick.Characters
         protected virtual void EnterBattle()
         {
             // if turn system not injected
-            if (!_turnSystem) _turnSystem = FindObjectOfType<TurnSystem>();
+            if (!_turnSystem)
+            {
+                _turnSystem = FindObjectOfType<TurnSystem>();
+                return;
+            }
 
             // get dependencies for turn from turn order
             foreach(TurnClass tc in _turnSystem.TurnOrder)

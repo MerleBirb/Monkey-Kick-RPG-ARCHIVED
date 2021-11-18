@@ -31,8 +31,7 @@ namespace MonkeyKick.Managers
 
         public void InitiateBattle(Vector3 camPos, List<CharacterBattle> newFighters)
         {
-            _currentFighters.Clear(); // clear the fighters list in case there are any
-            _currentFighters.AddRange(newFighters); // add the new fighters to the current fighters list
+            _currentFighters = newFighters; // add the new fighters to the current fighters list
             _gameState = GameStates.Battle;
             OnBattleStart.Invoke(camPos);
         }

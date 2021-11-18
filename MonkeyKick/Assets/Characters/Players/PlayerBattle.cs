@@ -1,7 +1,6 @@
 // Merle Roji
 // 10/13/21
 
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MonkeyKick.Controls;

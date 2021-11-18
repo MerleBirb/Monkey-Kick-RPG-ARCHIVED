@@ -71,9 +71,9 @@ namespace MonkeyKick.Characters
                 _movement = Vector2.zero;
 
                 // battle start on both the player and the enemy
+                gameManager?.InitiateBattle(betweenPos, fighters);
                 InvokeOnBattleStart();
                 enemyMove.InvokeOnBattleStart();
-                gameManager.InitiateBattle(betweenPos, fighters);
             }
         }
 
