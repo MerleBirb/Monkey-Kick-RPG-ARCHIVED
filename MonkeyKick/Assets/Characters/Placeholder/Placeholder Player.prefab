@@ -228,7 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615928a0e85ea6d47a106de8d391b98e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HurtBoxes:
+  gameManager: {fileID: 11400000, guid: 47d4b28d46bdafd47a8ee10561f4691a, type: 2}
+  Hitboxes:
   - {fileID: 7103895652423830906}
   - {fileID: 7483129081832269143}
   - {fileID: 2951129992283325420}
@@ -236,7 +237,6 @@ MonoBehaviour:
   - {fileID: 8912053581907174741}
   - {fileID: 7508268601118930099}
   isInterrupted: 0
-  gameManager: {fileID: 11400000, guid: 47d4b28d46bdafd47a8ee10561f4691a, type: 2}
   Turn:
     character: {fileID: 0}
     speed: 0

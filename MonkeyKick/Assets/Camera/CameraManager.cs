@@ -9,14 +9,12 @@ namespace MonkeyKick.Cameras
 {
     public class CameraManager : MonoBehaviour
     {
-        [SerializeField] private GameManager gameManager;
-
         #region CAMERAS
 
-        [Header("Spawn when in the Overworld State")]
+        [Header("Spawn this camera when in the Overworld State")]
         [SerializeField] private GameObject overworldCamera;
 
-        [Header("Spawn when in the Battle State")]
+        [Header("Spawn this camera when in the Battle State")]
         [SerializeField] private GameObject battleCamera;
 
         #endregion
@@ -44,8 +42,11 @@ namespace MonkeyKick.Cameras
 
         #endregion
 
-        #region CAMERA METHODS
+        #region INITIALIZE CAMERA METHODS
 
+        /// <summary>
+        /// Initializes the overworld camera, and de-activates any other camera.
+        /// </summary>
         private void InitializeOverworldCamera()
         {
             overworldCamera?.SetActive(true);
@@ -53,6 +54,11 @@ namespace MonkeyKick.Cameras
             battleUI?.SetActive(false);
         }
 
+        /// <summary>
+        /// Initializes the battle camera, and de-activates any other camera.
+        /// Sets the battle camera's position to a new position.
+        /// </summary>
+        /// <param name="camPos"></param>
         private void InitializeBattleCamera(Vector3 camPos)
         {
             battleCamera?.SetActive(true);
@@ -60,57 +66,6 @@ namespace MonkeyKick.Cameras
 
             battleCamera.transform.position = new Vector3(camPos.x, camPos.y, camPos.z);
             battleUI?.SetActive(true);
-        }
-
-        private void InitiateCameras()
-        {
-            switch (gameManager.GameState)
-            {
-                case GameStates.Overworld:
-                    {
-                        overworldCamera.SetActive(true);
-                        battleCamera.SetActive(false);
-                        battleUI.SetActive(false);
-
-                        break;
-                    }
-                case GameStates.Battle:
-                    {
-                        overworldCamera.SetActive(false);
-                        battleCamera.SetActive(true);
-
-                        Vector3 overworldCamPos = overworldCamera.transform.position;
-                        battleCamera.transform.position = new Vector3(overworldCamPos.x, overworldCamPos.y, overworldCamPos.z);
-                        battleUI.SetActive(true);
-
-                        break;
-                    }
-            }
-        }
-
-        private void InitiateCameras(Vector3 camPos)
-        {
-            switch (gameManager.GameState)
-            {
-                case GameStates.Overworld:
-                    {
-                        overworldCamera.SetActive(true);
-                        battleCamera.SetActive(false);
-                        battleUI.SetActive(false);
-
-                        break;
-                    }
-                case GameStates.Battle:
-                    {
-                        overworldCamera.SetActive(false);
-                        battleCamera.SetActive(true);
-
-                        battleCamera.transform.position = new Vector3(camPos.x, camPos.y, camPos.z);
-                        battleUI.SetActive(true);
-
-                        break;
-                    }
-            }
         }
 
         #endregion

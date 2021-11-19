@@ -3,7 +3,7 @@
 
 using UnityEngine;
 using MonkeyKick.LogicPatterns.StateMachines;
-using MonkeyKick.Characters;
+using MonkeyKick.RPGSystem.Characters;
 using MonkeyKick.RPGSystem.Hitboxes;
 using MonkeyKick.QualityOfLife;
 using MonkeyKick.UserInterface;

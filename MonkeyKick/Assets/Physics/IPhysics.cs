@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-namespace MonkeyKick.Characters
+namespace MonkeyKick.CustomPhysics
 {
     public interface IPhysics
     {

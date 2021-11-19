@@ -3,13 +3,17 @@
 
 using UnityEngine;
 
-namespace MonkeyKick.QualityOfLife
+namespace MonkeyKick.CustomPhysics
 {
     public static class PhysicsQoL
     {
         #region ANGLES
 
-        public static void ClampAngle(ref Vector3 angle)
+		/// <summary>
+		/// Keep the angle from going below -180 and above 180.
+		/// </summary>
+		/// <param name="angle"></param>
+        public static void ClampAngle180(ref Vector3 angle)
 		{
 			if (angle.x < -180) angle.x += 360;
 			else if (angle.x > 180) angle.x -= 360;

@@ -9,13 +9,13 @@ namespace MonkeyKick.Cameras
     {
         #region CAMERA
 
-        protected CameraController _camera;
+        private CameraController _camera;
 
         #endregion
 
         #region FACING
 
-        protected Facing _facing = Facing.Down;
+        private Facing _facing = Facing.Down;
 
         public Facing Facing { get { return _facing; } }
         public Vector2 Angle { get { return _camera.CurrentRotation; } }
@@ -31,14 +31,17 @@ namespace MonkeyKick.Cameras
 
         public void LateUpdate()
         {
-            CheckFace();
+            SetFace();
         }
 
         #endregion
 
-        #region METHODS
+        #region DIRECTION METHODS
 
-        public void CheckFace()
+        /// <summary>
+        /// Sets the face based on the camera's current x rotation.
+        /// </summary>
+        public void SetFace()
         {
             float rX = _camera.CurrentRotation.x;
             float x = Mathf.Abs(rX);

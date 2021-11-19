@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-namespace MonkeyKick.QualityOfLife
+namespace MonkeyKick.CustomPhysics
 {
     public struct ParabolaData
     {

@@ -8,7 +8,7 @@ using MonkeyKick.QualityOfLife;
 using MonkeyKick.Controls;
 using MonkeyKick.Managers;
 
-namespace MonkeyKick.Characters
+namespace MonkeyKick.RPGSystem.Characters
 {
     public class PlayerMovement : CharacterMovement
     {

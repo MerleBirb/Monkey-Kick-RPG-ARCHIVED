@@ -3,7 +3,7 @@
 
 using UnityEngine;
 using System.Collections.Generic;
-using MonkeyKick.Characters;
+using MonkeyKick.RPGSystem.Characters;
 using MonkeyKick.RPGSystem.Hitboxes;
 using MonkeyKick.LogicPatterns.StateMachines;
 
@@ -92,7 +92,7 @@ namespace MonkeyKick.RPGSystem
                     new ExecuteCounterSkill(possibleCounters, false),
                     new DelayState(this, "returnToBattlePos", 0.3f),
                     new InterruptState(this, "interrupted"),
-                    new InstantiateHitboxAtPoint(this, hitboxPrefab, actor.HurtBoxes[(int)BodyParts.LeftArm], hitboxScale, damageScaling, 0.3f),
+                    new InstantiateHitboxAtPoint(this, hitboxPrefab, actor.Hitboxes[(int)BodyParts.LeftArm], hitboxScale, damageScaling, 0.3f),
                     new ChangeAnimation(actorAnim, ATTACK)
                 }
             );

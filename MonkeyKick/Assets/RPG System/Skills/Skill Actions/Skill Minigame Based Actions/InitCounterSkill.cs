@@ -2,7 +2,7 @@
 // 11/13/21
 
 using MonkeyKick.RPGSystem;
-using MonkeyKick.Characters;
+using MonkeyKick.RPGSystem.Characters;
 
 namespace MonkeyKick.LogicPatterns.StateMachines
 {

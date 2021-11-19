@@ -3,8 +3,9 @@
 
 using UnityEngine;
 using MonkeyKick.Managers;
+using MonkeyKick.CustomPhysics;
 
-namespace MonkeyKick.Characters
+namespace MonkeyKick.RPGSystem.Characters
 {
     public abstract class CharacterMovement : MonoBehaviour
     {

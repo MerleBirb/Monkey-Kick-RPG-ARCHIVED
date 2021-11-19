@@ -3,8 +3,8 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using MonkeyKick.Characters;
-using MonkeyKick.QualityOfLife;
+using MonkeyKick.RPGSystem.Characters;
+using MonkeyKick.Cameras;
 
 namespace MonkeyKick.Managers
 {

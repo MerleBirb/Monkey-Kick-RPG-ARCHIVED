@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-namespace MonkeyKick.Characters
+namespace MonkeyKick.RPGSystem.Characters
 {
     public class EnemyMovement : CharacterMovement
     {

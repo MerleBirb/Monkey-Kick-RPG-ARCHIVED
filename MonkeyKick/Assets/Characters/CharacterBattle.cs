@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using MonkeyKick.Managers;
 using MonkeyKick.QualityOfLife;
-using MonkeyKick.RPGSystem;
+using MonkeyKick.CustomPhysics;
 
-namespace MonkeyKick.Characters
+namespace MonkeyKick.RPGSystem.Characters
 {
     public enum BattleStates
     {
@@ -33,9 +33,13 @@ namespace MonkeyKick.Characters
 
     public abstract class CharacterBattle : MonoBehaviour
     {
+        [Header("The Game Manager holds the game state.")]
+        [SerializeField] protected GameManager gameManager;
+
         #region HITBOXES
 
-        public List<Transform> HurtBoxes;
+        [Header("Hitboxes that represent limbs")]
+        public List<Transform> Hitboxes;
 
         [HideInInspector] public bool isInterrupted; // have they been interrupted by an attack
 
@@ -43,7 +47,6 @@ namespace MonkeyKick.Characters
 
         #region RPG BATTLE SYSTEM
 
-        [SerializeField] protected GameManager gameManager;
         [HideInInspector] public TurnClass Turn;
         public CharacterStats Stats;
         protected TurnSystem _turnSystem;
@@ -111,8 +114,11 @@ namespace MonkeyKick.Characters
 
         #endregion
 
-        #region METHODS
+        #region BATTLE STATE METHODS
 
+        /// <summary>
+        /// Actions that occur while in the Enter Battle state.
+        /// </summary>
         protected virtual void EnterBattle()
         {
             // if turn system not injected
@@ -135,17 +141,6 @@ namespace MonkeyKick.Characters
                 StartCoroutine(JumpIntoBattlePosition());
                 _battleStarted = true;
             }
-            else
-            {
-                StopCoroutine(JumpIntoBattlePosition());
-
-                if (_turnSystem.TurnSystemLoaded && _physics.OnGround())
-                {
-                    // stop movement after jump
-                    _physics?.ResetMovement();
-                    _battleState = BattleStates.Wait;
-                }
-            }
         }
 
         protected virtual void Wait()
@@ -156,15 +151,20 @@ namespace MonkeyKick.Characters
 
         private IEnumerator JumpIntoBattlePosition()
         {
-            // Vector3 landPos = transform.position + new Vector3(_startingBattlePos.x, 0f, _startingBattlePos.y);
+            Vector3 landPos = transform.position + new Vector3(_startingBattlePos.x, 0f, _startingBattlePos.y);
 
-            // jump into position
-            // ParabolaData jumpData = PhysicsQoL.CalculateParabolaData(transform.position, landPos, 1f, 0f, Physics.gravity.y);
-            // PhysicsQoL.ParabolaMove(jumpData, _physics?.GetRigidbody());
-            // yield return new WaitForSeconds(jumpData.TimeToTarget);
+            //jump into position
+            ParabolaData jumpData = PhysicsQoL.CalculateParabolaData(transform.position, landPos, 1f, 0f, Physics.gravity.y);
+            PhysicsQoL.ParabolaMove(jumpData, _physics?.GetRigidbody());
 
-            transform.position += new Vector3(_startingBattlePos.x, 0f, _startingBattlePos.y);
-            _battleState = BattleStates.Wait;
+            yield return new WaitForSeconds(jumpData.TimeToTarget);
+
+            if (_turnSystem.TurnSystemLoaded && _physics.OnGround())
+            {
+                // stop movement after jump
+                _physics?.ResetMovement();
+                _battleState = BattleStates.Wait;
+            }
 
             yield return null;
         }
@@ -187,8 +187,6 @@ namespace MonkeyKick.Characters
                 _battleState = BattleStates.Dead;
             }
         }
-
-        public void ChangeAnimation(string newAnim) => AnimationQoL.ChangeAnimation(_anim, _currentState, newAnim);
 
         #endregion
 

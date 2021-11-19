@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using MonkeyKick.Characters;
+using MonkeyKick.RPGSystem.Characters;
 using MonkeyKick.LogicPatterns.StateMachines;
 
 namespace MonkeyKick.RPGSystem

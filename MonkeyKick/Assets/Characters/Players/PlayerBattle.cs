@@ -8,7 +8,7 @@ using MonkeyKick.Managers;
 using MonkeyKick.QualityOfLife;
 using MonkeyKick.References;
 
-namespace MonkeyKick.Characters
+namespace MonkeyKick.RPGSystem.Characters
 {
     public class PlayerBattle : CharacterBattle
     {

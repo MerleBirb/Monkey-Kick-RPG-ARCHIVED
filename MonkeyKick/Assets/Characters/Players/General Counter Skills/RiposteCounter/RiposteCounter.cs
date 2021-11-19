@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MonkeyKick.RPGSystem.Hitboxes;
-using MonkeyKick.Characters;
+using MonkeyKick.RPGSystem.Characters;
 using MonkeyKick.LogicPatterns.StateMachines;
 
 namespace MonkeyKick.RPGSystem
@@ -59,7 +59,7 @@ namespace MonkeyKick.RPGSystem
                 new StateAction[]
                 {
                     new DelayState(this, "endRiposte", attackDelay),
-                    new InstantiateHitboxAtPoint(this, hitboxPrefab, actor.HurtBoxes[(int)BodyParts.RightArm], hitboxScale, damageScaling, attackDelay),
+                    new InstantiateHitboxAtPoint(this, hitboxPrefab, actor.Hitboxes[(int)BodyParts.RightArm], hitboxScale, damageScaling, attackDelay),
                     new ChangeAnimation(actorAnim, ATTACK)
                 }
             );

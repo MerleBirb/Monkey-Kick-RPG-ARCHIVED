@@ -5,9 +5,10 @@ using System;
 using UnityEngine;
 using MonkeyKick.Managers;
 using MonkeyKick.QualityOfLife;
+using MonkeyKick.CustomPhysics;
 using MonkeyKick.Cameras;
 
-namespace MonkeyKick.Characters
+namespace MonkeyKick.RPGSystem.Characters
 {
     public class SpriteBillboard : MonoBehaviour
     {
