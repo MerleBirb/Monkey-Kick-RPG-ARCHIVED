@@ -6,7 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MonkeyKick.Managers;
-using MonkeyKick.QualityOfLife;
 using MonkeyKick.CustomPhysics;
 
 namespace MonkeyKick.RPGSystem.Characters
@@ -143,12 +142,6 @@ namespace MonkeyKick.RPGSystem.Characters
             }
         }
 
-        protected virtual void Wait()
-        {
-            if (_isTurn) _battleState = BattleStates.ChooseAction;
-            if (_turnSystem.EnemyPartyDefeated()) { OnBattleEnd.Invoke(); }
-        }
-
         private IEnumerator JumpIntoBattlePosition()
         {
             Vector3 landPos = transform.position + new Vector3(_startingBattlePos.x, 0f, _startingBattlePos.y);
@@ -169,6 +162,18 @@ namespace MonkeyKick.RPGSystem.Characters
             yield return null;
         }
 
+        /// <summary>
+        /// Actions that occur while in the Wait state.
+        /// </summary>
+        protected virtual void Wait()
+        {
+            if (_isTurn) _battleState = BattleStates.ChooseAction;
+            if (_turnSystem.EnemyPartyDefeated()) { OnBattleEnd.Invoke(); }
+        }
+
+        /// <summary>
+        /// Actions that occur while in the Reset After Action state.
+        /// </summary>
         public void ResetAfterAction()
         {
             _isTurn = false;
@@ -178,6 +183,13 @@ namespace MonkeyKick.RPGSystem.Characters
             if (!_isTurn) _battleState = BattleStates.Wait;
         }
 
+        #endregion
+
+        #region MISC. METHODS
+
+        /// <summary>
+        /// Checks to see if health is below 0 to activate the death state.
+        /// </summary>
         protected void CheckHealth()
         {
             if (Stats.CurrentHP <= 0)
@@ -189,7 +201,7 @@ namespace MonkeyKick.RPGSystem.Characters
         }
 
         #endregion
-
+        
         #region EVENTS
 
         // Battle end event

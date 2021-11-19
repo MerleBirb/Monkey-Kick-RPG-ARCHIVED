@@ -121,8 +121,11 @@ namespace MonkeyKick.RPGSystem.Characters
 
         #endregion
 
-        #region GENERAL METHODS
+        #region BATTLE STATE METHODS
 
+        /// <summary>
+        /// Checks buttons pressed by the player.
+        /// </summary>
         private void CheckInput()
         {
             pressedJump = _jump.triggered;
@@ -139,6 +142,9 @@ namespace MonkeyKick.RPGSystem.Characters
             AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE_R); // get into battle idle
         }
 
+        /// <summary>
+        /// Lets the player select what action they want to do when it's their turn.
+        /// </summary>
         protected virtual void ChooseAction()
         {
             // menu options

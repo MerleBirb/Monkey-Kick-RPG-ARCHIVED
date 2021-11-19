@@ -62,6 +62,9 @@ namespace MonkeyKick.RPGSystem.Characters
             AnimationQoL.ChangeAnimation(_anim, _currentState, BATTLE_STANCE_L);
         }
 
+        /// <summary>
+        /// Lets the enemy choose their next action.
+        /// </summary>
         protected void ChooseAction()
         {
             // save battle position for returning from skills and counterattacks

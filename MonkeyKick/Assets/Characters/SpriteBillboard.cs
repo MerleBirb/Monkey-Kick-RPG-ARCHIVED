@@ -13,12 +13,22 @@ namespace MonkeyKick.RPGSystem.Characters
     public class SpriteBillboard : MonoBehaviour
     {
         [SerializeField] private GameManager gameManager;
+
+        #region CAMERA
+
         public CameraDirection CamDirection;
         private Camera _mainCam;
         private Facing _facing = Facing.Down;
+        private int _offset = 4;
+
+        #endregion
+
+        #region CHARACTER
+
         private Animator _anim;
         private CharacterMovement _character;
-        private int _offset = 4;
+
+        #endregion
 
         #region ANIMATIONS
 
@@ -55,13 +65,19 @@ namespace MonkeyKick.RPGSystem.Characters
 
         #endregion
 
-        #region METHODS
+        #region SPRITE METHODS
 
+        /// <summary>
+        /// Sets the x-rotation of the sprite to face the camera.
+        /// </summary>
         private void Billboard()
         {
             transform.rotation = _mainCam.transform.rotation;
         }
 
+        /// <summary>
+        /// Rotates the sprite around the y-axis with the camera and sets the facing value.
+        /// </summary>
         private void RotateSprite()
         {
             Vector2 movement = _character.CurrentVelocity; // save the movement
@@ -79,6 +95,9 @@ namespace MonkeyKick.RPGSystem.Characters
             if (_offset > 7) _offset -= 8;     
         }
 
+        /// <summary>
+        /// Animations for the overworld.
+        /// </summary>
         private void OverworldAnimations() // only in overworld
         {
             Facing direction = (Facing)_offset;

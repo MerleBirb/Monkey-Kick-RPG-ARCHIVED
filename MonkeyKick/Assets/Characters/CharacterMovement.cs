@@ -9,6 +9,7 @@ namespace MonkeyKick.RPGSystem.Characters
 {
     public abstract class CharacterMovement : MonoBehaviour
     {
+        [Header("The Game Manager holds the game state.")]
         [SerializeField] protected GameManager gameManager;
 
         #region PHYSICS
@@ -40,16 +41,6 @@ namespace MonkeyKick.RPGSystem.Characters
         public virtual void FixedUpdate()
         {
             _physics?.ObeyGravity();
-        }
-
-        #endregion
-
-        #region METHODS
-
-        public enum CharacterTypes
-        {
-            Player,
-            Enemy
         }
 
         #endregion
