@@ -158,7 +158,7 @@ namespace MonkeyKick.RPGSystem.Characters
             {
                 if (!_movePressed)
                 {
-                    menuChoice.Variable.Value++;
+                    ++menuChoice.Variable.Value;
                     _movePressed = true;
                 }
             }

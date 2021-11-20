@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d7356c449854f3148b5d7fa3782a3036, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 560959374942471579}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c17f4470a47a51d46a37026155f9e6cd, type: 3}
   m_Name: 
@@ -257,7 +257,7 @@ MonoBehaviour:
     isTurn: 0
     wasTurnPrev: 0
     isDead: 0
-  Stats: {fileID: 11400000, guid: f8df83176c7d75749930c2d480684a68, type: 2}
+  Stats: {fileID: 11400000, guid: 6a9df6ba2791dfa4c9eb702c04ff5e6b, type: 2}
   _startingBattlePos: {x: 3, y: 0}
 --- !u!114 &560959374942471580
 MonoBehaviour:

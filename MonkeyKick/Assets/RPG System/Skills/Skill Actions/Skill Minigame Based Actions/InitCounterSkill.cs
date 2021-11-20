@@ -21,7 +21,7 @@ namespace MonkeyKick.LogicPatterns.StateMachines
         {
             if (_possibleCounters != null)
             {
-                for (int i = 0; i < _possibleCounters.Length; i++)
+                for (int i = 0; i < _possibleCounters.Length; ++i)
                 {
                     _possibleCounters[i].Init(_skill.target, new CharacterBattle[] { _skill.actor });
                     if (i == _possibleCounters.Length) return true;

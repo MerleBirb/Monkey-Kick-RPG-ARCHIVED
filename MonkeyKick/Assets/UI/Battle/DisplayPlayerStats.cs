@@ -43,7 +43,7 @@ namespace MonkeyKick.UserInterface
 
         private void InitUI()
         {
-            for(int i = 0; i < turnSystem.TurnOrder.Count; i++)
+            for(int i = 0; i < turnSystem.TurnOrder.Count; ++i)
             {
                 if (turnSystem.TurnOrder[i].character.CompareTag(TagsQoL.PLAYER_TAG)) _playerStats.Add(turnSystem.TurnOrder[i].character.Stats);
                 else if (turnSystem.TurnOrder[i].character.CompareTag(TagsQoL.ENEMY_TAG)) _enemyStats.Add(turnSystem.TurnOrder[i].character.Stats);
@@ -56,13 +56,13 @@ namespace MonkeyKick.UserInterface
         {
             if (_charactersLoaded)
             {
-                for (int p = 0; p < _playerStats.Count; p++)
+                for (int p = 0; p < _playerStats.Count; ++p)
                 {
                     playerHPTexts[p].text = "HP: " + _playerStats[p].CurrentHP.ToString() + "/" + _playerStats[p].MaxHP.ToString();
                     playerKiTexts[p].text = "KI: " + _playerStats[p].CurrentKi.ToString() + "/" + _playerStats[p].MaxKi.ToString();
                 }
 
-                for (int e = 0; e < _enemyStats.Count; e++)
+                for (int e = 0; e < _enemyStats.Count; ++e)
                 {
                     enemyHPTexts[e].text = "HP: " + _enemyStats[e].CurrentHP.ToString() + "/" + _enemyStats[e].MaxHP.ToString();
                     enemyKiTexts[e].text = "KI: " + _enemyStats[e].CurrentKi.ToString() + "/" + _enemyStats[e].MaxKi.ToString();

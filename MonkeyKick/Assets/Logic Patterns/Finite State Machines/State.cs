@@ -33,7 +33,7 @@ namespace MonkeyKick.LogicPatterns.StateMachines
         {
             if (array == null) return; // if there is no array, don't run
 
-            for (int i = 0; i < array.Length; i++)
+            for (int i = array.Length; --i >= 0;)
             {
                 if (forceSkip) break; // skip if action is already executing
                 forceSkip = array[i].Execute();

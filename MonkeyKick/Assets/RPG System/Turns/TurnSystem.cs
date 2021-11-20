@@ -59,7 +59,7 @@ namespace MonkeyKick.RPGSystem
             // transfer the list to the turn order, clear from game manager when done
             _allCombatants.AddRange(gameManager.CurrentFighters);
 
-            for (int i = 0; i < _allCombatants.Count; i++)
+            for (int i = 0; i < _allCombatants.Count; ++i)
             {
                 _turnOrder.Add(_allCombatants[i].Turn);
                 _turnOrder[i].character = _allCombatants[i];
@@ -88,7 +88,7 @@ namespace MonkeyKick.RPGSystem
 
         private void ResetTurns()
         {
-            for (int i = 0; i < _turnOrder.Count; i++)
+            for (int i = 0; i < _turnOrder.Count; ++i)
             {
                 if (i == 0)
                 {
@@ -105,7 +105,7 @@ namespace MonkeyKick.RPGSystem
 
         private void UpdateTurns()
         {
-            for (int i = 0; i < _turnOrder.Count; i++)
+            for (int i = 0; i < _turnOrder.Count; ++i)
             {
                 if (!_turnOrder[i].wasTurnPrev)
                 {

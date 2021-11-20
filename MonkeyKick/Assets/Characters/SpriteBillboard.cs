@@ -65,7 +65,7 @@ namespace MonkeyKick.RPGSystem.Characters
 
         #endregion
 
-        #region SPRITE METHODS
+        #region BILLBOARDING METHODS
 
         /// <summary>
         /// Sets the x-rotation of the sprite to face the camera.
