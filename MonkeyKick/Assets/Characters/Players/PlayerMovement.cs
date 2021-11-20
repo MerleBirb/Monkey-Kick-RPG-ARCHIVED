@@ -18,8 +18,6 @@ namespace MonkeyKick.RPGSystem.Characters
         private InputAction _move;
         private InputAction _jump;
 
-        private bool _hasPressedJump = false;
-
         #endregion
 
         #region UNITY METHODS
@@ -86,17 +84,22 @@ namespace MonkeyKick.RPGSystem.Characters
 
         #endregion
 
-        #region METHODS
+        #region MOVEMENT METHODS
 
+        /// <summary>
+        /// Checks input from the player.
+        /// </summary>
         private void CheckInput()
         {
             if (_controls == null) return;
 
-            _hasPressedJump = _jump.triggered;
-
-            PressedJump();
+            // jump
+            if (_jump.triggered && _physics.OnGround()) _physics.Jump();
         }
 
+        /// <summary>
+        /// Moves the player around via Rigidbody.
+        /// </summary>
         private void Movement()
         {
             if (_physics == null) return;
@@ -107,19 +110,6 @@ namespace MonkeyKick.RPGSystem.Characters
 
             if (direction) _physics.Movement(_movement, _physics.GetMoveSpeed(), direction); // if a camera exists, use it's direction
             else _physics.Movement(_movement, _physics.GetMoveSpeed()); // if camera doesnt exist default is Vector3.forward
-        }
-
-        private void PressedJump()
-        {
-            if (_hasPressedJump)
-            {
-                if (_physics.OnGround())
-                {
-                    _physics.Jump();
-                    _hasPressedJump = false;
-                }
-
-            }
         }
 
         #endregion
