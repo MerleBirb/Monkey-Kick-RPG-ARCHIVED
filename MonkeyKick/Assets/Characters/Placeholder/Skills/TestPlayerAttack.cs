@@ -18,8 +18,8 @@ namespace MonkeyKick.RPGSystem
         [SerializeField] protected DisplayEffortRank effortRankPrefab;
         [SerializeField] protected DisplayDebugUI debugUIPrefab;
 
-        [Header("Velocity on the x-axis while moving towards the target")]
-        [SerializeField] private float xVelToTarget;
+        [Header("Time it takes to arrive at the target")]
+        [SerializeField] private float timeToTarget;
         [Header("Time you have to input your button press")]
         [SerializeField] private float timeForPunch;
         [Header("Offset on the x-axis for reaching target destination")]
@@ -47,7 +47,7 @@ namespace MonkeyKick.RPGSystem
                 // fixed update actions
                 new StateAction[]
                 {
-                    new ActorMoveToTarget(this, "timedInputAttack", targetTransform.position, new Vector3(xVelToTarget, 0f, 0f), xOffsetFromTarget)
+                    new ActorMoveToTarget(this, "timedInputAttack", targetTransform.position, timeToTarget, xOffsetFromTarget)
                 },
                 // update Actions
                 new StateAction[]
@@ -86,7 +86,7 @@ namespace MonkeyKick.RPGSystem
                 // fixed update actions
                 new StateAction[]
                 {
-                    new ActorMoveToTarget(this, "endSkill", returnPos, new Vector3(-xVelToTarget, 0f, 0f))
+                    new ActorMoveToTarget(this, "endSkill", returnPos, timeToTarget)
                 },
                 // update actions
                 new StateAction[]

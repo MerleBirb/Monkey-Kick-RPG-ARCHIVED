@@ -48,7 +48,7 @@ namespace MonkeyKick.RPGSystem.Characters
 
         #region UNITY METHODS
 
-        private void Start()
+        private void Awake()
         {
             _anim = GetComponent<Animator>();
             _character = GetComponentInParent<CharacterMovement>();

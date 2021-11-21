@@ -20,11 +20,11 @@ namespace MonkeyKick.Managers
         #region GAME STATE
 
         [Header("The state the game currently is in.")]
-        [SerializeField] private GameStates _gameState = GameStates.Overworld;
+        [SerializeField] private GameStates gameState = GameStates.Overworld;
         public GameStates GameState
         {
-            get => _gameState;
-            set => _gameState = value;
+            get => gameState;
+            set => gameState = value;
         }
 
         private List<CharacterBattle> _currentFighters = new List<CharacterBattle>(); // fighters in the turn order
@@ -33,13 +33,13 @@ namespace MonkeyKick.Managers
         public void InitiateBattle(Vector3 camPos, List<CharacterBattle> newFighters)
         {
             _currentFighters = newFighters; // add the new fighters to the current fighters list
-            _gameState = GameStates.Battle;
+            gameState = GameStates.Battle;
             CameraQoL.InvokeOnBattleStart(camPos);
         }
 
         public void EndBattle()
         {
-            _gameState = GameStates.Overworld;
+            gameState = GameStates.Overworld;
             CameraQoL.InvokeOnBattleEnd();
         }
 

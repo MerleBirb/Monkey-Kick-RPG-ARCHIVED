@@ -1,9 +1,8 @@
 // Merle Roji
 // 11/9/21
 
-using System;
-using UnityEngine;
 using MonkeyKick.RPGSystem;
+using MonkeyKick.RPGSystem.Characters;
 
 namespace MonkeyKick.LogicPatterns.StateMachines
 {
@@ -19,6 +18,7 @@ namespace MonkeyKick.LogicPatterns.StateMachines
         public override bool Execute()
         {
             _skill.actor.ResetAfterAction();
+            _skill.target.BattleState = BattleStates.Wait;
 
             return true;
         }

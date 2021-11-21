@@ -54,7 +54,7 @@ namespace MonkeyKick.RPGSystem.Characters
         protected BattleStates _battleState = BattleStates.EnterBattle;
         public BattleStates BattleState
         {
-            get { return _battleState; }
+            get => _battleState;
             set
             {
                 Type t = value.GetType(); // check if type is of BattleStates
@@ -152,12 +152,9 @@ namespace MonkeyKick.RPGSystem.Characters
 
             yield return new WaitForSeconds(jumpData.TimeToTarget);
 
-            if (_turnSystem.TurnSystemLoaded && _physics.OnGround())
-            {
-                // stop movement after jump
-                _physics?.ResetMovement();
-                _battleState = BattleStates.Wait;
-            }
+            // stop movement after jump
+            _physics?.ResetMovement();
+            _battleState = BattleStates.Wait;
 
             yield return null;
         }
