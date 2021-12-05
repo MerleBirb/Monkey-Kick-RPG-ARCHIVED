@@ -102,7 +102,7 @@ namespace MonkeyKick.RPGSystem
                 null,
                 new StateAction[]
                 {
-                    new DelayState(this, "returnToBattlePos"),
+                    new DelayState(this, "returnToBattlePos", 0.02f), // the small time is a bandaid fix for weird freeze when hitting the enemy while theyre moving
                     new ChangeAnimation(actorAnim, BATTLE_STANCE)
                 }
             );

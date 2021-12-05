@@ -32,7 +32,7 @@ namespace MonkeyKick.LogicPatterns.StateMachines
         {
             if (_newHitbox == null)
             {
-                _newHitbox = _skill.InstantiateHitbox(_prefab, _spawnPoint, _scale, _skill.target, _totalDamage, _time + 0.15f);
+                _newHitbox = _skill.InstantiateHitbox(_prefab, _spawnPoint, _scale, _skill.target, _totalDamage, _time);
                 return true;
             }
 

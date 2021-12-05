@@ -23,6 +23,8 @@ namespace MonkeyKick.LogicPatterns.StateMachines
                 _skill.actor.CharacterPhysics.ResetMovement();
                 _skill.SetState(_targetState);
                 _skill.actor.isInterrupted = false;
+
+                return true;
             }
 
             return false;

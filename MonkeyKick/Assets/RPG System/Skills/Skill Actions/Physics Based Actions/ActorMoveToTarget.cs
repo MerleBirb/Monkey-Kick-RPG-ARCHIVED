@@ -41,6 +41,11 @@ namespace MonkeyKick.LogicPatterns.StateMachines
                 return true;
             }
 
+            if (_skill.actor.isInterrupted)
+            {
+                
+            }
+
             return false;
         }
 
