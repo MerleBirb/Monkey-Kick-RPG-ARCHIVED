@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
   m_LocalPosition: {x: 0, y: 7.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7430557789452629438}
   m_Father: {fileID: 0}
@@ -87,7 +88,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   AngleY: 30
   RotationSmoothing: 10
-  RotationSensitivity: 100
+  RotationSensitivity: 200
   Distance: 8
 --- !u!114 &7430557789255352384
 MonoBehaviour:
@@ -130,6 +131,7 @@ Transform:
   m_LocalRotation: {x: 0.22048293, y: 0.0008806558, z: -0.00019907347, w: -0.97539043}
   m_LocalPosition: {x: -0.01805744, y: -2.4696732, z: 32.253586}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7430557789255352385}
   m_RootOrder: 0

@@ -16,7 +16,12 @@ namespace MonkeyKick.UserInterface
         [SerializeField] private int xOffset;
         [SerializeField] private Image selectorPrefab;
         private Image _selector;
-        private bool _selectorCreated = false;
+
+        private void OnEnable()
+        {
+            _selector = Instantiate(selectorPrefab, transform);
+            _selector.transform.rotation = Quaternion.Euler(0f, 0f, -90f);
+        }
 
         private void Update()
         {
@@ -25,12 +30,6 @@ namespace MonkeyKick.UserInterface
 
         private void ChoiceUpdate()
         {
-            if (!_selectorCreated)
-            {
-                _selector = Instantiate(selectorPrefab, transform);
-                _selectorCreated = true;
-            }
-
             MenuQoL.SelectMenu(menuTexts, _selector, menuChoice.Variable.Value, OffsetChoice.XAxis, xOffset);
 
             if (menuChoice.Variable.Value < 0) { menuChoice.Variable.Value = menuTexts.Count - 1; }

@@ -14,10 +14,13 @@ namespace MonkeyKick.QualityOfLife
     }
 
     public static class MenuQoL
-    {
+    {   
+        #region SELECT MENU
+
         /// <summary>
         /// Moves the Image to an element in the list of choices in the menu
         /// </summary>
+
         public static void SelectMenu(in List<Transform> menu, Image selector, in int menuChoice)
         {
             var menuCount = menu.Count - 1;
@@ -65,5 +68,68 @@ namespace MonkeyKick.QualityOfLife
                     new Vector2(menu[menuChoice].position.x + xOffset, menu[menuChoice].position.y + yOffset);
             }
         }
+
+        #endregion
+        
+        #region SCROLL THRU MENU
+
+        /// <summary>
+        /// Scrolls up or down through the menu.
+        /// </summary>
+
+        public static void ScrollThroughMenu(ref bool movePressed, ref int menuValue, Vector2 movement)
+        {
+            const float DEADZONE = 0.3f;
+
+            // scrolling through the menu
+            if (movement.y < -DEADZONE)
+            {
+                if (!movePressed)
+                {
+                    ++menuValue;
+                    movePressed = true;
+                }
+            }
+            else if (movement.y > DEADZONE)
+            {
+                if (!movePressed)
+                {
+                    menuValue--;
+                    movePressed = true;
+                }
+            }
+            else
+            {
+                movePressed = false;
+            }
+        }
+        
+        #endregion
+    
+        #region EVENTS
+
+        public delegate void OpenOverworldMenuTrigger();
+        public static event OpenOverworldMenuTrigger OnOpenOverworldMenu;
+
+        /// <summary>
+        /// Invokes the 'OnOpenOverworldMenu' event.
+        /// </summary>
+        public static void InvokeOnOpenOverworldMenu()
+        {
+            OnOpenOverworldMenu?.Invoke();
+        }
+
+        public delegate void CloseOverworldMenuTrigger();
+        public static event CloseOverworldMenuTrigger OnCloseOverworldMenu;
+
+        /// <summary>
+        /// Invokes the 'OnCloseOverworldMenu' event.
+        /// </summary>
+        public static void InvokeOnCloseOverworldMenu()
+        {
+            OnCloseOverworldMenu?.Invoke();
+        }
+
+        #endregion
     }
 }

@@ -148,32 +148,12 @@ namespace MonkeyKick.RPGSystem.Characters
         protected virtual void ChooseAction()
         {
             // menu options
-            const float deadzone = 0.3f;
             const int FIGHT = 0;
             const int CHARGE = 1;
             const int ITEM = 2;
 
             // scrolling through the menu
-            if (_movement.y < -deadzone)
-            {
-                if (!_movePressed)
-                {
-                    ++menuChoice.Variable.Value;
-                    _movePressed = true;
-                }
-            }
-            else if (_movement.y > deadzone)
-            {
-                if (!_movePressed)
-                {
-                    menuChoice.Variable.Value--;
-                    _movePressed = true;
-                }
-            }
-            else
-            {
-                _movePressed = false;
-            }
+            MenuQoL.ScrollThroughMenu(ref _movePressed, ref menuChoice.Variable.Value, _movement);
 
             if (_select.triggered)
             {

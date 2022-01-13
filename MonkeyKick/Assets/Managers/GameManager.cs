@@ -11,7 +11,7 @@ namespace MonkeyKick.Managers
     public enum GameStates
     {
         Overworld,
-        Battle
+        Battle,
     }
 
     [CreateAssetMenu(fileName = "GameManager", menuName = "Managers/Game Manager", order = 1)]
