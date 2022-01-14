@@ -31,23 +31,15 @@ namespace MonkeyKick.UserInterface
 
             // set controls
             _start = _controls.Menu.Start;
+
+            // add functions to menu event
+            MenuQoL.OnOpenOverworldMenu += Pause;
+            MenuQoL.OnCloseOverworldMenu += Resume;
         }
 
         private void Update()
         {
-            if (_start.triggered)
-            {
-                if (!ui.activeInHierarchy)
-                {
-                    MenuQoL.InvokeOnOpenOverworldMenu();
-                    ui.SetActive(true);
-                }
-                else
-                {
-                    MenuQoL.InvokeOnCloseOverworldMenu();
-                    ui.SetActive(false);
-                }
-            }
+            CheckInput();
         }
 
         private void OnEnable()
@@ -58,6 +50,37 @@ namespace MonkeyKick.UserInterface
         private void OnDisable()
         {
             _controls?.Menu.Disable();
+
+            MenuQoL.OnOpenOverworldMenu -= Pause;
+            MenuQoL.OnCloseOverworldMenu -= Resume;
+        }
+
+        #endregion
+
+        #region MENU METHODS
+
+        // checks if the menu button was pressed
+        private void CheckInput()
+        {
+            if (_start.triggered)
+            {
+                if (!ui.activeInHierarchy) MenuQoL.InvokeOnOpenOverworldMenu();
+                else MenuQoL.InvokeOnCloseOverworldMenu();
+            }
+        }
+
+        private void Pause()
+        {
+            gameManager.GameState = GameStates.Menu;
+            ui.SetActive(true);
+            Time.timeScale = 0f;
+        }
+
+        private void Resume()
+        {
+            gameManager.GameState = GameStates.Overworld;
+            ui.SetActive(false);
+            Time.timeScale = 1f;
         }
 
         #endregion

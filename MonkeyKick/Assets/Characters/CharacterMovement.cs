@@ -7,7 +7,7 @@ using MonkeyKick.CustomPhysics;
 
 namespace MonkeyKick.RPGSystem.Characters
 {
-    public abstract class CharacterMovement : MonoBehaviour
+    public class CharacterMovement : MonoBehaviour
     {
         [Header("The Game Manager holds the game state.")]
         [SerializeField] protected GameManager gameManager;

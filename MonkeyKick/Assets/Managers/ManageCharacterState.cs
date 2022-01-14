@@ -9,8 +9,6 @@ namespace MonkeyKick.RPGSystem.Characters
 {
     public class ManageCharacterState : MonoBehaviour
     {
-        [SerializeField] private GameManager gameManager;
-
         #region CHARACTER COMPONENTS
 
         private CharacterMovement _movement;
@@ -28,8 +26,8 @@ namespace MonkeyKick.RPGSystem.Characters
             _movement.OnBattleStart += EnterBattle;
             _battle.OnBattleEnd += ExitBattle;
 
-            MenuQoL.OnOpenOverworldMenu += OpenMenu;
-            MenuQoL.OnCloseOverworldMenu += CloseMenu;
+            MenuQoL.OnOpenOverworldMenu += PauseMovement;
+            MenuQoL.OnCloseOverworldMenu += ResumeMovement;
         }
 
         private void OnDestroy()
@@ -37,18 +35,18 @@ namespace MonkeyKick.RPGSystem.Characters
             _movement.OnBattleStart -= EnterBattle;
             _battle.OnBattleEnd -= ExitBattle;
 
-            MenuQoL.OnOpenOverworldMenu -= OpenMenu;
-            MenuQoL.OnCloseOverworldMenu -= CloseMenu;
+            MenuQoL.OnOpenOverworldMenu -= PauseMovement;
+            MenuQoL.OnCloseOverworldMenu -= ResumeMovement;
         }
 
         #endregion
 
-        public void OpenMenu()
+        public void PauseMovement()
         {
             _movement.enabled = false;
         }
 
-        public void CloseMenu()
+        public void ResumeMovement()
         {
             _movement.enabled = true;
         }

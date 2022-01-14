@@ -76,14 +76,14 @@ namespace MonkeyKick.RPGSystem.Characters
         {
             _controls?.Overworld.Enable();
 
-            _physics.ResetMovement();
+            if (_physics.OnGround()) _physics.ResetMovement();
         }
 
         private void OnDisable()
         {
             _controls?.Overworld.Disable();
 
-            _physics.ResetMovement();
+            if (_physics.OnGround()) _physics.ResetMovement();
         }
 
         #endregion
