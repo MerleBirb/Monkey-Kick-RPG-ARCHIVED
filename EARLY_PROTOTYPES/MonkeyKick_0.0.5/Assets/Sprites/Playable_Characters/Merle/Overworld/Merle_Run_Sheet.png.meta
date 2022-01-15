@@ -195,7 +195,7 @@ TextureImporter:
       213: -6376287400303488852
     second: Merle_Run_Sheet_63
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -215,6 +215,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -224,11 +226,11 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: -1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -246,9 +248,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -1631,6 +1637,71 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Merle_Run_Sheet_2: -6045005008751543124
+      Merle_Run_Sheet_39: 3511872152272803184
+      Merle_Run_Sheet_23: -242955148200390086
+      Merle_Run_Sheet_36: -5454881505558830843
+      Merle_Run_Sheet_32: -9148081065612075393
+      Merle_Run_Sheet_60: -2844614535363484158
+      Merle_Run_Sheet_16: 6833676934878307394
+      Merle_Run_Sheet_41: -4633014775110331032
+      Merle_Run_Sheet_11: 3212592430093326189
+      Merle_Run_Sheet_55: -4540773592362520228
+      Merle_Run_Sheet_62: 243890324374330874
+      Merle_Run_Sheet_37: 8052402126055413836
+      Merle_Run_Sheet_42: -2028966069475060955
+      Merle_Run_Sheet_53: -2909767897301227740
+      Merle_Run_Sheet_63: -6376287400303488852
+      Merle_Run_Sheet_29: -6910678853428508606
+      Merle_Run_Sheet_44: -5996741993651438596
+      Merle_Run_Sheet_54: 8190451501623641715
+      Merle_Run_Sheet_56: 6981833771261560203
+      Merle_Run_Sheet_52: 1195200198469384297
+      Merle_Run_Sheet_6: 3420551788432186486
+      Merle_Run_Sheet_27: -5325813263977831178
+      Merle_Run_Sheet_31: -4504756459051943108
+      Merle_Run_Sheet_15: 8807295406194247335
+      Merle_Run_Sheet_22: 4759615917966826621
+      Merle_Run_Sheet_17: -2937776742696000780
+      Merle_Run_Sheet_10: 4632357889611400887
+      Merle_Run_Sheet_30: -3228574526174100741
+      Merle_Run_Sheet_1: -8599123720750744003
+      Merle_Run_Sheet_48: 3922712667051171201
+      Merle_Run_Sheet_33: 7690502230807376624
+      Merle_Run_Sheet_47: -5437266991003183018
+      Merle_Run_Sheet_12: 6944450577161447557
+      Merle_Run_Sheet_9: -7215997765292857495
+      Merle_Run_Sheet_7: -8130016633901163055
+      Merle_Run_Sheet_58: -4636055083635332288
+      Merle_Run_Sheet_35: 4473184536389728994
+      Merle_Run_Sheet_13: 8077255703129205726
+      Merle_Run_Sheet_50: 4335728260052301861
+      Merle_Run_Sheet_26: 7534152363295236052
+      Merle_Run_Sheet_25: 8590532911583239327
+      Merle_Run_Sheet_40: 4920474801364416529
+      Merle_Run_Sheet_57: 1971035882469911755
+      Merle_Run_Sheet_0: 6381242371987596653
+      Merle_Run_Sheet_19: -391235198715609592
+      Merle_Run_Sheet_45: 3057683696029625475
+      Merle_Run_Sheet_59: -6076419487395984528
+      Merle_Run_Sheet_49: -4546093168392151680
+      Merle_Run_Sheet_8: 3214736734817700498
+      Merle_Run_Sheet_34: -1761259791272845682
+      Merle_Run_Sheet_51: -3865473310056961104
+      Merle_Run_Sheet_43: 1977022454364074498
+      Merle_Run_Sheet_14: -1736442532371148289
+      Merle_Run_Sheet_61: 3115390062557981069
+      Merle_Run_Sheet_5: -1684253808558240338
+      Merle_Run_Sheet_24: -9162823211978564013
+      Merle_Run_Sheet_38: 4039159158897469783
+      Merle_Run_Sheet_18: -8555209461720211998
+      Merle_Run_Sheet_21: -2079269704321338774
+      Merle_Run_Sheet_46: 1274833027634876745
+      Merle_Run_Sheet_28: -4183766554106306768
+      Merle_Run_Sheet_4: -2923733371186110791
+      Merle_Run_Sheet_20: -1945366331593293861
+      Merle_Run_Sheet_3: 6864693099823852462
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

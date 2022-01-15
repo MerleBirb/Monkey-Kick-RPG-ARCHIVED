@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 using MonkeyKick.RPGSystem;
+using MonkeyKick.RPGSystem.Characters;
 using MonkeyKick.QualityOfLife;
 
 namespace MonkeyKick.UserInterface

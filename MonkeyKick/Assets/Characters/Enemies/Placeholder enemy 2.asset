@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterName: Evil Guy 2
   _level: 1
-  _description: Description
   _maxHP: 10
   _currentHP: 10
   _maxKi: 10

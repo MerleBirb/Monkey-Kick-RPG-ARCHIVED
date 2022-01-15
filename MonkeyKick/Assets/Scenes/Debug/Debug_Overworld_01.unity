@@ -1179,6 +1179,14 @@ PrefabInstance:
       propertyPath: direction
       value: 
       objectReference: {fileID: 976734922}
+    - target: {fileID: 2620644519227634207, guid: be54eb4d60128b64f9e851565748f140, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7617607231334096646, guid: be54eb4d60128b64f9e851565748f140, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be54eb4d60128b64f9e851565748f140, type: 3}
 --- !u!1001 &3922097802019271784
@@ -1498,10 +1506,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1721471012, guid: 50f959fa9d2e80348b78b11f42321c43, type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 11400000, guid: 47d4b28d46bdafd47a8ee10561f4691a, type: 2}
     - target: {fileID: 4683942702847956481, guid: 50f959fa9d2e80348b78b11f42321c43, type: 3}
       propertyPath: m_RootOrder
       value: 2

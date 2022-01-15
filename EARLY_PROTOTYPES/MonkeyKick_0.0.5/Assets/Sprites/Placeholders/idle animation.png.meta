@@ -86,6 +86,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -94,9 +96,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 0
     wrapV: 0
     wrapW: 0
@@ -117,9 +119,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -600,6 +605,28 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      idle animation_6: 5725325076080995692
+      idle animation_15: -7969817342828815293
+      idle animation_12: -2142272937249574565
+      idle animation_9: 471089350251728412
+      idle animation_5: 194020481930064856
+      idle animation_8: 4833531432771817899
+      idle animation_16: -1095361277058545769
+      idle animation_0: -6819788285808234091
+      idle animation_1: 682292710786356352
+      idle animation_2: -7787413413809808454
+      idle animation_4: 5481068771421895424
+      idle animation_14: -5434495020849445401
+      idle animation_10: -2182973906042766959
+      idle animation_18: 3328559355272497197
+      idle animation_13: -221452937291301205
+      idle animation_3: 1589267402514717270
+      idle animation_19: -4519547361474920967
+      idle animation_7: -2743175359102616617
+      idle animation_11: -6970259992369053311
+      idle animation_17: 2291969063365376875
+      idle animation_20: -8267170377540533878
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

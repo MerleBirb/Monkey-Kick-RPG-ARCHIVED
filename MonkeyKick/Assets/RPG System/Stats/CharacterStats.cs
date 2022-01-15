@@ -3,22 +3,25 @@
 
 using UnityEngine;
 using System.Collections.Generic;
+using MonkeyKick.RPGSystem;
 
-namespace MonkeyKick.RPGSystem
+namespace MonkeyKick.RPGSystem.Characters
 {
-    [CreateAssetMenu(fileName = "Stats", menuName = "RPGSystem/Stats/CharacterStats", order = 1)]
+    [CreateAssetMenu(fileName = "Stats", menuName = "RPGSystem/Character/Character Stats")]
     public class CharacterStats : ScriptableObject
     {
         #region STAT VARIABLES
 
         [Header("Basic Information")]
         [SerializeField] protected string _characterName = "Name";
-        public string CharacterName { get => _characterName; }
+        public string CharacterName
+        {
+            get => _characterName;
+            set => _characterName = value;
+        }
+
         [SerializeField] protected int _level = 1;
         public int Level { get => _level; }
-        [TextArea(15, 20)]
-        [SerializeField] protected string _description = "Description";
-        public string Description { get => _description; }
 
         [Header("How much damage the character can take")]
         [SerializeField] protected int _maxHP = 1;
