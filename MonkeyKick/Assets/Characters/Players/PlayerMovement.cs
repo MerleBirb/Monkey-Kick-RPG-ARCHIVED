@@ -36,8 +36,10 @@ namespace MonkeyKick.RPGSystem.Characters
             _move.performed += ctx => _movement = ctx.ReadValue<Vector2>();
         }
 
-        private void Update()
+        public override void Update()
         {
+            base.Update();
+
             CheckInput();
         }
 

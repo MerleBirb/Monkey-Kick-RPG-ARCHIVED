@@ -38,8 +38,15 @@ namespace MonkeyKick.RPGSystem.Characters
             }
         }
 
+        public virtual void Update()
+        {
+            if (gameManager.GameState != GameStates.Overworld) return;
+        }
+
         public virtual void FixedUpdate()
         {
+            if (gameManager.GameState != GameStates.Overworld) return;
+
             _physics?.ObeyGravity();
         }
 

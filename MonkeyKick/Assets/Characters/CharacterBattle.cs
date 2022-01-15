@@ -97,12 +97,16 @@ namespace MonkeyKick.RPGSystem.Characters
 
         protected virtual void Update()
         {
+            if (gameManager.GameState != GameStates.Battle) return;
+
             CheckHealth();
             if (_isTurn != Turn.isTurn) { _isTurn = Turn.isTurn; }
         }
 
         protected virtual void FixedUpdate()
         {
+            if (gameManager.GameState != GameStates.Battle) return;
+
             _physics?.ObeyGravity();
         }
 

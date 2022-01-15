@@ -12,7 +12,8 @@ namespace MonkeyKick.Managers
     {
         Overworld,
         Battle,
-        Menu
+        Menu,
+        Dialogue
     }
 
     [CreateAssetMenu(fileName = "GameManager", menuName = "Managers/Game Manager", order = 1)]

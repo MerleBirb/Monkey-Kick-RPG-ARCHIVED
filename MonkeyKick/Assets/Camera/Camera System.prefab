@@ -89,6 +89,10 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7430557789255352387, guid: 4ccb3739aabd4ea48868eef210647889, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 11400000, guid: 47d4b28d46bdafd47a8ee10561f4691a, type: 2}
     - target: {fileID: 7430557789255352398, guid: 4ccb3739aabd4ea48868eef210647889, type: 3}
       propertyPath: m_LookAt
       value: 

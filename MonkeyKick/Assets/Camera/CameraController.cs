@@ -5,11 +5,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using MonkeyKick.Controls;
 using MonkeyKick.CustomPhysics;
+using MonkeyKick.Managers;
 
 namespace MonkeyKick.Cameras
 {
     public class CameraController : MonoBehaviour
     {
+        [SerializeField] private GameManager gameManager;
+
         #region CONTROLS
 
         private CameraControls _controls;
@@ -54,11 +57,15 @@ namespace MonkeyKick.Cameras
 
         private void Update()
         {
+            if (gameManager.GameState != GameStates.Overworld) return;
+
             CheckInput();
         }
 
         private void LateUpdate()
         {
+            if (gameManager.GameState != GameStates.Overworld) return;
+
             RotateCamera();
         }
 
