@@ -9,6 +9,8 @@ namespace MonkeyKick.RPGSystem.Characters
 {
     public class ManageCharacterState : MonoBehaviour
     {
+        [SerializeField] private GameManager gameManager;
+
         #region CHARACTER COMPONENTS
 
         private CharacterMovement _movement;
@@ -28,6 +30,8 @@ namespace MonkeyKick.RPGSystem.Characters
 
             MenuQoL.OnOpenOverworldMenu += PauseMovement;
             MenuQoL.OnCloseOverworldMenu += ResumeMovement;
+
+            gameManager.OnDialogueEnd += ResumeMovement;
         }
 
         private void OnDestroy()
@@ -37,6 +41,8 @@ namespace MonkeyKick.RPGSystem.Characters
 
             MenuQoL.OnOpenOverworldMenu -= PauseMovement;
             MenuQoL.OnCloseOverworldMenu -= ResumeMovement;
+
+            gameManager.OnDialogueEnd -= ResumeMovement;
         }
 
         #endregion

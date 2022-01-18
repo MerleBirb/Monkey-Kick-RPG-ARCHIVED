@@ -51,5 +51,17 @@ namespace MonkeyKick.Managers
         }
 
         #endregion
+
+        #region GAME EVENTS
+
+        public delegate void EndDialogue();
+        public EndDialogue OnDialogueEnd;
+
+        public void InvokeOnDialogueEnd()
+        {
+            OnDialogueEnd?.Invoke();
+        }
+
+        #endregion
     }
 }

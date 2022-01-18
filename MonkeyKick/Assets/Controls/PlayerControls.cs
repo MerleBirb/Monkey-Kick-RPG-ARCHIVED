@@ -46,6 +46,15 @@ namespace MonkeyKick.Controls
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Action"",
+                    ""type"": ""Button"",
+                    ""id"": ""1713a706-7e61-4c8a-a8a4-aef26bf2963d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -134,6 +143,28 @@ namespace MonkeyKick.Controls
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""943382b1-0940-4a79-a0f6-cdafa65ffaa5"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba4189c6-6d5a-40b4-87df-80e65f301c6d"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -576,6 +607,17 @@ namespace MonkeyKick.Controls
                 },
                 {
                     ""name"": """",
+                    ""id"": ""7d9003f6-9007-4930-9776-f814a6ba2b63"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""58f3b5c4-7b08-4799-9c94-775613e067e8"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
@@ -743,6 +785,7 @@ namespace MonkeyKick.Controls
             m_Overworld = asset.FindActionMap("Overworld", throwIfNotFound: true);
             m_Overworld_Move = m_Overworld.FindAction("Move", throwIfNotFound: true);
             m_Overworld_Jump = m_Overworld.FindAction("Jump", throwIfNotFound: true);
+            m_Overworld_Action = m_Overworld.FindAction("Action", throwIfNotFound: true);
             // Battle
             m_Battle = asset.FindActionMap("Battle", throwIfNotFound: true);
             m_Battle_Move = m_Battle.FindAction("Move", throwIfNotFound: true);
@@ -823,12 +866,14 @@ namespace MonkeyKick.Controls
         private IOverworldActions m_OverworldActionsCallbackInterface;
         private readonly InputAction m_Overworld_Move;
         private readonly InputAction m_Overworld_Jump;
+        private readonly InputAction m_Overworld_Action;
         public struct OverworldActions
         {
             private @PlayerControls m_Wrapper;
             public OverworldActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Overworld_Move;
             public InputAction @Jump => m_Wrapper.m_Overworld_Jump;
+            public InputAction @Action => m_Wrapper.m_Overworld_Action;
             public InputActionMap Get() { return m_Wrapper.m_Overworld; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -844,6 +889,9 @@ namespace MonkeyKick.Controls
                     @Jump.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnJump;
+                    @Action.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnAction;
+                    @Action.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnAction;
+                    @Action.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnAction;
                 }
                 m_Wrapper.m_OverworldActionsCallbackInterface = instance;
                 if (instance != null)
@@ -854,6 +902,9 @@ namespace MonkeyKick.Controls
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
+                    @Action.started += instance.OnAction;
+                    @Action.performed += instance.OnAction;
+                    @Action.canceled += instance.OnAction;
                 }
             }
         }
@@ -1050,6 +1101,7 @@ namespace MonkeyKick.Controls
         {
             void OnMove(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnAction(InputAction.CallbackContext context);
         }
         public interface IBattleActions
         {

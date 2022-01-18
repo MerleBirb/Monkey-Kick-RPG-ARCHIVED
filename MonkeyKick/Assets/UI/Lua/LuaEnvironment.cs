@@ -8,11 +8,21 @@ using MoonSharp.Interpreter;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MonkeyKick.Managers;
+using MonkeyKick.RPGSystem.Characters;
 
 namespace MonkeyKick.UserInterface
 {
     public class LuaEnvironment : MonoBehaviour
     {
+        [SerializeField] private GameManager gameManager;
+        private CharacterMovement _player;
+        public CharacterMovement Player
+        {
+            get => _player;
+            set => _player = value;
+        }
+
         #region MOONSHARP FIELDS
 
         private Script _environment;
@@ -23,13 +33,13 @@ namespace MonkeyKick.UserInterface
             get => _luaState;
         }
 
-        [SerializeField] private UnityEngine.Object loadFile; // serialized lua file
+        [SerializeField] private string loadFile;
 
         #endregion
 
         #region UNITY METHODS
 
-        private IEnumerator Start()
+        public IEnumerator Setup()
         {
             Debug.Log("Load Script");
             Script.DefaultOptions.DebugPrint = (s) => Debug.Log(s);
@@ -59,9 +69,9 @@ namespace MonkeyKick.UserInterface
         /// If the file doesn't exist, it throws an error.
         /// </summary>
         /// <param name="fileName"></param>
-        private void LoadFile(UnityEngine.Object fileName)
+        private void LoadFile(string fileName)
         {
-            string filePath = AssetDatabase.GetAssetPath(fileName); // get the path of the lua file
+            string filePath = Path.Combine(Application.streamingAssetsPath, fileName); // get the path of the lua file
 
             DynValue ret = DynValue.Nil;
 
@@ -117,6 +127,9 @@ namespace MonkeyKick.UserInterface
             else
             {
                 Debug.Log("No Active Dialogue.");
+                gameManager.GameState = GameStates.Overworld;
+                gameManager.InvokeOnDialogueEnd();
+                gameObject.SetActive(false);
             }
         }
 
