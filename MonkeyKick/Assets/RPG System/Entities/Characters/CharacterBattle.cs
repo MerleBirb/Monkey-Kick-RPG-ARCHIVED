@@ -159,6 +159,8 @@ namespace MonkeyKick.RPGSystem.Characters
 
             // stop movement after jump
             _physics?.ResetMovement();
+            _battlePos.x = transform.position.x;
+            _battlePos.y = transform.position.z;
             _battleState = BattleStates.Wait;
 
             yield return null;

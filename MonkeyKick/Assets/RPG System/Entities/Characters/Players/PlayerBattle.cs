@@ -162,8 +162,8 @@ namespace MonkeyKick.RPGSystem.Characters
                     case FIGHT:
                     {
                         // save battle position for returning from skills and counterattacks
-                        _battlePos.x = transform.position.x;
-                        _battlePos.y = transform.position.z;
+                        //_battlePos.x = transform.position.x;
+                        //_battlePos.y = transform.position.z;
 
                         // initiate the skill
                         Stats.SkillList[0].Init(this, new CharacterBattle[] { _turnSystem.EnemyParty[0] });
