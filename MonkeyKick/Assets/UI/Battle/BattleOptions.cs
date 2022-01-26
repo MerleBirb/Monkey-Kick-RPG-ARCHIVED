@@ -23,6 +23,11 @@ namespace MonkeyKick.UserInterface
             _selector.transform.rotation = Quaternion.Euler(0f, 0f, -90f);
         }
 
+        private void OnDisable()
+        {
+            Destroy(_selector);
+        }
+
         private void Update()
         {
             ChoiceUpdate();
