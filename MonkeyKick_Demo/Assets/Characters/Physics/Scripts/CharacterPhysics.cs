@@ -14,8 +14,6 @@ namespace MonkeyKick.Characters
     [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
     public class CharacterPhysics : MonoBehaviour
     {
-        #region PRIVATE FIELDS
-
         [SerializeField] private float _moveSpeed = 1;
         public float MoveSpeed { get => _moveSpeed; }
         [SerializeField] private float _jumpHeight = 5;
@@ -29,10 +27,6 @@ namespace MonkeyKick.Characters
         private RaycastHit _hitGround; // hit of whatever is grounding the character
         private Vector3 _currentGravity; // new gravity
         private Vector3 _groundNormal; // normal of whatever is grounding the character
-
-        #endregion
-
-        #region METHODS
 
         public void Movement(Vector2 movementInput, float currentSpeed)
         {
@@ -92,7 +86,5 @@ namespace MonkeyKick.Characters
 
             _rigidbody.AddForce(_currentGravity, ForceMode.Acceleration);
         }
-
-        #endregion
     }
 }
