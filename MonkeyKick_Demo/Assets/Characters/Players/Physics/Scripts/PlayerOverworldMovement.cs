@@ -9,7 +9,8 @@ namespace MonkeyKick.Characters
     /// Controls player movement during the overworld portions
     /// 
     /// Notes:
-    /// 
+    /// - make sure to add Game Manager
+    /// - make sure to add Game State functionality
     /// </summary>
 
     public class PlayerOverworldMovement : CharacterOverworldMovement

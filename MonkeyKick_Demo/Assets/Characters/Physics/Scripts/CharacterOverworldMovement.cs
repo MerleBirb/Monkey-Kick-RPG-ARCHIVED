@@ -8,9 +8,10 @@ namespace MonkeyKick.Characters
     /// Controls character movement during the overworld portions
     /// 
     /// Notes:
-    /// 
+    /// - make sure to add Game Manager
+    /// - make sure to add Game State functionality
     /// </summary>
- 
+
     public class CharacterOverworldMovement : MonoBehaviour
     {
         [SerializeField] protected Transform _cameraDirection;
