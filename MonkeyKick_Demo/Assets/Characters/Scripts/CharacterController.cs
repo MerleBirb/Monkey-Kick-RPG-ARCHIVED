@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
+// Merle Roji 7/11/22
+
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+namespace MonkeyKick.Characters
 {
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// Controls the state of the character and holds the stat information.
+    /// 
+    /// Notes:
+    /// - make sure to keep decoupled from overworld and battle mechanics
+    /// 
+    /// </summary>
+    public abstract class CharacterController : MonoBehaviour
     {
-        
-    }
+        [SerializeField] protected CharacterInformation _stats;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        protected CapsuleCollider _collider;
+        public CapsuleCollider Collider { get => _collider; }
+
+        public virtual void Awake()
+        {
+            _collider = GetComponent<CapsuleCollider>();
+        }
     }
 }
+
