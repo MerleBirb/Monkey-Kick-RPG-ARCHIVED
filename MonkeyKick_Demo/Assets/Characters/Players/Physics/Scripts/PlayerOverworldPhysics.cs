@@ -1,9 +1,9 @@
-// Merle Roji 6/28/22
+// Merle Roji 7/10/22
 
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace MonkeyKick.Characters
+namespace MonkeyKick.Characters.Players
 {
     /// <summary>
     /// Controls player movement during the overworld portions
@@ -13,7 +13,7 @@ namespace MonkeyKick.Characters
     /// - make sure to add Game State functionality
     /// </summary>
 
-    public class PlayerOverworldMovement : CharacterOverworldMovement
+    public class PlayerOverworldPhysics : CharacterOverworldPhysics
     {
         private PlayerControls _controls;
         private InputAction _walk;
@@ -33,10 +33,8 @@ namespace MonkeyKick.Characters
             _walk.performed += ctx => _movement = ctx.ReadValue<Vector2>();
         }
 
-        public override void Update()
+        public void Update()
         {
-            base.Update();
-
             CheckInput();
         }
 
@@ -44,21 +42,21 @@ namespace MonkeyKick.Characters
         {
             base.FixedUpdate();
 
-            Movement();
+            CheckInputFixed();
         }
 
         private void OnEnable()
         {
             _controls?.Overworld.Enable();
 
-            if (_physics.OnGround()) _physics.ResetMovement();
+            ResetMovement();
         }
 
         private void OnDisable()
         {
             _controls?.Overworld.Disable();
 
-            if (_physics.OnGround()) _physics.ResetMovement();
+            ResetMovement();
         }
 
         private void CheckInput()
@@ -66,19 +64,18 @@ namespace MonkeyKick.Characters
             if (_controls == null) return;
 
             // jump
-            if (_jump.triggered && _physics.OnGround()) _physics.Jump();
+            if (_jump.triggered && OnGround()) Jump();
         }
 
-        private void Movement()
+        private void CheckInputFixed()
         {
-            if (_physics == null) return;
-
             // normalize the movement input
             _movement.Normalize();
             _isMoving = Mathf.Abs(_movement.x) > 0f || Mathf.Abs(_movement.y) > 0f;
 
-            if (_cameraDirection) _physics.Movement(_movement, _physics.MoveSpeed, _cameraDirection); // if a camera exists, use it's direction
-            else _physics.Movement(_movement, _physics.MoveSpeed); // if camera doesnt exist default is Vector3.forward
+            if (_cameraDirection) Movement(MoveSpeed, _cameraDirection); // if a camera exists, use it's direction
+            else Movement(MoveSpeed); // if camera doesnt exist default is Vector3.forward
         }
     }
 }
+
