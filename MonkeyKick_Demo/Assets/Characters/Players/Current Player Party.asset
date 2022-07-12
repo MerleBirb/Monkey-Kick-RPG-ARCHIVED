@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a4b288b70804a54cb4f2968187aabf6, type: 3}
-  m_Name: Player Party
+  m_Name: Current Player Party
   m_EditorClassIdentifier: 
   Characters:
   - {fileID: 7976740626362589235, guid: df8f0ed9e1914ba47b62275fb2ff37b1, type: 3}
