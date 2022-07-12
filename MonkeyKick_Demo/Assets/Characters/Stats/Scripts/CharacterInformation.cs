@@ -43,5 +43,17 @@ namespace MonkeyKick.Characters
         [Header("Swag: Affects Critical Hit Chance.")]
         [SerializeField] protected int _swag = 1;
         public int Swag { get => _swag; }
+
+        const int STAT_CLAMP = 99999;
+        protected void OnValidate()
+        {
+            _maxKi = Mathf.Clamp(_maxKi, 1, STAT_CLAMP);
+            _currentKi = Mathf.Clamp(_currentKi, 0, _maxKi);
+
+            _attack = Mathf.Clamp(_attack, 1, STAT_CLAMP);
+            _defense = Mathf.Clamp(_defense, 1, STAT_CLAMP);
+            _speed = Mathf.Clamp(_speed, 1, STAT_CLAMP);
+            _swag = Mathf.Clamp(_swag, 1, STAT_CLAMP);
+        }
     }
 }
