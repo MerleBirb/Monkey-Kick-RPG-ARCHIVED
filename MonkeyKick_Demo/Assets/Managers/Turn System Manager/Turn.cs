@@ -15,7 +15,7 @@ namespace MonkeyKick.Managers.TurnSystem
     public class Turn
     {
         [ReadOnly] public Character Character;
-        [ReadOnly] public int speed; // saves the speed from the character stats
+        [ReadOnly] public int Speed; // saves the speed from the character stats
         [ReadOnly] public bool IsTurn = false;
         [ReadOnly] public bool WasTurnPrev = false; // true if the character had 'IsTurn' true last turn
         [ReadOnly] public bool IsDead = false;

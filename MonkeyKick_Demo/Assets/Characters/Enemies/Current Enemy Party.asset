@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4b288b70804a54cb4f2968187aabf6, type: 3}
   m_Name: Current Enemy Party
   m_EditorClassIdentifier: 
-  Characters: []
+  Characters:
+  - {fileID: 6172238194445448544, guid: 34fe79e501050d64b9554fef9a67d297, type: 3}

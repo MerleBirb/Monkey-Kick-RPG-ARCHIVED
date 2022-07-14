@@ -797,38 +797,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1669612157 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3705704387770992064, guid: 7bdaaa37164c32d409ee09ddc9a660f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 3705704387175647165}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1669612158 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3705704387770992067, guid: 7bdaaa37164c32d409ee09ddc9a660f4,
     type: 3}
   m_PrefabInstance: {fileID: 3705704387175647165}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1669612159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1669612157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4f29ec1e17fd65468fe56370364a28e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _incomingEnemyParty: {fileID: 11400000, guid: be13db7894910744cb04515f819b4539,
-    type: 2}
-  _incomingPlayerParty: {fileID: 11400000, guid: ad06b96c230ed584d9c9f8a94d6ba7fd,
-    type: 2}
-  _playerSpawns:
-  - {fileID: 2042528582}
-  _enemySpawns:
-  - {fileID: 203834282}
 --- !u!1 &1729615254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,6 +1154,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 572631412}
     m_Modifications:
+    - target: {fileID: 1669612159, guid: 7bdaaa37164c32d409ee09ddc9a660f4, type: 3}
+      propertyPath: _enemySpawns.Array.data[0]
+      value: 
+      objectReference: {fileID: 203834282}
+    - target: {fileID: 1669612159, guid: 7bdaaa37164c32d409ee09ddc9a660f4, type: 3}
+      propertyPath: _playerSpawns.Array.data[0]
+      value: 
+      objectReference: {fileID: 2042528582}
     - target: {fileID: 3705704387770992064, guid: 7bdaaa37164c32d409ee09ddc9a660f4,
         type: 3}
       propertyPath: m_Name

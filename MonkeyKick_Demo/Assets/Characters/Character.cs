@@ -14,6 +14,7 @@ namespace MonkeyKick.Characters
     public abstract class Character : MonoBehaviour
     {
         [SerializeField] protected CharacterInformation _stats;
+        public CharacterInformation Stats { get => _stats; }
 
         protected CapsuleCollider _collider;
         public CapsuleCollider Collider { get => _collider; }

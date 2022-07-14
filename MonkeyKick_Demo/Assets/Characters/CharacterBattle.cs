@@ -13,6 +13,7 @@ namespace MonkeyKick.Characters
     /// </summary>
     public abstract class CharacterBattle : MonoBehaviour
     {
+        // turn
         protected Turn _turn;
         public Turn Turn
         {
