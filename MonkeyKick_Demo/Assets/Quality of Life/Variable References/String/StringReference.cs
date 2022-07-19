@@ -9,7 +9,7 @@ Author: Merlebirb
 
 using System;
 
-namespace MonkeyKick.References
+namespace MonkeyKick
 {
     [Serializable]
     public class StringReference

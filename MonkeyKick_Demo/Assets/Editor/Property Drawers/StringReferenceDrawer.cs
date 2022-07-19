@@ -10,7 +10,7 @@ Author: Merlebirb
 using UnityEngine;
 using UnityEditor;
 
-namespace MonkeyKick.References
+namespace MonkeyKick
 {
     [CustomPropertyDrawer(typeof(StringReference))]
     public class StringReferenceDrawer : PropertyDrawer

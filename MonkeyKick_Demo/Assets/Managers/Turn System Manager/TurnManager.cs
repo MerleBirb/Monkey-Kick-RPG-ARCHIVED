@@ -24,6 +24,7 @@ namespace MonkeyKick.Managers.TurnSystem
         private List<CharacterBattle> _enemyParty = new List<CharacterBattle>();
         private List<CharacterBattle> _allParty = new List<CharacterBattle>();
         private List<Turn> _turnOrder = new List<Turn>();
+        public List<Turn> TurnOrder { get => _turnOrder; }
 
         // lists of spawns for enemies and players
         [SerializeField] private Transform[] _playerSpawns;
@@ -80,13 +81,13 @@ namespace MonkeyKick.Managers.TurnSystem
             for (int p = 0; p < _playerParty.Count; ++p)
             {
                 CharacterBattle newPlayer = Instantiate(_playerParty[p], _playerSpawns[p].position, Quaternion.identity);
-                newPlayer.Turn = _playerParty[p].Turn;
+                _playerParty[p] = newPlayer;
             }
 
             for (int e = 0; e < _enemyParty.Count; ++e)
             {
                 CharacterBattle newEnemy = Instantiate(_enemyParty[e], _enemySpawns[e].position, Quaternion.identity);
-                newEnemy.Turn = _enemyParty[e].Turn;
+                _enemyParty[e] = newEnemy;
             }
         }
 

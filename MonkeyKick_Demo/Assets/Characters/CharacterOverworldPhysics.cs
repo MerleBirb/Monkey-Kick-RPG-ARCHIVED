@@ -34,13 +34,13 @@ namespace MonkeyKick.Characters
         private Vector3 _currentGravity; // new gravity
         private Vector3 _groundNormal; // normal of whatever is grounding the character
 
-        public virtual void Awake()
+        protected virtual void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
             _collider = GetComponent<CapsuleCollider>();
         }
 
-        public virtual void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             ObeyGravity();
         }

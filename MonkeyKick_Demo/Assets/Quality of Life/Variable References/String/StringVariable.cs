@@ -9,7 +9,7 @@ Author: Merlebirb
 
 using UnityEngine;
 
-namespace MonkeyKick.References
+namespace MonkeyKick
 {
     [CreateAssetMenu(menuName = "New Variable/String", fileName = "String")]
     public class StringVariable : ScriptableObject

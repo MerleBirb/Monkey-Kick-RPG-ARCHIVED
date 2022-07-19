@@ -10,7 +10,7 @@ Author: Merlebirb
 using UnityEngine;
 using UnityEditor;
 
-namespace MonkeyKick.References
+namespace MonkeyKick
 {
     [CustomPropertyDrawer(typeof(IntReference))]
     public class IntReferenceDrawer : PropertyDrawer

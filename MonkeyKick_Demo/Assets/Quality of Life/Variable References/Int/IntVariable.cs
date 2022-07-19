@@ -9,7 +9,7 @@ Author: Merlebirb
 
 using UnityEngine;
 
-namespace MonkeyKick.References
+namespace MonkeyKick
 {
     [CreateAssetMenu(menuName = "New Variable/Integer", fileName = "Int")]
     public class IntVariable : ScriptableObject

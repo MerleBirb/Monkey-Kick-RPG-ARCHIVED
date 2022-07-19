@@ -55,5 +55,14 @@ namespace MonkeyKick.Characters
             _speed = Mathf.Clamp(_speed, 1, STAT_CLAMP);
             _swag = Mathf.Clamp(_swag, 1, STAT_CLAMP);
         }
+
+        public virtual void Damage(int value)
+        {
+            bool damageHPBelowZero = (_currentKi - value) <= 0;
+
+            // make sure the HP never goes below zero
+            if (damageHPBelowZero) _currentKi = 0;
+            else _currentKi -= (int)value;
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace MonkeyKick.Characters.Players
         private InputAction _walk;
         private InputAction _jump;
 
-        public override void Awake()
+        protected override void Awake()
         {
             base.Awake();
 
@@ -33,12 +33,12 @@ namespace MonkeyKick.Characters.Players
             _walk.performed += ctx => _movement = ctx.ReadValue<Vector2>();
         }
 
-        public void Update()
+        private void Update()
         {
             CheckInput();
         }
 
-        public override void FixedUpdate()
+        protected override void FixedUpdate()
         {
             base.FixedUpdate();
 

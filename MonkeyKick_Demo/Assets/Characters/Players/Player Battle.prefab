@@ -190,6 +190,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea004d9f4a19211449896a5bd43d7c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _maxGroundAngle: 60
 --- !u!1001 &5026618526440548538
 PrefabInstance:
   m_ObjectHideFlags: 0
