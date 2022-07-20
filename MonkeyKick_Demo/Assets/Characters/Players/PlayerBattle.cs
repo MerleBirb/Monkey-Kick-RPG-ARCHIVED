@@ -55,6 +55,17 @@ namespace MonkeyKick.Characters.Players
             _buttonEast = _controls.Battle.East;
             _buttonWest = _controls.Battle.West;
         }
+
+        protected override void Update()
+        {
+            base.Update();
+
+            switch(_battleState)
+            {
+                case BattleStates.EnterBattle: EnterBattle(); break;
+                case BattleStates.Wait: Wait(); break;
+            }
+        }
     }
 }
 

@@ -45,9 +45,16 @@ namespace MonkeyKick.Characters
         protected bool _isTurn = false;
 
         // turn system
-        protected CharacterInformation _stats;
+        [SerializeField] protected CharacterInformation _stats;
+        public CharacterInformation Stats { get => _stats; }
         protected TurnManager _turnManager;
         protected bool _hasBattleStarted = false;
+        protected bool _isInterrupted = false;
+        public bool IsInterrupted
+        {
+            get => _isInterrupted;
+            set => _isInterrupted = value;
+        }
         protected BattleStates _battleState = BattleStates.EnterBattle;
         public BattleStates BattleState
         {
@@ -74,13 +81,17 @@ namespace MonkeyKick.Characters
 
         protected virtual void Awake()
         {
+            _rigidbody = GetComponent<Rigidbody>();
+            _collider = GetComponent<CapsuleCollider>();
 
+            // inject turn manager
+            _turnManager = FindObjectOfType<TurnManager>();
         }
 
         protected virtual void Update()
         {
             CheckHealth();
-            if (_isTurn != _turn.IsTurn) { _isTurn = _turn.IsTurn; }
+            //if (_isTurn != _turn.IsTurn) { _isTurn = _turn.IsTurn; }
         }
 
         protected virtual void FixedUpdate()
@@ -98,24 +109,20 @@ namespace MonkeyKick.Characters
         {
             if (!_hasBattleStarted)
             {
-                // inject turn system
-                if (!_turnManager)
-                {
-                    _turnManager = FindObjectOfType<TurnManager>();
-                }
-
                 // get dependencies for turn from turn order
                 foreach (Turn t in _turnManager.TurnOrder)
                 {
-                    if (t.Character.name == gameObject.name) _turn = t;
+                    if (t.Character.Stats.CharacterName == _stats.CharacterName) _turn = t;
                 }
 
                 // set battle position
                 _battlePos.x = transform.position.x;
                 _battlePos.y = transform.position.z;
-                _battleState = BattleStates.Wait;
-
                 _hasBattleStarted = true;
+            }
+            else
+            {
+                _battleState = BattleStates.Wait;
             }
         }
 

@@ -2,8 +2,8 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using MonkeyKick.Characters;
-using MonkeyKick.QualityOfLife;
 
 namespace MonkeyKick.Managers.TurnSystem
 {
@@ -30,9 +30,8 @@ namespace MonkeyKick.Managers.TurnSystem
         [SerializeField] private Transform[] _playerSpawns;
         [SerializeField] private Transform[] _enemySpawns;
 
-        // checks
-        private bool _areAllCharactersSpawned;
-        private bool _areAllCharactersInTheTurnOrder;
+        // events
+        public UnityEvent OnCharacterListsFilled;
 
         private void Awake()
         {
@@ -74,6 +73,8 @@ namespace MonkeyKick.Managers.TurnSystem
                     _enemyParty.Add(_allParty[i]);
                 }
             }
+
+            OnCharacterListsFilled.Invoke();
         }
 
         private void SpawnCharacters()
@@ -177,8 +178,6 @@ namespace MonkeyKick.Managers.TurnSystem
             _playerParty.Clear();
             _enemyParty.Clear();
             _turnOrder.Clear();
-            _areAllCharactersInTheTurnOrder = false;
-            _areAllCharactersSpawned = false;
         }
     }
 }

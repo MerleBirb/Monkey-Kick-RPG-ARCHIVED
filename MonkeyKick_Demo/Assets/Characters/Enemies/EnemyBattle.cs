@@ -13,6 +13,20 @@ namespace MonkeyKick.Characters.Enemies
     /// </summary>
     public class EnemyBattle : CharacterBattle
     {
+        protected override void Awake()
+        {
+            base.Awake();
+        }
 
+        protected override void Update()
+        {
+            base.Update();
+
+            switch(_battleState)
+            {
+                case BattleStates.EnterBattle: EnterBattle(); break;
+                case BattleStates.Wait: Wait(); break;
+            }
+        }
     }
 }

@@ -44,6 +44,8 @@ namespace MonkeyKick.Characters
         [SerializeField] protected int _swag = 1;
         public int Swag { get => _swag; }
 
+        [Header("List of skills a character can utilize.")]
+
         const int STAT_CLAMP = 99999;
         protected void OnValidate()
         {
