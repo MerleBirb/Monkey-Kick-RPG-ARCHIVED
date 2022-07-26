@@ -18,7 +18,7 @@ namespace MonkeyKick.Characters.Players
         protected InputAction _move;
         private InputAction _select;
         private InputAction _jump;
-        [HideInInspector] public bool pressedJump;
+        [HideInInspector] public bool PressedJump;
         private Vector2 _movement;
         private bool _movePressed = false;
         private InputAction _buttonNorth;
@@ -34,7 +34,7 @@ namespace MonkeyKick.Characters.Players
         public InputAction ButtonWest { get => _buttonWest; }
         [HideInInspector] public bool PressedButtonWest;
 
-        [SerializeField] private IntReference menuChoice;
+        [SerializeField] private IntReference _menuChoice;
 
         protected override void Awake()
         {
@@ -56,6 +56,18 @@ namespace MonkeyKick.Characters.Players
             _buttonWest = _controls.Battle.West;
         }
 
+        private void OnEnable()
+        {
+            _controls?.Battle.Enable();
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            _controls?.Battle.Disable();
+        }
+
         protected override void Update()
         {
             base.Update();
@@ -64,7 +76,43 @@ namespace MonkeyKick.Characters.Players
             {
                 case BattleStates.EnterBattle: EnterBattle(); break;
                 case BattleStates.Wait: Wait(); break;
+                case BattleStates.ChooseAction: ChooseAction(); break;
             }
+        }
+
+        protected override void FixedUpdate()
+        {
+            base.FixedUpdate();
+
+            switch(_battleState)
+            {
+
+            }
+        }
+
+        private void CheckInput()
+        {
+            PressedJump = _jump.triggered;
+            PressedButtonNorth = _buttonNorth.triggered;
+            PressedButtonEast = _buttonEast.triggered;
+            PressedButtonSouth = _buttonSouth.triggered;
+            PressedButtonWest = _buttonWest.triggered;
+        }
+
+        protected override void EnterBattle()
+        {
+            base.EnterBattle();
+            _menuChoice.Variable.Value = 0;
+        }
+
+        protected void ChooseAction()
+        {
+            // menu options
+            const int FIGHT = 0;
+            const int CHARGE = 1;
+            const int ITEM = 2;
+
+            MenuQoL.ScrollThroughMenu(ref _movePressed, ref _menuChoice.Variable.Value, _movement);
         }
     }
 }

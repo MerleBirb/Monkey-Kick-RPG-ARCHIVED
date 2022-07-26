@@ -11,11 +11,11 @@ namespace MonkeyKick.UserInterface
     /// </summary>
     public class DisplayDebugUI : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _effortRankText;
+        [SerializeField] private TextMeshProUGUI _debugText;
 
         public void DisplayTimer(float value)
         {
-            _effortRankText.text = value.ToString("F2") + " sec.";
+            _debugText.text = value.ToString("F2") + " sec.";
         }
     }
 }

@@ -102,5 +102,26 @@ namespace MonkeyKick
             }
         }
 
+        public delegate void OpenOverworldMenuTrigger();
+        public static event OpenOverworldMenuTrigger OnOpenOverworldMenu;
+
+        /// <summary>
+        /// Invokes the 'OnOpenOverworldMenu' event.
+        /// </summary>
+        public static void InvokeOnOpenOverworldMenu()
+        {
+            OnOpenOverworldMenu?.Invoke();
+        }
+
+        public delegate void CloseOverworldMenuTrigger();
+        public static event CloseOverworldMenuTrigger OnCloseOverworldMenu;
+
+        /// <summary>
+        /// Invokes the 'OnCloseOverworldMenu' event.
+        /// </summary>
+        public static void InvokeOnCloseOverworldMenu()
+        {
+            OnCloseOverworldMenu?.Invoke();
+        }
     }
 }

@@ -1,6 +1,7 @@
 // Merle Roji 7/12/22
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using MonkeyKick.Managers.TurnSystem;
 
@@ -78,6 +79,8 @@ namespace MonkeyKick.Characters
         private RaycastHit _hitGround; // hit of whatever is grounding the character
         private Vector3 _currentGravity; // new gravity
         private Vector3 _groundNormal; // normal of whatever is grounding the character
+        [SerializeField] protected List<Transform> _hitboxSpawnPoints;
+        public List<Transform> HitboxSpawnPoints { get => _hitboxSpawnPoints; }
 
         protected virtual void Awake()
         {
@@ -91,7 +94,7 @@ namespace MonkeyKick.Characters
         protected virtual void Update()
         {
             CheckHealth();
-            //if (_isTurn != _turn.IsTurn) { _isTurn = _turn.IsTurn; }
+            if (_turn != null ) _isTurn = _turn.IsTurn;
         }
 
         protected virtual void FixedUpdate()
@@ -107,23 +110,16 @@ namespace MonkeyKick.Characters
 
         protected virtual void EnterBattle()
         {
-            if (!_hasBattleStarted)
+            // get dependencies for turn from turn order
+            foreach (Turn t in _turnManager.TurnOrder)
             {
-                // get dependencies for turn from turn order
-                foreach (Turn t in _turnManager.TurnOrder)
-                {
-                    if (t.Character.Stats.CharacterName == _stats.CharacterName) _turn = t;
-                }
+                if (t.Character.Stats.CharacterName == _stats.CharacterName) _turn = t;
+            }
 
-                // set battle position
-                _battlePos.x = transform.position.x;
-                _battlePos.y = transform.position.z;
-                _hasBattleStarted = true;
-            }
-            else
-            {
-                _battleState = BattleStates.Wait;
-            }
+            // set battle position
+            _battlePos.x = transform.position.x;
+            _battlePos.y = transform.position.z;
+            _battleState = BattleStates.Wait;
         }
 
         protected virtual void Wait()
