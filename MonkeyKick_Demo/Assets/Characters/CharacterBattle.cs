@@ -153,23 +153,28 @@ namespace MonkeyKick.Characters
             }
         }
 
-        protected void ResetMovement()
+        public void ResetMovement()
         {
             _rigidbody.velocity = Vector3.zero;
         }
 
-        protected void TurnOffGravity()
+        public void TurnOffGravity()
         {
             _rigidbody.useGravity = false;
         }
 
-        protected bool OnGround()
+        public void Jump(float height)
+        {
+            _rigidbody.velocity += new Vector3(0f, height, 0f);
+        }
+
+        public bool OnGround()
         {
             float adjustHeight = (_collider.height / 2f) + 0.1f;
             return Physics.Raycast(_rigidbody.position, -Vector3.up, out _hitGround, adjustHeight, _groundLayer); // raycast down, true if object is ground layer, store hit
         }
 
-        protected void ObeyGravity()
+        public void ObeyGravity()
         {
             if (_maxGroundAngle > Vector3.Angle(_hitGround.normal, -Physics.gravity.normalized)) _groundNormal = _hitGround.normal;
 
