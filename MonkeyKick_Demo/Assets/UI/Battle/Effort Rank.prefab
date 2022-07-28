@@ -34,7 +34,7 @@ RectTransform:
   m_Children:
   - {fileID: 2815496936017202064}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -53,7 +53,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effortRankText: {fileID: 2815496936017202067}
-  _secondsUntilDestroyed: 1
+  _secondsUntilDestroyed: 2
   _colors:
   - {r: 1, g: 0.2028302, b: 0.2028302, a: 0}
   - {r: 1, g: 0.63089186, b: 0.18396229, a: 0}

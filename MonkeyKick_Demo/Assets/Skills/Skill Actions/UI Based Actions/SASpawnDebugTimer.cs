@@ -3,9 +3,9 @@
 using UnityEngine;
 using MonkeyKick.UserInterface;
 
-namespace MonkeyKick.Skill
+namespace MonkeyKick.Skills
 {
-    public class SASpawnDebugUI : StateAction
+    public class SASpawnDebugTimer : StateAction
     {
         private Skill _skill; // store the state machine of the skill
         private DisplayDebugUI _prefab; // prefab for UI
@@ -13,7 +13,7 @@ namespace MonkeyKick.Skill
         private bool _hasSpawned = false; // has the UI spawned yet?
         private DisplayDebugUI _newDebugUI = null; // ui to be spawned
 
-        public SASpawnDebugUI(Skill skill, DisplayDebugUI prefab, float time)
+        public SASpawnDebugTimer(Skill skill, DisplayDebugUI prefab, float time)
         {
             _skill = skill;
             _prefab = prefab;

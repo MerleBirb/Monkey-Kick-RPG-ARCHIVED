@@ -1,7 +1,7 @@
 // Merle Roji 7/28/22
 
 
-namespace MonkeyKick.Skill
+namespace MonkeyKick.Skills
 {
     public class SAInterruptAction : StateAction
     {

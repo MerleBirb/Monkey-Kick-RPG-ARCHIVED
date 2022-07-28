@@ -2,7 +2,7 @@
 
 using MonkeyKick.Characters;
 
-namespace MonkeyKick.Skill
+namespace MonkeyKick.Skills
 {
     public class SAInitCounterSkill : StateAction
     {

@@ -952,6 +952,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Overworld
       objectReference: {fileID: 0}
+    - target: {fileID: 2695432586039479983, guid: 72637a0a952bfbd4ea1f5875c0db53dc,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2695432586039480018, guid: 72637a0a952bfbd4ea1f5875c0db53dc,
         type: 3}
       propertyPath: m_RootOrder

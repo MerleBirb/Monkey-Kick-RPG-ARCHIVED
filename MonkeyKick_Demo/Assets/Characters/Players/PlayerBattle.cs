@@ -77,6 +77,19 @@ namespace MonkeyKick.Characters.Players
                 case BattleStates.EnterBattle: EnterBattle(); break;
                 case BattleStates.Wait: Wait(); break;
                 case BattleStates.ChooseAction: ChooseAction(); break;
+                case BattleStates.Action:
+                    {
+                        CheckInput();
+                        Stats.Skills[0].Tick();
+
+                        break;
+                    }
+                case BattleStates.Counter:
+                    {
+                        CheckInput();
+
+                        break;
+                    }
             }
         }
 
@@ -86,7 +99,12 @@ namespace MonkeyKick.Characters.Players
 
             switch(_battleState)
             {
+                case BattleStates.Action:
+                    {
+                        Stats.Skills[0].FixedTick();
 
+                        break;
+                    }
             }
         }
 
@@ -113,6 +131,23 @@ namespace MonkeyKick.Characters.Players
             const int ITEM = 2;
 
             MenuQoL.ScrollThroughMenu(ref _movePressed, ref _menuChoice.Variable.Value, _movement);
+
+            if (_select.triggered)
+            {
+                switch(_menuChoice.Variable.Value)
+                {
+                    case FIGHT:
+                        {   
+                            // init the skill
+                            Stats.Skills[0].Init(this, new CharacterBattle[] { _turnManager.EnemyParty[0] });
+                            _battleState = BattleStates.Action;
+
+                            break;
+                        }
+                    case CHARGE: break;
+                    case ITEM: break; 
+                }
+            }
         }
     }
 }

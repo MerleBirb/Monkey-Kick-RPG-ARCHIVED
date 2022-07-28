@@ -20,3 +20,4 @@ MonoBehaviour:
   _defense: 10
   _speed: 9
   _swag: 10
+  _skills: []

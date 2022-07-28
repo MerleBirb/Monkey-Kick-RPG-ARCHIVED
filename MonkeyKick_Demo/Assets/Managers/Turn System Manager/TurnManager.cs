@@ -21,7 +21,9 @@ namespace MonkeyKick.Managers.TurnSystem
 
         // lists of current parties
         private List<CharacterBattle> _playerParty = new List<CharacterBattle>();
+        public List<CharacterBattle> PlayerParty { get => _playerParty; }
         private List<CharacterBattle> _enemyParty = new List<CharacterBattle>();
+        public List<CharacterBattle> EnemyParty { get => _enemyParty; }
         private List<CharacterBattle> _allParty = new List<CharacterBattle>();
         private List<Turn> _turnOrder = new List<Turn>();
         public List<Turn> TurnOrder { get => _turnOrder; }

@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace MonkeyKick.Skill
+namespace MonkeyKick.Skills
 {
     public class SADamageTarget : StateAction
     {

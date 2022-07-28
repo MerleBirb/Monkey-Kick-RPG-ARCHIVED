@@ -2,7 +2,7 @@
 
 using MonkeyKick.Characters.Players;
 
-namespace MonkeyKick.Skill
+namespace MonkeyKick.Skills
 {
     public class SAJumpCounter : StateAction
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using MonkeyKick.UserInterface;
 
-namespace MonkeyKick.Skill
+namespace MonkeyKick.Skills
 {
     public class SASingleTapTimedInput : StateAction
     {
@@ -45,14 +45,14 @@ namespace MonkeyKick.Skill
 
                 if (_button.triggered)
                 {
-                    if (_prefab) _skill.InstantiateEffortRank(_prefab, SkillQoL.SingleTapTimedButtonPress(_currentTime, _limitTime, _timeChecks), 0.2f);
+                    if (_prefab) _skill.InstantiateEffortRank(_prefab, SkillQoL.SingleTapTimedButtonPress(_currentTime, _limitTime, _timeChecks));
                     _skill.SetState(_targetState);
                     return true;
                 }
             }
             else
             {
-                if (_prefab) _skill.InstantiateEffortRank(_prefab, AttackRating.Miss, 0.2f);
+                if (_prefab) _skill.InstantiateEffortRank(_prefab, AttackRating.Miss);
                 _skill.SetState(_targetState);
                 return true;
             }

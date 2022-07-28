@@ -3,7 +3,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace MonkeyKick.Skill
+namespace MonkeyKick.Skills
 {
     public class SALinearMoveToTarget : StateAction
     {

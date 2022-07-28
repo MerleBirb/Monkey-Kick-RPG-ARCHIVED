@@ -5,7 +5,7 @@ using MonkeyKick.Characters;
 using MonkeyKick.QualityOfLife;
 using MonkeyKick.UserInterface;
 
-namespace MonkeyKick.Skill
+namespace MonkeyKick.Skills
 {
     public enum Buttons
     {
@@ -74,11 +74,10 @@ namespace MonkeyKick.Skill
         }
 
         // UI
-        public virtual DisplayEffortRank InstantiateEffortRank(DisplayEffortRank prefab, AttackRating attackRating, float time)
+        public virtual DisplayEffortRank InstantiateEffortRank(DisplayEffortRank prefab, AttackRating attackRating)
         {
             DisplayEffortRank newRank = Instantiate(prefab);
             newRank.DisplayUI(attackRating);
-            Destroy(newRank.gameObject, time);
 
             return newRank;
         }
