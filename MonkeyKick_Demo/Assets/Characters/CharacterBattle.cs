@@ -82,10 +82,17 @@ namespace MonkeyKick.Characters
         [SerializeField] protected List<Transform> _hitboxSpawnPoints;
         public List<Transform> HitboxSpawnPoints { get => _hitboxSpawnPoints; }
 
+        // animations
+        protected Animator _anim;
+        protected string _currentState = "";
+        protected const string BATTLE_STANCE_R = "BattleStance_right";
+        protected const string BATTLE_STANCE_L = "BattleStance_left";
+
         protected virtual void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
             _collider = GetComponent<CapsuleCollider>();
+            _anim = GetComponentInChildren<Animator>();
 
             // inject turn manager
             _turnManager = FindObjectOfType<TurnManager>();
