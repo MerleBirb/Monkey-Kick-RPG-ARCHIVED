@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 410cf54ac1a38a441a11cfb87ed01d2b, type: 3}
-  m_Name: Test Player Attack
+  m_Script: {fileID: 11500000, guid: ade5b8e9be5aa174981a7e7f3c09018c, type: 3}
+  m_Name: Riposte Counter
   m_EditorClassIdentifier: 
-  _skillName: Test Punch
+  _skillName: 
   _skillDescription: 
   _skillValue: 0.25
   CurrentRating: 0
@@ -24,15 +24,8 @@ MonoBehaviour:
   TargetTransform: {fileID: 0}
   TargetRb: {fileID: 0}
   TargetAnim: {fileID: 0}
-  _effortRankPrefab: {fileID: 2815496935606689380, guid: 9f4050303c902024b943b2b65192cfe0,
+  _limitWindupTime: 0.5
+  _attackDelay: 1
+  _hitboxPrefab: {fileID: 8435272549277191078, guid: 27cf79c8f0eeda24cb4567fb8c5f5178,
     type: 3}
-  _debugUIPrefab: {fileID: 1234883706424746264, guid: 151dafbb3a51893429aca5c7cd6fb9bc,
-    type: 3}
-  _timeToTarget: 1
-  _timeForPunch: 1
-  _xOffsetFromTarget: -0.75
-  _timeChecks:
-  - 0.9
-  - 0.5
-  - 0.3
-  - 0.15
+  CounterTimer: 0

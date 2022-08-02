@@ -2,7 +2,6 @@
 
 using UnityEngine;
 using MonkeyKick.Characters;
-using MonkeyKick.QualityOfLife;
 using MonkeyKick.UserInterface;
 
 namespace MonkeyKick.Skills

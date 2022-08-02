@@ -2,7 +2,6 @@
 
 using UnityEngine;
 using TMPro;
-using MonkeyKick.QualityOfLife;
 
 namespace MonkeyKick.UserInterface
 {
@@ -20,7 +19,7 @@ namespace MonkeyKick.UserInterface
 
         public void DisplayUI(AttackRating attackRating)
         {
-            _effortRankText.color = _colors[(int)attackRating];
+            //_effortRankText.color = _colors[(int)attackRating];
             _effortRankText.text = SkillQoL.AttackRatingStrings[(int)attackRating];
             Destroy(gameObject, _secondsUntilDestroyed);
         }

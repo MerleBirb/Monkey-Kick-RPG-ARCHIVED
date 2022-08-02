@@ -9,12 +9,12 @@ namespace MonkeyKick
     {
         #region STATE PATTERN VARIABLES
 
-        protected State currentState;
-        protected Dictionary<string, State> allStates = new Dictionary<string, State>();
+        protected State _currentState;
+        protected Dictionary<string, State> _allStates = new Dictionary<string, State>();
 
         protected State GetState(string stateID)
         {
-            allStates.TryGetValue(stateID, out State returnValue);
+            _allStates.TryGetValue(stateID, out State returnValue);
             return returnValue;
         }
 
@@ -22,7 +22,7 @@ namespace MonkeyKick
         {
             State targetState = GetState(targetID);
             if (targetState == null) Debug.LogError(targetID + " was not found."); // if the targetID wasnt found 
-            currentState = targetState;
+            _currentState = targetState;
         }
 
         #endregion
@@ -31,12 +31,12 @@ namespace MonkeyKick
 
         public void FixedTick()
         {
-            if (currentState != null) currentState.FixedTick(); // set the current state to execute its actions in the FixedUpdate() loop
+            if (_currentState != null) _currentState.FixedTick(); // set the current state to execute its actions in the FixedUpdate() loop
         }
 
         public void Tick()
         {
-            if (currentState != null) currentState.Tick(); // set the current state to execute its actions in the Update() loop
+            if (_currentState != null) _currentState.Tick(); // set the current state to execute its actions in the Update() loop
         }
 
         #endregion

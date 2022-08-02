@@ -8,7 +8,7 @@ using MonkeyKick.Characters.Players;
 
 namespace MonkeyKick.Skills
 {
-    [CreateAssetMenu(fileName = "Test Attack", menuName = "RPG/Create a Skill/Placeholder/Test Attack", order = 1)]
+    [CreateAssetMenu(fileName = "Test Attack", menuName = "RPG/Create a Skill/Placeholder/Test Player Attack", order = 1)]
     public class SKTestPlayerAttack : Skill
     {
         [Header("To display how good the player did with their button press")]
@@ -24,7 +24,7 @@ namespace MonkeyKick.Skills
         [Header("Your attack rating is proportional to what time interval you press your input in")]
         [SerializeField] private float[] _timeChecks;
 
-        const string IDLE = "Punch_windup_right";
+        const string IDLE = "Idle_down";
         const string WINDUP = "Punch_windup_right";
         const string ATTACK = "Punch_attack_right";
 
@@ -32,7 +32,7 @@ namespace MonkeyKick.Skills
         {
             base.Init(newActor, newTargets);
 
-            allStates = new Dictionary<string, State>();
+            _allStates = new Dictionary<string, State>();
 
             PlayerBattle player = Actor.GetComponent<PlayerBattle>();
             Vector3 returnPos = new Vector3(Actor.BattlePos.x, Actor.transform.position.y, Actor.BattlePos.y);
@@ -102,11 +102,11 @@ namespace MonkeyKick.Skills
                 }
             );
 
-            allStates.Add("moveToEnemy", moveToEnemy);
-            allStates.Add("timedInputAttack", timedInputAttack);
-            allStates.Add("finishAttack", finishAttack);
-            allStates.Add("returnToBattlePos", returnToBattlePos);
-            allStates.Add("endSkill", endSkill);
+            _allStates.Add("moveToEnemy", moveToEnemy);
+            _allStates.Add("timedInputAttack", timedInputAttack);
+            _allStates.Add("finishAttack", finishAttack);
+            _allStates.Add("returnToBattlePos", returnToBattlePos);
+            _allStates.Add("endSkill", endSkill);
 
             // set first state
             SetState("moveToEnemy");

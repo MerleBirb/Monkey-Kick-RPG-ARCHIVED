@@ -20,4 +20,5 @@ MonoBehaviour:
   _defense: 10
   _speed: 9
   _swag: 10
-  _skills: []
+  _skills:
+  - {fileID: 11400000, guid: d7ced78a8e1ebf04182fb14efba88b63, type: 2}
