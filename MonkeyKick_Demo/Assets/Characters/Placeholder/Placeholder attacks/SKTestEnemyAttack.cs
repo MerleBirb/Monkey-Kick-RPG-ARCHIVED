@@ -128,7 +128,8 @@ namespace MonkeyKick.Skills
                 {
                     new SAChangeAnimation(ActorAnim, BATTLE_STANCE),
                     new SAChangeAnimation(TargetAnim, "BattleStance_right"),
-                    new SAEndSkill(this)
+                    new SAEndSkill(this),
+                    new SASetPlayerStateFromEnemy(this, BattleStates.Wait),
                 }
             );
 

@@ -75,7 +75,13 @@ namespace MonkeyKick.Characters.Players
             switch(_battleState)
             {
                 case BattleStates.EnterBattle: EnterBattle(); break;
-                case BattleStates.Wait: Wait(); break;
+                case BattleStates.Wait:
+                    {
+                        CheckKi();
+                        Wait();
+                        
+                        break;
+                    }
                 case BattleStates.ChooseAction: ChooseAction(); break;
                 case BattleStates.Action:
                     {
@@ -86,6 +92,7 @@ namespace MonkeyKick.Characters.Players
                     }
                 case BattleStates.Counter:
                     {
+                        CheckKi();
                         CheckInput();
 
                         break;

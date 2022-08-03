@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 8991465786300598709}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &8991465785259938371
 CapsuleCollider:
@@ -72,7 +72,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8991465785259938370}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 10000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -112,7 +112,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _maxGroundAngle: 60
+  _stats: {fileID: 0}
   _sceneToLoad: 
+  _currentScene:
+    UseConstant: 1
+    ConstantValue: 
+    Variable: {fileID: 0}
   _party: {fileID: 0}
   _currentEnemyParty: {fileID: 0}
 --- !u!1 &8991465786300598708

@@ -1059,6 +1059,12 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 7449219201553598781, guid: 06e5b1846a8377f409073d64d99f8038,
         type: 3}
+      propertyPath: _stats
+      value: 
+      objectReference: {fileID: 11400000, guid: fb678b6c056fca3458023034a1c3f5e1,
+        type: 2}
+    - target: {fileID: 7449219201553598781, guid: 06e5b1846a8377f409073d64d99f8038,
+        type: 3}
       propertyPath: _sceneToLoad
       value: TestLevel_Battle_1
       objectReference: {fileID: 0}
@@ -1073,6 +1079,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: be13db7894910744cb04515f819b4539,
         type: 2}
+    - target: {fileID: 7449219201553598781, guid: 06e5b1846a8377f409073d64d99f8038,
+        type: 3}
+      propertyPath: _currentScene.Variable
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c3dbb88bd2fbe949a0fd69842fc3da1,
+        type: 2}
+    - target: {fileID: 7449219201553598781, guid: 06e5b1846a8377f409073d64d99f8038,
+        type: 3}
+      propertyPath: _currentScene.UseConstant
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8991465785259938366, guid: 06e5b1846a8377f409073d64d99f8038,
         type: 3}
       propertyPath: m_RootOrder

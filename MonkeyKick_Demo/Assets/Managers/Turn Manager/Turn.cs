@@ -20,5 +20,4 @@ namespace MonkeyKick.Managers.TurnSystem
         [ReadOnly] public bool WasTurnPrev = false; // true if the character had 'IsTurn' true last turn
         [ReadOnly] public bool IsDead = false;
     }
-
 }

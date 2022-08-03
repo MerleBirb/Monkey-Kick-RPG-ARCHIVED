@@ -15,8 +15,9 @@ namespace MonkeyKick.Characters.Enemies
     /// </summary>
     public class EnemyOverworldPhysics : CharacterOverworldPhysics
     {
-
+        [SerializeField] private CharacterInformation _stats;
         [SerializeField] private string _sceneToLoad;
+        [SerializeField] private StringReference _currentScene;
         [SerializeField] private PartyManager _party;
         public PartyManager Party { get => _party; }
 
@@ -25,13 +26,17 @@ namespace MonkeyKick.Characters.Enemies
 
         private void OnTriggerEnter(Collider col)
         {
-            if (col.CompareTag(TagsQoL.PLAYER_TAG))
+            if (_stats.CurrentKi > 0)
             {
-                // set the new enemy party
-                _currentEnemyParty.Characters = _party.Characters;
+                if (col.CompareTag(TagsQoL.PLAYER_TAG))
+                {
+                    // set the new enemy party
+                    _currentEnemyParty.Characters = _party.Characters;
 
-                // change the scene
-                SceneManager.LoadScene(_sceneToLoad);
+                    // change the scene
+                    _currentScene.Variable.Value = SceneManager.GetActiveScene().name;
+                    SceneManager.LoadScene(_sceneToLoad);
+                }
             }
         }
     }

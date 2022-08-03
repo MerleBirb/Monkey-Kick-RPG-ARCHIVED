@@ -24,10 +24,17 @@ namespace MonkeyKick.Characters.Enemies
             switch (_battleState)
             {
                 case BattleStates.EnterBattle: EnterBattle(); break;
-                case BattleStates.Wait: Wait(); break;
+                case BattleStates.Wait:
+                    {
+                        CheckKi();
+                        Wait();
+                        
+                        break;
+                    }
                 case BattleStates.ChooseAction: ChooseAction(); break;
                 case BattleStates.Action:
                     {
+                        CheckKi();
                         Stats.Skills[0].Tick();
 
                         break;

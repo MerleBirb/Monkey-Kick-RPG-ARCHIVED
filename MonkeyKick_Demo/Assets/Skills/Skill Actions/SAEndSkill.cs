@@ -16,7 +16,6 @@ namespace MonkeyKick.Skills
         public override bool Execute()
         {
             _skill.Actor.ResetAfterAction();
-            _skill.Target.BattleState = BattleStates.Wait;
 
             return true;
         }

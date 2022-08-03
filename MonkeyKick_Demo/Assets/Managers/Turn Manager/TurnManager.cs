@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using MonkeyKick.Characters;
 
@@ -32,8 +33,12 @@ namespace MonkeyKick.Managers.TurnSystem
         [SerializeField] private Transform[] _playerSpawns;
         [SerializeField] private Transform[] _enemySpawns;
 
+        // scenes
+        [SerializeField] private StringReference _previousOverworldScene;
+
         // events
         public UnityEvent OnCharacterListsFilled;
+        public UnityEvent OnBattleWin;
 
         private void Awake()
         {
@@ -64,6 +69,7 @@ namespace MonkeyKick.Managers.TurnSystem
                 _turnOrder.Add(_allParty[i].Turn);
                 _turnOrder[i].Character = _allParty[i].GetComponent<Character>();
                 _turnOrder[i].Speed = _turnOrder[i].Character.Stats.Speed;
+                _turnOrder[i].IsDead = false;
 
                 if (_allParty[i].CompareTag(TagsQoL.PLAYER_TAG))
                 {
@@ -137,6 +143,7 @@ namespace MonkeyKick.Managers.TurnSystem
                 {
                     if (EnemyPartyDefeated())
                     {
+                        OnBattleWin.Invoke();
                         return;
                     }
 
@@ -169,7 +176,13 @@ namespace MonkeyKick.Managers.TurnSystem
         // check if the enemy party has been wiped out
         public bool EnemyPartyDefeated()
         {
-            if (_enemyParty.Count == 0) return true;
+            int count = 0;
+            foreach(CharacterBattle c in _enemyParty)
+            {
+                if (c.Turn.IsDead) count++;
+            }
+
+            if (count >= _enemyParty.Count) return true;
             return false;
         }
 
@@ -180,6 +193,12 @@ namespace MonkeyKick.Managers.TurnSystem
             _playerParty.Clear();
             _enemyParty.Clear();
             _turnOrder.Clear();
+        }
+
+        public void EndBattle()
+        {
+            ResetBattle();
+            SceneManager.LoadScene(_previousOverworldScene.Variable.Value);
         }
     }
 }

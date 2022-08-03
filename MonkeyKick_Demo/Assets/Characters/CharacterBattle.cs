@@ -36,7 +36,7 @@ namespace MonkeyKick.Characters
     public abstract class CharacterBattle : MonoBehaviour
     {
         // turn
-        protected Turn _turn;
+        protected Turn _turn = new Turn();
         public Turn Turn
         {
             get => _turn;
@@ -100,7 +100,6 @@ namespace MonkeyKick.Characters
 
         protected virtual void Update()
         {
-            CheckHealth();
             if (_turn != null ) _isTurn = _turn.IsTurn;
         }
 
@@ -113,6 +112,7 @@ namespace MonkeyKick.Characters
         {
             _battleState = BattleStates.EnterBattle;
             _hasBattleStarted = false;
+            _turn = null;
         }
 
         protected virtual void EnterBattle()
@@ -143,7 +143,7 @@ namespace MonkeyKick.Characters
             if (!_isTurn) _battleState = BattleStates.Wait;
         }
 
-        protected void CheckHealth()
+        protected void CheckKi()
         {
             if (_stats.CurrentKi == 0)
             {

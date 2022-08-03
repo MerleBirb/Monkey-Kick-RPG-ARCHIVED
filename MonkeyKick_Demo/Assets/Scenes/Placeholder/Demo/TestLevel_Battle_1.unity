@@ -1431,8 +1431,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2042528582}
     - target: {fileID: 1669612159, guid: 7bdaaa37164c32d409ee09ddc9a660f4, type: 3}
+      propertyPath: OnBattleWin.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669612159, guid: 7bdaaa37164c32d409ee09ddc9a660f4, type: 3}
+      propertyPath: OnBattleWin.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669612159, guid: 7bdaaa37164c32d409ee09ddc9a660f4, type: 3}
       propertyPath: OnCharacterListsFilled.m_PersistentCalls.m_Calls.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669612159, guid: 7bdaaa37164c32d409ee09ddc9a660f4, type: 3}
+      propertyPath: OnBattleWin.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3705704387175647166}
+    - target: {fileID: 1669612159, guid: 7bdaaa37164c32d409ee09ddc9a660f4, type: 3}
+      propertyPath: OnBattleWin.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669612159, guid: 7bdaaa37164c32d409ee09ddc9a660f4, type: 3}
+      propertyPath: OnBattleWin.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EndBattle
       objectReference: {fileID: 0}
     - target: {fileID: 1669612159, guid: 7bdaaa37164c32d409ee09ddc9a660f4, type: 3}
       propertyPath: OnCharacterListsFilled.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1451,8 +1471,16 @@ PrefabInstance:
       value: InitUI
       objectReference: {fileID: 0}
     - target: {fileID: 1669612159, guid: 7bdaaa37164c32d409ee09ddc9a660f4, type: 3}
+      propertyPath: OnBattleWin.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MonkeyKick.Managers.TurnSystem.TurnManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669612159, guid: 7bdaaa37164c32d409ee09ddc9a660f4, type: 3}
       propertyPath: OnCharacterListsFilled.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MonkeyKick.UserInterface.DisplayCharacterBattleUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669612159, guid: 7bdaaa37164c32d409ee09ddc9a660f4, type: 3}
+      propertyPath: OnBattleWin.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1669612159, guid: 7bdaaa37164c32d409ee09ddc9a660f4, type: 3}
       propertyPath: OnCharacterListsFilled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
