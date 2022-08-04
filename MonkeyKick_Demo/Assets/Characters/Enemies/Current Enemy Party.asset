@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Current Enemy Party
   m_EditorClassIdentifier: 
   Characters:
-  - {fileID: 6172238194445448544, guid: 34fe79e501050d64b9554fef9a67d297, type: 3}
+  - {fileID: 2510162312630248323, guid: 559eb2a4aaaeea744bca7ee51cf7f03a, type: 3}

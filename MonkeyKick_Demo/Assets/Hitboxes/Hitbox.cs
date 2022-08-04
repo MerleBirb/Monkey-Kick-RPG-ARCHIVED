@@ -19,7 +19,7 @@ namespace MonkeyKick
 
         [SerializeField] private TypeOfTarget _typeOfTarget;
 
-        [HideInInspector] public int DamageValue;
+        public int DamageValue;
         [HideInInspector] public CharacterBattle Target;
 
         private bool _hasHit = false;
