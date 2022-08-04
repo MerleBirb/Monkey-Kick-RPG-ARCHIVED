@@ -99,5 +99,13 @@ namespace MonkeyKick.Skills
             return newDebugUI;
         }
 
+        public virtual DisplayDebugUI InstantiateDebugUI(DisplayDebugUI prefab, float time, string text)
+        {
+            DisplayDebugUI newDebugUI = Instantiate(prefab);
+            newDebugUI.DisplayDebugText(text);
+            Destroy(newDebugUI.gameObject, time);
+
+            return newDebugUI;
+        }
     }
 }

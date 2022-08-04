@@ -15,7 +15,7 @@ MonoBehaviour:
   _characterName: P-Dawg
   _description: The raddest guy ever.
   _maxKi: 32
-  _currentKi: 28
+  _currentKi: 32
   _attack: 17
   _defense: 16
   _speed: 12

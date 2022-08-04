@@ -24,6 +24,8 @@ MonoBehaviour:
   TargetTransform: {fileID: 0}
   TargetRb: {fileID: 0}
   TargetAnim: {fileID: 0}
+  _debugInstructionsPrefab: {fileID: 7973651296466604949, guid: b080e6dcca3fdd741b7f3c4d4fe6e194,
+    type: 3}
   _timeToFire: 2
   _laserPrefab: {fileID: 236599750707230933, guid: 0992abf0f66ef5c4b869212e66a9265e,
     type: 3}

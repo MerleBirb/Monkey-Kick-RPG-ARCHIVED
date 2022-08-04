@@ -1291,10 +1291,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1127879334}
     m_Modifications:
-    - target: {fileID: 291878854, guid: 2fbf2d6a0a101a04f9f5fc4d8c34d48a, type: 3}
-      propertyPath: m_Name
-      value: Fight text
-      objectReference: {fileID: 0}
     - target: {fileID: 291878855, guid: 2fbf2d6a0a101a04f9f5fc4d8c34d48a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1318,10 +1314,6 @@ PrefabInstance:
     - target: {fileID: 291878855, guid: 2fbf2d6a0a101a04f9f5fc4d8c34d48a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 291878856, guid: 2fbf2d6a0a101a04f9f5fc4d8c34d48a, type: 3}
-      propertyPath: m_text
-      value: FIGHT
       objectReference: {fileID: 0}
     - target: {fileID: 1492753437, guid: 2fbf2d6a0a101a04f9f5fc4d8c34d48a, type: 3}
       propertyPath: _turnManager

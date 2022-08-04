@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MonkeyKick.Characters;
 using MonkeyKick.Projectiles;
+using MonkeyKick.UserInterface;
 
 namespace MonkeyKick.Skills
 {
@@ -11,6 +12,8 @@ namespace MonkeyKick.Skills
     public class SKEnigmaBeam : Skill
     {
         #region SKILL INFORMATION
+
+        [SerializeField] protected DisplayDebugUI _debugInstructionsPrefab;
 
         [Header("Time it takes to charge the laser.")]
         [SerializeField] private float _timeToFire;
@@ -44,6 +47,7 @@ namespace MonkeyKick.Skills
                 new StateAction[]
                 {
                     new SADelayState(this, "prepareToFire", 0.1f),
+                    new SASpawnDebugText(this, _debugInstructionsPrefab, "Press the 'Space' key to jump and avoid the laser.", 3f),
                     new SAInitCounterSkill(this, _possibleCounters),
                     new SASetPlayerStateFromEnemy(this, BattleStates.Counter)
                 }

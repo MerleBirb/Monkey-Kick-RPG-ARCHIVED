@@ -13,6 +13,11 @@ namespace MonkeyKick.UserInterface
     {
         [SerializeField] private TextMeshProUGUI _debugText;
 
+        public void DisplayDebugText(string newText)
+        {
+            _debugText.text = newText;
+        }
+
         public void DisplayTimer(float value)
         {
             _debugText.text = value.ToString("F2") + " sec.";
