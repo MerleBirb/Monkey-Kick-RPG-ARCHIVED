@@ -36,7 +36,7 @@ namespace MonkeyKick.Characters
     public abstract class CharacterBattle : MonoBehaviour
     {
         // turn
-        protected Turn _turn;
+        protected Turn _turn = new Turn();
         public Turn Turn
         {
             get => _turn;
@@ -85,8 +85,6 @@ namespace MonkeyKick.Characters
         // animations
         protected Animator _anim;
         protected string _currentState = "";
-        protected const string BATTLE_STANCE_R = "BattleStance_right";
-        protected const string BATTLE_STANCE_L = "BattleStance_left";
 
         protected virtual void Awake()
         {
@@ -100,7 +98,6 @@ namespace MonkeyKick.Characters
 
         protected virtual void Update()
         {
-            CheckHealth();
             if (_turn != null ) _isTurn = _turn.IsTurn;
         }
 
@@ -113,6 +110,7 @@ namespace MonkeyKick.Characters
         {
             _battleState = BattleStates.EnterBattle;
             _hasBattleStarted = false;
+            _turn = null;
         }
 
         protected virtual void EnterBattle()
@@ -143,7 +141,7 @@ namespace MonkeyKick.Characters
             if (!_isTurn) _battleState = BattleStates.Wait;
         }
 
-        protected void CheckHealth()
+        protected void CheckKi()
         {
             if (_stats.CurrentKi == 0)
             {
@@ -153,23 +151,28 @@ namespace MonkeyKick.Characters
             }
         }
 
-        protected void ResetMovement()
+        public void ResetMovement()
         {
             _rigidbody.velocity = Vector3.zero;
         }
 
-        protected void TurnOffGravity()
+        public void TurnOffGravity()
         {
             _rigidbody.useGravity = false;
         }
 
-        protected bool OnGround()
+        public void Jump(float height)
         {
-            float adjustHeight = (_collider.height / 2f) + 0.1f;
+            _rigidbody.velocity += new Vector3(0f, height, 0f);
+        }
+
+        public bool OnGround()
+        {
+            float adjustHeight = (_collider.height / 2f) + 0.2f;
             return Physics.Raycast(_rigidbody.position, -Vector3.up, out _hitGround, adjustHeight, _groundLayer); // raycast down, true if object is ground layer, store hit
         }
 
-        protected void ObeyGravity()
+        public void ObeyGravity()
         {
             if (_maxGroundAngle > Vector3.Angle(_hitGround.normal, -Physics.gravity.normalized)) _groundNormal = _hitGround.normal;
 

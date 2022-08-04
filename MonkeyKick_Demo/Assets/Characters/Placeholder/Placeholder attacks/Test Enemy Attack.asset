@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577c91b58349140458e816032a0439ec, type: 3}
+  m_Name: Test Enemy Attack
+  m_EditorClassIdentifier: 
+  _skillName: 
+  _skillDescription: 
+  _skillValue: 0.25
+  CurrentRating: 0
+  Actor: {fileID: 0}
+  ActorTransform: {fileID: 0}
+  ActorRb: {fileID: 0}
+  ActorAnim: {fileID: 0}
+  Target: {fileID: 0}
+  TargetTransform: {fileID: 0}
+  TargetRb: {fileID: 0}
+  TargetAnim: {fileID: 0}
+  _timeToTarget: 1
+  _xOffsetFromTarget: 0.75
+  _hitboxPrefab: {fileID: 4918394904751838472, guid: 5a149d306e66fac45ac5e8c85a96c589,
+    type: 3}
+  _possibleCounters:
+  - {fileID: 11400000, guid: b5704245dcded6d4c818203bed45aa2a, type: 2}
+  - {fileID: 11400000, guid: 10b1a005678f3ee45aa795e2fa814f1c, type: 2}

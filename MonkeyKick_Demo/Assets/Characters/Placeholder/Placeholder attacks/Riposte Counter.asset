@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade5b8e9be5aa174981a7e7f3c09018c, type: 3}
+  m_Name: Riposte Counter
+  m_EditorClassIdentifier: 
+  _skillName: 
+  _skillDescription: 
+  _skillValue: 0.25
+  CurrentRating: 0
+  Actor: {fileID: 0}
+  ActorTransform: {fileID: 0}
+  ActorRb: {fileID: 0}
+  ActorAnim: {fileID: 0}
+  Target: {fileID: 0}
+  TargetTransform: {fileID: 0}
+  TargetRb: {fileID: 0}
+  TargetAnim: {fileID: 0}
+  _limitWindupTime: 0.5
+  _attackDelay: 0.25
+  _hitboxPrefab: {fileID: 8435272549277191078, guid: 27cf79c8f0eeda24cb4567fb8c5f5178,
+    type: 3}
+  CounterTimer: 0

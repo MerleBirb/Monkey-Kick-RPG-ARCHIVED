@@ -90,7 +90,7 @@ namespace MonkeyKick.Characters
 
         protected bool OnGround()
         {
-            float adjustHeight = (_collider.height / 2f) + 0.1f;
+            float adjustHeight = (_collider.height / 2f) + 0.2f;
             return Physics.Raycast(_rigidbody.position, -Vector3.up, out _hitGround, adjustHeight, _groundLayer); // raycast down, true if object is ground layer, store hit
         }
 

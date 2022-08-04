@@ -1,6 +1,8 @@
 // Merle Roji 7/9/22
 
 using UnityEngine;
+using System.Collections.Generic;
+using MonkeyKick.Skills;
 
 namespace MonkeyKick.Characters
 {
@@ -45,6 +47,8 @@ namespace MonkeyKick.Characters
         public int Swag { get => _swag; }
 
         [Header("List of skills a character can utilize.")]
+        [SerializeField] private List<Skill> _skills;
+        public List<Skill> Skills { get => _skills; }
 
         const int STAT_CLAMP = 99999;
         protected void OnValidate()
