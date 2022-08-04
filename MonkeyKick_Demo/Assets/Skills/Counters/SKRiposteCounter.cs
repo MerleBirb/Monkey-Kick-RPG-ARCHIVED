@@ -21,9 +21,9 @@ namespace MonkeyKick.Skills
 
         #region ANIMATIONS
 
-        const string BATTLE_STANCE = "Idle_down";
-        const string WINDUP = "Punch_windup_right";
-        const string ATTACK = "Punch_attack_right";
+        const string BATTLE_STANCE = "pdawg_battlestance";
+        const string WINDUP = "pdawg_punch_windup";
+        const string ATTACK = "pdawg_punch_hit";
 
         #endregion
 

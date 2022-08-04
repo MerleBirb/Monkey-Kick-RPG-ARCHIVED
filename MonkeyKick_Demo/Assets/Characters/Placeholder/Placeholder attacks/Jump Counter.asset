@@ -24,4 +24,4 @@ MonoBehaviour:
   TargetTransform: {fileID: 0}
   TargetRb: {fileID: 0}
   TargetAnim: {fileID: 0}
-  _jumpHeight: 3
+  _jumpHeight: 10

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Current Player Party
   m_EditorClassIdentifier: 
   Characters:
-  - {fileID: 7976740626362589235, guid: df8f0ed9e1914ba47b62275fb2ff37b1, type: 3}
+  - {fileID: 87356365337391680, guid: 9138e49c5575fe343986352eda54098f, type: 3}

@@ -13,14 +13,6 @@ namespace MonkeyKick.Skills
         [Header("Height for the jump.")]
         [SerializeField] private float _jumpHeight = 1f;
 
-        #region ANIMATIONS
-
-        protected const string BATTLE_STANCE = "Idle_down";
-        protected const string WINDUP = "Punch_windup_right";
-        protected const string ATTACK = "Punch_attack_right";
-
-        #endregion
-
         public override void Init(CharacterBattle newActor, CharacterBattle[] newTargets)
         {
             base.Init(newActor, newTargets);

@@ -24,9 +24,9 @@ namespace MonkeyKick.Skills
         [Header("Your attack rating is proportional to what time interval you press your input in")]
         [SerializeField] private float[] _timeChecks;
 
-        const string IDLE = "Idle_down";
-        const string WINDUP = "Punch_windup_right";
-        const string ATTACK = "Punch_attack_right";
+        const string IDLE = "pdawg_battlestance";
+        const string WINDUP = "pdawg_punch_windup";
+        const string ATTACK = "pdawg_punch_hit";
 
         public override void Init(CharacterBattle newActor, CharacterBattle[] newTargets)
         {

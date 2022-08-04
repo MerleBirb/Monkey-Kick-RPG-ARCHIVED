@@ -85,8 +85,6 @@ namespace MonkeyKick.Characters
         // animations
         protected Animator _anim;
         protected string _currentState = "";
-        protected const string BATTLE_STANCE_R = "BattleStance_right";
-        protected const string BATTLE_STANCE_L = "BattleStance_left";
 
         protected virtual void Awake()
         {
@@ -170,7 +168,7 @@ namespace MonkeyKick.Characters
 
         public bool OnGround()
         {
-            float adjustHeight = (_collider.height / 2f) + 0.1f;
+            float adjustHeight = (_collider.height / 2f) + 0.2f;
             return Physics.Raycast(_rigidbody.position, -Vector3.up, out _hitGround, adjustHeight, _groundLayer); // raycast down, true if object is ground layer, store hit
         }
 
