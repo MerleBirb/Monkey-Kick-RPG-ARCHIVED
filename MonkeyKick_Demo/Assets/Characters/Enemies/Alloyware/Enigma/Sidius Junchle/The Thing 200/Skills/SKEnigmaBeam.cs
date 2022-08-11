@@ -39,6 +39,8 @@ namespace MonkeyKick.Skills
 
             SpriteRenderer renderer = Actor.GetComponentInChildren<SpriteRenderer>();
 
+            PlayClip(ActorAudioSource, Clips[2]);
+
             State setUp = new State
             (
                 // fixed update action

@@ -46,6 +46,8 @@ namespace MonkeyKick.Skills
                 if (_button.triggered)
                 {
                     if (_prefab) _skill.InstantiateEffortRank(_prefab, SkillQoL.SingleTapTimedButtonPress(_currentTime, _limitTime, _timeChecks));
+                    _skill.PlayClip(_skill.ActorAudioSource, _skill.Clips[1]);
+                    _skill.PlayClip(_skill.TargetAudioSource, _skill.Clips[0]);
                     _skill.SetState(_targetState);
                     return true;
                 }

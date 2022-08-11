@@ -29,6 +29,7 @@ namespace MonkeyKick.Skills
             if (_newProjectile == null)
             {
                 _newProjectile = _skill.InstantiateProjectile(_projectilePrefab, _skill.ActorTransform, _xSpeed, _lifetime);
+                _skill.PlayClip(_skill.ActorAudioSource, _skill.Clips[3]);
                 return true;
             }
 

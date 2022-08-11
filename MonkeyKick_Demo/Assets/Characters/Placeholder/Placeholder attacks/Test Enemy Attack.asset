@@ -20,10 +20,13 @@ MonoBehaviour:
   ActorTransform: {fileID: 0}
   ActorRb: {fileID: 0}
   ActorAnim: {fileID: 0}
+  ActorAudioSource: {fileID: 0}
   Target: {fileID: 0}
   TargetTransform: {fileID: 0}
   TargetRb: {fileID: 0}
   TargetAnim: {fileID: 0}
+  TargetAudioSource: {fileID: 0}
+  Clips: []
   _timeToTarget: 1
   _xOffsetFromTarget: 0.75
   _hitboxPrefab: {fileID: 4918394904751838472, guid: 5a149d306e66fac45ac5e8c85a96c589,

@@ -20,10 +20,17 @@ MonoBehaviour:
   ActorTransform: {fileID: 0}
   ActorRb: {fileID: 0}
   ActorAnim: {fileID: 0}
+  ActorAudioSource: {fileID: 0}
   Target: {fileID: 0}
   TargetTransform: {fileID: 0}
   TargetRb: {fileID: 0}
   TargetAnim: {fileID: 0}
+  TargetAudioSource: {fileID: 0}
+  Clips:
+  - {fileID: 8300000, guid: bc10fd1fb94375e46b3436507cd56ecc, type: 3}
+  - {fileID: 8300000, guid: 1073b271fd345a64492af60b96e9de24, type: 3}
+  - {fileID: 8300000, guid: 97e5432a5f8a02d43afc30a674b25c1b, type: 3}
+  - {fileID: 8300000, guid: 3524bb832343c3b488b5a11e043f3b03, type: 3}
   _debugInstructionsPrefab: {fileID: 7973651296466604949, guid: b080e6dcca3fdd741b7f3c4d4fe6e194,
     type: 3}
   _timeToFire: 2

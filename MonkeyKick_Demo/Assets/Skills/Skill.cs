@@ -36,12 +36,17 @@ namespace MonkeyKick.Skills
         [HideInInspector] public Transform ActorTransform;
         [HideInInspector] public Rigidbody ActorRb;
         [HideInInspector] public Animator ActorAnim;
+        [HideInInspector] public AudioSource ActorAudioSource;
 
         // target
         [HideInInspector] public CharacterBattle Target;
         [HideInInspector] public Transform TargetTransform;
         [HideInInspector] public Rigidbody TargetRb;
         [HideInInspector] public Animator TargetAnim;
+        [HideInInspector] public AudioSource TargetAudioSource;
+
+        // delete this later
+        public AudioClip[] Clips;
 
         // sets the actor, target, and actions of the attack
         public virtual void Init(CharacterBattle newActor, CharacterBattle[] newTargets)
@@ -51,12 +56,14 @@ namespace MonkeyKick.Skills
             ActorRb = Actor.GetComponent<Rigidbody>();
             ActorTransform = Actor.transform;
             ActorAnim = Actor.GetComponentInChildren<Animator>();
+            ActorAudioSource = Actor.GetComponent<AudioSource>();
 
             // set up target
             Target = newTargets[0];
             TargetRb = Target.GetComponent<Rigidbody>();
             TargetTransform = Target.transform;
             TargetAnim = Target.GetComponentInChildren<Animator>();
+            TargetAudioSource = Actor.GetComponent<AudioSource>();
         }
 
         public virtual FireProjectile InstantiateProjectile(FireProjectile prefab, Transform spawnPoint, float xSpeed, float lifetime)
@@ -104,6 +111,13 @@ namespace MonkeyKick.Skills
             Destroy(newDebugUI.gameObject, time);
 
             return newDebugUI;
+        }
+
+        public virtual void PlayClip(AudioSource source, AudioClip clip)
+        {
+            source.Stop();
+            source.clip = clip;
+            source.Play();
         }
     }
 }

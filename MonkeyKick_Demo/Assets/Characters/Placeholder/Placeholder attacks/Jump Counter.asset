@@ -20,8 +20,11 @@ MonoBehaviour:
   ActorTransform: {fileID: 0}
   ActorRb: {fileID: 0}
   ActorAnim: {fileID: 0}
+  ActorAudioSource: {fileID: 0}
   Target: {fileID: 0}
   TargetTransform: {fileID: 0}
   TargetRb: {fileID: 0}
   TargetAnim: {fileID: 0}
+  TargetAudioSource: {fileID: 0}
+  Clips: []
   _jumpHeight: 10
