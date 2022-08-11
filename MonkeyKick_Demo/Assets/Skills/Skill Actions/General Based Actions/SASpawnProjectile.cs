@@ -1,4 +1,4 @@
-// Merle Roji
+// Merle Roji 8/4/22
 
 using UnityEngine;
 using MonkeyKick.Projectiles;
@@ -28,7 +28,7 @@ namespace MonkeyKick.Skills
         {
             if (_newProjectile == null)
             {
-                _newProjectile = _skill.InstantiateProjectile(_projectilePrefab, _skill.ActorTransform, _xSpeed, _lifetime, _skill.Target);
+                _newProjectile = _skill.InstantiateProjectile(_projectilePrefab, _skill.ActorTransform, _xSpeed, _lifetime);
                 return true;
             }
 

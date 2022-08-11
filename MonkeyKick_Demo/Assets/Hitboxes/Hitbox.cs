@@ -11,7 +11,7 @@ namespace MonkeyKick
     /// </summary>
     public class Hitbox : MonoBehaviour
     {
-        private enum TypeOfTarget
+        public enum TypeOfTarget
         {
             Player,
             Enemy
@@ -20,7 +20,6 @@ namespace MonkeyKick
         [SerializeField] private TypeOfTarget _typeOfTarget;
 
         public int DamageValue;
-        [HideInInspector] public CharacterBattle Target;
 
         private bool _hasHit = false;
 
@@ -30,7 +29,7 @@ namespace MonkeyKick
             {
                 if (!_hasHit && col.CompareTag(TagsQoL.PLAYER_TAG))
                 {
-                    Target.Stats.Damage(DamageValue);
+                    col.GetComponent<CharacterBattle>().Stats.Damage(DamageValue);
                     _hasHit = true;
                 }
             }
@@ -38,11 +37,16 @@ namespace MonkeyKick
             {
                 if (!_hasHit && col.CompareTag(TagsQoL.ENEMY_TAG))
                 {
-                    Target.Stats.Damage(DamageValue);
-                    Target.IsInterrupted = true;
+                    col.GetComponent<CharacterBattle>().Stats.Damage(DamageValue);
+                    col.GetComponent<CharacterBattle>().IsInterrupted = true;
                     _hasHit = true;
                 }
             }
+        }
+
+        public void ToggleTarget(TypeOfTarget type)
+        {
+            _typeOfTarget = type;
         }
     }
 }

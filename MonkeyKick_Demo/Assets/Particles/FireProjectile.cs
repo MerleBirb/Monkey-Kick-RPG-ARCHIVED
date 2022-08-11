@@ -30,5 +30,14 @@ namespace MonkeyKick.Projectiles
         {
             _rigidbody.velocity = new Vector3(_xSpeed, 0f, 0f);
         }
+
+        private void OnTriggerEnter(Collider col)
+        {
+            if (col.CompareTag("Counter"))
+            {
+                _xSpeed = -_xSpeed;
+                _hitbox.ToggleTarget(Hitbox.TypeOfTarget.Enemy);
+            }
+        }
     }
 }

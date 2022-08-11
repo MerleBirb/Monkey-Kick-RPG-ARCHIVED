@@ -4847,6 +4847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _xSpeed: 1
+  Target: {fileID: 0}
 --- !u!1 &6168447254999980745
 GameObject:
   m_ObjectHideFlags: 0
@@ -5002,7 +5003,7 @@ PrefabInstance:
     - target: {fileID: 8371714870621072890, guid: 5a149d306e66fac45ac5e8c85a96c589,
         type: 3}
       propertyPath: m_Name
-      value: Hitbox for Enemy
+      value: Hitbox
       objectReference: {fileID: 0}
     - target: {fileID: 9222570385185195021, guid: 5a149d306e66fac45ac5e8c85a96c589,
         type: 3}

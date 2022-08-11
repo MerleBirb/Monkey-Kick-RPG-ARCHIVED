@@ -59,23 +59,21 @@ namespace MonkeyKick.Skills
             TargetAnim = Target.GetComponentInChildren<Animator>();
         }
 
-        public virtual FireProjectile InstantiateProjectile(FireProjectile prefab, Transform spawnPoint, float xSpeed, float lifetime, CharacterBattle target)
+        public virtual FireProjectile InstantiateProjectile(FireProjectile prefab, Transform spawnPoint, float xSpeed, float lifetime)
         {
             FireProjectile newProjectile = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
             newProjectile.XSpeed = xSpeed;
-            newProjectile.ProjHitbox.Target = target;
             Destroy(newProjectile, lifetime);
 
             return newProjectile;
         }
 
         // Hitbox
-        public virtual Hitbox InstantiateHitbox(Hitbox prefab, Transform bodyPart, Vector3 scale, CharacterBattle target, int damage, float time)
+        public virtual Hitbox InstantiateHitbox(Hitbox prefab, Transform bodyPart, Vector3 scale, int damage, float time)
         {
             Hitbox newHitbox = Instantiate(prefab, bodyPart);
             newHitbox.transform.localScale = scale;
             newHitbox.transform.rotation = Quaternion.identity;
-            newHitbox.Target = target;
             newHitbox.DamageValue = damage;
             Destroy(newHitbox.gameObject, time);
 

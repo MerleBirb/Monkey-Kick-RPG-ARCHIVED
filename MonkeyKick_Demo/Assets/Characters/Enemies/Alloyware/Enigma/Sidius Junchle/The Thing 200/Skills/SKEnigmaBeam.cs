@@ -47,7 +47,7 @@ namespace MonkeyKick.Skills
                 new StateAction[]
                 {
                     new SADelayState(this, "prepareToFire", 0.1f),
-                    new SASpawnDebugText(this, _debugInstructionsPrefab, "Press the 'Space' key to jump and avoid the laser.", 3f),
+                    new SASpawnDebugText(this, _debugInstructionsPrefab, "Press the 'Space' key to jump and avoid the laser. Hold the 'D' key to charge a punch, then release it to throw the punch.", 3f),
                     new SAInitCounterSkill(this, _possibleCounters),
                     new SASetPlayerStateFromEnemy(this, BattleStates.Counter)
                 }
