@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b81267ab0f1c04b8855bb5026b8544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 11400000, guid: 98be751611635794ba780cf52cc8fe82, type: 2}
+  _stats: {fileID: 11400000, guid: f47fb37187a9cdc4e85e83254d37c339, type: 2}
 --- !u!114 &87356365337391680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea004d9f4a19211449896a5bd43d7c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 11400000, guid: 98be751611635794ba780cf52cc8fe82, type: 2}
+  _stats: {fileID: 11400000, guid: f47fb37187a9cdc4e85e83254d37c339, type: 2}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8

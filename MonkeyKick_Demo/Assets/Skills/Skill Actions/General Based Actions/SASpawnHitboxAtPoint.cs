@@ -28,7 +28,7 @@ namespace MonkeyKick.Skills
         {
             if (_newHitbox == null)
             {
-                _newHitbox = _skill.InstantiateHitbox(_prefab, _spawnPoint, _scale, _skill.Target, _totalDamage, _time);
+                _newHitbox = _skill.InstantiateHitbox(_prefab, _spawnPoint, _scale, _totalDamage, _time);
                 return true;
             }
 

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad6d8dd690aa5e4a9e50e84c835503b, type: 3}
+  m_Name: Enigma Beam mk200
+  m_EditorClassIdentifier: 
+  _skillName: 
+  _skillDescription: 
+  _skillValue: 4
+  CurrentRating: 0
+  Actor: {fileID: 0}
+  ActorTransform: {fileID: 0}
+  ActorRb: {fileID: 0}
+  ActorAnim: {fileID: 0}
+  Target: {fileID: 0}
+  TargetTransform: {fileID: 0}
+  TargetRb: {fileID: 0}
+  TargetAnim: {fileID: 0}
+  _debugInstructionsPrefab: {fileID: 7973651296466604949, guid: b080e6dcca3fdd741b7f3c4d4fe6e194,
+    type: 3}
+  _timeToFire: 2
+  _laserPrefab: {fileID: 236599750707230933, guid: 0992abf0f66ef5c4b869212e66a9265e,
+    type: 3}
+  _projectileSpeed: -10
+  _projectileLifetime: 2
+  _possibleCounters:
+  - {fileID: 11400000, guid: b5704245dcded6d4c818203bed45aa2a, type: 2}
+  - {fileID: 11400000, guid: 10b1a005678f3ee45aa795e2fa814f1c, type: 2}

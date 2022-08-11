@@ -26,11 +26,13 @@ MonoBehaviour:
   TargetAnim: {fileID: 0}
   _effortRankPrefab: {fileID: 2815496935606689380, guid: 9f4050303c902024b943b2b65192cfe0,
     type: 3}
-  _debugUIPrefab: {fileID: 1234883706424746264, guid: 151dafbb3a51893429aca5c7cd6fb9bc,
+  _debugTimerPrefab: {fileID: 1234883706424746264, guid: 151dafbb3a51893429aca5c7cd6fb9bc,
+    type: 3}
+  _debugInstructionsPrefab: {fileID: 7973651296466604949, guid: b080e6dcca3fdd741b7f3c4d4fe6e194,
     type: 3}
   _timeToTarget: 1
   _timeForPunch: 1
-  _xOffsetFromTarget: -0.75
+  _xOffsetFromTarget: -1
   _timeChecks:
   - 0.9
   - 0.5

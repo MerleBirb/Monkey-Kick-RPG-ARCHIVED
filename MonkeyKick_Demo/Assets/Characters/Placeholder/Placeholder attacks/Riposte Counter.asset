@@ -26,6 +26,6 @@ MonoBehaviour:
   TargetAnim: {fileID: 0}
   _limitWindupTime: 0.5
   _attackDelay: 0.25
-  _hitboxPrefab: {fileID: 8435272549277191078, guid: 27cf79c8f0eeda24cb4567fb8c5f5178,
+  _hitboxPrefab: {fileID: 2427626564472816729, guid: f0d8b845a5d08e142a4a5fcad9753edc,
     type: 3}
   CounterTimer: 0

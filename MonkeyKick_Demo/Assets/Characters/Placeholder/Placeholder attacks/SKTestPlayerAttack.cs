@@ -13,7 +13,8 @@ namespace MonkeyKick.Skills
     {
         [Header("To display how good the player did with their button press")]
         [SerializeField] protected DisplayEffortRank _effortRankPrefab;
-        [SerializeField] protected DisplayDebugUI _debugUIPrefab;
+        [SerializeField] protected DisplayDebugUI _debugTimerPrefab;
+        [SerializeField] protected DisplayDebugUI _debugInstructionsPrefab;
 
         [Header("Time it takes to arrive at the target")]
         [SerializeField] private float _timeToTarget;
@@ -47,6 +48,7 @@ namespace MonkeyKick.Skills
                 // update Actions
                 new StateAction[]
                 {
+                    new SASpawnDebugText(this, _debugInstructionsPrefab, "Press the 'D' key before the timer runs out.", 3f),
                     new SAChangeAnimation(ActorAnim, IDLE)
                 }
             );
@@ -59,7 +61,7 @@ namespace MonkeyKick.Skills
                 new StateAction[]
                 {
                     new SASingleTapTimedInput(this, "finishAttack", player.ButtonEast, _timeForPunch, _timeChecks, _effortRankPrefab),
-                    new SASpawnDebugTimer(this, _debugUIPrefab, _timeForPunch),
+                    new SASpawnDebugTimer(this, _debugTimerPrefab, _timeForPunch),
                     new SAChangeAnimation(ActorAnim, WINDUP)
                 }
             );

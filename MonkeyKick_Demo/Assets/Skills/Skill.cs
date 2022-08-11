@@ -3,6 +3,7 @@
 using UnityEngine;
 using MonkeyKick.Characters;
 using MonkeyKick.UserInterface;
+using MonkeyKick.Projectiles;
 
 namespace MonkeyKick.Skills
 {
@@ -58,14 +59,21 @@ namespace MonkeyKick.Skills
             TargetAnim = Target.GetComponentInChildren<Animator>();
         }
 
+        public virtual FireProjectile InstantiateProjectile(FireProjectile prefab, Transform spawnPoint, float xSpeed, float lifetime)
+        {
+            FireProjectile newProjectile = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
+            newProjectile.XSpeed = xSpeed;
+            Destroy(newProjectile, lifetime);
+
+            return newProjectile;
+        }
 
         // Hitbox
-        public virtual Hitbox InstantiateHitbox(Hitbox prefab, Transform bodyPart, Vector3 scale, CharacterBattle target, int damage, float time)
+        public virtual Hitbox InstantiateHitbox(Hitbox prefab, Transform bodyPart, Vector3 scale, int damage, float time)
         {
             Hitbox newHitbox = Instantiate(prefab, bodyPart);
             newHitbox.transform.localScale = scale;
             newHitbox.transform.rotation = Quaternion.identity;
-            newHitbox.Target = target;
             newHitbox.DamageValue = damage;
             Destroy(newHitbox.gameObject, time);
 
@@ -89,5 +97,13 @@ namespace MonkeyKick.Skills
             return newDebugUI;
         }
 
+        public virtual DisplayDebugUI InstantiateDebugUI(DisplayDebugUI prefab, float time, string text)
+        {
+            DisplayDebugUI newDebugUI = Instantiate(prefab);
+            newDebugUI.DisplayDebugText(text);
+            Destroy(newDebugUI.gameObject, time);
+
+            return newDebugUI;
+        }
     }
 }
